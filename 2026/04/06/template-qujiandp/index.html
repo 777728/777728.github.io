@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://777728.github.io">
   <title>区间和环形dp | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curiosity compete progress">
+  <meta name="description" content="P1435 [IOI 2000] 回文字串题目描述回文词是一种对称的字符串。任意给定一个字符串，通过插入若干字符，都可以变成回文词。此题的任务是，求出将给定字符串变成回文词所需要插入的最少字符数。 比如 $\verb!Ab3bd!$ 插入 $2$ 个字符后可以变成回文词 $\verb!dAb3bAd!$ 或 $\verb!Adb3bdA!$，但是插入少于 $2$ 个的字符无法变成回文词。 注意：此">
 <meta property="og:type" content="article">
 <meta property="og:title" content="区间和环形dp">
-<meta property="og:url" content="https://777728.github.io/2026/04/05/template-qujiandp/index.html">
+<meta property="og:url" content="https://777728.github.io/2026/04/06/template-qujiandp/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="curiosity compete progress">
+<meta property="og:description" content="P1435 [IOI 2000] 回文字串题目描述回文词是一种对称的字符串。任意给定一个字符串，通过插入若干字符，都可以变成回文词。此题的任务是，求出将给定字符串变成回文词所需要插入的最少字符数。 比如 $\verb!Ab3bd!$ 插入 $2$ 个字符后可以变成回文词 $\verb!dAb3bAd!$ 或 $\verb!Adb3bdA!$，但是插入少于 $2$ 个的字符无法变成回文词。 注意：此">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-04-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-06T09:03:16.663Z">
+<meta property="article:published_time" content="2026-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-06T12:16:01.397Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="template">
 <meta property="article:tag" content="区间和环形dp">
@@ -172,15 +172,34 @@
   
 
         
-        <a href="/2026/04/05/template-qujiandp/" class="archive-article-date">
-  	<time datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-05</time>
+        <a href="/2026/04/06/template-qujiandp/" class="archive-article-date">
+  	<time datetime="2026-04-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="P1435-IOI-2000-回文字串"><a href="#P1435-IOI-2000-回文字串" class="headerlink" title="P1435 [IOI 2000] 回文字串"></a>P1435 [IOI 2000] 回文字串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>回文词是一种对称的字符串。任意给定一个字符串，通过插入若干字符，都可以变成回文词。此题的任务是，求出将给定字符串变成回文词所需要插入的最少字符数。</p>
+<p>比如 $\verb!Ab3bd!$ 插入 $2$ 个字符后可以变成回文词 $\verb!dAb3bAd!$ 或 $\verb!Adb3bdA!$，但是插入少于 $2$ 个的字符无法变成回文词。</p>
+<p><strong>注意</strong>：此问题区分大小写。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入共一行，一个字符串。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>有且只有一个整数，即最少插入字符数。</p>
+<h2 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1"><a href="#输入-1" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ab3bd</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 1010</span></span><br><span class="line">string s;</span><br><span class="line"><span class="type">int</span> f[maxn][maxn],n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;s;</span><br><span class="line">    n = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span><br><span class="line">        f[i][i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] == s[i - <span class="number">1</span>])</span><br><span class="line">            f[i - <span class="number">1</span>][i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> f[i - <span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> l = <span class="number">2</span>;l &lt; n;l++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i + l &lt; n;i++)&#123;</span><br><span class="line">            <span class="type">int</span> j = i + l;</span><br><span class="line">            f[i][j] = <span class="built_in">min</span>(f[i + <span class="number">1</span>][j] + <span class="number">1</span>,f[i][j - <span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j])</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i][j],f[i + <span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[<span class="number">0</span>][n - <span class="number">1</span>]&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="P1880-NOI1995-石子合并"><a href="#P1880-NOI1995-石子合并" class="headerlink" title="P1880 [NOI1995] 石子合并"></a>P1880 [NOI1995] 石子合并</h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个圆形操场的四周摆放 $N$ 堆石子，现要将石子有次序地合并成一堆，规定每次只能选相邻的 $2$ 堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。</p>
+<p>试设计出一个算法，计算出将 $N$ 堆石子合并成 $1$ 堆的最小得分和最大得分。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>数据的第 $1$ 行是正整数 $N$，表示有 $N$ 堆石子。</p>
+<p>第 $2$ 行有 $N$ 个整数，第 $i$ 个整数 $a_i$ 表示第 $i$ 堆石子的个数。</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出共 $2$ 行，第 $1$ 行为最小得分，第 $2$ 行为最大得分。</p>
+<h2 id="输入输出样例-1-1"><a href="#输入输出样例-1-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1-1"><a href="#输入-1-1" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4 5 9 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="输出-1-1"><a href="#输出-1-1" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">43</span><br><span class="line">54</span><br></pre></td></tr></table></figure>
+
+<h2 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明&#x2F;提示"></a>说明&#x2F;提示</h2><p>$1\leq N\leq 100$，$0\leq a_i\leq 20$。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 1010</span></span><br><span class="line"><span class="type">int</span> a[maxn][maxn];</span><br><span class="line"><span class="type">int</span> f1[maxn][maxn],f2[maxn][maxn],n,x,y,ans1 = <span class="number">200000000</span>,ans2 = -ans1;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">        cin&gt;&gt;a[i][i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">        a[n + i][n + i] = a[i][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i &lt;= n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= n + n - i + <span class="number">1</span>;j++)&#123;</span><br><span class="line">            x = j;</span><br><span class="line">            y = i + j - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>;k &lt; i;k++)&#123;</span><br><span class="line">                a[x][y] = a[x][x + k - <span class="number">1</span>] + a[x + k][y];</span><br><span class="line">                <span class="keyword">if</span>(f1[x][y] != <span class="number">0</span>)</span><br><span class="line">                    f1[x][y] = <span class="built_in">min</span>(f1[x][y],f1[x][x + k - <span class="number">1</span>] + f1[x + k][y] + a[x][y]);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    f1[x][y] = f1[x][x + k - <span class="number">1</span>] + f1[x + k][y] + a[x][y];</span><br><span class="line">                <span class="keyword">if</span>(f2[x][y] != <span class="number">0</span>)</span><br><span class="line">                    f2[x][y] = <span class="built_in">max</span>(f2[x][y],a[x][y] + f2[x][x + k - <span class="number">1</span>] + f2[x + k][y]);</span><br><span class="line">                <span class="keyword">else</span> f2[x][y] = a[x][y] + f2[x][x + k - <span class="number">1</span>] + f2[x + k][y]; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">        ans1 = <span class="built_in">min</span>(ans1,f1[i][i + n - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">        ans2 = <span class="built_in">max</span>(ans2,f2[i][i + n - <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans1&lt;&lt;endl&lt;&lt;ans2&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -279,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/05/template-qujiandp/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/06/template-qujiandp/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -293,18 +312,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/05/template-qianzhuiheyuchaifen/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/06/template-dp-shushang/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          前缀和与拆分
+          树上与图dp
         
       </div>
     </a>
   
   
-    <a href="/2026/04/05/template-st-fenzhi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">分治和递增</div>
+    <a href="/2026/04/05/20260405/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">之前都不积极vp的后果，呜呜·w·</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -331,7 +350,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#P1435-IOI-2000-%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text">P1435 [IOI 2000] 回文字串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P1880-NOI1995-%E7%9F%B3%E5%AD%90%E5%90%88%E5%B9%B6"><span class="toc-number">2.</span> <span class="toc-text">P1880 [NOI1995] 石子合并</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">2.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1-1"><span class="toc-number">2.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E-%E6%8F%90%E7%A4%BA"><span class="toc-number">2.5.</span> <span class="toc-text">说明&#x2F;提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.6.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -480,19 +499,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,11 +507,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,19 +531,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -545,6 +564,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
             
             <div class="clearfix"></div>
