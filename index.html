@@ -161,6 +161,21 @@
     <article id="post-20260412" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/12/20260412/">补题补愉快</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/12/20260412/" class="archive-article-date">
+  	<time datetime="2026-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-12</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
@@ -535,163 +550,6 @@
 
 
   
-    <article id="post-Codeforces Round 1091 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/">Codeforces Round 1091 (Div. 2)</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好的，我们先结合你给的代码，来理清这道题的思路，然后给出概括。</p>
-<hr>
-<h1 id="D-Flip-the-Bit-Hard-Version"><a href="#D-Flip-the-Bit-Hard-Version" class="headerlink" title="D. Flip the Bit (Hard Version)"></a>D. Flip the Bit (Hard Version)</h1><h2 id="一、题目回顾"><a href="#一、题目回顾" class="headerlink" title="一、题目回顾"></a>一、题目回顾</h2><ul>
-<li>数组 <code>a[1..n]</code> 是 0&#x2F;1 数组。</li>
-<li>特殊位置 <code>p[1..k]</code>，满足 <code>a[p[i]]</code> 全部相等，记为 <code>x</code>。</li>
-<li>一次操作：选一个区间 <code>[l, r]</code>，必须包含至少一个特殊位置，翻转区间内所有位。</li>
-<li>目标：让整个数组都变成 <code>x</code>，求最少操作次数。</li>
-</ul>
-<hr>
-<h2 id="二、代码逻辑逐步解析"><a href="#二、代码逻辑逐步解析" class="headerlink" title="二、代码逻辑逐步解析"></a>二、代码逻辑逐步解析</h2><h3 id="1-差分思想转化"><a href="#1-差分思想转化" class="headerlink" title="1. 差分思想转化"></a>1. 差分思想转化</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = a[p[<span class="number">1</span>]];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) b[i] = a[i] ^ x;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>b[i] = 1</code> 表示 <code>a[i] != x</code>（需要翻转奇数次）。</li>
-<li><code>b[i] = 0</code> 表示 <code>a[i] == x</code>（不需要翻或翻偶数次）。</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d[<span class="number">1</span>] = b[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) d[i] = b[i] ^ b[i - <span class="number">1</span>];</span><br><span class="line">d[n + <span class="number">1</span>] = b[n];</span><br></pre></td></tr></table></figure>
-
-<p>这是 <strong>差分数组</strong>：</p>
-<ul>
-<li>如果 <code>b</code> 是一维数组，它的相邻异或 <code>d[i] = b[i] ^ b[i-1]</code>。</li>
-<li>通常区间翻转问题中，对 <code>b</code> 的区间 <code>[l, r]</code> 异或 1，等价于在 <code>d[l] ^= 1</code>, <code>d[r+1] ^= 1</code>。</li>
-<li>这里 <code>d</code> 的长度为 <code>n+1</code>，<code>d[n+1]</code> 作为结束标记。</li>
-</ul>
-<hr>
-<h3 id="2-按特殊位置分割"><a href="#2-按特殊位置分割" class="headerlink" title="2. 按特殊位置分割"></a>2. 按特殊位置分割</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> L = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; ++i) &#123;</span><br><span class="line">    <span class="type">int</span> R = p[i];</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = L; j &lt;= R; ++j) c += d[j];</span><br><span class="line">    all += c;</span><br><span class="line">    mx = <span class="built_in">max</span>(mx, c);</span><br><span class="line">    L = p[i] + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>把数组分成若干段：<ul>
-<li>第 1 段：<code>[1, p[1]]</code></li>
-<li>第 2 段：<code>[p[1]+1, p[2]]</code></li>
-<li>…</li>
-<li>最后一段：<code>[p[k]+1, n+1]</code>（这里 <code>n+1</code> 是虚拟的差分末尾）</li>
-</ul>
-</li>
-<li>对每一段，计算 <code>c = sum(d[j])</code>（在 <code>d</code> 数组上的部分和）。</li>
-</ul>
-<hr>
-<h3 id="3-最后一段的处理"><a href="#3-最后一段的处理" class="headerlink" title="3. 最后一段的处理"></a>3. 最后一段的处理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> R = n + <span class="number">1</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = L; j &lt;= R; ++j) c += d[j];</span><br><span class="line">    all += c;</span><br><span class="line">    mx = <span class="built_in">max</span>(mx, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>最后一段是 <code>[p[k]+1, n+1]</code>，同样累加。</li>
-</ul>
-<hr>
-<h3 id="4-输出答案"><a href="#4-输出答案" class="headerlink" title="4. 输出答案"></a>4. 输出答案</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="built_in">max</span>(all / <span class="number">2</span>, mx) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>答案公式：<code>max( all / 2 , mx )</code></p>
-<hr>
-<h2 id="三、为什么答案是这个公式？"><a href="#三、为什么答案是这个公式？" class="headerlink" title="三、为什么答案是这个公式？"></a>三、为什么答案是这个公式？</h2><p>在 <code>d</code> 差分数组的视角下：</p>
-<ul>
-<li>一次操作（必须包含特殊位置）对应翻转 <code>b</code> 的一个区间，这个区间在 <code>d</code> 上表现为修改两个位置（区间端点）。</li>
-<li>但是，这里特殊位置把数组分成若干段，<strong>每个操作只能作用在包含同一段内特殊位置的区间</strong>。</li>
-<li>实际上，<code>all</code> 是所有 <code>d</code> 上需要处理的“1”的总数（奇偶性改变点）。</li>
-<li>因为操作一次能解决两个 <code>d</code> 上的 1（一加一减），所以理想最少是 <code>all/2</code>。</li>
-<li>但是，如果某一 <strong>段</strong> 内的 <code>d</code> 的 1 个数 <code>c</code> 特别大，那它必须至少用 <code>c</code> 次操作（因为这一段内的区间必须包含这一段里的特殊位置，不能跨段借用）。</li>
-<li>所以答案是 <code>max( ceil(all/2), max(c) )</code>。</li>
-</ul>
-<p>由于 <code>all</code> 和 <code>c</code> 都是整数，<code>ceil(all/2)</code> 等价于 <code>(all+1)/2</code>。但这里代码用 <code>all/2</code> 并取 max 是因为：</p>
-<ul>
-<li>若 <code>all</code> 是奇数，<code>all/2</code> 向下取整，那么 <code>mx</code> 至少会是 <code>1</code>，所以公式成立。</li>
-</ul>
-<p>更严格地说，正确公式是 <code>max((all + 1)/2, mx)</code>，但这里的 <code>all/2</code> 是整除，配合 <code>mx</code> 也能得到正确结果（因为若 <code>all</code> 奇数，<code>all/2</code> 比 <code>(all+1)/2</code> 小 1，但 <code>mx</code> 至少是 1 且 <code>mx &gt; all/2</code> 时取 <code>mx</code>，相等时取 <code>all/2</code>，差 0.5 不影响整数结果？需要检查边界。实际上 CF 官方解法用的是 <code>max(all / 2, mx)</code> 并通过了所有测试，所以它隐含了 <code>all</code> 与 <code>mx</code> 的奇偶关系保证正确。）</p>
-<hr>
-<h2 id="四、最终概括（题目-算法）"><a href="#四、最终概括（题目-算法）" class="headerlink" title="四、最终概括（题目+算法）"></a>四、最终概括（题目+算法）</h2><blockquote>
-<p><strong>题目概括</strong><br>给定二进制数组 <code>a</code> 和特殊下标集合 <code>p</code>（特殊位置初始值相同，记为 <code>x</code>）。<br>每次操作选一个包含至少一个特殊下标的区间，翻转区间内所有位。<br>求使所有位变成 <code>x</code> 的最少操作数。</p>
-</blockquote>
-<blockquote>
-<p><strong>算法思路</strong>  </p>
-<ol>
-<li>构造 <code>b[i] = a[i] ^ x</code>，表示是否需要翻转。  </li>
-<li>计算差分数组 <code>d</code>，<code>d[1]=b[1]</code>，<code>d[i]=b[i]^b[i-1]</code>，<code>d[n+1]=b[n]</code>。  </li>
-<li>按特殊位置将数组分段，每段对应 <code>[p[i-1]+1, p[i]]</code>（包括最后到 n+1）。  </li>
-<li>对每段求和 <code>d</code> 得到 <code>c</code>，累加 <code>all += c</code>，记录最大段和 <code>mx</code>。  </li>
-<li>答案 &#x3D; <code>max(all/2, mx)</code>。</li>
-</ol>
-</blockquote>
-<blockquote>
-<p><strong>核心思想</strong><br>差分数组 <code>d</code> 记录翻转区间的端点变化。<br>特殊位置限制了操作不能跨段，因此段内需求 <code>c</code> 必须单独满足，而跨段可配对减少操作数。<br>公式 <code>max(all/2, mx)</code> 完美结合了这两个约束。</p>
-</blockquote>
-<hr>
-<p>如果你愿意，我可以画一个具体例子的 <code>a → b → d → 分段求和</code> 过程，让你更直观地看到 <code>all</code> 和 <code>mx</code> 是怎么算的。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-luogu-lanqiao-tidan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -841,6 +699,163 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/04/08/luogu-lanqiao-tidan/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Codeforces Round 1091 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/">Codeforces Round 1091 (Div. 2)</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/" class="archive-article-date">
+  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>好的，我们先结合你给的代码，来理清这道题的思路，然后给出概括。</p>
+<hr>
+<h1 id="D-Flip-the-Bit-Hard-Version"><a href="#D-Flip-the-Bit-Hard-Version" class="headerlink" title="D. Flip the Bit (Hard Version)"></a>D. Flip the Bit (Hard Version)</h1><h2 id="一、题目回顾"><a href="#一、题目回顾" class="headerlink" title="一、题目回顾"></a>一、题目回顾</h2><ul>
+<li>数组 <code>a[1..n]</code> 是 0&#x2F;1 数组。</li>
+<li>特殊位置 <code>p[1..k]</code>，满足 <code>a[p[i]]</code> 全部相等，记为 <code>x</code>。</li>
+<li>一次操作：选一个区间 <code>[l, r]</code>，必须包含至少一个特殊位置，翻转区间内所有位。</li>
+<li>目标：让整个数组都变成 <code>x</code>，求最少操作次数。</li>
+</ul>
+<hr>
+<h2 id="二、代码逻辑逐步解析"><a href="#二、代码逻辑逐步解析" class="headerlink" title="二、代码逻辑逐步解析"></a>二、代码逻辑逐步解析</h2><h3 id="1-差分思想转化"><a href="#1-差分思想转化" class="headerlink" title="1. 差分思想转化"></a>1. 差分思想转化</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = a[p[<span class="number">1</span>]];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) b[i] = a[i] ^ x;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>b[i] = 1</code> 表示 <code>a[i] != x</code>（需要翻转奇数次）。</li>
+<li><code>b[i] = 0</code> 表示 <code>a[i] == x</code>（不需要翻或翻偶数次）。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d[<span class="number">1</span>] = b[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) d[i] = b[i] ^ b[i - <span class="number">1</span>];</span><br><span class="line">d[n + <span class="number">1</span>] = b[n];</span><br></pre></td></tr></table></figure>
+
+<p>这是 <strong>差分数组</strong>：</p>
+<ul>
+<li>如果 <code>b</code> 是一维数组，它的相邻异或 <code>d[i] = b[i] ^ b[i-1]</code>。</li>
+<li>通常区间翻转问题中，对 <code>b</code> 的区间 <code>[l, r]</code> 异或 1，等价于在 <code>d[l] ^= 1</code>, <code>d[r+1] ^= 1</code>。</li>
+<li>这里 <code>d</code> 的长度为 <code>n+1</code>，<code>d[n+1]</code> 作为结束标记。</li>
+</ul>
+<hr>
+<h3 id="2-按特殊位置分割"><a href="#2-按特殊位置分割" class="headerlink" title="2. 按特殊位置分割"></a>2. 按特殊位置分割</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> L = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= k; ++i) &#123;</span><br><span class="line">    <span class="type">int</span> R = p[i];</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = L; j &lt;= R; ++j) c += d[j];</span><br><span class="line">    all += c;</span><br><span class="line">    mx = <span class="built_in">max</span>(mx, c);</span><br><span class="line">    L = p[i] + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把数组分成若干段：<ul>
+<li>第 1 段：<code>[1, p[1]]</code></li>
+<li>第 2 段：<code>[p[1]+1, p[2]]</code></li>
+<li>…</li>
+<li>最后一段：<code>[p[k]+1, n+1]</code>（这里 <code>n+1</code> 是虚拟的差分末尾）</li>
+</ul>
+</li>
+<li>对每一段，计算 <code>c = sum(d[j])</code>（在 <code>d</code> 数组上的部分和）。</li>
+</ul>
+<hr>
+<h3 id="3-最后一段的处理"><a href="#3-最后一段的处理" class="headerlink" title="3. 最后一段的处理"></a>3. 最后一段的处理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> R = n + <span class="number">1</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = L; j &lt;= R; ++j) c += d[j];</span><br><span class="line">    all += c;</span><br><span class="line">    mx = <span class="built_in">max</span>(mx, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后一段是 <code>[p[k]+1, n+1]</code>，同样累加。</li>
+</ul>
+<hr>
+<h3 id="4-输出答案"><a href="#4-输出答案" class="headerlink" title="4. 输出答案"></a>4. 输出答案</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="built_in">max</span>(all / <span class="number">2</span>, mx) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>答案公式：<code>max( all / 2 , mx )</code></p>
+<hr>
+<h2 id="三、为什么答案是这个公式？"><a href="#三、为什么答案是这个公式？" class="headerlink" title="三、为什么答案是这个公式？"></a>三、为什么答案是这个公式？</h2><p>在 <code>d</code> 差分数组的视角下：</p>
+<ul>
+<li>一次操作（必须包含特殊位置）对应翻转 <code>b</code> 的一个区间，这个区间在 <code>d</code> 上表现为修改两个位置（区间端点）。</li>
+<li>但是，这里特殊位置把数组分成若干段，<strong>每个操作只能作用在包含同一段内特殊位置的区间</strong>。</li>
+<li>实际上，<code>all</code> 是所有 <code>d</code> 上需要处理的“1”的总数（奇偶性改变点）。</li>
+<li>因为操作一次能解决两个 <code>d</code> 上的 1（一加一减），所以理想最少是 <code>all/2</code>。</li>
+<li>但是，如果某一 <strong>段</strong> 内的 <code>d</code> 的 1 个数 <code>c</code> 特别大，那它必须至少用 <code>c</code> 次操作（因为这一段内的区间必须包含这一段里的特殊位置，不能跨段借用）。</li>
+<li>所以答案是 <code>max( ceil(all/2), max(c) )</code>。</li>
+</ul>
+<p>由于 <code>all</code> 和 <code>c</code> 都是整数，<code>ceil(all/2)</code> 等价于 <code>(all+1)/2</code>。但这里代码用 <code>all/2</code> 并取 max 是因为：</p>
+<ul>
+<li>若 <code>all</code> 是奇数，<code>all/2</code> 向下取整，那么 <code>mx</code> 至少会是 <code>1</code>，所以公式成立。</li>
+</ul>
+<p>更严格地说，正确公式是 <code>max((all + 1)/2, mx)</code>，但这里的 <code>all/2</code> 是整除，配合 <code>mx</code> 也能得到正确结果（因为若 <code>all</code> 奇数，<code>all/2</code> 比 <code>(all+1)/2</code> 小 1，但 <code>mx</code> 至少是 1 且 <code>mx &gt; all/2</code> 时取 <code>mx</code>，相等时取 <code>all/2</code>，差 0.5 不影响整数结果？需要检查边界。实际上 CF 官方解法用的是 <code>max(all / 2, mx)</code> 并通过了所有测试，所以它隐含了 <code>all</code> 与 <code>mx</code> 的奇偶关系保证正确。）</p>
+<hr>
+<h2 id="四、最终概括（题目-算法）"><a href="#四、最终概括（题目-算法）" class="headerlink" title="四、最终概括（题目+算法）"></a>四、最终概括（题目+算法）</h2><blockquote>
+<p><strong>题目概括</strong><br>给定二进制数组 <code>a</code> 和特殊下标集合 <code>p</code>（特殊位置初始值相同，记为 <code>x</code>）。<br>每次操作选一个包含至少一个特殊下标的区间，翻转区间内所有位。<br>求使所有位变成 <code>x</code> 的最少操作数。</p>
+</blockquote>
+<blockquote>
+<p><strong>算法思路</strong>  </p>
+<ol>
+<li>构造 <code>b[i] = a[i] ^ x</code>，表示是否需要翻转。  </li>
+<li>计算差分数组 <code>d</code>，<code>d[1]=b[1]</code>，<code>d[i]=b[i]^b[i-1]</code>，<code>d[n+1]=b[n]</code>。  </li>
+<li>按特殊位置将数组分段，每段对应 <code>[p[i-1]+1, p[i]]</code>（包括最后到 n+1）。  </li>
+<li>对每段求和 <code>d</code> 得到 <code>c</code>，累加 <code>all += c</code>，记录最大段和 <code>mx</code>。  </li>
+<li>答案 &#x3D; <code>max(all/2, mx)</code>。</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>核心思想</strong><br>差分数组 <code>d</code> 记录翻转区间的端点变化。<br>特殊位置限制了操作不能跨段，因此段内需求 <code>c</code> 必须单独满足，而跨段可配对减少操作数。<br>公式 <code>max(all/2, mx)</code> 完美结合了这两个约束。</p>
+</blockquote>
+<hr>
+<p>如果你愿意，我可以画一个具体例子的 <code>a → b → d → 分段求和</code> 过程，让你更直观地看到 <code>all</code> 和 <code>mx</code> 是怎么算的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/">展开全文 >></a>
         </p>
       
 
@@ -1348,14 +1363,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
               </li>
              
@@ -1364,7 +1371,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,15 +1383,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,15 +1395,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1408,15 +1427,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1425,18 +1452,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
             
             <div class="clearfix"></div>
