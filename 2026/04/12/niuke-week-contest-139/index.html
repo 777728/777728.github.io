@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>九点起的一天 | Cai Haoran&#39;s Blog</title>
+  <title>niuke-week-contest-139 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="洛谷蓝桥杯苯环题单 大英2023初赛">
+  <meta name="description" content="小红的部分相同字符串描述$\hspace{15pt}$有一个未知的长度为 $n$ 的字符串，保证该字符串仅由 $26$ 个小写英文字母组成。现有 $k$ 个限制条件，每个条件给出两个位置 $u$ 和 $v$，表示 $s_u &#x3D; s_v$（即字符串中第 $u$ 个字符与第 $v$ 个字符相同）。$\hspace{15pt}$请你计算在满足所有限制条件的情况下，有多少种不同的字符串。由于答案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="九点起的一天">
-<meta property="og:url" content="https://777728.github.io/2026/04/09/20260409/index.html">
+<meta property="og:title" content="niuke-week-contest-139">
+<meta property="og:url" content="https://777728.github.io/2026/04/12/niuke-week-contest-139/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="洛谷蓝桥杯苯环题单 大英2023初赛">
+<meta property="og:description" content="小红的部分相同字符串描述$\hspace{15pt}$有一个未知的长度为 $n$ 的字符串，保证该字符串仅由 $26$ 个小写英文字母组成。现有 $k$ 个限制条件，每个条件给出两个位置 $u$ 和 $v$，表示 $s_u &#x3D; s_v$（即字符串中第 $u$ 个字符与第 $v$ 个字符相同）。$\hspace{15pt}$请你计算在满足所有限制条件的情况下，有多少种不同的字符串。由于答案">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-04-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-10T03:55:23.380Z">
+<meta property="article:published_time" content="2026-04-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-12T15:36:46.302Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="diary">
+<meta property="article:tag" content="niuke">
+<meta property="article:tag" content="xcpc">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -159,30 +160,179 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-20260409" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-niuke-week-contest-139" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      九点起的一天
+      niuke-week-contest-139
     </h1>
   
 
         
-        <a href="/2026/04/09/20260409/" class="archive-article-date">
-  	<time datetime="2026-04-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-09</time>
+        <a href="/2026/04/12/niuke-week-contest-139/" class="archive-article-date">
+  	<time datetime="2026-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>洛谷蓝桥杯苯环题单</li>
-<li>大英2023初赛</li>
+        <h1 id="小红的部分相同字符串"><a href="#小红的部分相同字符串" class="headerlink" title="小红的部分相同字符串"></a>小红的部分相同字符串</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>$\hspace{15pt}$有一个未知的长度为 $n$ 的字符串，保证该字符串仅由 $26$ 个小写英文字母组成。现有 $k$ 个限制条件，每个条件给出两个位置 $u$ 和 $v$，表示 $s_u &#x3D; s_v$（即字符串中第 $u$ 个字符与第 $v$ 个字符相同）。<br>$\hspace{15pt}$请你计算在满足所有限制条件的情况下，有多少种不同的字符串。由于答案可能很大，请输出其对 $998244353$ 取模的结果。</p>
+<h2 id="错误代码"><a href="#错误代码" class="headerlink" title="错误代码"></a>错误代码</h2><p>反例：a[i] 仅标记位置是否出现过，未维护连通块归属。处理 (2,3) 时，因 a[2] 和 a[3] 均已为 1，触发 continue，漏掉了合并 (1,2) 与 (3,4) 的步骤。qin 未递减，多计 1 个自由度，导致答案偏大。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,k;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="type">int</span> qin = n;</span><br><span class="line">    <span class="keyword">while</span>(k --)&#123;</span><br><span class="line">        <span class="type">int</span> u,v;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        <span class="keyword">if</span>(a[u] == <span class="number">1</span>&amp;&amp;a[v] == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[u] == <span class="number">1</span>||a[v] == <span class="number">1</span>) &#123;</span><br><span class="line">        qin--;</span><br><span class="line">        a[u] = <span class="number">1</span>;</span><br><span class="line">        a[v] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">        a[u] = <span class="number">1</span>;</span><br><span class="line">        a[v] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(u != v)qin--;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= qin;i++)&#123;</span><br><span class="line">        ans = ans * <span class="number">26</span> % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="正确代码"><a href="#正确代码" class="headerlink" title="正确代码"></a>正确代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 200010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">int</span> n,m,ans;</span><br><span class="line"><span class="type">int</span> x,y;</span><br><span class="line"><span class="type">int</span> fa[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(fa[x] == x) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">return</span> (fa[x] = <span class="built_in">find</span>(fa[x]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">join</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> f = <span class="built_in">find</span>(x);</span><br><span class="line">    <span class="type">int</span> f2 = <span class="built_in">find</span>(y);</span><br><span class="line">    <span class="keyword">if</span>(fa[x] != fa[y]) fa[f] = f2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">power</span><span class="params">(<span class="type">int</span> y,<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span> % mod;</span><br><span class="line">    <span class="type">int</span> s = <span class="built_in">power</span>(y,x / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span>(x % <span class="number">2</span> == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> s * s % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s * s % mod * y % mod;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,k;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">        fa[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(k--)&#123;</span><br><span class="line">        <span class="type">int</span> u,v;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        <span class="built_in">join</span>(u,v);</span><br><span class="line">    &#125;</span><br><span class="line">    set&lt;<span class="type">int</span>&gt; roots;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        roots.<span class="built_in">insert</span>(<span class="built_in">find</span>(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> qin = roots.<span class="built_in">size</span>();</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">1</span>;</span><br><span class="line">    ans = <span class="built_in">power</span>(<span class="number">26</span>,qin);</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="小红的树权值"><a href="#小红的树权值" class="headerlink" title="小红的树权值"></a>小红的树权值</h1><h2 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h2><p>$\hspace{15pt}$小红这样定义一棵树的权值：对于一棵树，删除若干节点（删除节点指将该节点及其关联的所有边从图中移除）后满足剩余的所有联通块大小都为 $1$，可能的最小删除数量即为这棵树的权值。</p>
+<p>$\hspace{15pt}$现在小红拿到了一棵以 $1$ 号节点为根，包含 $n$ 个点的有根树，她想知道这棵树中 $1\sim n$ 号点的所有子树的权值分别是多少，请你帮帮她。  </p>
+<p>【名词解释】<br>$\hspace{15pt}$子树：对于树中某个节点，其与所有后代节点构成的集合称为该节点的子树。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>思路： 树上dp<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1352">text</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; adj[MAXN];</span><br><span class="line"><span class="type">int</span> dp[MAXN][<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> child[MAXN];</span><br><span class="line"><span class="type">int</span> ans[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> parent)</span> </span>&#123;</span><br><span class="line">    child[u] = <span class="number">1</span>;</span><br><span class="line">    dp[u][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    dp[u][<span class="number">1</span>] = <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> v : adj[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == parent) <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        </span><br><span class="line">        child[u] += child[v];</span><br><span class="line">        </span><br><span class="line">        dp[u][<span class="number">0</span>] += <span class="built_in">max</span>(dp[v][<span class="number">0</span>], dp[v][<span class="number">1</span>]);</span><br><span class="line">        </span><br><span class="line">        dp[u][<span class="number">1</span>] += dp[v][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        adj[i].<span class="built_in">clear</span>();</span><br><span class="line">        dp[i][<span class="number">0</span>] = dp[i][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        child[i] = <span class="number">0</span>;</span><br><span class="line">        ans[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> u, v;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v;</span><br><span class="line">        adj[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        adj[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> max_ind = <span class="built_in">max</span>(dp[i][<span class="number">0</span>], dp[i][<span class="number">1</span>]);</span><br><span class="line">        ans[i] = child[i] - max_ind;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        cout &lt;&lt; ans[i] &lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    <span class="keyword">if</span> (cin &gt;&gt; t) &#123;</span><br><span class="line">        <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">            <span class="built_in">solve</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="小红的部分不同字符串"><a href="#小红的部分不同字符串" class="headerlink" title="小红的部分不同字符串"></a>小红的部分不同字符串</h1><h2 id="描述-2"><a href="#描述-2" class="headerlink" title="描述"></a>描述</h2><p>$\hspace{15pt}$有一个未知的长度为 $n$ 的字符串，保证该字符串仅由 $26$ 个小写英文字母组成。现有 $n$ 个限制条件，用一个数组 $a &#x3D; {a_1, a_2,\dots,a_n}$ 表示，意为 $s_i \ne s_{a_i}$（即字符串中第 $i$ 个字符与第 $a_i$ 个字符不同）。</p>
+<p>$\hspace{15pt}$请你计算在满足所有限制条件的情况下，有多少种不同的字符串。由于答案可能很大，请输出其对 $998244353$ 取模的结果。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这段代码的核心思路是<strong>图论建模 + 基环树染色计数</strong>。具体步骤概括如下：</p>
+<ol>
+<li><p><strong>问题转化</strong>：<br>将字符串的每个位置 $i$ 看作图的节点，约束 $s_i \neq s_{a_i}$ 看作节点 $i$ 与 $a_i$ 之间的无向边。由于每个节点恰好有一个 $a_i$，整个图由若干个<strong>基环树连通分量</strong>组成（即每个连通块中恰好有一个环）。</p>
+</li>
+<li><p><strong>独立计算连通分量</strong>：<br>不同连通分量之间的字符选择互不影响，总方案数为各分量方案数的乘积。</p>
+<ul>
+<li>使用 <strong>BFS</strong> 遍历未访问节点，找出当前连通分量的所有节点，得到分量大小 $S$。</li>
+</ul>
+</li>
+<li><p><strong>确定环长 $L$</strong>：<br>在找到的连通分量中，利用有向关系 <code>next[i] = a[i]</code> 寻找唯一的环。</p>
+<ul>
+<li>从分量中任意一点出发，沿 <code>a[i]</code> 路径行走，直到遇到重复节点，该节点即为环上节点。</li>
+<li>再次遍历该环，统计环的长度 $L$。</li>
+</ul>
+</li>
+<li><p><strong>应用染色公式</strong>：<br>对于大小为 $S$、环长为 $L$ 的基环树，用 $K&#x3D;26$ 种颜色进行合法着色（相邻不同色）的方案数公式为：<br>$$ W &#x3D; (K-1)^S + (-1)^L \cdot (K-1)^{S-L+1} $$</p>
+<ul>
+<li>利用<strong>快速幂</strong>计算模意义下的幂次。</li>
+<li>根据 $L$ 的奇偶性决定第二项的符号。</li>
+</ul>
+</li>
+<li><p><strong>累乘结果</strong>：<br>将所有连通分量的方案数 $W$ 相乘，得到最终答案。</p>
+</li>
 </ol>
+<p><strong>总结</strong>：通过 BFS 拆分连通块 $\rightarrow$ 追踪有向边找环长 $\rightarrow$ 代入基环树染色公式 $\rightarrow$ 累乘得解。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-c++">
+using namespace std;
+
+#define mod 998244353
+#define int long long
+
+const int MAXN = 200010;
+
+int n;
+int a[MAXN];          
+vector&lt;int&gt; adj[MAXN]; 
+bool visited[MAXN];    
+int power(int base, int exp) {
+    int res = 1;
+    base %= mod;
+    while (exp &gt; 0) {
+        if (exp &amp; 1) res = res * base % mod;
+        base = base * base % mod;
+        exp &gt;&gt;= 1;
+    }
+    return res;
+}
+
+void solve() {
+    cin &gt;&gt; n;
+    
+    for (int i = 1; i &lt;= n; ++i) {
+        adj[i].clear();
+        visited[i] = false;
+    }
+    
+    for (int i = 1; i &lt;= n; ++i) {
+        cin &gt;&gt; a[i];
+        adj[i].push_back(a[i]);
+        adj[a[i]].push_back(i);
+    }
+    
+    long long total_ans = 1;
+    int K = 26;
+    
+    for (int i = 1; i &lt;= n; ++i) {
+        if (!visited[i]) {
+            vector&lt;int&gt; component_nodes;
+            queue&lt;int&gt; q;
+            q.push(i);
+            visited[i] = true;
+            
+            while (!q.empty()) {
+                int u = q.front();
+                q.pop();
+                component_nodes.push_back(u);
+                
+                for (int v : adj[u]) {
+                    if (!visited[v]) {
+                        visited[v] = true;
+                        q.push(v);
+                    }
+                }
+            }
+            int S = component_nodes.size();
+            
+            
+            
+            map&lt;int, int&gt; index_in_comp; // 节点到其在 component_nodes 中索引的映射，或者直接用一个全局 vis_step
+            // 为了简单，我们用一个新的局部标记数组或者利用全局数组的状态
+            
+            // 我们使用一个步数标记法来找环
+            // 在当前的 component_nodes 中，从任意点开始沿 a[u] 走
+            // 因为只有一个环，最终一定会进入环
+            
+            int start_node = component_nodes[0];
+            vector&lt;int&gt; path;
+            map&lt;int, bool&gt; in_path;
+            
+            int curr = start_node;
+            while (in_path.find(curr) == in_path.end()) {
+                in_path[curr] = true;
+                path.push_back(curr);
+                curr = a[curr];
+            }
+            
+            // 此时 curr 是环上的一个节点
+            // 计算环长 L
+            int L = 0;
+            int temp = curr;
+            do {
+                L++;
+                temp = a[temp];
+            } while (temp != curr);
+            
+            // 3. 计算该分量的方案数
+            // Formula: W = (K-1)^S + (-1)^L * (K-1)^(S - L + 1)
+            
+            int term1 = power(K - 1, S);
+            int term2 = power(K - 1, S - L + 1);
+            
+            if (L % 2 != 0) {
+                // (-1)^L is -1
+                term2 = (mod - term2) % mod;
+            }
+            
+            int ways = (term1 + term2) % mod;
+            total_ans = total_ans * ways % mod;
+        }
+    }
+    
+    cout &lt;&lt; total_ans &lt;&lt; endl;
+}
+
+signed main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    solve();
+    return 0;
+}
+</code></pre>
 
       
 
@@ -222,7 +372,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">niuke</a>
         		</li>
       		
 		</ul>
@@ -278,7 +432,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/09/20260409/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/12/niuke-week-contest-139/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,18 +446,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/10/20260410/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/12/20260412/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          早八的高代课
+          补题补愉快
         
       </div>
     </a>
   
   
-    <a href="/2026/04/08/20260408/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">蓝桥杯于我是捐钱去理</div>
+    <a href="/2026/04/11/20260411/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">蓝桥杯二十几分，菜菜，捞捞</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -330,7 +484,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BA%A2%E7%9A%84%E9%83%A8%E5%88%86%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.</span> <span class="toc-text">小红的部分相同字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">错误代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E7%A1%AE%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">正确代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BA%A2%E7%9A%84%E6%A0%91%E6%9D%83%E5%80%BC"><span class="toc-number">2.</span> <span class="toc-text">小红的树权值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BA%A2%E7%9A%84%E9%83%A8%E5%88%86%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">小红的部分不同字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">3.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
