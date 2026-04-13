@@ -16,7 +16,7 @@
 <meta property="og:description" content="小红的部分相同字符串描述$\hspace{15pt}$有一个未知的长度为 $n$ 的字符串，保证该字符串仅由 $26$ 个小写英文字母组成。现有 $k$ 个限制条件，每个条件给出两个位置 $u$ 和 $v$，表示 $s_u &#x3D; s_v$（即字符串中第 $u$ 个字符与第 $v$ 个字符相同）。$\hspace{15pt}$请你计算在满足所有限制条件的情况下，有多少种不同的字符串。由于答案">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-12T15:36:46.302Z">
+<meta property="article:modified_time" content="2026-04-12T15:38:30.682Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="niuke">
 <meta property="article:tag" content="xcpc">
@@ -216,124 +216,7 @@
 </li>
 </ol>
 <p><strong>总结</strong>：通过 BFS 拆分连通块 $\rightarrow$ 追踪有向边找环长 $\rightarrow$ 代入基环树染色公式 $\rightarrow$ 累乘得解。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-c++">
-using namespace std;
-
-#define mod 998244353
-#define int long long
-
-const int MAXN = 200010;
-
-int n;
-int a[MAXN];          
-vector&lt;int&gt; adj[MAXN]; 
-bool visited[MAXN];    
-int power(int base, int exp) {
-    int res = 1;
-    base %= mod;
-    while (exp &gt; 0) {
-        if (exp &amp; 1) res = res * base % mod;
-        base = base * base % mod;
-        exp &gt;&gt;= 1;
-    }
-    return res;
-}
-
-void solve() {
-    cin &gt;&gt; n;
-    
-    for (int i = 1; i &lt;= n; ++i) {
-        adj[i].clear();
-        visited[i] = false;
-    }
-    
-    for (int i = 1; i &lt;= n; ++i) {
-        cin &gt;&gt; a[i];
-        adj[i].push_back(a[i]);
-        adj[a[i]].push_back(i);
-    }
-    
-    long long total_ans = 1;
-    int K = 26;
-    
-    for (int i = 1; i &lt;= n; ++i) {
-        if (!visited[i]) {
-            vector&lt;int&gt; component_nodes;
-            queue&lt;int&gt; q;
-            q.push(i);
-            visited[i] = true;
-            
-            while (!q.empty()) {
-                int u = q.front();
-                q.pop();
-                component_nodes.push_back(u);
-                
-                for (int v : adj[u]) {
-                    if (!visited[v]) {
-                        visited[v] = true;
-                        q.push(v);
-                    }
-                }
-            }
-            int S = component_nodes.size();
-            
-            
-            
-            map&lt;int, int&gt; index_in_comp; // 节点到其在 component_nodes 中索引的映射，或者直接用一个全局 vis_step
-            // 为了简单，我们用一个新的局部标记数组或者利用全局数组的状态
-            
-            // 我们使用一个步数标记法来找环
-            // 在当前的 component_nodes 中，从任意点开始沿 a[u] 走
-            // 因为只有一个环，最终一定会进入环
-            
-            int start_node = component_nodes[0];
-            vector&lt;int&gt; path;
-            map&lt;int, bool&gt; in_path;
-            
-            int curr = start_node;
-            while (in_path.find(curr) == in_path.end()) {
-                in_path[curr] = true;
-                path.push_back(curr);
-                curr = a[curr];
-            }
-            
-            // 此时 curr 是环上的一个节点
-            // 计算环长 L
-            int L = 0;
-            int temp = curr;
-            do {
-                L++;
-                temp = a[temp];
-            } while (temp != curr);
-            
-            // 3. 计算该分量的方案数
-            // Formula: W = (K-1)^S + (-1)^L * (K-1)^(S - L + 1)
-            
-            int term1 = power(K - 1, S);
-            int term2 = power(K - 1, S - L + 1);
-            
-            if (L % 2 != 0) {
-                // (-1)^L is -1
-                term2 = (mod - term2) % mod;
-            }
-            
-            int ways = (term1 + term2) % mod;
-            total_ans = total_ans * ways % mod;
-        }
-    }
-    
-    cout &lt;&lt; total_ans &lt;&lt; endl;
-}
-
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    solve();
-    return 0;
-}
-</code></pre>
-
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">200010</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[MAXN];          </span><br><span class="line">vector&lt;<span class="type">int</span>&gt; adj[MAXN]; </span><br><span class="line"><span class="type">bool</span> visited[MAXN];    </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">power</span><span class="params">(<span class="type">int</span> base, <span class="type">int</span> exp)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">    base %= mod;</span><br><span class="line">    <span class="keyword">while</span> (exp &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (exp &amp; <span class="number">1</span>) res = res * base % mod;</span><br><span class="line">        base = base * base % mod;</span><br><span class="line">        exp &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        adj[i].<span class="built_in">clear</span>();</span><br><span class="line">        visited[i] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        adj[i].<span class="built_in">push_back</span>(a[i]);</span><br><span class="line">        adj[a[i]].<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> total_ans = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> K = <span class="number">26</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[i]) &#123;</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; component_nodes;</span><br><span class="line">            queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">            q.<span class="built_in">push</span>(i);</span><br><span class="line">            visited[i] = <span class="literal">true</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">                <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">                q.<span class="built_in">pop</span>();</span><br><span class="line">                component_nodes.<span class="built_in">push_back</span>(u);</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> v : adj[u]) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!visited[v]) &#123;</span><br><span class="line">                        visited[v] = <span class="literal">true</span>;</span><br><span class="line">                        q.<span class="built_in">push</span>(v);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> S = component_nodes.<span class="built_in">size</span>();</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; index_in_comp; <span class="comment">// 节点到其在 component_nodes 中索引的映射，或者直接用一个全局 vis_step</span></span><br><span class="line">            <span class="comment">// 为了简单，我们用一个新的局部标记数组或者利用全局数组的状态</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 我们使用一个步数标记法来找环</span></span><br><span class="line">            <span class="comment">// 在当前的 component_nodes 中，从任意点开始沿 a[u] 走</span></span><br><span class="line">            <span class="comment">// 因为只有一个环，最终一定会进入环</span></span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> start_node = component_nodes[<span class="number">0</span>];</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; path;</span><br><span class="line">            map&lt;<span class="type">int</span>, <span class="type">bool</span>&gt; in_path;</span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> curr = start_node;</span><br><span class="line">            <span class="keyword">while</span> (in_path.<span class="built_in">find</span>(curr) == in_path.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                in_path[curr] = <span class="literal">true</span>;</span><br><span class="line">                path.<span class="built_in">push_back</span>(curr);</span><br><span class="line">                curr = a[curr];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 此时 curr 是环上的一个节点</span></span><br><span class="line">            <span class="comment">// 计算环长 L</span></span><br><span class="line">            <span class="type">int</span> L = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> temp = curr;</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                L++;</span><br><span class="line">                temp = a[temp];</span><br><span class="line">            &#125; <span class="keyword">while</span> (temp != curr);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 3. 计算该分量的方案数</span></span><br><span class="line">            <span class="comment">// Formula: W = (K-1)^S + (-1)^L * (K-1)^(S - L + 1)</span></span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> term1 = <span class="built_in">power</span>(K - <span class="number">1</span>, S);</span><br><span class="line">            <span class="type">int</span> term2 = <span class="built_in">power</span>(K - <span class="number">1</span>, S - L + <span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (L % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// (-1)^L is -1</span></span><br><span class="line">                term2 = (mod - term2) % mod;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> ways = (term1 + term2) % mod;</span><br><span class="line">            total_ans = total_ans * ways % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; total_ans &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -645,7 +528,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,23 +544,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,15 +556,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,7 +572,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,14 +601,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
             
             <div class="clearfix"></div>
