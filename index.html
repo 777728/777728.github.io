@@ -158,6 +158,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-abc-453" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/13/abc-453/">AtCoder Beginner Contest 453</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/13/abc-453/" class="archive-article-date">
+  	<time datetime="2026-04-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="问题陈述"><a href="#问题陈述" class="headerlink" title="问题陈述"></a>问题陈述</h4><p>有一个由 $H$ 行 $\times$ 列 $W$ 组成的网格。 $W$ 列，高桥在网格中上下左右移动。<br>从上往下 $i$ 行、从左往上 $(1\leq i\leq H, 1\leq j\leq W)$ 列的单元格的状态用字符 $S &#95; {i,j}$ 表示。<br>$S &#95; {i,j}$ 是 <code>#</code>、<code>.</code>、<code>o</code>、<code>x</code>、<code>S</code>、<code>G</code> 中的一个。</p>
+<ul>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>#</code>：无法输入此单元格。</li>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>.</code>：此单元格可以自由进出。也就是说，进入此格后，高桥可以向上、向下、向左或向右移动到任何相邻的格（如果存在的话）。</li>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>o</code>：在这一格中，<strong>高桥移动的方向必须与之前移动的方向相同</strong>。也就是说，进入这一格后，他必须不改变方向地移动到下一格。</li>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>x</code>：在这一格中，<strong>高桥不能沿与前一步相同的方向移动</strong>。也就是说，进入这一格后，他必须改变方向才能移动到下一格。转 $180$ 度返回上一格被视为改变方向。</li>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>S</code>：该格是高桥的起始位置。此格可以自由进出。</li>
+<li>如果 $S &#95; {i,j}&#x3D;$ <code>G</code>：此格是高桥的目的地。此格可以自由进出。</li>
+</ul>
+<p>正好有一个 $(i,j)$ 与 $1\leq i\leq H, 1\leq j\leq W$ 满足 $S &#95; {i,j}&#x3D;$ <code>S</code>，正好有一个满足 $S &#95; {i,j}&#x3D;$ <code>G</code>。</p>
+<p>高桥想要从起始位置出发，反复向上下左右移动到相邻的单元格，从而到达目的地。<br>请判断这是否可行，如果可行，请输出一个在相邻单元格之间最多有 $5\times 10^6$ 次移动的有效移动序列。<br>可以证明，如果在问题的条件下存在一个有效的移动序列，那么就存在一个最多有 $5\times 10^6$ 次移动的序列。<br>只要移动次数最多为 $5\times 10^6$ ，就没有必要最小化移动次数。</p>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>如果无法在满足条件的情况下到达目的地，则在第一行输出 “否”，在第二行不输出任何内容。<br>如果可以在满足条件的情况下到达目的地，则在第一行输出 “是”。<br>在第二行输出一个字符串 $T$ 代表一连串的移动。 $T$ 必须满足以下所有条件。</p>
+<ul>
+<li>$T$ 的长度 $\lvert T\rvert$ 介于 $1$ 和 $5\times 10^6$ 之间（包括首尾）。</li>
+<li>$T$ 中的每个字符都是 “U”、”D”、”L”、”R “中的一个。<ul>
+<li>$T$ 的第 $i$ 个字符是 “U”、”D”、”L”、”R”，这意味着在出发后的第 $i$ 次移动中，高桥分别移动到相邻单元格的上方、下方、左侧或右侧。</li>
+</ul>
+</li>
+<li>对于 $1\leq i\leq \lvert T\rvert$ ，在 $i$ -th步之后，高桥不在网格之外。</li>
+<li>在移动过程中，每个单元格的条件都没有被破坏。</li>
+<li>在第 $\lvert T\rvert$ 次移动之后，高桥（Takahashi）位于目的地单元格。只要满足这个条件，他就可以在 $\lvert T\rvert$ &#x2F;th步之前通过目的单元格。</li>
+</ul>
+<h2 id="错误代码"><a href="#错误代码" class="headerlink" title="错误代码"></a>错误代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">bool</span>&gt; visited[H][W][<span class="number">4</span>];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; prev_r[H][W][<span class="number">4</span>];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; prev_c[H][W][<span class="number">4</span>];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; prev_dir[H][W][<span class="number">4</span>];</span><br><span class="line">    vector&lt;<span class="type">char</span>&gt; prev_move[H][W][<span class="number">4</span>];</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="literal">false</span>, <span class="built_in">sizeof</span>(visited));</span><br><span class="line">    <span class="built_in">memset</span>(prev_r, <span class="number">-1</span>, <span class="built_in">sizeof</span>(prev_r));</span><br><span class="line">    <span class="built_in">memset</span>(prev_c, <span class="number">-1</span>, <span class="built_in">sizeof</span>(prev_c));</span><br><span class="line">    <span class="built_in">memset</span>(prev_dir, <span class="number">-1</span>, <span class="built_in">sizeof</span>(prev_dir));</span><br><span class="line">    <span class="built_in">memset</span>(prev_move, <span class="number">0</span>, <span class="built_in">sizeof</span>(prev_move));</span><br></pre></td></tr></table></figure>
+<h2 id="正确代码"><a href="#正确代码" class="headerlink" title="正确代码"></a>正确代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dr[] = &#123;<span class="number">-1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> dc[] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> dir_char[] = &#123;<span class="string">&#x27;U&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;R&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="type">int</span> r, c, dir;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> H, W;</span><br><span class="line">    <span class="keyword">if</span> (!(cin &gt;&gt; H &gt;&gt; W)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">grid</span><span class="params">(H)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; H; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; grid[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> sr = <span class="number">-1</span>, sc = <span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> gr = <span class="number">-1</span>, gc = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; H; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; W; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (grid[i][j] == <span class="string">&#x27;S&#x27;</span>) &#123;</span><br><span class="line">                sr = i;</span><br><span class="line">                sc = j;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (grid[i][j] == <span class="string">&#x27;G&#x27;</span>) &#123;</span><br><span class="line">                gr = i;</span><br><span class="line">                gc = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;vector&lt;<span class="type">bool</span>&gt;&gt;&gt; <span class="built_in">visited</span>(H, vector&lt;vector&lt;<span class="type">bool</span>&gt;&gt;(W, <span class="built_in">vector</span>&lt;<span class="type">bool</span>&gt;(<span class="number">4</span>, <span class="literal">false</span>)));</span><br><span class="line">    vector&lt;vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&gt; <span class="built_in">prev_r</span>(H, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;(W, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">4</span>, <span class="number">-1</span>)));</span><br><span class="line">    vector&lt;vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&gt; <span class="built_in">prev_c</span>(H, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;(W, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">4</span>, <span class="number">-1</span>)));</span><br><span class="line">    vector&lt;vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&gt; <span class="built_in">prev_dir</span>(H, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;(W, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">4</span>, <span class="number">-1</span>)));</span><br><span class="line">    vector&lt;vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&gt; <span class="built_in">prev_move</span>(H, vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;(W, <span class="built_in">vector</span>&lt;<span class="type">char</span>&gt;(<span class="number">4</span>, <span class="number">0</span>)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    queue&lt;State&gt; q;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> d = <span class="number">0</span>; d &lt; <span class="number">4</span>; ++d) &#123;</span><br><span class="line">        <span class="type">int</span> nr = sr + dr[d];</span><br><span class="line">        <span class="type">int</span> nc = sc + dc[d];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查边界和障碍</span></span><br><span class="line">        <span class="keyword">if</span> (nr &gt;= <span class="number">0</span> &amp;&amp; nr &lt; H &amp;&amp; nc &gt;= <span class="number">0</span> &amp;&amp; nc &lt; W &amp;&amp; grid[nr][nc] != <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!visited[nr][nc][d]) &#123;</span><br><span class="line">                visited[nr][nc][d] = <span class="literal">true</span>;</span><br><span class="line">                prev_r[nr][nc][d] = sr;</span><br><span class="line">                prev_c[nr][nc][d] = sc;</span><br><span class="line">                prev_dir[nr][nc][d] = <span class="number">-1</span>; </span><br><span class="line">                prev_move[nr][nc][d] = dir_char[d];</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;nr, nc, d&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> found = <span class="literal">false</span>;</span><br><span class="line">    <span class="type">int</span> end_r = <span class="number">-1</span>, end_c = <span class="number">-1</span>, end_dir = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        State curr = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> r = curr.r;</span><br><span class="line">        <span class="type">int</span> c = curr.c;</span><br><span class="line">        <span class="type">int</span> prev_d = curr.dir; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (r == gr &amp;&amp; c == gc) &#123;</span><br><span class="line">            found = <span class="literal">true</span>;</span><br><span class="line">            end_r = r;</span><br><span class="line">            end_c = c;</span><br><span class="line">            end_dir = prev_d;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> next_d = <span class="number">0</span>; next_d &lt; <span class="number">4</span>; ++next_d) &#123;</span><br><span class="line">            <span class="type">int</span> nr = r + dr[next_d];</span><br><span class="line">            <span class="type">int</span> nc = c + dc[next_d];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (nr &lt; <span class="number">0</span> || nr &gt;= H || nc &lt; <span class="number">0</span> || nc &gt;= W) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (grid[nr][nc] == <span class="string">&#x27;#&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="type">char</span> cell_type = grid[r][c];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (cell_type == <span class="string">&#x27;o&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (next_d != prev_d) <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cell_type == <span class="string">&#x27;x&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (next_d == prev_d) <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!visited[nr][nc][next_d]) &#123;</span><br><span class="line">                visited[nr][nc][next_d] = <span class="literal">true</span>;</span><br><span class="line">                prev_r[nr][nc][next_d] = r;</span><br><span class="line">                prev_c[nr][nc][next_d] = c;</span><br><span class="line">                prev_dir[nr][nc][next_d] = prev_d; </span><br><span class="line">                prev_move[nr][nc][next_d] = dir_char[next_d];</span><br><span class="line">                q.<span class="built_in">push</span>(&#123;nr, nc, next_d&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!found) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; endl;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 回溯路径</span></span><br><span class="line">        string path = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="type">int</span> cr = end_r;</span><br><span class="line">        <span class="type">int</span> cc = end_c;</span><br><span class="line">        <span class="type">int</span> cd = end_dir;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (cd != <span class="number">-1</span>) &#123;</span><br><span class="line">            path += prev_move[cr][cc][cd];</span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> pr = prev_r[cr][cc][cd];</span><br><span class="line">            <span class="type">int</span> pc = prev_c[cr][cc][cd];</span><br><span class="line">            <span class="type">int</span> pd = prev_dir[cr][cc][cd];</span><br><span class="line">            </span><br><span class="line">            cr = pr;</span><br><span class="line">            cc = pc;</span><br><span class="line">            cd = pd;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">reverse</span>(path.<span class="built_in">begin</span>(), path.<span class="built_in">end</span>());</span><br><span class="line">        cout &lt;&lt; path &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/13/abc-453/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260413" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -665,6 +766,84 @@
 
 
   
+    <article id="post-20260408" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/08/20260408/">蓝桥杯于我是捐钱去理</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/08/20260408/" class="archive-article-date">
+  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>苯环蓝桥题单</li>
+<li>Codeforces Round 1091 (Div. 2 ) D 深入浅出数学小部分</li>
+<li>大英补一套</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/08/20260408/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Codeforces Round 1091 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -885,84 +1064,6 @@
 
 
   
-    <article id="post-20260408" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/08/20260408/">蓝桥杯于我是捐钱去理</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/08/20260408/" class="archive-article-date">
-  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>苯环蓝桥题单</li>
-<li>Codeforces Round 1091 (Div. 2 ) D 深入浅出数学小部分</li>
-<li>大英补一套</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/08/20260408/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-luogu-lanqiao-tidan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1141,84 +1242,6 @@
 
 
   
-    <article id="post-20260407" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/07/20260407/">线段树搭配重链剖分好难 线段树啥时候能掌握啊</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/07/20260407/" class="archive-article-date">
-  	<time datetime="2026-04-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>洛谷树上剖分，KMP和字典树</li>
-<li>Codeforces Round 1091 (Div. 2)</li>
-<li>大英补昨天的一套半，还欠着一套周六做</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/07/20260407/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1349,15 +1372,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color3">atcoder</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color3">lanqiao</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1365,19 +1388,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1389,7 +1400,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">lanqiao</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1397,11 +1412,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1409,11 +1420,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1421,7 +1432,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1433,7 +1460,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
