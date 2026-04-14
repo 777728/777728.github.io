@@ -179,9 +179,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>cf1093 abc453 补题 </li>
-<li>数学作业</li>
-<li>abc452</li>
+<li>cf1093 abc453 蓝桥杯 补题 （没补完）</li>
+<li>水课作业*4</li>
 </ol>
 
       
@@ -207,6 +206,225 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/04/14/20260414/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260415" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/14/20260415/">昨天cf签到，今天十节课</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/14/20260415/" class="archive-article-date">
+  	<time datetime="2026-04-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>abc452</li>
+<li>蓝桥杯补题</li>
+<li>数学作业</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/14/20260415/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-luogu-lanqiao-2026" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/14/luogu-lanqiao-2026/">蓝桥杯2026</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/14/luogu-lanqiao-2026/" class="archive-article-date">
+  	<time datetime="2026-04-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><hr>
+<p>这道题要求计算在 $2048 \times 2048$ 的网格中，有多少种将每个格子填为 $L$ 或 $Q$ 的方案，满足三个条件：</p>
+<ol>
+<li><strong>每行 $Q$ 的个数为奇数</strong>  </li>
+<li><strong>每列 $Q$ 的个数为奇数</strong>  </li>
+<li><strong>任意 $2\times2$ 子区域中 $Q$ 的个数为奇数</strong></li>
+</ol>
+<p>你需要输出结果对 $998244353$ 取模。  </p>
+<hr>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><hr>
+<h3 id="打表"><a href="#打表" class="headerlink" title="打表"></a>打表</h3><p>n 为奇数时只有 1 种方案，n 是 4 的倍数时，注意到 32 和 8192 都是 2 的幂，可以归纳出来这种时候是 2 ^ (2n−3)，其他情况下的 n 的答案是 0。题目要求的 n&#x3D;2048，是 4 的倍数，所以答案就是 2 ^ 4093 取模。</p>
+<h3 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h3><p>由于每个 2×2 的矩阵的和都是奇数，即 a 1,1​+a 1,2​+a 2,1​+a 2,2​是奇数且 a 2,1​+a 2,2​+a 3,1​+a 3,2​也是奇数，于是我们知道 a 1,1​+a 1,2​和 a 3,1​+a 3,2​同奇偶。</p>
+<p>推广出来，我们发现 a i,j​+a i+1,j​和 a i,j−2​+a i+1,j−2​同奇偶，且 a i,j​+a i,j+1​与 a i+2,j​+a i+2,j+1​同奇偶。</p>
+<p>如果我们已知第一行和第一列的所有数，根据这个规律可以把整个矩阵填满（首先 a 1,1​,a 1,2​,a 2,1​已知，奇偶性可以算出 a 2,2​，然后利用隔行隔列同奇偶的性质可以填满整个矩阵，可以手玩一下）。</p>
+<p>同时如果保证第一行的和是奇数的话，则由于第三行每相邻两个数的和的奇偶性和第一行相同，因此所有奇数行的和肯定也是奇数；由于每个 2×2 的矩阵的和都是奇数，因此前两行的和一定是偶数（前两行可以分割成 1024 个 2×2 的矩阵），因此第二行的和也是奇数，因此偶数行的和也是奇数。</p>
+<p>同理只要第一列的和是奇数，所有列的和都是奇数。</p>
+<p>怎么保证第一行第一列的和是奇数？只填 2047 个，算算奇偶性决定最后一个怎么填。</p>
+<h2 id="于是一共有-2047-2047−1-4093-个位置可以随便填，答案就是-2-4093-。减一因为-a-1-1​被算了两次。"><a href="#于是一共有-2047-2047−1-4093-个位置可以随便填，答案就是-2-4093-。减一因为-a-1-1​被算了两次。" class="headerlink" title="于是一共有 2047+2047−1&#x3D;4093 个位置可以随便填，答案就是 2 4093 。减一因为 a 1,1​被算了两次。"></a>于是一共有 2047+2047−1&#x3D;4093 个位置可以随便填，答案就是 2 4093 。减一因为 a 1,1​被算了两次。</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> var_cnt = n * n; </span><br><span class="line">    <span class="type">int</span> eq_cnt = <span class="number">2</span> * n + (n - <span class="number">1</span>) * (n - <span class="number">1</span>); </span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">a</span>(eq_cnt, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(var_cnt + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">auto</span> get_id = [&amp;] (<span class="type">int</span> r, <span class="type">int</span> c) &#123;</span><br><span class="line">        <span class="keyword">return</span> r * n + c;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i, j)] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a[idx][var_cnt] = <span class="number">1</span>;</span><br><span class="line">        idx++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i, j)] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a[idx][var_cnt] = <span class="number">1</span>;</span><br><span class="line">        idx++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n - <span class="number">1</span>; j++) &#123;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i, j)] = <span class="number">1</span>;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i + <span class="number">1</span>, j)] = <span class="number">1</span>;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i, j + <span class="number">1</span>)] = <span class="number">1</span>;</span><br><span class="line">            a[idx][<span class="built_in">get_id</span>(i + <span class="number">1</span>, j + <span class="number">1</span>)] = <span class="number">1</span>;</span><br><span class="line">            a[idx][var_cnt] = <span class="number">1</span>;</span><br><span class="line">            idx++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> rank = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; var_cnt &amp;&amp; rank &lt; idx; j++) &#123;</span><br><span class="line">        <span class="type">int</span> pivot = rank;</span><br><span class="line">        <span class="keyword">while</span> (pivot &lt; idx &amp;&amp; a[pivot][j] == <span class="number">0</span>) &#123;</span><br><span class="line">            pivot++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pivot == idx) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">swap</span>(a[rank], a[pivot]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; idx; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i != rank &amp;&amp; a[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = j; k &lt;= var_cnt; k++) &#123;</span><br><span class="line">                    a[i][k] ^= a[rank][k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        rank++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> valid = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = rank; i &lt; idx; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i][var_cnt] == <span class="number">1</span>) &#123;</span><br><span class="line">            valid = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!valid) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;n = &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, ans = &quot;</span> &lt;&lt; <span class="string">&quot;0&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        LL cnt = var_cnt - rank;</span><br><span class="line">        LL res = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">            res *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;n = &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, ans = &quot;</span> &lt;&lt; res &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">1</span>; n &lt;= <span class="number">16</span>; n++) &#123;</span><br><span class="line">        <span class="built_in">solve</span>(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><hr>
+<p>题目要求：  </p>
+<p>有 $N$ 根木材，长度分别为 $A_i$，最多可以切 $K$ 刀（每次切一根成两段，长度正整数）。  </p>
+<p>目标：找到最小的 <strong>挡板间距 $L$</strong>，使得存在一种切割方案，切割后 <strong>所有木段的长度都不超过 $L$</strong>。  </p>
+<ul>
+<li>$L$ 越小，要求切割后每段越短，需要的切割次数可能越多。  </li>
+<li>要保证切割次数不超过 $K$。</li>
+</ul>
+<hr>
+<p><strong>核心思路</strong>（不解答，仅概括题意）  </p>
+<ul>
+<li>给定 $L$，可以计算每根木材至少需要切几刀才能让每段长度 $\le L$：<br>长度 $A_i$ 的木材，切 $t_i &#x3D; \lceil A_i &#x2F; L \rceil - 1$ 刀，得到 $\lceil A_i &#x2F; L \rceil$ 段。  </li>
+<li>总刀数 $T &#x3D; \sum t_i$ 必须 $\le K$。  </li>
+<li>要找最小的 $L$，使 $T \le K$。</li>
+</ul>
+<p><strong>输入</strong>：  </p>
+<ul>
+<li>$N, K$  </li>
+<li>$A_1 \dots A_N$</li>
+</ul>
+<p><strong>输出</strong>：  </p>
+<ul>
+<li>最小 $L$</li>
+</ul>
+<p><strong>数据范围</strong>：<br>$N$ 最大 $10^6$，$K$ 最大 $10^9$，$A_i$ 最大 $10^9$。</p>
+<h2 id="贪心想到-二分没想到-确实没练"><a href="#贪心想到-二分没想到-确实没练" class="headerlink" title="贪心想到 二分没想到 确实没练"></a>贪心想到 二分没想到 确实没练</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">int</span> n,k,a[<span class="number">1000005</span>],malen;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i]%x==<span class="number">0</span>)sum+=a[i]/x<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> sum+=a[i]/x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        cin&gt;&gt;a[i],malen=<span class="built_in">max</span>(malen,a[i]);</span><br><span class="line">    <span class="type">int</span> l=<span class="number">0</span>,r=malen,mid;</span><br><span class="line">    <span class="keyword">while</span>(l<span class="number">+1</span>&lt;r)</span><br><span class="line">    &#123;</span><br><span class="line">        mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(mid)&lt;=k)r=mid;</span><br><span class="line">        <span class="keyword">else</span> l=mid;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;r;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><hr>
+<h2 id="题目理解"><a href="#题目理解" class="headerlink" title="题目理解"></a><strong>题目理解</strong></h2><p>我们有：</p>
+<ul>
+<li>硬盘扇区：编号 ( 1, 2, \dots, N )</li>
+<li>第 (i) 个扇区的数据量：( a_i &#x3D; C \times i )</li>
+<li>我们可以选择一个连续的扇区区间 ([l, r]) 读取，会得到数据总量：<br>[<br>\sum_{i&#x3D;l}^r C \times i &#x3D; C \times \frac{(l+r)(r-l+1)}{2}<br>]</li>
+<li>每次读取是连续区间，不能重复读取（每个扇区最多读一次）</li>
+<li>要求：读出的数据总量 <strong>恰好等于</strong> ( W )</li>
+<li>目标：<strong>最少指令次数</strong>（即最少区间数）</li>
+</ul>
+<hr>
+<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><strong>思路</strong></h2><p>首先如果 w 不是 c 的倍数肯定 −1，否则令 x&#x3D; c w​。</p>
+<p>如果 1+2+⋯+n&#x3D; 2 n(n+1)​&lt;x，也是无解。</p>
+<p>如果 w&#x3D;0，答案是 0。（赛时代码好像没考虑这个，寄）</p>
+<p>否则，下面证明答案最多是 2。</p>
+<p>由于<br>2 n(n+1)​≥x，因此一定存在一个 1≤m&lt;n，使得：</p>
+<p>1+2+⋯+m&#x3D; 2 m(m+1)​≤x； 1+2+⋯+(m+1)&gt;x。 我们可以证明 y&#x3D;1+2+⋯+(m+1)−x&#x3D;(m+1)−[x−(1+2+⋯m)]≤(m+1)，我们把 (m+1) 补上，再把 y 删去，最多两个区间。</p>
+<p>所以答案不是 1 就是 2。开 map 记录一下前缀和，即可判断一个区间是否可行，可行则为 1，否则为 2。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-cpp">
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/14/luogu-lanqiao-2026/">展开全文 >></a>
         </p>
       
 
@@ -1035,161 +1253,6 @@
 
 
   
-    <article id="post-20260409" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/09/20260409/">九点起的一天</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/09/20260409/" class="archive-article-date">
-  	<time datetime="2026-04-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>洛谷蓝桥杯苯环题单</li>
-<li>大英2023初赛</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/09/20260409/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260408" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/08/20260408/">蓝桥杯于我是捐钱去理</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/08/20260408/" class="archive-article-date">
-  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>苯环蓝桥题单</li>
-<li>Codeforces Round 1091 (Div. 2 ) D 深入浅出数学小部分</li>
-<li>大英补一套</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/08/20260408/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1328,6 +1391,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">洛谷</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
@@ -1336,15 +1407,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1352,11 +1415,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">lanqiao</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1364,15 +1423,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1380,11 +1431,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1396,7 +1455,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1404,15 +1463,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
             
             <div class="clearfix"></div>
