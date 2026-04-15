@@ -158,6 +158,186 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260415" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/15/20260415/">又是忙碌的一天</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/15/20260415/" class="archive-article-date">
+  	<time datetime="2026-04-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>早上 abc452</li>
+<li>下午 cf1092 数学作业</li>
+<li>晚上 niuke137 蓝桥杯补题</li>
+</ol>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/15/20260415/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-abc-452" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/15/abc-452/">AtCoder Beginner Contest 452</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/15/abc-452/" class="archive-article-date">
+  	<time datetime="2026-04-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><hr>
+<p><strong>给定字符串 S 和 T，问 S 的所有非空子串中，有多少个子串不以 T 作为子序列（不要求连续）。</strong></p>
+<p>关键点：</p>
+<ul>
+<li>子串是连续的，子序列可以不连续。</li>
+<li>两个子串只要位置不同就算不同（即使内容相同）。</li>
+<li>长度限制：|S| ≤ 2×10^5，|T| ≤ 50。</li>
+</ul>
+<p>换句话说，要统计所有子串 [l, r]（1 ≤ l ≤ r ≤ |S|），使得 <strong>不存在一种方式从 S[l..r] 中按顺序挑出字符等于 T</strong>。</p>
+<h2 id="更直白地：子串内不能按顺序匹配出整个-T。"><a href="#更直白地：子串内不能按顺序匹配出整个-T。" class="headerlink" title="更直白地：子串内不能按顺序匹配出整个 T。"></a>更直白地：子串内不能按顺序匹配出整个 T。</h2><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><hr>
+<p><strong>答案 &#x3D; 总子串数 − 包含 T 的子串数</strong></p>
+<h3 id="关键步骤"><a href="#关键步骤" class="headerlink" title="关键步骤"></a>关键步骤</h3><ol>
+<li><p><strong>预处理 <code>nxt[i][c]</code></strong>：从位置 i 开始，字符 c 首次出现的位置（O(26n)）</p>
+</li>
+<li><p><strong>对每个左端点 i</strong>：</p>
+<ul>
+<li>贪心匹配 T：<code>pos = nxt[pos][t[j]]; pos++</code></li>
+<li>若匹配成功，<code>cnt += n - pos + 1</code>（以 i 为左端点的合法右端点个数）</li>
+</ul>
+</li>
+<li><p><strong>输出</strong>：<code>n*(n+1)/2 - cnt</code></p>
+</li>
+</ol>
+<hr>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 200050</span></span><br><span class="line">string s,t;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> nxt[maxn][<span class="number">27</span>],cnt;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cin&gt;&gt;s&gt;&gt;t;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n=s.<span class="built_in">length</span>(),m=t.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++) nxt[n][i]=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">char</span> c=<span class="string">&#x27;a&#x27;</span>;c&lt;=<span class="string">&#x27;z&#x27;</span>;c++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i]==c) nxt[i][c-<span class="string">&#x27;a&#x27;</span>]=i;</span><br><span class="line">            <span class="keyword">else</span> nxt[i][c-<span class="string">&#x27;a&#x27;</span>]=nxt[i<span class="number">+1</span>][c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> pos=i;</span><br><span class="line">        <span class="type">bool</span> fl=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            pos=nxt[pos][t[j]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">            <span class="keyword">if</span>(pos==<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                fl=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pos++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(fl) cnt+=n-pos<span class="number">+1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;n*(n<span class="number">+1</span>)/<span class="number">2</span>-cnt&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/15/abc-452/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260414" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -235,84 +415,6 @@
 
 
   
-    <article id="post-20260415" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/14/20260415/">昨天cf签到，今天十节课</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/14/20260415/" class="archive-article-date">
-  	<time datetime="2026-04-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>abc452</li>
-<li>蓝桥杯补题</li>
-<li>数学作业</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/14/20260415/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-luogu-lanqiao-2026" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -360,7 +462,7 @@
 <li>要保证切割次数不超过 $K$。</li>
 </ul>
 <hr>
-<p><strong>核心思路</strong>（不解答，仅概括题意）  </p>
+<p><strong>核心思路</strong></p>
 <ul>
 <li>给定 $L$，可以计算每根木材至少需要切几刀才能让每段长度 $\le L$：<br>长度 $A_i$ 的木材，切 $t_i &#x3D; \lceil A_i &#x2F; L \rceil - 1$ 刀，得到 $\lceil A_i &#x2F; L \rceil$ 段。  </li>
 <li>总刀数 $T &#x3D; \sum t_i$ 必须 $\le K$。  </li>
@@ -395,9 +497,7 @@
 <p>由于<br>2 n(n+1)​≥x，因此一定存在一个 1≤m&lt;n，使得：</p>
 <p>1+2+⋯+m&#x3D; 2 m(m+1)​≤x； 1+2+⋯+(m+1)&gt;x。 我们可以证明 y&#x3D;1+2+⋯+(m+1)−x&#x3D;(m+1)−[x−(1+2+⋯m)]≤(m+1)，我们把 (m+1) 补上，再把 y 删去，最多两个区间。</p>
 <p>所以答案不是 1 就是 2。开 map 记录一下前缀和，即可判断一个区间是否可行，可行则为 1，否则为 2。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-cpp">
-</code></pre>
-
+<h2 id="tle代码"><a href="#tle代码" class="headerlink" title="tle代码"></a>tle代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n, c;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">        cin &gt;&gt; n &gt;&gt; c &gt;&gt; w;</span><br><span class="line">        <span class="keyword">if</span>(w == <span class="number">0</span>) cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (w % c != <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            set&lt;<span class="type">int</span>&gt;a;</span><br><span class="line">            <span class="type">int</span> x = w / c;</span><br><span class="line">            <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; x &gt; (n / <span class="number">2</span>) * (n + <span class="number">1</span>))&#123;</span><br><span class="line">                cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; x &gt; (n / <span class="number">2</span> + <span class="number">1</span>) * n)&#123;</span><br><span class="line">                cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">                    a.<span class="built_in">insert</span>(i);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>;j &lt;= n;j++)&#123;</span><br><span class="line">                        a.<span class="built_in">insert</span>(i + j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(a.<span class="built_in">count</span>(x) == <span class="number">1</span>) cout&lt;&lt;<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">                <span class="keyword">else</span> cout&lt;&lt;<span class="number">2</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">## 优化代码</span><br><span class="line">```<span class="function">cpp</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, c;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">if</span> (w == <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (w % c != <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> x = w / c;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> max_sum = n * (n + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; max_sum) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    unordered_set&lt;<span class="type">long</span> <span class="type">long</span>&gt; prefix_sums;</span><br><span class="line">    prefix_sums.<span class="built_in">insert</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">bool</span> found_one = <span class="literal">false</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> current_sum = <span class="number">0</span>;   </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> r = <span class="number">1</span>; r &lt;= n; ++r) &#123;</span><br><span class="line">        current_sum += r;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> target = current_sum - x;</span><br><span class="line">        <span class="keyword">if</span> (prefix_sums.<span class="built_in">find</span>(target) != prefix_sums.<span class="built_in">end</span>()) &#123;</span><br><span class="line">            found_one = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        prefix_sums.<span class="built_in">insert</span>(current_sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (found_one) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">2</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1174,85 +1274,6 @@
 
 
   
-    <article id="post-20260410" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/10/20260410/">早八的高代课</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/10/20260410/" class="archive-article-date">
-  	<time datetime="2026-04-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>洛谷蓝桥杯冲刺题单</li>
-<li>模版回顾</li>
-<li>牛客多校模拟赛2</li>
-<li>大英2024初赛</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/10/20260410/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1407,10 +1428,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
@@ -1419,15 +1436,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1435,7 +1448,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1443,19 +1456,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1467,15 +1484,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>

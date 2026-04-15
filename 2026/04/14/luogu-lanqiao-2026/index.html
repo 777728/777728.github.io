@@ -16,7 +16,7 @@
 <meta property="og:description" content="B题意 这道题要求计算在 $2048 \times 2048$ 的网格中，有多少种将每个格子填为 $L$ 或 $Q$ 的方案，满足三个条件：  每行 $Q$ 的个数为奇数   每列 $Q$ 的个数为奇数   任意 $2\times2$ 子区域中 $Q$ 的个数为奇数  你需要输出结果对 $998244353$ 取模。    思路 打表n 为奇数时只有 1 种方案，n 是 4 的倍数时，注意到 32">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-14T17:28:47.760Z">
+<meta property="article:modified_time" content="2026-04-15T02:57:11.835Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="xcpc">
 <meta property="article:tag" content="洛谷">
@@ -207,7 +207,7 @@
 <li>要保证切割次数不超过 $K$。</li>
 </ul>
 <hr>
-<p><strong>核心思路</strong>（不解答，仅概括题意）  </p>
+<p><strong>核心思路</strong></p>
 <ul>
 <li>给定 $L$，可以计算每根木材至少需要切几刀才能让每段长度 $\le L$：<br>长度 $A_i$ 的木材，切 $t_i &#x3D; \lceil A_i &#x2F; L \rceil - 1$ 刀，得到 $\lceil A_i &#x2F; L \rceil$ 段。  </li>
 <li>总刀数 $T &#x3D; \sum t_i$ 必须 $\le K$。  </li>
@@ -242,9 +242,7 @@
 <p>由于<br>2 n(n+1)​≥x，因此一定存在一个 1≤m&lt;n，使得：</p>
 <p>1+2+⋯+m&#x3D; 2 m(m+1)​≤x； 1+2+⋯+(m+1)&gt;x。 我们可以证明 y&#x3D;1+2+⋯+(m+1)−x&#x3D;(m+1)−[x−(1+2+⋯m)]≤(m+1)，我们把 (m+1) 补上，再把 y 删去，最多两个区间。</p>
 <p>所以答案不是 1 就是 2。开 map 记录一下前缀和，即可判断一个区间是否可行，可行则为 1，否则为 2。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-cpp">
-</code></pre>
-
+<h2 id="tle代码"><a href="#tle代码" class="headerlink" title="tle代码"></a>tle代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n, c;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">        cin &gt;&gt; n &gt;&gt; c &gt;&gt; w;</span><br><span class="line">        <span class="keyword">if</span>(w == <span class="number">0</span>) cout&lt;&lt;<span class="number">0</span>&lt;&lt;endl;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (w % c != <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            set&lt;<span class="type">int</span>&gt;a;</span><br><span class="line">            <span class="type">int</span> x = w / c;</span><br><span class="line">            <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; x &gt; (n / <span class="number">2</span>) * (n + <span class="number">1</span>))&#123;</span><br><span class="line">                cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; x &gt; (n / <span class="number">2</span> + <span class="number">1</span>) * n)&#123;</span><br><span class="line">                cout&lt;&lt;<span class="number">-1</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">                    a.<span class="built_in">insert</span>(i);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>;j &lt;= n;j++)&#123;</span><br><span class="line">                        a.<span class="built_in">insert</span>(i + j);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(a.<span class="built_in">count</span>(x) == <span class="number">1</span>) cout&lt;&lt;<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">                <span class="keyword">else</span> cout&lt;&lt;<span class="number">2</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">## 优化代码</span><br><span class="line">```<span class="function">cpp</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, c;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> w;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; c &gt;&gt; w;</span><br><span class="line">    <span class="keyword">if</span> (w == <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">0</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (w % c != <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> x = w / c;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> max_sum = n * (n + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; max_sum) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    unordered_set&lt;<span class="type">long</span> <span class="type">long</span>&gt; prefix_sums;</span><br><span class="line">    prefix_sums.<span class="built_in">insert</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">bool</span> found_one = <span class="literal">false</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> current_sum = <span class="number">0</span>;   </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> r = <span class="number">1</span>; r &lt;= n; ++r) &#123;</span><br><span class="line">        current_sum += r;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> target = current_sum - x;</span><br><span class="line">        <span class="keyword">if</span> (prefix_sums.<span class="built_in">find</span>(target) != prefix_sums.<span class="built_in">end</span>()) &#123;</span><br><span class="line">            found_one = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        prefix_sums.<span class="built_in">insert</span>(current_sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (found_one) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">2</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -357,7 +355,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/14/20260415/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/14/20260414/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -395,7 +393,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">1.</span> <span class="toc-text">B</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%A1%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">打表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">推理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8E%E6%98%AF%E4%B8%80%E5%85%B1%E6%9C%89-2047-2047%E2%88%921-4093-%E4%B8%AA%E4%BD%8D%E7%BD%AE%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%A1%AB%EF%BC%8C%E7%AD%94%E6%A1%88%E5%B0%B1%E6%98%AF-2-4093-%E3%80%82%E5%87%8F%E4%B8%80%E5%9B%A0%E4%B8%BA-a-1-1%E2%80%8B%E8%A2%AB%E7%AE%97%E4%BA%86%E4%B8%A4%E6%AC%A1%E3%80%82"><span class="toc-number">1.3.</span> <span class="toc-text">于是一共有 2047+2047−1&#x3D;4093 个位置可以随便填，答案就是 2 4093 。减一因为 a 1,1​被算了两次。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D"><span class="toc-number">2.</span> <span class="toc-text">D</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E6%83%B3%E5%88%B0-%E4%BA%8C%E5%88%86%E6%B2%A1%E6%83%B3%E5%88%B0-%E7%A1%AE%E5%AE%9E%E6%B2%A1%E7%BB%83"><span class="toc-number">2.2.</span> <span class="toc-text">贪心想到 二分没想到 确实没练</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E"><span class="toc-number">3.</span> <span class="toc-text">E</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E7%90%86%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">题目理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.3.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">1.</span> <span class="toc-text">B</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E8%A1%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">打表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">推理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8E%E6%98%AF%E4%B8%80%E5%85%B1%E6%9C%89-2047-2047%E2%88%921-4093-%E4%B8%AA%E4%BD%8D%E7%BD%AE%E5%8F%AF%E4%BB%A5%E9%9A%8F%E4%BE%BF%E5%A1%AB%EF%BC%8C%E7%AD%94%E6%A1%88%E5%B0%B1%E6%98%AF-2-4093-%E3%80%82%E5%87%8F%E4%B8%80%E5%9B%A0%E4%B8%BA-a-1-1%E2%80%8B%E8%A2%AB%E7%AE%97%E4%BA%86%E4%B8%A4%E6%AC%A1%E3%80%82"><span class="toc-number">1.3.</span> <span class="toc-text">于是一共有 2047+2047−1&#x3D;4093 个位置可以随便填，答案就是 2 4093 。减一因为 a 1,1​被算了两次。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#D"><span class="toc-number">2.</span> <span class="toc-text">D</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83%E6%83%B3%E5%88%B0-%E4%BA%8C%E5%88%86%E6%B2%A1%E6%83%B3%E5%88%B0-%E7%A1%AE%E5%AE%9E%E6%B2%A1%E7%BB%83"><span class="toc-number">2.2.</span> <span class="toc-text">贪心想到 二分没想到 确实没练</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#E"><span class="toc-number">3.</span> <span class="toc-text">E</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E7%90%86%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">题目理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tle%E4%BB%A3%E7%A0%81"><span class="toc-number">3.3.</span> <span class="toc-text">tle代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -564,10 +562,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
@@ -576,15 +570,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,7 +582,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,19 +590,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,15 +618,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>
