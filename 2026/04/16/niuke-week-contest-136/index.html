@@ -16,7 +16,7 @@
 <meta property="og:description" content="e题意$\hspace{15pt}$给定一棵 $n$ 个节点的有根树，根节点为 $1$。初始时所有节点都是红色。$\hspace{15pt}$初始时小红位于根节点 $1$，她要和小紫进行一场游戏。游戏由多回合组成，每一回合中：$\hspace{23pt}\bullet$ 小红先移动到任意一个与她当前位置相邻的红色节点；$\hspace{23pt}\bullet$ 之后小紫选择任意一个与小红当前位置">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-16T09:33:15.785Z">
+<meta property="article:modified_time" content="2026-04-16T11:34:00.861Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="niuke">
 <meta property="article:tag" content="xcpc">
@@ -182,7 +182,93 @@
       
         <h1 id="e"><a href="#e" class="headerlink" title="e"></a>e</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>$\hspace{15pt}$给定一棵 $n$ 个节点的有根树，根节点为 $1$。初始时所有节点都是红色。<br>$\hspace{15pt}$初始时小红位于根节点 $1$，她要和小紫进行一场游戏。游戏由多回合组成，每一回合中：<br>$\hspace{23pt}\bullet$ 小红先移动到任意一个与她当前位置相邻的红色节点；<br>$\hspace{23pt}\bullet$ 之后小紫选择任意一个与小红当前位置相邻的红色节点，将其染成紫色。<br>$\hspace{23pt}\bullet$ 游戏持续进行直到一方获得胜利或一方无法操作。<br>$\hspace{15pt}$如果小红移动到了一个叶子节点，则小红获胜，反之如果直到游戏结束小红都没有移动到一个叶子节点，那么小紫获胜。<br>$\hspace{15pt}$请你判断在最优策略下，谁会获胜。</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> good = <span class="number">0</span>;  <span class="comment">// 好孩子的数量</span></span><br><span class="line">    <span class="type">bool</span> leaf = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> v : g[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == p) <span class="keyword">continue</span>;</span><br><span class="line">        leaf = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        <span class="keyword">if</span> (win[v]) good++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (leaf) &#123;</span><br><span class="line">        win[u] = <span class="literal">true</span>;  <span class="comment">// 叶子节点小红赢</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (u == <span class="number">1</span>) &#123;</span><br><span class="line">        win[u] = (good &gt;= <span class="number">1</span>);  <span class="comment">// 根至少一个能赢的孩子</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        win[u] = (good &gt;= <span class="number">2</span>);  <span class="comment">// 非根节点至少两个能赢的孩子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    g.<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u, v;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v;</span><br><span class="line">        g[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        g[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    win.<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    cout &lt;&lt; (win[<span class="number">1</span>] ? <span class="string">&quot;red&quot;</span> : <span class="string">&quot;purple&quot;</span>) &lt;&lt; endl;</span><br><span class="line">    win.<span class="built_in">clear</span>();</span><br><span class="line">    g.<span class="built_in">clear</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="f"><a href="#f" class="headerlink" title="f"></a>f</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2>
+<h1 id="f"><a href="#f" class="headerlink" title="f"></a>f</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p>$\hspace{15pt}$在平面直角坐标系中，定义两个点相邻，当且仅当它们的曼哈顿距离恰好为 $1$。<br>$\hspace{15pt}$请你构造 $n$ 个不重复的点（坐标均为整数），使得这些点中恰好有 $k$ 对相邻的点。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><hr>
+<h2 id="📌-题目目标"><a href="#📌-题目目标" class="headerlink" title="📌 题目目标"></a>📌 题目目标</h2><p>构造一个二维平面上的点集，满足：</p>
+<ul>
+<li>使用点数 ≤ <code>n</code></li>
+<li>恰好有 <code>k</code> 对<strong>相邻点</strong>（曼哈顿距离 &#x3D; 1）</li>
+</ul>
+<hr>
+<h2 id="🔑-核心思路"><a href="#🔑-核心思路" class="headerlink" title="🔑 核心思路"></a>🔑 核心思路</h2><h3 id="1️⃣-贪心-二分：先构造最大满网格"><a href="#1️⃣-贪心-二分：先构造最大满网格" class="headerlink" title="1️⃣ 贪心 + 二分：先构造最大满网格"></a>1️⃣ 贪心 + 二分：先构造最大满网格</h3><ul>
+<li>一个 <code>l × l</code> 的实心正方形网格，内部相邻边数为：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">水平边：l × (l-1)</span><br><span class="line">垂直边：l × (l-1)</span><br><span class="line">总计：2 × l × (l-1)</span><br></pre></td></tr></table></figure></li>
+<li>二分查找<strong>最大的 <code>l</code></strong>，使得 <code>2*l*(l-1) ≤ k</code>，优先用紧凑结构”批量”消耗 <code>k</code></li>
+</ul>
+<h3 id="2️⃣-剩余-k-的处理：边缘延伸"><a href="#2️⃣-剩余-k-的处理：边缘延伸" class="headerlink" title="2️⃣ 剩余 k 的处理：边缘延伸"></a>2️⃣ 剩余 <code>k</code> 的处理：边缘延伸</h3><p>满网格构造后，若还有剩余 <code>k</code>，通过在边缘<strong>挂点</strong>来精确消耗：</p>
+<table>
+<thead>
+<tr>
+<th>剩余 k 特征</th>
+<th>构造策略</th>
+<th>每次消耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>k</code> 为奇数 且 <code>k &gt; 2l-1</code></td>
+<td>先孤立挂1点 <code>(0,1)</code></td>
+<td><code>k-=1, n-=1</code></td>
+</tr>
+<tr>
+<td><code>k</code> 为偶数</td>
+<td>从 <code>(l+1,l+1)</code> 向左&#x2F;上延伸，新点同时邻2个已有点</td>
+<td><code>k-=2, n-=1</code></td>
+</tr>
+<tr>
+<td><code>k</code> 为奇数（小值）</td>
+<td>从 <code>(1,l+1)</code> 向上单链延伸</td>
+<td><code>k-=2, n-=1</code>（首点 <code>-1</code>）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ 关键技巧：让新点<strong>同时连接2个已有点</strong>，可高效消耗 <code>k</code>（1点换2边）</p>
+</blockquote>
+<h3 id="3️⃣-孤立点兜底"><a href="#3️⃣-孤立点兜底" class="headerlink" title="3️⃣ 孤立点兜底"></a>3️⃣ 孤立点兜底</h3><p>若 <code>n</code> 还有剩余，输出坐标稀疏的孤立点（如 <code>(1e9, 偶数)</code>），确保：</p>
+<ul>
+<li>不产生额外相邻边</li>
+<li>消耗完所有可用点数</li>
+</ul>
+<hr>
+<h2 id="🧭-代码流程图解"><a href="#🧭-代码流程图解" class="headerlink" title="🧭 代码流程图解"></a>🧭 代码流程图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">输入 n, k</span><br><span class="line">   ↓</span><br><span class="line">二分求最大 l: 2*l*(l-1) ≤ k</span><br><span class="line">   ↓</span><br><span class="line">检查 l*l ≤ n? → No: 直接输出 &quot;No&quot;</span><br><span class="line">   ↓</span><br><span class="line">构造 l×l 实心网格 (ans[i][j]=1)</span><br><span class="line">   ↓</span><br><span class="line">n -= l*l, k -= 2*l*(l-1)</span><br><span class="line">   ↓</span><br><span class="line">if (k &gt; 0):</span><br><span class="line">   ├─ k奇且大 → 挂孤立点 (0,1)</span><br><span class="line">   ├─ k偶 → 从角落双向延伸 (每次-2)</span><br><span class="line">   └─ k奇 → 从边缘单链延伸</span><br><span class="line">   ↓</span><br><span class="line">检查 n ≥ 0? → No: 输出 &quot;No&quot;</span><br><span class="line">   ↓</span><br><span class="line">输出 &quot;Yes&quot;</span><br><span class="line">   ├─ 先输出孤立点 (消耗剩余 n)</span><br><span class="line">   └─ 再输出网格点 (ans[i][j]==1)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-关键细节"><a href="#⚠️-关键细节" class="headerlink" title="⚠️ 关键细节"></a>⚠️ 关键细节</h2><table>
+<thead>
+<tr>
+<th>代码片段</th>
+<th>作用&#x2F;注意点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>2LL * (mid-1) * mid</code></td>
+<td>用 <code>LL</code> 防止乘法溢出</td>
+</tr>
+<tr>
+<td><code>mid = (l+r+1)/2</code></td>
+<td>二分上取整，避免死循环</td>
+</tr>
+<tr>
+<td><code>ans[l+10][l+10]</code></td>
+<td>预留边界，方便延伸时不越界</td>
+</tr>
+<tr>
+<td><code>base = 1e9</code></td>
+<td>孤立点坐标足够远，避免意外相邻</td>
+</tr>
+<tr>
+<td><code>cerr&lt;&lt;...</code></td>
+<td>调试用（提交时可注释）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🎯-算法复杂度"><a href="#🎯-算法复杂度" class="headerlink" title="🎯 算法复杂度"></a>🎯 算法复杂度</h2><ul>
+<li>时间：<code>O(l² + k)</code> ≈ <code>O(n)</code>（构造 + 输出）</li>
+<li>空间：<code>O(l²)</code> 存储网格</li>
+</ul>
+<blockquote>
+<p>💡 本质是<strong>贪心构造</strong>：先用高密度结构”吃”掉大部分 <code>k</code>，再用边缘操作”微调”，最后孤立点填充。</p>
+</blockquote>
+<hr>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;   </span><br><span class="line">    <span class="comment">// 二分查找最大满网格尺寸</span></span><br><span class="line">    <span class="type">int</span> l = <span class="number">0</span>, r = n;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="number">2LL</span> * (mid - <span class="number">1</span>) * mid &lt;= k) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="comment">// 检查可行性</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="number">1LL</span> * l * l &gt; n) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// 初始化网格</span></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">ans</span>(l + <span class="number">10</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(l + <span class="number">10</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= l; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= l; j++) &#123;</span><br><span class="line">            ans[i][j] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">    n -= <span class="number">1LL</span> * l * l;</span><br><span class="line">    k -= <span class="number">2LL</span> * (l - <span class="number">1</span>) * l; </span><br><span class="line">    <span class="comment">//cerr&lt;&lt;&quot;n:&quot;&lt;&lt;n&lt;&lt;&quot;,k:&quot;&lt;&lt;k&lt;&lt;endl;</span></span><br><span class="line">    <span class="comment">// 处理剩余的相邻对需求</span></span><br><span class="line">    <span class="keyword">if</span>(k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 奇数情况处理</span></span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; k &gt; <span class="number">2</span> * l - <span class="number">1</span>) &#123;</span><br><span class="line">            ans[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            k--;</span><br><span class="line">            n--;</span><br><span class="line">        &#125;        </span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; k &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            ans[l + <span class="number">1</span>][l + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            n--;         </span><br><span class="line">            <span class="comment">// 向左延伸</span></span><br><span class="line">            <span class="type">int</span> x = l;</span><br><span class="line">            <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ans[l + <span class="number">1</span>][x] = <span class="number">1</span>;</span><br><span class="line">                n--;</span><br><span class="line">                k -= <span class="number">2</span>;</span><br><span class="line">                x--;</span><br><span class="line">            &#125;        </span><br><span class="line">            <span class="comment">// 向上延伸</span></span><br><span class="line">            x = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ans[x][l + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                n--;</span><br><span class="line">                k -= <span class="number">2</span>;</span><br><span class="line">                x++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ans[<span class="number">1</span>][l + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">            n--;</span><br><span class="line">            k--;</span><br><span class="line">            <span class="type">int</span> x = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">while</span>(k &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                ans[x][l + <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">                n--;</span><br><span class="line">                k -= <span class="number">2</span>;</span><br><span class="line">                x++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// 最终检查</span></span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;No&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Yes&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 输出孤立点（不产生任何相邻关系）</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> base = <span class="number">1000000000LL</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; n &gt; <span class="number">0</span>; i+= <span class="number">2</span>,n--) &#123;</span><br><span class="line">        cout &lt;&lt; base &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; i  &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输出构造的网格点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= l + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= l + <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(ans[i][j]) &#123;</span><br><span class="line">                cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; j &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -333,7 +419,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#e"><span class="toc-number">1.</span> <span class="toc-text">e</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#f"><span class="toc-number">2.</span> <span class="toc-text">f</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#e"><span class="toc-number">1.</span> <span class="toc-text">e</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F"><span class="toc-number">1.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#f"><span class="toc-number">2.</span> <span class="toc-text">f</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E9%A2%98%E7%9B%AE%E7%9B%AE%E6%A0%87"><span class="toc-number">2.3.</span> <span class="toc-text">📌 题目目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%91-%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">2.4.</span> <span class="toc-text">🔑 核心思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-%E8%B4%AA%E5%BF%83-%E4%BA%8C%E5%88%86%EF%BC%9A%E5%85%88%E6%9E%84%E9%80%A0%E6%9C%80%E5%A4%A7%E6%BB%A1%E7%BD%91%E6%A0%BC"><span class="toc-number">2.4.1.</span> <span class="toc-text">1️⃣ 贪心 + 二分：先构造最大满网格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-%E5%89%A9%E4%BD%99-k-%E7%9A%84%E5%A4%84%E7%90%86%EF%BC%9A%E8%BE%B9%E7%BC%98%E5%BB%B6%E4%BC%B8"><span class="toc-number">2.4.2.</span> <span class="toc-text">2️⃣ 剩余 k 的处理：边缘延伸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-%E5%AD%A4%E7%AB%8B%E7%82%B9%E5%85%9C%E5%BA%95"><span class="toc-number">2.4.3.</span> <span class="toc-text">3️⃣ 孤立点兜底</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AD-%E4%BB%A3%E7%A0%81%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="toc-number">2.5.</span> <span class="toc-text">🧭 代码流程图解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9A%A0%EF%B8%8F-%E5%85%B3%E9%94%AE%E7%BB%86%E8%8A%82"><span class="toc-number">2.6.</span> <span class="toc-text">⚠️ 关键细节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">2.7.</span> <span class="toc-text">🎯 算法复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.8.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -470,15 +556,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">xcpc</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">codeforces</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,47 +584,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,11 +592,47 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,15 +644,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
             
             <div class="clearfix"></div>
