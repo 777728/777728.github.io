@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://777728.github.io">
   <title>review-day | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="网站回顾 天梯赛模拟">
+  <meta name="description" content="网站回顾 天梯赛模拟  #include #include #include #include #include #include #include #include #include #include using namespace std;vectorfa; int find(int x){    if(fa[x] &#x3D;&#x3D; x) return x;    return (f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="review-day">
 <meta property="og:url" content="https://777728.github.io/2026/04/17/20260417/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="网站回顾 天梯赛模拟">
+<meta property="og:description" content="网站回顾 天梯赛模拟  #include #include #include #include #include #include #include #include #include #include using namespace std;vectorfa; int find(int x){    if(fa[x] &#x3D;&#x3D; x) return x;    return (f">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-17T02:47:53.092Z">
+<meta property="article:modified_time" content="2026-04-18T13:27:59.121Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="diary">
 <meta name="twitter:card" content="summary">
@@ -183,6 +183,12 @@
 <li>网站回顾</li>
 <li>天梯赛模拟</li>
 </ol>
+<p>#include <iostream><br>#include <vector><br>#include <algorithm><br>#include <string><br>#include <map><br>#include <set><br>#include <queue><br>#include <stack><br>#include <cmath><br>#include <cstring><br>using namespace std;<br>vector<int>fa;</p>
+<p>int find(int x){<br>    if(fa[x] &#x3D;&#x3D; x) return x;<br>    return (fa[x] &#x3D; find(fa[x]));<br>}</p>
+<p>void join(int a,int b){<br>    int faa &#x3D; find(a);<br>    int fab &#x3D; find(b);<br>    if(faa !&#x3D; fab) fa[fab] &#x3D; faa;<br>}<br>void solve(){<br>    int n,m;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    fa.resize(n + 1);<br>    for(int i &#x3D; 1;i &lt;&#x3D; n;i++){<br>        fa[i] &#x3D; i;<br>    }<br>    while(m–){<br>        int a,b;<br>        cin&gt;&gt;a&gt;&gt;b;<br>        join(a,b);<br>    }<br>    int cnt &#x3D; 0;<br>    for(int i &#x3D; 1;i &lt;&#x3D; n;i++){<br>        if(fa[i] &#x3D;&#x3D; 1)cnt++;<br>    }<br>    cout&lt;&lt;cnt;</p>
+<p>}<br>int main(){<br>    ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);<br>    solve();<br>    return 0;<br>}</p>
+<p>#include <iostream><br>#include <vector><br>#include <algorithm><br>#include <string><br>#include <map><br>#include <set><br>#include <queue><br>#include <stack><br>#include <cmath><br>#include <cstring><br>using namespace std;</p>
+<p>string check(string x){<br>    while(x.find(“(xx)”) !&#x3D; string::npos){<br>        int pos &#x3D; x.find(“(xx)”);<br>        x &#x3D; x.substr(0,pos) + “xx” + x.substr(pos + 4);<br>    }<br>    return x;<br>}<br>void solve(){<br>    int t;<br>    while(t–){<br>        string a,b;<br>        cin&gt;&gt;a&gt;&gt;b;<br>        if(check(a) &#x3D;&#x3D; check(b)) cout&lt;&lt;”Yes”&lt;&lt;endl;<br>        else cout&lt;&lt;”No”&lt;&lt;endl;<br>    }<br>}<br>int main(){<br>    ios::sync_with_stdio(false),cin.tie(0),cout.tie(0);<br>    solve();<br>    return 0;<br>}</p>
 
       
 
@@ -291,6 +297,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2026/04/18/abc-454/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          AtCoder Beginner Contest 454
+        
+      </div>
+    </a>
   
   
     <a href="/2026/04/16/20260416/" id="article-nav-older" class="article-nav-link-wrap">
@@ -486,11 +501,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -502,6 +517,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
@@ -510,15 +529,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,15 +545,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,7 +557,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,11 +565,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>
