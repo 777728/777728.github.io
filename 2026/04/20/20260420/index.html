@@ -6,21 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>平衡树和红黑树 | Cai Haoran&#39;s Blog</title>
+  <title>集训队倒数第三 （正数27）呜呜 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="P3369 【模板】普通平衡树题目描述您需要动态地维护一个可重集合 $M$，并且提供以下操作：  向 $M$ 中插入一个数 $x$。 从 $M$ 中删除一个数 $x$。（若有多个相同的数，应只删除一个） 查询 $M$ 中有多少个数比 $x$ 小，并且将得到的答案加 $1$。 查询如果将 $M$ 从小到大排列后，排名位于第 $x$ 位的数。 查询 $M$ 中 $x$ 的前驱（定义为 $M$ 中小于">
+  <meta name="description" content="订牛客周赛  马蹄杯第一场 6&#x2F;10 准备做一遍近三年码蹄杯真题和pat甲级真题 准备设定每天固定的时间用来回顾： 深入浅出两本书 网站回顾 晨跑 6:30起床，7:00-7:30晨跑，8:00-8:30网站回顾，12:00-13:30刷题，18:30-21:30刷题，21:30-23:00刷题（回宿舍），23:00-24:00回顾 空闲时间刷题   争取每天至少刷一份马蹄杯或PAT甲">
 <meta property="og:type" content="article">
-<meta property="og:title" content="平衡树和红黑树">
-<meta property="og:url" content="https://777728.github.io/2026/04/07/template-honghuishu-pinghenshu/index.html">
+<meta property="og:title" content="集训队倒数第三 （正数27）呜呜">
+<meta property="og:url" content="https://777728.github.io/2026/04/20/20260420/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="P3369 【模板】普通平衡树题目描述您需要动态地维护一个可重集合 $M$，并且提供以下操作：  向 $M$ 中插入一个数 $x$。 从 $M$ 中删除一个数 $x$。（若有多个相同的数，应只删除一个） 查询 $M$ 中有多少个数比 $x$ 小，并且将得到的答案加 $1$。 查询如果将 $M$ 从小到大排列后，排名位于第 $x$ 位的数。 查询 $M$ 中 $x$ 的前驱（定义为 $M$ 中小于">
+<meta property="og:description" content="订牛客周赛  马蹄杯第一场 6&#x2F;10 准备做一遍近三年码蹄杯真题和pat甲级真题 准备设定每天固定的时间用来回顾： 深入浅出两本书 网站回顾 晨跑 6:30起床，7:00-7:30晨跑，8:00-8:30网站回顾，12:00-13:30刷题，18:30-21:30刷题，21:30-23:00刷题（回宿舍），23:00-24:00回顾 空闲时间刷题   争取每天至少刷一份马蹄杯或PAT甲">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-04-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-07T10:05:55.313Z">
+<meta property="og:image" content="https://777728.github.io/img/rating26-04-20.jpg">
+<meta property="article:published_time" content="2026-04-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-20T15:55:17.901Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="template">
-<meta property="article:tag" content="平衡树和红黑树">
+<meta property="article:tag" content="diary">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://777728.github.io/img/rating26-04-20.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
   
@@ -160,64 +161,39 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-template-honghuishu-pinghenshu" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-20260420" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      平衡树和红黑树
+      集训队倒数第三 （正数27）呜呜
     </h1>
   
 
         
-        <a href="/2026/04/07/template-honghuishu-pinghenshu/" class="archive-article-date">
-  	<time datetime="2026-04-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-07</time>
+        <a href="/2026/04/20/20260420/" class="archive-article-date">
+  	<time datetime="2026-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="P3369-【模板】普通平衡树"><a href="#P3369-【模板】普通平衡树" class="headerlink" title="P3369 【模板】普通平衡树"></a>P3369 【模板】普通平衡树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>您需要动态地维护一个可重集合 $M$，并且提供以下操作：</p>
-<ol>
-<li>向 $M$ 中插入一个数 $x$。</li>
-<li>从 $M$ 中删除一个数 $x$。（若有多个相同的数，应只删除一个）</li>
-<li>查询 $M$ 中有多少个数比 $x$ 小，并且将得到的答案加 $1$。</li>
-<li>查询如果将 $M$ 从小到大排列后，排名位于第 $x$ 位的数。</li>
-<li>查询 $M$ 中 $x$ 的前驱（定义为 $M$ 中小于 $x$，且最大的数）。</li>
-<li>查询 $M$ 中 $x$ 的后继（定义为 $M$ 中大于 $x$，且最小的数）。</li>
+        <ol>
+<li>订牛客周赛 </li>
+<li>马蹄杯第一场 6&#x2F;10</li>
+<li>准备做一遍近三年码蹄杯真题和pat甲级真题</li>
+<li>准备设定每天固定的时间用来回顾：<ul>
+<li>深入浅出两本书</li>
+<li>网站回顾</li>
+<li>晨跑 6:30起床，7:00-7:30晨跑，8:00-8:30网站回顾，12:00-13:30刷题，18:30-21:30刷题，21:30-23:00刷题（回宿舍），23:00-24:00回顾 空闲时间刷题</li>
+</ul>
+</li>
+<li>争取每天至少刷一份马蹄杯或PAT甲级真题，保持状态</li>
 </ol>
-<p>对于操作 $3,5,6$，<strong>不保证</strong>当前可重集中存在数 $x$。</p>
-<p>对于操作 $4,5,6$，保证答案一定存在。</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行为 $n$，表示操作的个数，下面 $n$ 行每行有两个数 $\text{opt}$ 和 $x$，$\text{opt}$ 表示操作的序号（$ 1 \leq \text{opt} \leq 6 $）。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>对于操作 $3,4,5,6$ 每行输出一个数，表示对应答案。</p>
-<h2 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h2><h3 id="输入-1"><a href="#输入-1" class="headerlink" title="输入 #1"></a>输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">10</span><br><span class="line">1 106465</span><br><span class="line">4 1</span><br><span class="line">1 317721</span><br><span class="line">1 460929</span><br><span class="line">1 644985</span><br><span class="line">1 84185</span><br><span class="line">1 89851</span><br><span class="line">6 81968</span><br><span class="line">1 492737</span><br><span class="line">5 493598</span><br></pre></td></tr></table></figure>
-
-<h3 id="输出-1"><a href="#输出-1" class="headerlink" title="输出 #1"></a>输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">106465</span><br><span class="line">84185</span><br><span class="line">492737</span><br></pre></td></tr></table></figure>
-
-<h2 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明&#x2F;提示"></a>说明&#x2F;提示</h2><p><strong>【数据范围】</strong> </p>
-<p>对于 $100%$ 的数据，$1\le n \le 10^5$，$|x| \le 10^7$。</p>
-<p>来源：Tyvj1728，原名：普通平衡树。</p>
-<p>在此鸣谢！</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> LL;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">RD</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> out = <span class="number">0</span>,flag = <span class="number">1</span>;<span class="type">char</span> c = <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">while</span>(c &lt; <span class="string">&#x27;0&#x27;</span> || c &gt;<span class="string">&#x27;9&#x27;</span>)&#123;<span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>)flag = <span class="number">-1</span>;c = <span class="built_in">getchar</span>();&#125;</span><br><span class="line">    <span class="keyword">while</span>(c &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;out = out * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>;c = <span class="built_in">getchar</span>();&#125;</span><br><span class="line">    <span class="keyword">return</span> flag * out;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//第一次打treap，不压行写注释XD</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1000019</span>,INF = <span class="number">1e9</span>;</span><br><span class="line"><span class="comment">//平衡树，利用BST性质查询和修改，利用随机和堆优先级来保持平衡，把树的深度控制在log N，保证了操作效率</span></span><br><span class="line"><span class="comment">//基本平衡树有以下几个比较重要的函数：新建，插入，删除，旋转</span></span><br><span class="line"><span class="comment">//节点的基本属性有val(值)，dat(随机出来的优先级)</span></span><br><span class="line"><span class="comment">//通过增加属性，结合BST的性质可以达到一些效果，如size(子树大小，查询排名)，cnt(每个节点包含的副本数)等</span></span><br><span class="line"><span class="type">int</span> na;</span><br><span class="line"><span class="type">int</span> ch[maxn][<span class="number">2</span>];<span class="comment">//[i][0]代表i左儿子，[i][1]代表i右儿子</span></span><br><span class="line"><span class="type">int</span> val[maxn],dat[maxn];</span><br><span class="line"><span class="type">int</span> size[maxn],cnt[maxn];</span><br><span class="line"><span class="type">int</span> tot,root;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">New</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;<span class="comment">//新增节点，</span></span><br><span class="line">	val[++tot] = v;<span class="comment">//节点赋值</span></span><br><span class="line">	dat[tot] = <span class="built_in">rand</span>();<span class="comment">//随机优先级</span></span><br><span class="line">	size[tot] = <span class="number">1</span>;<span class="comment">//目前是新建叶子节点，所以子树大小为1</span></span><br><span class="line">	cnt[tot] = <span class="number">1</span>;<span class="comment">//新建节点同理副本数为1</span></span><br><span class="line">	<span class="keyword">return</span> tot;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushup</span><span class="params">(<span class="type">int</span> id)</span></span>&#123;<span class="comment">//和线段树的pushup更新一样</span></span><br><span class="line">	size[id] = size[ch[id][<span class="number">0</span>]] + size[ch[id][<span class="number">1</span>]] + cnt[id];<span class="comment">//本节点子树大小 = 左儿子子树大小 + 右儿子子树大小 + 本节点副本数</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">	root = <span class="built_in">New</span>(-INF),ch[root][<span class="number">1</span>] = <span class="built_in">New</span>(INF);<span class="comment">//先加入正无穷和负无穷，便于之后操作(貌似不加也行)</span></span><br><span class="line">	<span class="built_in">pushup</span>(root);<span class="comment">//因为INF &gt; -INF,所以是右子树，</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Rotate</span><span class="params">(<span class="type">int</span> &amp;id,<span class="type">int</span> d)</span></span>&#123;<span class="comment">//id是引用传递，d(irection)为旋转方向，0为左旋，1为右旋</span></span><br><span class="line">	<span class="type">int</span> temp = ch[id][d ^ <span class="number">1</span>];<span class="comment">//旋转理解：找个动图看一看就好(或参见其他OIer的blog)</span></span><br><span class="line">	ch[id][d ^ <span class="number">1</span>] = ch[temp][d];<span class="comment">//这里讲一个记忆技巧，这些数据都是被记录后马上修改</span></span><br><span class="line">	ch[temp][d] = id;<span class="comment">//所以像“Z”一样</span></span><br><span class="line">	id = temp;<span class="comment">//比如这个id，在上一行才被记录过，ch[temp][d]、ch[id][d ^ 1]也是一样的</span></span><br><span class="line">	<span class="built_in">pushup</span>(ch[id][d]),<span class="built_in">pushup</span>(id);<span class="comment">//旋转以后size会改变，看图就会发现只更新自己和转上来的点，pushup一下,注意先子节点再父节点</span></span><br><span class="line">	&#125;<span class="comment">//旋转实质是(&#123;在满足BST的性质的基础上比较优先级&#125;通过交换本节点和其某个叶子节点)把链叉开成二叉形状(从而控制深度)，可以看图理解一下</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> &amp;id,<span class="type">int</span> v)</span></span>&#123;<span class="comment">//id依然是引用，在新建节点时可以体现</span></span><br><span class="line">	<span class="keyword">if</span>(!id)&#123;</span><br><span class="line">		id = <span class="built_in">New</span>(v);<span class="comment">//若节点为空，则新建一个节点</span></span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">if</span>(v == val[id])cnt[id]++;<span class="comment">//若节点已存在，则副本数++;</span></span><br><span class="line">	<span class="keyword">else</span>&#123;<span class="comment">//要满足BST性质，小于插到左边，大于插到右边</span></span><br><span class="line">		<span class="type">int</span> d = v &lt; val[id] ? <span class="number">0</span> : <span class="number">1</span>;<span class="comment">//这个d是方向的意思，按照BST的性质，小于本节点则向左，大于向右</span></span><br><span class="line">		<span class="built_in">insert</span>(ch[id][d],v);<span class="comment">//递归实现</span></span><br><span class="line">		<span class="keyword">if</span>(dat[id] &lt; dat[ch[id][d]])<span class="built_in">Rotate</span>(id,d ^ <span class="number">1</span>);<span class="comment">//(参考一下图)与左节点交换右旋，与右节点交换左旋</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">pushup</span>(id);<span class="comment">//现在更新一下本节点的信息</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Remove</span><span class="params">(<span class="type">int</span> &amp;id,<span class="type">int</span> v)</span></span>&#123;<span class="comment">//最难de部分了</span></span><br><span class="line">	<span class="keyword">if</span>(!id)<span class="keyword">return</span> ;<span class="comment">//到这了发现查不到这个节点，该点不存在，直接返回</span></span><br><span class="line">	<span class="keyword">if</span>(v == val[id])&#123;<span class="comment">//检索到了这个值</span></span><br><span class="line">		<span class="keyword">if</span>(cnt[id] &gt; <span class="number">1</span>)&#123;cnt[id]--,<span class="built_in">pushup</span>(id);<span class="keyword">return</span> ;&#125;<span class="comment">//若副本不止一个，减去一个就好</span></span><br><span class="line">		<span class="keyword">if</span>(ch[id][<span class="number">0</span>] || ch[id][<span class="number">1</span>])&#123;<span class="comment">//发现只有一个值，且有儿子节点,我们只能把值旋转到底部删除</span></span><br><span class="line">			<span class="keyword">if</span>(!ch[id][<span class="number">1</span>] || dat[ch[id][<span class="number">0</span>]] &gt; dat[ch[id][<span class="number">1</span>]])&#123;<span class="comment">//当前点被移走之后，会有一个新的点补上来(左儿子或右儿子)，按照优先级，优先级大的补上来</span></span><br><span class="line">				<span class="built_in">Rotate</span>(id,<span class="number">1</span>),<span class="built_in">Remove</span>(ch[id][<span class="number">1</span>],v);<span class="comment">//我们会发现，右旋是与左儿子交换，当前点变成右节点；左旋则是与右儿子交换，当前点变为左节点</span></span><br><span class="line">				&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">Rotate</span>(id,<span class="number">0</span>),<span class="built_in">Remove</span>(ch[id][<span class="number">0</span>],v);</span><br><span class="line">			<span class="built_in">pushup</span>(id);</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">else</span> id = <span class="number">0</span>;<span class="comment">//发现本节点是叶子节点，直接删除</span></span><br><span class="line">		<span class="keyword">return</span> ;<span class="comment">//这个return对应的是检索到值de所有情况</span></span><br><span class="line">		&#125;</span><br><span class="line">	v &lt; val[id] ? <span class="built_in">Remove</span>(ch[id][<span class="number">0</span>],v) : <span class="built_in">Remove</span>(ch[id][<span class="number">1</span>],v);<span class="comment">//继续BST性质</span></span><br><span class="line">	<span class="built_in">pushup</span>(id);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_rank</span><span class="params">(<span class="type">int</span> id,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!id)<span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//若查询值不存在，返回；因为最后要减一排除哨兵节点，想要结果为-1这里就返回0</span></span><br><span class="line">	<span class="keyword">if</span>(v == val[id])<span class="keyword">return</span> size[ch[id][<span class="number">0</span>]] + <span class="number">1</span>;<span class="comment">//查询到该值，由BST性质可知：该点左边值都比该点的值(查询值)小，故rank为左儿子大小 + 1</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(v &lt; val[id])<span class="keyword">return</span> <span class="built_in">get_rank</span>(ch[id][<span class="number">0</span>],v);<span class="comment">//发现需查询的点在该点左边，往左边递归查询</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> size[ch[id][<span class="number">0</span>]] + cnt[id] + <span class="built_in">get_rank</span>(ch[id][<span class="number">1</span>],v);<span class="comment">//若查询值大于该点值。说明询问点在当前点的右侧，且此点的值都小于查询值，所以要加上cnt[id]</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_val</span><span class="params">(<span class="type">int</span> id,<span class="type">int</span> rank)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!id)<span class="keyword">return</span> INF;<span class="comment">//一直向右找找不到，说明是正无穷</span></span><br><span class="line">	<span class="keyword">if</span>(rank &lt;= size[ch[id][<span class="number">0</span>]])<span class="keyword">return</span> <span class="built_in">get_val</span>(ch[id][<span class="number">0</span>],rank);<span class="comment">//左边排名已经大于rank了，说明rank对应的值在左儿子那里</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(rank &lt;= size[ch[id][<span class="number">0</span>]] + cnt[id])<span class="keyword">return</span> val[id];<span class="comment">//上一步排除了在左区间的情况，若是rank在左与中(目前节点)中，则直接返回目前节点(中区间)的值</span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">get_val</span>(ch[id][<span class="number">1</span>],rank - size[ch[id][<span class="number">0</span>]] - cnt[id]);<span class="comment">//剩下只能在右区间找了，rank减去左区间大小和中区间，继续递归</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_pre</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> id = root,pre;<span class="comment">//递归不好返回，以循环求解</span></span><br><span class="line">	<span class="keyword">while</span>(id)&#123;<span class="comment">//查到节点不存在为止</span></span><br><span class="line">		<span class="keyword">if</span>(val[id] &lt; v)pre = val[id],id = ch[id][<span class="number">1</span>];<span class="comment">//满足当前节点比目标小，往当前节点的右侧寻找最优值</span></span><br><span class="line">		<span class="keyword">else</span> id = ch[id][<span class="number">0</span>];<span class="comment">//无论是比目标节点大还是等于目标节点，都不满足前驱条件，应往更小处靠近</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> pre;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_next</span><span class="params">(<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> id = root,next;</span><br><span class="line">	<span class="keyword">while</span>(id)&#123;</span><br><span class="line">		<span class="keyword">if</span>(val[id] &gt; v)next = val[id],id = ch[id][<span class="number">0</span>];<span class="comment">//同理，满足条件向左寻找更小解(也就是最优解)</span></span><br><span class="line">		<span class="keyword">else</span> id = ch[id][<span class="number">1</span>];<span class="comment">//与上方同理</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">build</span>();<span class="comment">//不要忘记初始化[运行build()会连同root一并初始化，所以很重要]</span></span><br><span class="line">	na = <span class="built_in">RD</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= na;i++)&#123;</span><br><span class="line">		<span class="type">int</span> cmd = <span class="built_in">RD</span>(),x = <span class="built_in">RD</span>();</span><br><span class="line">		<span class="keyword">if</span>(cmd == <span class="number">1</span>)<span class="built_in">insert</span>(root,x);<span class="comment">//函数都写好了，注意：需要递归的函数都从根开始，不需要递归的函数直接查询</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="number">2</span>)<span class="built_in">Remove</span>(root,x);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="number">3</span>)<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">get_rank</span>(root,x) - <span class="number">1</span>);<span class="comment">//注意：因为初始化时插入了INF和-INF,所以查询排名时要减1(-INF不是第一小，是“第零小”)</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="number">4</span>)<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">get_val</span>(root,x + <span class="number">1</span>));<span class="comment">//同理，用排名查询值得时候要查x + 1名，因为第一名(其实不是)是-INF</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="number">5</span>)<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">get_pre</span>(x));</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="number">6</span>)<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">get_next</span>(x));</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><hr>
-<h3 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h3><ol>
-<li><p><strong>二叉搜索树性质</strong><br>红黑树是一棵平衡二叉搜索树，其中序遍历单调不减（即中序遍历得到的序列是非递减的）。</p>
-</li>
-<li><p><strong>节点颜色</strong><br>每个节点要么是红色，要么是黑色。</p>
-</li>
-<li><p><strong>根节点颜色</strong><br>根节点是黑色的。</p>
-</li>
-<li><p><strong>叶节点（外部节点）颜色</strong><br>每个叶节点（即 <code>NULL</code> 节点，也称为外部节点，目的是将红黑树变为真二叉树）是黑色的。</p>
-</li>
-<li><p><strong>红色节点的子节点颜色</strong><br>每个红色节点的两个子节点都是黑色的。<br>（换句话说，从每个叶子到根的所有路径上不能有两个连续的红色节点。）</p>
-</li>
-<li><p><strong>黑色节点数量一致</strong><br>从根节点到每个叶子的所有路径都包含相同数目的黑色节点，这个数值称为<strong>黑高度</strong>。</p>
-</li>
-</ol>
-<hr>
+<p><img src="/img/rating26-04-20.jpg"></p>
 
       
 
@@ -257,11 +233,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">平衡树和红黑树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
         		</li>
       		
 		</ul>
@@ -317,7 +289,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/07/template-honghuishu-pinghenshu/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/20/20260420/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -331,18 +303,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/07/template-KMP-zidianshu/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          KMP和字典树
-        
-      </div>
-    </a>
   
-  
-    <a href="/2026/04/06/20260406/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">清明结算</div>
+    <a href="/2026/04/20/luogu-mati-202601/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">马蹄杯第一场</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -369,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#P3369-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-number">1.</span> <span class="toc-text">P3369 【模板】普通平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B-1"><span class="toc-number">1.4.</span> <span class="toc-text">输入输出样例 #1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">输入 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">输出 #1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E-%E6%8F%90%E7%A4%BA"><span class="toc-number">1.5.</span> <span class="toc-text">说明&#x2F;提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.6.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-number">1.7.</span> <span class="toc-text">红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">1.7.1.</span> <span class="toc-text">红黑树的性质</span></a></li></ol></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
