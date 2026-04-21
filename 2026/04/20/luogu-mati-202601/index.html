@@ -16,7 +16,7 @@
 <meta property="og:description" content="1这道题要求从三个已排序的数组中各选一个数，找出所有可能乘积中最小的前 m 个。直接枚举所有组合会超时（n³ 太大），需要用多路归并配合小根堆来高效找出最小的那些乘积。 题意概括 给定三个长度为 n 的正整数数组 a、b、c。 从 a、b、c 中各选一个元素组成三元组 (a[i], b[j], c[k])，乘积为 a[i] × b[j] × c[k]。 共有 n³ 种组合，要求输出乘积最小的前 m">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-20T15:44:07.722Z">
+<meta property="article:modified_time" content="2026-04-21T08:33:52.267Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="xcpc">
 <meta property="article:tag" content="洛谷">
@@ -210,7 +210,47 @@
 <li><strong>小根堆实现</strong>：通过重载 <code>&lt;</code> 运算符让堆顶始终为最小值。</li>
 <li><strong>边界控制</strong>：只在索引 +1 后仍小于 n 时才入堆，避免越界。</li>
 </ul>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>是的，<code>1 ^ 9 == 8</code> 是正确的。</p>
+<p>在 C&#x2F;C++、Java、Python 等语言中，<code>^</code> 就是<strong>按位异或</strong>运算符。</p>
+<p>计算逻辑：</p>
+<ul>
+<li><code>1</code> 的二进制是 <code>0001</code></li>
+<li><code>9</code> 的二进制是 <code>1001</code></li>
+<li>逐位比较，相同为 0，不同为 1：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  0001</span><br><span class="line">^ 1001</span><br><span class="line">-------</span><br><span class="line">  1000</span><br></pre></td></tr></table></figure>
+
+<p>二进制 <code>1000</code> 对应的十进制数值就是 <strong>8</strong>。</p>
+<p>所以 <code>1 ^ 9</code> 的结果等于 <code>8</code>，判断表达式 <code>1 ^ 9 == 8</code> 的返回值是 <code>true</code>（或 <code>1</code>）</p>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><h3 id="题意概括-1"><a href="#题意概括-1" class="headerlink" title="题意概括"></a>题意概括</h3><p>给定一个长度为 (n) 的 01 串 (s)，允许的操作是<strong>交换相邻字符</strong>。<br>记 (cnt) 为 (s) 中 <code>1</code> 的个数。通过操作可以得到所有含有 (cnt) 个 <code>1</code> 的字符串，共 (C_n^{cnt}) 种。</p>
+<p>对每一种可能的字符串 (t)，定义 (f(s, t)) 为将 (s) 变成 (t) 所需的<strong>最少相邻交换次数</strong>。<br>要求计算所有 (t) 的 (f(s, t)) 之和，对 (10^9+7) 取模。</p>
+<hr>
+<h3 id="思路解析"><a href="#思路解析" class="headerlink" title="思路解析"></a>思路解析</h3><h4 id="1-最少交换次数的计算"><a href="#1-最少交换次数的计算" class="headerlink" title="1. 最少交换次数的计算"></a>1. 最少交换次数的计算</h4><p>对于两个含有相同数量 <code>1</code> 的 01 串，最少相邻交换次数等于<strong>它们对应位置的 <code>1</code> 的序号差绝对值之和</strong>。</p>
+<p>例如：  </p>
+<ul>
+<li>(s) 中第 (i) 个 <code>1</code> 在原串中的位置是 (p_i)  </li>
+<li>(t) 中第 (i) 个 <code>1</code> 的位置是 (q_i)<br>则 (f(s,t) &#x3D; \sum_{i&#x3D;1}^{cnt} |p_i - q_i|)</li>
+</ul>
+<h4 id="2-总和拆分"><a href="#2-总和拆分" class="headerlink" title="2. 总和拆分"></a>2. 总和拆分</h4><p>原问题要求：<br>[<br>\sum_{所有合法t} f(s,t) &#x3D; \sum_{所有合法t} \sum_{i&#x3D;1}^{cnt} |p_i - q_i|<br>]<br>交换求和顺序：<br>[<br>&#x3D; \sum_{i&#x3D;1}^{cnt} \sum_{所有合法t} |p_i - q_i|<br>]<br>也就是说，我们可以<strong>独立考虑每个 <code>1</code> 的贡献</strong>，最后加总。</p>
+<h4 id="3-单个-1-的贡献计算"><a href="#3-单个-1-的贡献计算" class="headerlink" title="3. 单个 1 的贡献计算"></a>3. 单个 <code>1</code> 的贡献计算</h4><p>设当前考虑的是 (s) 中的第 (i) 个 <code>1</code>，它在原串中的位置是 (p_i)。</p>
+<p>在所有合法的 (t) 中，这个 <code>1</code> 会被放置到某个位置 (j)（(1 \le j \le n)），且该位置在 (t) 中必须是 <code>1</code>。</p>
+<ul>
+<li>如果这个 <code>1</code> 放在位置 (j)，那么它前面需要有 (i-1) 个 <code>1</code>，后面需要有 (cnt-i) 个 <code>1</code>。  </li>
+<li>位置 (j) 之前（不含 (j)）有 (j-1) 个位置，选 (i-1) 个放 <code>1</code>：(C_{j-1}^{i-1})  </li>
+<li>位置 (j) 之后有 (n-j) 个位置，选 (cnt-i) 个放 <code>1</code>：(C_{n-j}^{cnt-i})</li>
+</ul>
+<p>所以，第 (i) 个 <code>1</code> 放在位置 (j) 的合法 (t) 的数量为：<br>[<br>C_{j-1}^{i-1} \times C_{n-j}^{cnt-i}<br>]<br>此时它对总距离的贡献为：<br>[<br>|p_i - j| \times C_{j-1}^{i-1} \times C_{n-j}^{cnt-i}<br>]</p>
+<h4 id="4-最终公式"><a href="#4-最终公式" class="headerlink" title="4. 最终公式"></a>4. 最终公式</h4><p>对每个 (i)，枚举它可能的位置 (j)，累加贡献：<br>[<br>\text{ans} &#x3D; \sum_{i&#x3D;1}^{cnt} \sum_{j&#x3D;i}^{n-cnt+i} |p_i - j| \times C_{j-1}^{i-1} \times C_{n-j}^{cnt-i}<br>]<br>（(j) 的范围保证前后都有足够位置放剩余 <code>1</code>）</p>
+<hr>
+<p><strong>修正版核心部分：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5050</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, cnt;</span><br><span class="line">string s;</span><br><span class="line"><span class="type">int</span> pos[N];   <span class="comment">// 存储每个1的位置（1-indexed）</span></span><br><span class="line"><span class="type">int</span> c[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        c[i][<span class="number">0</span>] = c[i][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i; j++) &#123;</span><br><span class="line">            c[i][j] = (c[i<span class="number">-1</span>][j<span class="number">-1</span>] + c[i<span class="number">-1</span>][j]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; s;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;1&#x27;</span>) pos[++cnt] = i + <span class="number">1</span>;  <span class="comment">// 1-indexed 位置</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">        <span class="type">int</span> p = pos[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i; j &lt;= n - cnt + i; j++) &#123;</span><br><span class="line">            <span class="type">int</span> ways = c[j<span class="number">-1</span>][i<span class="number">-1</span>] * c[n-j][cnt-i] % mod;</span><br><span class="line">            ans = (ans + ways * <span class="built_in">abs</span>(p - j)) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><ul>
+<li>组合数预处理：(O(n^2))</li>
+<li>枚举计算：(O(cnt \times n) \le O(n^2))<br>对于 (n \le 5000)，总运算量约 (2.5 \times 10^7)，在 1 秒时限内可通过。</li>
+</ul>
+
       
 
       
@@ -333,8 +373,8 @@
     </a>
   
   
-    <a href="/2026/04/19/20260419/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vpvp</div>
+    <a href="/2026/04/20/template-tanxin/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">贪心</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -361,7 +401,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">思路简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA"><span class="toc-number">1.3.</span> <span class="toc-text">代码展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.1.</span> <span class="toc-text">关键点说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">思路简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA"><span class="toc-number">1.3.</span> <span class="toc-text">代码展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.1.</span> <span class="toc-text">关键点说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">3.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E8%A7%A3%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">思路解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9C%80%E5%B0%91%E4%BA%A4%E6%8D%A2%E6%AC%A1%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">3.2.1.</span> <span class="toc-text">1. 最少交换次数的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%80%BB%E5%92%8C%E6%8B%86%E5%88%86"><span class="toc-number">3.2.2.</span> <span class="toc-text">2. 总和拆分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%8D%95%E4%B8%AA-1-%E7%9A%84%E8%B4%A1%E7%8C%AE%E8%AE%A1%E7%AE%97"><span class="toc-number">3.2.3.</span> <span class="toc-text">3. 单个 1 的贡献计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%9C%80%E7%BB%88%E5%85%AC%E5%BC%8F"><span class="toc-number">3.2.4.</span> <span class="toc-text">4. 最终公式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text">复杂度分析</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -534,11 +574,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,7 +594,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,11 +618,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,11 +630,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,7 +642,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
             
             <div class="clearfix"></div>

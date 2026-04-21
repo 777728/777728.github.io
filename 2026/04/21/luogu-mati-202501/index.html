@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>又是忙碌的一天 | Cai Haoran&#39;s Blog</title>
+  <title>2025马蹄杯第一场 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="早上 abc452 下午 数学作业 晚上 niuke137 晚上 蓝桥杯 niuke137 补题 答案有了再补">
+  <meta name="description" content="1根据搜索结果，这是2025码蹄杯本科组第一场的MC0456题”斩断灵藤”，是一道贪心算法题目。[[14]] 问题核心给定一棵n个节点的树，要求将其分割成若干连通块，每个连通块大小不超过m，求最少的连通块数量。[[15]] 算法思路从你截图中的代码来看，解法如下：  DFS遍历树：从根节点开始深度优先搜索  贪心策略：  f[v] 表示节点v的 subtree 中剩余未分配的节点数 对每个节点的子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="又是忙碌的一天">
-<meta property="og:url" content="https://777728.github.io/2026/04/15/20260415/index.html">
+<meta property="og:title" content="2025马蹄杯第一场">
+<meta property="og:url" content="https://777728.github.io/2026/04/21/luogu-mati-202501/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="早上 abc452 下午 数学作业 晚上 niuke137 晚上 蓝桥杯 niuke137 补题 答案有了再补">
+<meta property="og:description" content="1根据搜索结果，这是2025码蹄杯本科组第一场的MC0456题”斩断灵藤”，是一道贪心算法题目。[[14]] 问题核心给定一棵n个节点的树，要求将其分割成若干连通块，每个连通块大小不超过m，求最少的连通块数量。[[15]] 算法思路从你截图中的代码来看，解法如下：  DFS遍历树：从根节点开始深度优先搜索  贪心策略：  f[v] 表示节点v的 subtree 中剩余未分配的节点数 对每个节点的子">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-04-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-15T15:56:50.143Z">
+<meta property="article:published_time" content="2026-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-21T10:24:32.300Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="diary">
+<meta property="article:tag" content="xcpc">
+<meta property="article:tag" content="洛谷">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -159,35 +160,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-20260415" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-luogu-mati-202501" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      又是忙碌的一天
+      2025马蹄杯第一场
     </h1>
   
 
         
-        <a href="/2026/04/15/20260415/" class="archive-article-date">
-  	<time datetime="2026-04-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-15</time>
+        <a href="/2026/04/21/luogu-mati-202501/" class="archive-article-date">
+  	<time datetime="2026-04-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>早上 abc452</li>
-<li>下午 数学作业</li>
-<li>晚上 niuke137</li>
-<li>晚上 蓝桥杯 niuke137 补题</li>
-<li>答案有了再补</li>
+        <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>根据搜索结果，这是<strong>2025码蹄杯本科组第一场</strong>的MC0456题”斩断灵藤”，是一道<strong>贪心算法</strong>题目。[[14]]</p>
+<h2 id="问题核心"><a href="#问题核心" class="headerlink" title="问题核心"></a>问题核心</h2><p>给定一棵n个节点的树，要求将其分割成若干连通块，每个连通块大小不超过m，求最少的连通块数量。[[15]]</p>
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>从你截图中的代码来看，解法如下：</p>
+<ol>
+<li><p><strong>DFS遍历树</strong>：从根节点开始深度优先搜索</p>
+</li>
+<li><p><strong>贪心策略</strong>：</p>
+<ul>
+<li><code>f[v]</code> 表示节点v的 subtree 中剩余未分配的节点数</li>
+<li>对每个节点的子节点，收集它们的 <code>f</code> 值</li>
+<li><strong>排序后贪心合并</strong>：将子节点的贡献从小到大排序，尽可能合并到当前节点</li>
+<li>如果合并后超过m，则需要”切断”，答案增加</li>
+</ul>
+</li>
+<li><p><strong>关键代码逻辑</strong>（第16-25行）：</p>
+<ul>
+<li>排序子节点的f值</li>
+<li>从小到大尝试合并：<code>if(f[now] + t[i] &lt;= m)</code> 则合并</li>
+<li>否则切断：<code>ans += t.size() - i</code>（剩余的都作为独立连通块）</li>
+</ul>
+</li>
 </ol>
-<hr>
-
+<p>这是一个典型的<strong>树形贪心</strong>问题，时间复杂度为 O(n log n)（主要来自排序）。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;g[N];</span><br><span class="line"><span class="type">int</span> n,m,f[N],ans = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">    f[now] = <span class="number">1</span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;x:g[now])&#123;</span><br><span class="line">        <span class="keyword">if</span>(x == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(x,now);</span><br><span class="line">            t.<span class="built_in">push_back</span>(f[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(t.<span class="built_in">begin</span>(),t.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; t.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(f[now] + t[i] &lt;= m)&#123;</span><br><span class="line">            f[now] += t[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ans += t.<span class="built_in">size</span>() - i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="type">int</span> u,v;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        g[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        g[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    cout&lt;&lt;ans + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h2 id="问题核心-1"><a href="#问题核心-1" class="headerlink" title="问题核心"></a>问题核心</h2><p>查找字符串出现个数</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin&gt;&gt;s;</span><br><span class="line">    string sf = <span class="string">&quot;matiji&quot;</span>;</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(s.<span class="built_in">find</span>(sf,pos) != string::npos)&#123;</span><br><span class="line">        pos = s.<span class="built_in">find</span>(sf,pos) + sf.<span class="built_in">size</span>();</span><br><span class="line">        ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -226,7 +244,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
         		</li>
       		
 		</ul>
@@ -282,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/15/20260415/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/21/luogu-mati-202501/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -296,18 +318,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/16/niuke-week-contest-136/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/21/20260421/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          niuke-week-contest-136
+          耍题
         
       </div>
     </a>
   
   
-    <a href="/2026/04/15/abc-452/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">AtCoder Beginner Contest 452</div>
+    <a href="/2026/04/20/20260420/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">集训队倒数第三 （正数27）呜呜</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -334,7 +356,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%A0%B8%E5%BF%83"><span class="toc-number">1.1.</span> <span class="toc-text">问题核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">算法思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%A0%B8%E5%BF%83-1"><span class="toc-number">2.1.</span> <span class="toc-text">问题核心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
