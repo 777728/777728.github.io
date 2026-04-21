@@ -165,7 +165,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/21/20260421/">耍题</a>
+      <a class="article-title" href="/2026/04/21/20260421/">为啥每个大学生都要把人生中最宝贵的时间浪费在白天精神最好时候的水课上</a>
     </h1>
   
 
@@ -181,7 +181,7 @@
         <ol>
 <li>订昨天的马蹄杯</li>
 <li>做2025马蹄杯第一场的题</li>
-<li>做pat甲级真题一份</li>
+<li>回顾</li>
 </ol>
 
       
@@ -282,6 +282,95 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;g[N];</span><br><span class="line"><span class="type">int</span> n,m,f[N],ans = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">    f[now] = <span class="number">1</span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;x:g[now])&#123;</span><br><span class="line">        <span class="keyword">if</span>(x == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(x,now);</span><br><span class="line">            t.<span class="built_in">push_back</span>(f[x]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(t.<span class="built_in">begin</span>(),t.<span class="built_in">end</span>());</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; t.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(f[now] + t[i] &lt;= m)&#123;</span><br><span class="line">            f[now] += t[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            ans += t.<span class="built_in">size</span>() - i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="type">int</span> u,v;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        g[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        g[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    cout&lt;&lt;ans + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h2 id="问题核心-1"><a href="#问题核心-1" class="headerlink" title="问题核心"></a>问题核心</h2><p>查找字符串出现个数</p>
 <h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin&gt;&gt;s;</span><br><span class="line">    string sf = <span class="string">&quot;matiji&quot;</span>;</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(s.<span class="built_in">find</span>(sf,pos) != string::npos)&#123;</span><br><span class="line">        pos = s.<span class="built_in">find</span>(sf,pos) + sf.<span class="built_in">size</span>();</span><br><span class="line">        ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><h2 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h2><p>给定长度为 <code>n</code> 的数组 <code>a</code>，有 <code>q</code> 次询问。每次询问给出 <code>[l, r]</code>，需要计算：</p>
+<p>$$S(l,r) &#x3D; 1 \times a_l + 2 \times a_{l+1} + 3 \times a_{l+2} + \dots + (r-l+1) \times a_r$$</p>
+<p>即区间内第 <code>i</code> 个元素（从1开始计数）乘以其在区间内的位置序号。结果对 <code>998244353</code> 取模。</p>
+<p><strong>数据范围</strong>：<code>n,q ≤ 5×10^5</code>，需要 <code>O(1)</code> 或 <code>O(log n)</code> 回答每次询问。</p>
+<hr>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><h3 id="核心问题"><a href="#核心问题" class="headerlink" title="核心问题"></a>核心问题</h3><p>直接计算需要遍历区间，每次询问 O(n)，总复杂度 O(nq) 不可行。</p>
+<h3 id="公式转化"><a href="#公式转化" class="headerlink" title="公式转化"></a>公式转化</h3><p>设区间长度为 <code>len = r - l + 1</code>，所求为：<br>$$S &#x3D; \sum_{i&#x3D;l}^{r} (i-l+1) \times a_i$$</p>
+<p>展开：<br>$$S &#x3D; \sum_{i&#x3D;l}^{r} i \times a_i - (l-1) \sum_{i&#x3D;l}^{r} a_i$$</p>
+<p>令：</p>
+<ul>
+<li><code>sumA[i]</code> &#x3D; 前缀和：$\sum_{k&#x3D;1}^{i} a_k$</li>
+<li><code>sumIA[i]</code> &#x3D; 带权前缀和：$\sum_{k&#x3D;1}^{i} k \times a_k$</li>
+</ul>
+<p>则：<br>$$\sum_{i&#x3D;l}^{r} a_i &#x3D; sumA[r] - sumA[l-1]$$<br>$$\sum_{i&#x3D;l}^{r} i \times a_i &#x3D; sumIA[r] - sumIA[l-1]$$</p>
+<p>代入得：<br>$$S &#x3D; (sumIA[r] - sumIA[l-1]) - (l-1) \times (sumA[r] - sumA[l-1])$$</p>
+<h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><ul>
+<li>预处理 <code>sumA</code> 和 <code>sumIA</code>，复杂度 O(n)</li>
+<li>每次询问 O(1) 计算</li>
+</ul>
+<hr>
+<h2 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, q;</span><br><span class="line"><span class="type">int</span> a[N], sumA[N], sumIA[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; q;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        <span class="comment">// 预处理前缀和</span></span><br><span class="line">        sumA[i] = (sumA[i<span class="number">-1</span>] + a[i]) % mod;</span><br><span class="line">        <span class="comment">// 预处理带权前缀和（i * a[i]）</span></span><br><span class="line">        sumIA[i] = (sumIA[i<span class="number">-1</span>] + i * a[i] % mod) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(q--) &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// S = (sumIA[r] - sumIA[l-1]) - (l-1) * (sumA[r] - sumA[l-1])</span></span><br><span class="line">        <span class="type">int</span> ans = (sumIA[r] - sumIA[l<span class="number">-1</span>] + mod) % mod;</span><br><span class="line">        <span class="type">int</span> sub = (l<span class="number">-1</span>) * ((sumA[r] - sumA[l<span class="number">-1</span>] + mod) % mod) % mod;</span><br><span class="line">        ans = (ans - sub + mod) % mod;</span><br><span class="line">        </span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="样例验证"><a href="#样例验证" class="headerlink" title="样例验证"></a>样例验证</h2><p><strong>输入：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3 1</span><br><span class="line">3 2 1</span><br><span class="line">2 3</span><br></pre></td></tr></table></figure>
+
+<p><strong>计算过程：</strong></p>
+<ul>
+<li><code>l=2, r=3</code></li>
+<li>原式 &#x3D; <code>1×a₂ + 2×a₃ = 1×2 + 2×1 = 4</code></li>
+<li>公式：<code>sumIA[3]=1×3+2×2+3×1=10</code>，<code>sumIA[1]=1×3=3</code></li>
+<li><code>sumA[3]=6</code>，<code>sumA[1]=3</code></li>
+<li><code>ans = (10-3) - (1)×(6-3) = 7 - 3 = 4</code> ✅</li>
+</ul>
+<hr>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>预处理</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>单次询问</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>总复杂度</td>
+<td>O(n+q)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="你代码中的另一种解法分析"><a href="#你代码中的另一种解法分析" class="headerlink" title="你代码中的另一种解法分析"></a>你代码中的另一种解法分析</h2><p>你提供的代码使用了<strong>后缀预处理</strong>的方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum[i] = (sum[i<span class="number">+1</span>] + a[i]) % mod;      <span class="comment">// 后缀和</span></span><br><span class="line">f[i] = (sum[i] + f[i<span class="number">+1</span>]) % mod;         <span class="comment">// 后缀“前缀和”</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>推导原理</strong>：<br>$$f[l] - f[r+1] &#x3D; \sum_{i&#x3D;l}^{r} \sum_{j&#x3D;i}^{r} a_j$$</p>
+<p>这个双重求和实际上就是：<br>$$\sum_{i&#x3D;l}^{r} (r-i+1) \times a_i$$</p>
+<p>而我们要求的是：<br>$$\sum_{i&#x3D;l}^{r} (i-l+1) \times a_i$$</p>
+<p>两者关系：<br>$$\sum_{i&#x3D;l}^{r} (r-i+1) \times a_i + \sum_{i&#x3D;l}^{r} (i-l+1) \times a_i &#x3D; (r-l+1) \times \sum_{i&#x3D;l}^{r} a_i$$</p>
+<p>所以：<br>$$S &#x3D; (r-l+1) \times sumA - [f[l] - f[r+1]]$$</p>
+<p>这种方法也是正确的，但需要小心处理取模。你代码中的公式稍有不同，核心思想是一致的。</p>
+<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><h3 id="📖-题目解释"><a href="#📖-题目解释" class="headerlink" title="📖 题目解释"></a>📖 题目解释</h3><p>将每个生灵的“前面人数限制”转化为<strong>可站立的离散位置区间</strong>（位置编号 <code>1 ~ n</code>）：</p>
+<ul>
+<li><code>1 x</code>：前面至少 <code>x</code> 人 → 自身位置 <code>≥ x+1</code> → 区间 <code>[x+1, n]</code></li>
+<li><code>2 x</code>：前面至多 <code>x</code> 人 → 自身位置 <code>≤ x+1</code> → 区间 <code>[1, x+1]</code></li>
+<li><code>3 x y</code>：前面 <code>x ~ y</code> 人 → 自身位置 <code>[x+1, y+1]</code></li>
+</ul>
+<p><strong>核心问题</strong>：能否将 <code>n</code> 个区间与 <code>1~n</code> 的位置进行<strong>一一匹配</strong>，使每个区间恰好包含分配给它的位置？</p>
+<hr>
+<h3 id="💡-解题思路（贪心）"><a href="#💡-解题思路（贪心）" class="headerlink" title="💡 解题思路（贪心）"></a>💡 解题思路（贪心）</h3><ol>
+<li><strong>区间转化</strong>：按规则将输入转为 <code>[l, r]</code> 存储。</li>
+<li><strong>按左端点排序</strong>：确保遍历到位置 <code>pos</code> 时，所有 <code>l ≤ pos</code> 的可选区间均已就绪。</li>
+<li><strong>最小堆贪心分配</strong>：维护一个小根堆（按右端点 <code>r</code> 排序）。对于每个位置 <code>pos = 1 ~ n</code>：<ul>
+<li>将所有 <code>l ≤ pos</code> 的区间 <code>r</code> 入堆。</li>
+<li>取出堆顶（<code>r</code> 最小，即<strong>最紧迫</strong>的区间）分配给 <code>pos</code>。</li>
+<li>若堆空或堆顶 <code>r &lt; pos</code>，说明该区间已过期，无解返回 <code>N</code>。</li>
+</ul>
+</li>
+<li><strong>正确性</strong>：优先满足右端点小的区间，能为后续位置留下更大的选择空间，是区间匹配问题的标准最优贪心。</li>
+</ol>
+<ul>
+<li><strong>复杂度</strong>：<code>O(∑n log n)</code> 时间，<code>O(n)</code> 空间，符合 <code>∑n ≤ 10⁶</code> 限制。</li>
+</ul>
+<hr>
+<h3 id="💻-代码展示"><a href="#💻-代码展示" class="headerlink" title="💻 代码展示"></a>💻 代码展示</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n, opt, x, y;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123; <span class="type">int</span> l, r; &#125; a[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123; <span class="keyword">return</span> a.l &lt; b.l; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; opt &gt;&gt; x;</span><br><span class="line">        <span class="keyword">if</span> (opt == <span class="number">1</span>) a[i] = &#123;x + <span class="number">1</span>, n&#125;;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (opt == <span class="number">2</span>) a[i] = &#123;<span class="number">1</span>, x + <span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            cin &gt;&gt; y;</span><br><span class="line">            a[i] = &#123;x + <span class="number">1</span>, y + <span class="number">1</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + <span class="number">1</span> + n, cmp);</span><br><span class="line">    </span><br><span class="line">    priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;&gt;&gt; q;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> pos = <span class="number">1</span>; pos &lt;= n; pos++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= n &amp;&amp; a[i].l &lt;= pos) q.<span class="built_in">push</span>(a[i++].r);</span><br><span class="line">        <span class="keyword">if</span> (q.<span class="built_in">empty</span>() || q.<span class="built_in">top</span>() &lt; pos) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        cout &lt;&lt; (<span class="built_in">solve</span>() ? <span class="string">&quot;Y&quot;</span> : <span class="string">&quot;N&quot;</span>) &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1523,7 +1612,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1531,11 +1620,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1543,7 +1632,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1567,23 +1656,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color5">模拟递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1595,11 +1672,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
             
             <div class="clearfix"></div>
