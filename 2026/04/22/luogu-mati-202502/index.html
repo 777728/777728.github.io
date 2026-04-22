@@ -16,7 +16,7 @@
 <meta property="og:description" content="1题意概括给定一棵 $n$ 个节点的有根树（根为1），为节点分配 $0 \sim n-1$ 的排列权值。$\text{mex}(u)$ 为 $u$ 子树中未出现的最小自然数。求 $\sum_{u&#x3D;1}^n \text{mex}(u)$ 的最大值。 核心思路 上界分析：子树大小为 $s$ 时，$\text{mex}(u) \le s$。 贪心构造：将 $0,1,2,\dots$ 依次放置在">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-22T07:07:35.231Z">
+<meta property="article:modified_time" content="2026-04-22T10:27:57.554Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="xcpc">
 <meta property="article:tag" content="洛谷">
@@ -286,6 +286,84 @@
 <li>$a_2&#x3D;1 &lt; 2$：贡献 $2 \times 1^{-1} &#x3D; 2$</li>
 <li>总和 $&#x3D; 3$ ✓</li>
 </ul>
+<h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><p>这段代码的核心思想是将<strong>括号序列转化为一棵树</strong>，然后利用<strong>单调栈</strong>在树上统计所有合法子串的深度贡献之和。</p>
+<p>以下是详细的逻辑拆解：</p>
+<h3 id="1-数据结构与预处理"><a href="#1-数据结构与预处理" class="headerlink" title="1. 数据结构与预处理"></a>1. 数据结构与预处理</h3><ul>
+<li><strong>树形映射</strong>：<ul>
+<li>将每一个左括号 <code>(</code> 看作树中的一个节点。</li>
+<li>如果括号 $A$ 直接包含括号 $B$（即 $A$ 是 $B$ 的父节点），则在树中连边 $A \to B$。</li>
+<li><code>son[x]</code>：存储节点 $x$ 的所有直接子节点。</li>
+<li><code>fa[x]</code>：存储节点 $x$ 的父节点。</li>
+<li><code>dep[x]</code>：存储以节点 $x$ 为根的子树的最大深度（即该括号对对应的最大嵌套层级）。</li>
+</ul>
+</li>
+<li><strong>虚拟根节点</strong>：使用 <code>0</code> 号节点作为虚拟根，代表整个序列的最外层，方便统一处理。</li>
+</ul>
+<h3 id="2-建树过程-build-函数"><a href="#2-建树过程-build-函数" class="headerlink" title="2. 建树过程 (build 函数)"></a>2. 建树过程 (<code>build</code> 函数)</h3><p>这是一个递归过程，用于解析字符串并构建树结构：</p>
+<ul>
+<li><strong>输入</strong>：当前父节点 <code>x</code>，当前扫描位置 <code>pos</code>。</li>
+<li><strong>逻辑</strong>：<ol>
+<li><strong>遇到 <code>(</code></strong>：<ul>
+<li>创建新节点 <code>cnt</code>。</li>
+<li>将 <code>cnt</code> 加入 <code>x</code> 的子节点列表 <code>son[x]</code>。</li>
+<li>记录 <code>fa[cnt] = x</code>。</li>
+<li><strong>递归</strong>：调用 <code>build(cnt, pos + 1)</code>。这意味着新创建的左括号成为了新的父节点，接下来的字符将在它的内部解析。</li>
+</ul>
+</li>
+<li><strong>遇到 <code>)</code></strong>：<ul>
+<li>说明当前层级（节点 <code>x</code> 的内部）结束了。</li>
+<li><strong>回溯</strong>：调用 <code>build(fa[x], pos + 1)</code>。这意味着解析权交还给 <code>x</code> 的父节点，继续解析 <code>x</code> 后面的内容（即兄弟节点或更外层的内容）。</li>
+</ul>
+</li>
+<li><strong>终止条件</strong>：当 <code>pos</code> 超出字符串长度时返回。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：这种建树方式巧妙地利用了递归栈来模拟括号的嵌套关系。</p>
+</blockquote>
+<h3 id="3-核心计算-dfs-函数"><a href="#3-核心计算-dfs-函数" class="headerlink" title="3. 核心计算 (dfs 函数)"></a>3. 核心计算 (<code>dfs</code> 函数)</h3><p>这是算法的关键部分，采用<strong>后序遍历</strong>（先处理子节点，再处理当前节点）：</p>
+<h4 id="A-计算深度-dep"><a href="#A-计算深度-dep" class="headerlink" title="A. 计算深度 (dep)"></a>A. 计算深度 (<code>dep</code>)</h4><ul>
+<li>递归处理完所有子节点后，当前节点 $x$ 的深度 <code>dep[x]</code> 等于 <code>max(子节点深度) + 1</code>。</li>
+<li>这代表了以该括号为最外层的子串的最大嵌套层数。</li>
+</ul>
+<h4 id="B-单调栈统计贡献"><a href="#B-单调栈统计贡献" class="headerlink" title="B. 单调栈统计贡献"></a>B. 单调栈统计贡献</h4><p>对于当前节点 $x$ 的所有子节点序列 $c_1, c_2, \dots, c_k$：</p>
+<ul>
+<li><strong>问题转化</strong>：任何由连续子序列 $c_i, c_{i+1}, \dots, c_j$ 组成的合法子串，其最外层括号都是 $x$。我们需要计算这些子串的价值总和。</li>
+<li><strong>价值定义</strong>：一个子串的价值是其内部的最大深度。对于由 $c_i \dots c_j$ 组成的子串，其价值取决于其中深度最大的那个子节点。</li>
+<li><strong>单调栈的作用</strong>：<ul>
+<li>代码维护一个关于 <code>dep</code> 值的<strong>单调递增栈</strong>。</li>
+<li><strong>计算右边界 <code>r[i]</code></strong>：当遍历到子节点 $i$ 时，如果 <code>dep[i]</code> 大于栈顶元素的深度，说明栈顶元素遇到了右边第一个比它深的节点。此时弹出栈顶，并记录其右边界为 $i$。<ul>
+<li>逻辑：<code>while (!st.empty() &amp;&amp; dep[y] &gt; st.top().first) { r[...] = i; pop(); }</code></li>
+</ul>
+</li>
+<li><strong>计算左边界 <code>l[i]</code></strong>：栈中剩下的元素深度都 $\ge$ 当前 <code>dep[i]</code>。栈顶元素即为左边第一个深度 $\ge$ 当前深度的位置。<ul>
+<li>逻辑：<code>l[i] = st.empty() ? -1 : st.top().second;</code></li>
+</ul>
+</li>
+<li><strong>清理栈</strong>：遍历结束后，栈中剩余元素的右边界均为子节点总数 <code>son[x].size()</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="C-累加答案"><a href="#C-累加答案" class="headerlink" title="C. 累加答案"></a>C. 累加答案</h4><ul>
+<li>公式：<code>ans += dep[son[x][i]] * (i - l[i]) * (r[i] - i)</code></li>
+<li><strong>含义</strong>：<ul>
+<li><code>dep[son[x][i]]</code>：该子节点代表的深度值。</li>
+<li><code>(i - l[i])</code>：以该子节点为<strong>最大值</strong>（或左侧边界）向左能扩展的范围数量。</li>
+<li><code>(r[i] - i)</code>：以该子节点为<strong>最大值</strong>（或右侧边界）向右能扩展的范围数量。</li>
+<li>乘积即为：在所有包含子节点 $i$ 且 $i$ 是其中深度最大者的连续子序列中，$i$ 的深度对总和的贡献次数。</li>
+<li>通过这种方式，每个合法子串的最大深度被精确地统计了一次（由该子串中深度最大的那个最内层括号贡献）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-主函数-signed-main"><a href="#4-主函数-signed-main" class="headerlink" title="4. 主函数 (signed main)"></a>4. 主函数 (<code>signed main</code>)</h3><ul>
+<li>读取字符串。</li>
+<li>调用 <code>build(0, 0)</code> 构建树。</li>
+<li>调用 <code>dfs(0)</code> 计算答案。</li>
+<li>输出结果。</li>
+<li><strong>技巧</strong>：使用 <code>#define int long long</code> 和 <code>signed main</code> 是为了方便处理大整数运算，防止中间结果溢出（虽然 <code>ans</code> 定义为 <code>int</code> 但在宏定义下实际上是 <code>long long</code>）。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h2 id="该代码通过将括号序列转化为树，将“求所有合法子串最大深度之和”的问题，转化为-“在树的每一层，利用单调栈计算每个子节点作为区间最大值时的贡献”-。这是一种非常高效-O-N-的解法。"><a href="#该代码通过将括号序列转化为树，将“求所有合法子串最大深度之和”的问题，转化为-“在树的每一层，利用单调栈计算每个子节点作为区间最大值时的贡献”-。这是一种非常高效-O-N-的解法。" class="headerlink" title="该代码通过将括号序列转化为树，将“求所有合法子串最大深度之和”的问题，转化为**“在树的每一层，利用单调栈计算每个子节点作为区间最大值时的贡献”**。这是一种非常高效 ($O(N)$) 的解法。"></a>该代码通过<strong>将括号序列转化为树</strong>，将“求所有合法子串最大深度之和”的问题，转化为**“在树的每一层，利用单调栈计算每个子节点作为区间最大值时的贡献”**。这是一种非常高效 ($O(N)$) 的解法。</h2><h3 id="代码展示"><a href="#代码展示" class="headerlink" title="代码展示"></a>代码展示</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N= <span class="number">1e6</span> + <span class="number">7</span>;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;son[N];</span><br><span class="line"><span class="type">int</span> fa[N],dep[N],l[N],r[N],cnt,ans;</span><br><span class="line">string s;</span><br><span class="line">stack&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt;st;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> pos)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pos &gt; s.<span class="built_in">length</span>() - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(s[pos] == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        son[x].<span class="built_in">push_back</span>(cnt);</span><br><span class="line">        fa[cnt] = x;</span><br><span class="line">        <span class="built_in">build</span>(cnt,pos + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">build</span>(fa[x],pos + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    dep[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> y : son[x])&#123;</span><br><span class="line">        <span class="built_in">dfs</span>(y);</span><br><span class="line">        dep[x] = <span class="built_in">max</span>(dep[x],dep[y] + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; son[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">        <span class="type">int</span> y = son[x][i];</span><br><span class="line">        <span class="keyword">while</span>(!st.<span class="built_in">empty</span>() &amp;&amp; dep[y] &gt; st.<span class="built_in">top</span>().first)&#123;</span><br><span class="line">            r[st.<span class="built_in">top</span>().second] = i;</span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        l[i] = st.<span class="built_in">empty</span>() ? <span class="number">-1</span> : st.<span class="built_in">top</span>().second;</span><br><span class="line">        st.<span class="built_in">push</span>(&#123;dep[y],i&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!st.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        r[st.<span class="built_in">top</span>().second] = son[x].<span class="built_in">size</span>();</span><br><span class="line">        st.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; son[x].<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">        ans += dep[son[x][i]] * (i - l[i]) * (r[i] - i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;s;</span><br><span class="line">    <span class="built_in">build</span>(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">0</span>);</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -399,9 +477,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2026/04/22/luogu-pat-2026/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          pat甲级1-10
+        
+      </div>
+    </a>
   
-    <a href="/2026/04/22/luogu-pat-2026/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pat甲级1-10</div>
+  
+    <a href="/2026/04/21/20260421/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为啥每个大学生都要把人生中最宝贵的时间浪费在白天精神最好时候的水课上</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -428,7 +515,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.4.</span> <span class="toc-text">复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-1"><span class="toc-number">2.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="toc-number">2.4.</span> <span class="toc-text">复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-2"><span class="toc-number">3.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-2"><span class="toc-number">3.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.4.</span> <span class="toc-text">复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-3"><span class="toc-number">4.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-3"><span class="toc-number">4.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="toc-number">4.4.</span> <span class="toc-text">关键点说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-2"><span class="toc-number">4.5.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E9%AA%8C%E8%AF%81"><span class="toc-number">4.6.</span> <span class="toc-text">样例验证</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.4.</span> <span class="toc-text">复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-1"><span class="toc-number">2.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-1"><span class="toc-number">2.4.</span> <span class="toc-text">复杂度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-2"><span class="toc-number">3.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-2"><span class="toc-number">3.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.4.</span> <span class="toc-text">复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-3"><span class="toc-number">4.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.2.</span> <span class="toc-text">核心思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA%E4%B8%8E%E5%88%86%E6%9E%90-3"><span class="toc-number">4.3.</span> <span class="toc-text">代码展示与分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9%E8%AF%B4%E6%98%8E"><span class="toc-number">4.4.</span> <span class="toc-text">关键点说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6-2"><span class="toc-number">4.5.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B%E9%AA%8C%E8%AF%81"><span class="toc-number">4.6.</span> <span class="toc-text">样例验证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5"><span class="toc-number">5.</span> <span class="toc-text">5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">5.1.</span> <span class="toc-text">1. 数据结构与预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BB%BA%E6%A0%91%E8%BF%87%E7%A8%8B-build-%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">2. 建树过程 (build 函数)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%A0%B8%E5%BF%83%E8%AE%A1%E7%AE%97-dfs-%E5%87%BD%E6%95%B0"><span class="toc-number">5.3.</span> <span class="toc-text">3. 核心计算 (dfs 函数)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A-%E8%AE%A1%E7%AE%97%E6%B7%B1%E5%BA%A6-dep"><span class="toc-number">5.3.1.</span> <span class="toc-text">A. 计算深度 (dep)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-%E5%8D%95%E8%B0%83%E6%A0%88%E7%BB%9F%E8%AE%A1%E8%B4%A1%E7%8C%AE"><span class="toc-number">5.3.2.</span> <span class="toc-text">B. 单调栈统计贡献</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C-%E7%B4%AF%E5%8A%A0%E7%AD%94%E6%A1%88"><span class="toc-number">5.3.3.</span> <span class="toc-text">C. 累加答案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%BB%E5%87%BD%E6%95%B0-signed-main"><span class="toc-number">5.4.</span> <span class="toc-text">4. 主函数 (signed main)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A5%E4%BB%A3%E7%A0%81%E9%80%9A%E8%BF%87%E5%B0%86%E6%8B%AC%E5%8F%B7%E5%BA%8F%E5%88%97%E8%BD%AC%E5%8C%96%E4%B8%BA%E6%A0%91%EF%BC%8C%E5%B0%86%E2%80%9C%E6%B1%82%E6%89%80%E6%9C%89%E5%90%88%E6%B3%95%E5%AD%90%E4%B8%B2%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6%E4%B9%8B%E5%92%8C%E2%80%9D%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E8%BD%AC%E5%8C%96%E4%B8%BA-%E2%80%9C%E5%9C%A8%E6%A0%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B1%82%EF%BC%8C%E5%88%A9%E7%94%A8%E5%8D%95%E8%B0%83%E6%A0%88%E8%AE%A1%E7%AE%97%E6%AF%8F%E4%B8%AA%E5%AD%90%E8%8A%82%E7%82%B9%E4%BD%9C%E4%B8%BA%E5%8C%BA%E9%97%B4%E6%9C%80%E5%A4%A7%E5%80%BC%E6%97%B6%E7%9A%84%E8%B4%A1%E7%8C%AE%E2%80%9D-%E3%80%82%E8%BF%99%E6%98%AF%E4%B8%80%E7%A7%8D%E9%9D%9E%E5%B8%B8%E9%AB%98%E6%95%88-O-N-%E7%9A%84%E8%A7%A3%E6%B3%95%E3%80%82"><span class="toc-number">5.6.</span> <span class="toc-text">该代码通过将括号序列转化为树，将“求所有合法子串最大深度之和”的问题，转化为**“在树的每一层，利用单调栈计算每个子节点作为区间最大值时的贡献”**。这是一种非常高效 ($O(N)$) 的解法。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA"><span class="toc-number">5.6.1.</span> <span class="toc-text">代码展示</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -593,19 +680,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,11 +688,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,11 +716,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,11 +728,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +740,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +752,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">深搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
             
             <div class="clearfix"></div>
