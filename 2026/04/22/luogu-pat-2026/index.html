@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>Tag: 平衡树和红黑树 | Cai Haoran&#39;s Blog</title>
+  <title>pat甲级1-10 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curiosity compete progress">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Cai Haoran&#39;s Blog">
-<meta property="og:url" content="https://777728.github.io/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91/index.html">
+  <meta name="description" content="1按照熟悉的1-based或个十百位模拟 12345678while(sum!&#x3D;0)&#123;        v.emplace_back(sum%10);&#x2F;&#x2F;876 543 21         sum&#x2F;&#x3D;10;    &#125;    for(int i &#x3D; v.size() - 1;i &gt;&#x3D; 0;i--)&#123;        cout&lt;&lt;v[i];">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pat甲级1-10">
+<meta property="og:url" content="https://777728.github.io/2026/04/22/luogu-pat-2026/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="curiosity compete progress">
+<meta property="og:description" content="1按照熟悉的1-based或个十百位模拟 12345678while(sum!&#x3D;0)&#123;        v.emplace_back(sum%10);&#x2F;&#x2F;876 543 21         sum&#x2F;&#x3D;10;    &#125;    for(int i &#x3D; v.size() - 1;i &gt;&#x3D; 0;i--)&#123;        cout&lt;&lt;v[i];">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-22T07:46:01.575Z">
 <meta property="article:author" content="Cai Haoran">
+<meta property="article:tag" content="xcpc">
+<meta property="article:tag" content="洛谷">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -156,64 +160,203 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-luogu-pat-2026" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/07/template-honghuishu-pinghenshu/" class="archive-article-date">
-  	<time datetime="2026-04-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/07/template-honghuishu-pinghenshu/">平衡树和红黑树</a>
+    <h1 class="article-title" itemprop="name">
+      pat甲级1-10
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2026/04/22/luogu-pat-2026/" class="archive-article-date">
+  	<time datetime="2026-04-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h3 id="按照熟悉的1-based或个十百位模拟"><a href="#按照熟悉的1-based或个十百位模拟" class="headerlink" title="按照熟悉的1-based或个十百位模拟"></a>按照熟悉的1-based或个十百位模拟</h3><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(sum!=<span class="number">0</span>)&#123;</span><br><span class="line">        v.<span class="built_in">emplace_back</span>(sum%<span class="number">10</span>);<span class="comment">//876 543 21 </span></span><br><span class="line">        sum/=<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = v.<span class="built_in">size</span>() - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">        cout&lt;&lt;v[i];</span><br><span class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; i % <span class="number">3</span> == <span class="number">0</span>) cout&lt;&lt;<span class="string">&#x27;,&#x27;</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h3 id="map用迭代器反向输出；"><a href="#map用迭代器反向输出；" class="headerlink" title="map用迭代器反向输出；"></a>map用迭代器反向输出；</h3><h3 id="计数：mp-size-会把系数为-0-的项也计入，导致输出的项数错误，可用erase删除系数为0的项-或遍历cnt-。"><a href="#计数：mp-size-会把系数为-0-的项也计入，导致输出的项数错误，可用erase删除系数为0的项-或遍历cnt-。" class="headerlink" title="计数：mp.size() 会把系数为 0 的项也计入，导致输出的项数错误，可用erase删除系数为0的项,或遍历cnt++。"></a>计数：mp.size() 会把系数为 0 的项也计入，导致输出的项数错误，可用erase删除系数为0的项,或遍历cnt++。</h3><hr>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;p : mp) <span class="keyword">if</span>(p.second != <span class="number">0.0</span>) cnt++;</span><br><span class="line">    cout &lt;&lt; cnt;</span><br><span class="line">    <span class="comment">// rbegin() 实现指数从大到小输出</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = mp.<span class="built_in">rbegin</span>(); it != mp.<span class="built_in">rend</span>(); ++it) &#123;</span><br><span class="line">        <span class="keyword">if</span>(it-&gt;second != <span class="number">0.0</span>)</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; fixed &lt;&lt; <span class="built_in">setprecision</span>(<span class="number">1</span>) &lt;&lt; it-&gt;second;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-shoukuan.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">平衡树和红黑树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/22/luogu-pat-2026/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2026/04/22/luogu-mati-202502/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2025马蹄杯第二场
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2026/04/21/20260421/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为啥每个大学生都要把人生中最宝贵的时间浪费在白天精神最好时候的水课上</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E7%85%A7%E7%86%9F%E6%82%89%E7%9A%841-based%E6%88%96%E4%B8%AA%E5%8D%81%E7%99%BE%E4%BD%8D%E6%A8%A1%E6%8B%9F"><span class="toc-number">1.1.</span> <span class="toc-text">按照熟悉的1-based或个十百位模拟</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E7%94%A8%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8F%8D%E5%90%91%E8%BE%93%E5%87%BA%EF%BC%9B"><span class="toc-number">2.1.</span> <span class="toc-text">map用迭代器反向输出；</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E6%95%B0%EF%BC%9Amp-size-%E4%BC%9A%E6%8A%8A%E7%B3%BB%E6%95%B0%E4%B8%BA-0-%E7%9A%84%E9%A1%B9%E4%B9%9F%E8%AE%A1%E5%85%A5%EF%BC%8C%E5%AF%BC%E8%87%B4%E8%BE%93%E5%87%BA%E7%9A%84%E9%A1%B9%E6%95%B0%E9%94%99%E8%AF%AF%EF%BC%8C%E5%8F%AF%E7%94%A8erase%E5%88%A0%E9%99%A4%E7%B3%BB%E6%95%B0%E4%B8%BA0%E7%9A%84%E9%A1%B9-%E6%88%96%E9%81%8D%E5%8E%86cnt-%E3%80%82"><span class="toc-number">2.2.</span> <span class="toc-text">计数：mp.size() 会把系数为 0 的项也计入，导致输出的项数错误，可用erase删除系数为0的项,或遍历cnt++。</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">3</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +379,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
