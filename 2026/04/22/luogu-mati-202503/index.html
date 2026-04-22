@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>vpvp | Cai Haoran&#39;s Blog</title>
+  <title>2025马蹄杯第三场 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="abc-454 补题 牛客周赛140 马蹄杯模拟（2026职业 订正  下周攻克：【算法2-1】前缀和、差分与离散化 + 【算法1-5】贪心 + 【算法1-1】模拟 （基础篇题题过，提高篇模版题） 之后一个月 提高篇全部，马蹄杯真题">
+  <meta name="description" content="1📜 题目总结：徐州领土计算（区间并集）1. 核心问题给定 $n$ 个整数区间 $[l_i, r_i]$，求这些区间覆盖的不同整数的总个数。本质上就是求多个区间的并集长度。 2. 数据范围挑战  $n$ 高达 $10^6$：要求算法时间复杂度必须在 $O(N \log N)$ 或 $O(N)$ 级别，不能使用 $O(N^2)$ 的暴力枚举。 坐标值高达 $10^9$：不能开数组直接标记（空间爆炸">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vpvp">
-<meta property="og:url" content="https://777728.github.io/2026/04/19/20260419/index.html">
+<meta property="og:title" content="2025马蹄杯第三场">
+<meta property="og:url" content="https://777728.github.io/2026/04/22/luogu-mati-202503/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="abc-454 补题 牛客周赛140 马蹄杯模拟（2026职业 订正  下周攻克：【算法2-1】前缀和、差分与离散化 + 【算法1-5】贪心 + 【算法1-1】模拟 （基础篇题题过，提高篇模版题） 之后一个月 提高篇全部，马蹄杯真题">
+<meta property="og:description" content="1📜 题目总结：徐州领土计算（区间并集）1. 核心问题给定 $n$ 个整数区间 $[l_i, r_i]$，求这些区间覆盖的不同整数的总个数。本质上就是求多个区间的并集长度。 2. 数据范围挑战  $n$ 高达 $10^6$：要求算法时间复杂度必须在 $O(N \log N)$ 或 $O(N)$ 级别，不能使用 $O(N^2)$ 的暴力枚举。 坐标值高达 $10^9$：不能开数组直接标记（空间爆炸">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-04-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-19T15:40:54.686Z">
+<meta property="article:published_time" content="2026-04-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-22T15:33:22.372Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="diary">
+<meta property="article:tag" content="xcpc">
+<meta property="article:tag" content="洛谷">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -159,35 +160,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-20260419" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-luogu-mati-202503" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      vpvp
+      2025马蹄杯第三场
     </h1>
   
 
         
-        <a href="/2026/04/19/20260419/" class="archive-article-date">
-  	<time datetime="2026-04-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-19</time>
+        <a href="/2026/04/22/luogu-mati-202503/" class="archive-article-date">
+  	<time datetime="2026-04-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>abc-454 补题</li>
-<li>牛客周赛140</li>
-<li>马蹄杯模拟（2026职业</li>
-<li>订正 </li>
-<li>下周攻克：【算法2-1】前缀和、差分与离散化 + 【算法1-5】贪心 + 【算法1-1】模拟 （基础篇题题过，提高篇模版题）</li>
-<li>之后一个月 提高篇全部，马蹄杯真题</li>
+        <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h3 id="📜-题目总结：徐州领土计算（区间并集）"><a href="#📜-题目总结：徐州领土计算（区间并集）" class="headerlink" title="📜 题目总结：徐州领土计算（区间并集）"></a>📜 题目总结：徐州领土计算（区间并集）</h3><p><strong>1. 核心问题</strong><br>给定 $n$ 个整数区间 $[l_i, r_i]$，求这些区间覆盖的<strong>不同整数的总个数</strong>。本质上就是求<strong>多个区间的并集长度</strong>。</p>
+<p><strong>2. 数据范围挑战</strong></p>
+<ul>
+<li>$n$ 高达 $10^6$：要求算法时间复杂度必须在 $O(N \log N)$ 或 $O(N)$ 级别，不能使用 $O(N^2)$ 的暴力枚举。</li>
+<li>坐标值高达 $10^9$：不能开数组直接标记（空间爆炸），必须使用<strong>离散化</strong>思想或直接进行<strong>区间合并</strong>。</li>
+</ul>
+<p><strong>3. 解题策略：排序 + 贪心合并</strong><br>这是处理区间问题的经典套路：</p>
+<ol>
+<li><strong>排序</strong>：将所有区间按照<strong>左端点 $l$ 从小到大</strong>排序。如果左端点相同，右端点大小无所谓（通常也会随之有序）。</li>
+<li><strong>维护当前合并区间</strong>：用一个变量 <code>maxr</code> 记录当前已经合并好的连续区间的<strong>最右端点</strong>。</li>
+<li><strong>遍历合并</strong>：<ul>
+<li>若当前区间 $[L, R]$ 的左端点 $L &gt; \text{maxr}$：说明中间断开了，这是一个新的独立区间。将上一段长度计入答案，更新 <code>maxr = R</code>。</li>
+<li>若 $L \le \text{maxr}$：说明有重叠或相连。<ul>
+<li>如果 $R &gt; \text{maxr}$：说明向右延伸了，只将<strong>新增部分</strong> ($R - \text{maxr}$) 计入答案，并更新 <code>maxr = R</code>。</li>
+<li>如果 $R \le \text{maxr}$：说明被完全包含，无需操作。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 <hr>
+<h3 id="⚠️-你犯过的典型错误回顾"><a href="#⚠️-你犯过的典型错误回顾" class="headerlink" title="⚠️ 你犯过的典型错误回顾"></a>⚠️ 你犯过的典型错误回顾</h3><p>在之前的尝试中，主要出现了以下几类错误，这些都是初学者在处理区间问题时容易踩的坑：</p>
+<ol>
+<li><p><strong>重复计数逻辑错误（最严重）</strong></p>
+<ul>
+<li><strong>错误思路</strong>：试图先选出几个点作为“代表”，剩下的随便填，或者简单的两两相加。</li>
+<li><strong>后果</strong>：对于重叠部分（如 <code>[1,5]</code> 和 <code>[4,7]</code>），中间的 <code>[4,5]</code> 会被计算两次，导致结果偏大。</li>
+<li><strong>修正</strong>：必须维护一个动态的 <code>maxr</code>，只计算<strong>超出</strong>当前最大右边界的部分。</li>
+</ul>
+</li>
+<li><p><strong>重叠部分长度计算公式错误</strong></p>
+<ul>
+<li><strong>错误代码</strong>：<code>ans += nowr - maxr + 1</code></li>
+<li><strong>原因</strong>：当 <code>maxr=5</code>, <code>nowr=7</code> 时，新增的是 <code>6, 7</code> (长度2)。公式算出 $7-5+1&#x3D;3$，多算了 <code>maxr</code> 本身那一个点。</li>
+<li><strong>修正</strong>：应为 <code>ans += nowr - maxr</code>。</li>
+</ul>
+</li>
+<li><p><strong>C++ 语法与迭代器陷阱</strong></p>
+<ul>
+<li><strong>比较函数错误</strong>：<code>cmp</code> 函数少写参数或写成成员函数形式，导致编译失败。</li>
+<li><strong>迭代器越界</strong>：使用 <code>it &lt;= a.end()</code> 并在循环内访问 <code>it-&gt;l</code>，当 <code>it == a.end()</code> 时会访问非法内存（Segmentation Fault）。</li>
+<li><strong>死循环</strong>：在 <code>while</code> 或 <code>for</code> 循环中忘记 <code>it++</code>，或者逻辑分支中漏掉自增。</li>
+<li><strong>指针访问错误</strong>：对迭代器 <code>it</code> 使用 <code>.</code> 而不是 <code>-&gt;</code> 访问结构体成员。</li>
+</ul>
+</li>
+<li><p><strong>数据类型溢出</strong></p>
+<ul>
+<li>坐标差值和总和可能超过 <code>int</code> 范围（$2 \times 10^9$），必须使用 <code>long long</code> 存储答案 <code>ans</code> 和中间计算过程。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="✅-最终正确代码（不修改版）"><a href="#✅-最终正确代码（不修改版）" class="headerlink" title="✅ 最终正确代码（不修改版）"></a>✅ 最终正确代码（不修改版）</h3><p>这段代码已经修复了上述所有逻辑和语法错误，可以直接通过评测：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> l;</span><br><span class="line">    <span class="type">int</span> r;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确的比较函数：按左端点升序排序</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">const</span> node&amp;x, <span class="type">const</span> node&amp;y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.l &lt; y.l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> (!(cin &gt;&gt; n)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 开 n+1 的空间，从下标 1 开始存</span></span><br><span class="line">    <span class="function">vector&lt;node&gt; <span class="title">a</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        cin &gt;&gt; a[i].l &gt;&gt; a[i].r;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 排序：核心步骤，让区间有序以便线性合并</span></span><br><span class="line">    <span class="built_in">sort</span>(a.<span class="built_in">begin</span>() + <span class="number">1</span>, a.<span class="built_in">end</span>(), cmp);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化：第一个区间的长度</span></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = a[<span class="number">1</span>].r - a[<span class="number">1</span>].l + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 记录当前合并后的最大右边界</span></span><br><span class="line">    <span class="type">int</span> maxr = a[<span class="number">1</span>].r;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从第二个区间开始遍历</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> it = a.<span class="built_in">begin</span>() + <span class="number">2</span>; it != a.<span class="built_in">end</span>(); it++)&#123;</span><br><span class="line">        <span class="type">int</span> nowl = it-&gt;l;</span><br><span class="line">        <span class="type">int</span> nowr = it-&gt;r;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nowl &gt; maxr)&#123;</span><br><span class="line">            <span class="comment">// 情况1：断开，新起一段</span></span><br><span class="line">            <span class="comment">// 加上上一段的贡献（已在之前累加或初始化），这里加当前完整段</span></span><br><span class="line">            ans += nowr - nowl + <span class="number">1</span>;</span><br><span class="line">            maxr = nowr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 情况2：重叠或相连</span></span><br><span class="line">            <span class="keyword">if</span>(nowr &gt; maxr)&#123;</span><br><span class="line">                <span class="comment">// 只有向右延伸时才增加长度</span></span><br><span class="line">                <span class="comment">// 修正点：只加新增部分 (nowr - maxr)，不要 +1</span></span><br><span class="line">                ans += nowr - maxr;</span><br><span class="line">                maxr = nowr;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果 nowr &lt;= maxr，说明被完全覆盖，不做任何操作</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -227,7 +273,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
         		</li>
       		
 		</ul>
@@ -283,7 +333,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/19/20260419/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/22/luogu-mati-202503/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +347,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/20/template-tanxin/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/22/luogu-mati-202502/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          贪心
+          2025马蹄杯第二场
         
       </div>
     </a>
   
   
-    <a href="/2026/04/19/niuke-week-contest-140/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">niuke-week-contest-140</div>
+    <a href="/2026/04/22/luogu-pat-2026/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">pat甲级1-10</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -335,7 +385,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9C-%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93%EF%BC%9A%E5%BE%90%E5%B7%9E%E9%A2%86%E5%9C%9F%E8%AE%A1%E7%AE%97%EF%BC%88%E5%8C%BA%E9%97%B4%E5%B9%B6%E9%9B%86%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">📜 题目总结：徐州领土计算（区间并集）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9A%A0%EF%B8%8F-%E4%BD%A0%E7%8A%AF%E8%BF%87%E7%9A%84%E5%85%B8%E5%9E%8B%E9%94%99%E8%AF%AF%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.2.</span> <span class="toc-text">⚠️ 你犯过的典型错误回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E6%9C%80%E7%BB%88%E6%AD%A3%E7%A1%AE%E4%BB%A3%E7%A0%81%EF%BC%88%E4%B8%8D%E4%BF%AE%E6%94%B9%E7%89%88%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">✅ 最终正确代码（不修改版）</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
