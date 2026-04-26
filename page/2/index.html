@@ -412,7 +412,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+
       
 
       
@@ -571,7 +572,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="D-E"><a href="#D-E" class="headerlink" title="D E"></a>D E</h1><h3 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h3><p>给定一个长度为 $n$ 的排列 $p$ 和两个步长 $x, y$。<br>你可以进行任意次操作：选择下标 $i$，交换 $p_i$ 与 $p_{i+x}$（若 $i+x \le n$），或者交换 $p_i$ 与 $p_{i+y}$（若 $i+y \le n$）。<br>问：能否通过若干次操作将排列变成升序 $[1, 2, \dots, n]$？</p>
+        <p>[]<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/132940">牛客周赛</a></p>
+<h1 id="D-E"><a href="#D-E" class="headerlink" title="D E"></a>D E</h1><h3 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h3><p>给定一个长度为 $n$ 的排列 $p$ 和两个步长 $x, y$。<br>你可以进行任意次操作：选择下标 $i$，交换 $p_i$ 与 $p_{i+x}$（若 $i+x \le n$），或者交换 $p_i$ 与 $p_{i+y}$（若 $i+y \le n$）。<br>问：能否通过若干次操作将排列变成升序 $[1, 2, \dots, n]$？</p>
 <p><strong>核心区别（困难版 vs 简单版）：</strong></p>
 <ul>
 <li><strong>简单版</strong>：保证 $x, y \le \lfloor n&#x2F;2 \rfloor$。</li>
@@ -1296,7 +1298,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="e"><a href="#e" class="headerlink" title="e"></a>e</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>$\hspace{15pt}$给定一棵 $n$ 个节点的有根树，根节点为 $1$。初始时所有节点都是红色。<br>$\hspace{15pt}$初始时小红位于根节点 $1$，她要和小紫进行一场游戏。游戏由多回合组成，每一回合中：<br>$\hspace{23pt}\bullet$ 小红先移动到任意一个与她当前位置相邻的红色节点；<br>$\hspace{23pt}\bullet$ 之后小紫选择任意一个与小红当前位置相邻的红色节点，将其染成紫色。<br>$\hspace{23pt}\bullet$ 游戏持续进行直到一方获得胜利或一方无法操作。<br>$\hspace{15pt}$如果小红移动到了一个叶子节点，则小红获胜，反之如果直到游戏结束小红都没有移动到一个叶子节点，那么小紫获胜。<br>$\hspace{15pt}$请你判断在最优策略下，谁会获胜。</p>
+        <p>[]<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/130107">牛客周赛</a></p>
+<h1 id="e"><a href="#e" class="headerlink" title="e"></a>e</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>$\hspace{15pt}$给定一棵 $n$ 个节点的有根树，根节点为 $1$。初始时所有节点都是红色。<br>$\hspace{15pt}$初始时小红位于根节点 $1$，她要和小紫进行一场游戏。游戏由多回合组成，每一回合中：<br>$\hspace{23pt}\bullet$ 小红先移动到任意一个与她当前位置相邻的红色节点；<br>$\hspace{23pt}\bullet$ 之后小紫选择任意一个与小红当前位置相邻的红色节点，将其染成紫色。<br>$\hspace{23pt}\bullet$ 游戏持续进行直到一方获得胜利或一方无法操作。<br>$\hspace{15pt}$如果小红移动到了一个叶子节点，则小红获胜，反之如果直到游戏结束小红都没有移动到一个叶子节点，那么小紫获胜。<br>$\hspace{15pt}$请你判断在最优策略下，谁会获胜。</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> good = <span class="number">0</span>;  <span class="comment">// 好孩子的数量</span></span><br><span class="line">    <span class="type">bool</span> leaf = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> v : g[u]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v == p) <span class="keyword">continue</span>;</span><br><span class="line">        leaf = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(v, u);</span><br><span class="line">        <span class="keyword">if</span> (win[v]) good++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (leaf) &#123;</span><br><span class="line">        win[u] = <span class="literal">true</span>;  <span class="comment">// 叶子节点小红赢</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (u == <span class="number">1</span>) &#123;</span><br><span class="line">        win[u] = (good &gt;= <span class="number">1</span>);  <span class="comment">// 根至少一个能赢的孩子</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        win[u] = (good &gt;= <span class="number">2</span>);  <span class="comment">// 非根节点至少两个能赢的孩子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    g.<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u, v;</span><br><span class="line">        cin &gt;&gt; u &gt;&gt; v;</span><br><span class="line">        g[u].<span class="built_in">push_back</span>(v);</span><br><span class="line">        g[v].<span class="built_in">push_back</span>(u);</span><br><span class="line">    &#125;</span><br><span class="line">    win.<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    cout &lt;&lt; (win[<span class="number">1</span>] ? <span class="string">&quot;red&quot;</span> : <span class="string">&quot;purple&quot;</span>) &lt;&lt; endl;</span><br><span class="line">    win.<span class="built_in">clear</span>();</span><br><span class="line">    g.<span class="built_in">clear</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="f"><a href="#f" class="headerlink" title="f"></a>f</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p>$\hspace{15pt}$在平面直角坐标系中，定义两个点相邻，当且仅当它们的曼哈顿距离恰好为 $1$。<br>$\hspace{15pt}$请你构造 $n$ 个不重复的点（坐标均为整数），使得这些点中恰好有 $k$ 对相邻的点。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><hr>
@@ -1571,10 +1574,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">atcoder</a>
               </li>
              
@@ -1595,19 +1594,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1615,7 +1606,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1623,7 +1618,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1631,7 +1626,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1664,6 +1659,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">

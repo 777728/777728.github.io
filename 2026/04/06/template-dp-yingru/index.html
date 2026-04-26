@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://777728.github.io">
   <title>动态规划引入 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="P2834 纸币问题 【完全背包问题】题目背景你是一个非常有钱的小朋友。 注意： 本题和《进阶篇》的对应题目，输入格式略有差异。 题目描述你有 $n$ 种面额互不相同的纸币，第 $i$ 种纸币的面额为 $a_i$ 并且有无限张，现在你需要支付 $w$ 的金额，请问有多少种纸币组合能恰好支付金额 $w$，答案对 $10^9+7$ 取模。 输入格式第一行两个正整数 $n,w$，分别表示纸币的种数和要凑">
+  <meta name="description" content="[]template P2834 纸币问题 【完全背包问题】题目背景你是一个非常有钱的小朋友。 注意： 本题和《进阶篇》的对应题目，输入格式略有差异。 题目描述你有 $n$ 种面额互不相同的纸币，第 $i$ 种纸币的面额为 $a_i$ 并且有无限张，现在你需要支付 $w$ 的金额，请问有多少种纸币组合能恰好支付金额 $w$，答案对 $10^9+7$ 取模。 输入格式第一行两个正整数 $n,w$，分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划引入">
 <meta property="og:url" content="https://777728.github.io/2026/04/06/template-dp-yingru/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="P2834 纸币问题 【完全背包问题】题目背景你是一个非常有钱的小朋友。 注意： 本题和《进阶篇》的对应题目，输入格式略有差异。 题目描述你有 $n$ 种面额互不相同的纸币，第 $i$ 种纸币的面额为 $a_i$ 并且有无限张，现在你需要支付 $w$ 的金额，请问有多少种纸币组合能恰好支付金额 $w$，答案对 $10^9+7$ 取模。 输入格式第一行两个正整数 $n,w$，分别表示纸币的种数和要凑">
+<meta property="og:description" content="[]template P2834 纸币问题 【完全背包问题】题目背景你是一个非常有钱的小朋友。 注意： 本题和《进阶篇》的对应题目，输入格式略有差异。 题目描述你有 $n$ 种面额互不相同的纸币，第 $i$ 种纸币的面额为 $a_i$ 并且有无限张，现在你需要支付 $w$ 的金额，请问有多少种纸币组合能恰好支付金额 $w$，答案对 $10^9+7$ 取模。 输入格式第一行两个正整数 $n,w$，分">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-04-06T16:41:57.510Z">
+<meta property="article:modified_time" content="2026-04-26T03:21:58.789Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="template">
 <meta property="article:tag" content="动态规划引入">
@@ -180,7 +180,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="P2834-纸币问题-【完全背包问题】"><a href="#P2834-纸币问题-【完全背包问题】" class="headerlink" title="P2834 纸币问题 【完全背包问题】"></a>P2834 纸币问题 【完全背包问题】</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>你是一个非常有钱的小朋友。</p>
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="P2834-纸币问题-【完全背包问题】"><a href="#P2834-纸币问题-【完全背包问题】" class="headerlink" title="P2834 纸币问题 【完全背包问题】"></a>P2834 纸币问题 【完全背包问题】</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>你是一个非常有钱的小朋友。</p>
 <p><strong>注意：</strong> 本题和《进阶篇》的对应题目，输入格式略有差异。</p>
 <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>你有 $n$ 种面额互不相同的纸币，第 $i$ 种纸币的面额为 $a_i$ 并且有无限张，现在你需要支付 $w$ 的金额，请问有多少种纸币组合能恰好支付金额 $w$，答案对 $10^9+7$ 取模。</p>
 <h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行两个正整数 $n,w$，分别表示纸币的种数和要凑出的金额。<br>第二行一行 $n$ 个以空格隔开的正整数 $a_1, a_2, \dots a_n$ 依次表示这 $n$ 种纸币的面额。</p>
@@ -327,18 +328,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/04/06/template-dp-shushang/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/04/06/20260406/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          树上与图dp
+          清明结算
         
       </div>
     </a>
   
   
-    <a href="/2026/04/06/template-qujiandp/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">区间和环形dp</div>
+    <a href="/2026/04/06/template-dp-shushang/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">树上与图dp</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -510,10 +511,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网站介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">atcoder</a>
               </li>
              
@@ -534,19 +531,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -554,7 +543,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -562,7 +555,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,7 +563,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,6 +596,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
