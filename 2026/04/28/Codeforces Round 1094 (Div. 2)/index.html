@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>Tag: codeforces | Cai Haoran&#39;s Blog</title>
+  <title>Codeforces Round 1094 (Div. 2) | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curiosity compete progress">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Cai Haoran&#39;s Blog">
-<meta property="og:url" content="https://777728.github.io/tags/codeforces/index.html">
+  <meta name="description" content="[]Codeforces Round 1094 (Div. 2) B题意解释 操作本质：每次操作可先任意翻转一个对称区间 $[u-y, u+y]$，再标记位置 $x_i$ 的元素（标记绑定元素，不随索引移动）。 核心性质：对称翻转严格保持索引奇偶性（$u-i$ 与 $u+i$ 奇偶相同）。因此数组天然分裂为 奇数位 和 偶数位 两个独立集合，元素无法跨奇偶交换。 目标：$m$ 次操作后，使未标记元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 1094 (Div. 2)">
+<meta property="og:url" content="https://777728.github.io/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="curiosity compete progress">
+<meta property="og:description" content="[]Codeforces Round 1094 (Div. 2) B题意解释 操作本质：每次操作可先任意翻转一个对称区间 $[u-y, u+y]$，再标记位置 $x_i$ 的元素（标记绑定元素，不随索引移动）。 核心性质：对称翻转严格保持索引奇偶性（$u-i$ 与 $u+i$ 奇偶相同）。因此数组天然分裂为 奇数位 和 偶数位 两个独立集合，元素无法跨奇偶交换。 目标：$m$ 次操作后，使未标记元">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-28T13:35:54.308Z">
 <meta property="article:author" content="Cai Haoran">
+<meta property="article:tag" content="codeforces">
+<meta property="article:tag" content="xcpc">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -156,36 +160,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Codeforces Round 1094 (Div. 2)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Codeforces Round 1094 (Div. 2)
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/" class="archive-article-date">
+
+        
+        <a href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/" class="archive-article-date">
   	<time datetime="2026-04-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/">Codeforces Round 1094 (Div. 2)</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2222">Codeforces Round 1094 (Div. 2)</a></p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><h3 id="题意解释"><a href="#题意解释" class="headerlink" title="题意解释"></a>题意解释</h3><ul>
+<li><strong>操作本质</strong>：每次操作可先任意翻转一个对称区间 $[u-y, u+y]$，再标记位置 $x_i$ 的<strong>元素</strong>（标记绑定元素，不随索引移动）。</li>
+<li><strong>核心性质</strong>：对称翻转严格保持索引奇偶性（$u-i$ 与 $u+i$ 奇偶相同）。因此数组天然分裂为 <code>奇数位</code> 和 <code>偶数位</code> 两个独立集合，元素<strong>无法跨奇偶交换</strong>。</li>
+<li><strong>目标</strong>：$m$ 次操作后，使<strong>未标记元素总和最小</strong> $\iff$ <strong>已标记元素总和最大</strong>。</li>
+</ul>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li><strong>标记自由度</strong>：第 $i$ 次操作查询位置 $x_i$（奇偶性 $p &#x3D; x_i \bmod 2$）。因可提前任意翻转，等价于从奇偶集合 $p$ 中<strong>任选一个元素标记</strong>。若元素已标记，则无事发生。</li>
+<li><strong>贪心策略</strong>（奇偶独立）：<ul>
+<li><strong>优先标记正数</strong>：正数加入已标记集合会直接减小答案，值越大越优。</li>
+<li><strong>负数处理</strong>：标记负数会增大答案。若该奇偶集合<strong>已标记过元素</strong>，后续操作可重复标记已标记元素，<strong>绝不主动标负数</strong>。</li>
+<li><strong>被迫标记</strong>：若该集合<strong>从未标记过</strong>且查询过至少一次，则必须标记一个。为减损，选<strong>最大值</strong>（最接近 $0$ 的负数），且仅标记一次。</li>
+</ul>
+</li>
+<li><strong>实现</strong>：用两个优先队列维护奇&#x2F;偶元素。遍历 $m$ 次查询，按 <code>正数必拿 || 首次必拿</code> 规则弹出，最终输出 <code>总和 - 已标记和</code>。</li>
+<li><strong>复杂度</strong>：$O(N \log N + M)$，空间 $O(N)$，完全满足 $10^5$ 限制。</li>
+</ol>
+<h3 id="代码展示-C"><a href="#代码展示-C" class="headerlink" title="代码展示 (C++)"></a>代码展示 (C++)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    priority_queue&lt;ll&gt; pq[<span class="number">2</span>]; <span class="comment">// pq[0]偶数位, pq[1]奇数位</span></span><br><span class="line">    ll total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        ll a; cin &gt;&gt; a;</span><br><span class="line">        pq[i &amp; <span class="number">1</span>].<span class="built_in">push</span>(a);</span><br><span class="line">        total += a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> marked[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>&#125;; <span class="comment">// 记录奇/偶集合是否已标记过</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">        <span class="type">int</span> p = x &amp; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (pq[p].<span class="built_in">empty</span>()) <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 贪心：有正数必取；若无正数且该集合尚未标记过，则取最大负数(仅一次)</span></span><br><span class="line">        <span class="keyword">if</span> (pq[p].<span class="built_in">top</span>() &gt;= <span class="number">0</span> || !marked[p]) &#123;</span><br><span class="line">            total -= pq[p].<span class="built_in">top</span>(); <span class="comment">// 直接从未标记和中扣除</span></span><br><span class="line">            pq[p].<span class="built_in">pop</span>();</span><br><span class="line">            marked[p] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; total &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-shoukuan.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -201,229 +247,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/27/Codeforces%20Round%201092%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2026/04/28/20260428/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          今日满课
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2026/04/27/20260427/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">没想到获奖</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/27/Codeforces%20Round%201092%20(Div.%202)/">Codeforces Round 1092 (Div. 2)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B"><span class="toc-number">1.</span> <span class="toc-text">B</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E8%A7%A3%E9%87%8A"><span class="toc-number">1.1.</span> <span class="toc-text">题意解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA-C"><span class="toc-number">1.3.</span> <span class="toc-text">代码展示 (C++)</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/27/Codeforces%20Round%20edu189%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-27</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/27/Codeforces%20Round%20edu189%20(Div.%202)/">Codeforces Round edu189 (Div. 2)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/13/Codeforces%20Round%201093%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/13/Codeforces%20Round%201093%20(Div.%202)/">Codeforces Round 1093 (Div. 2)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/08/Codeforces%20Round%201091%20(Div.%202)/">Codeforces Round 1091 (Div. 2)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/05/Codeforces%20Round%201090%20(Div.%204)/" class="archive-article-date">
-  	<time datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/05/Codeforces%20Round%201090%20(Div.%204)/">Codeforces Round 1090 (Div. 4)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -446,9 +391,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
