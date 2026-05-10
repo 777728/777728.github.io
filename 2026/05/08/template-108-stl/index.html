@@ -6,23 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>104-递推 | Cai Haoran&#39;s Blog</title>
+  <title>108-STL | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[]template 计算几何题意概括用两种砖块铺满 (2 \times N) 的墙：  (2 \times 1) 长方形（可横放：覆盖 (2 \times 1)；也可竖放：覆盖 (1 \times 2)，但墙宽为 2，所以竖放相当于两个竖条并排放→实际是两块 (1 \times 2) 竖砖） L 型砖（覆盖 3 格，可旋转 4 种方向）  求铺满的方法数，输出最后 4 位（模 10000）。">
+  <meta name="description" content="[]template P1160 队列安排 （STL list）核心操作：  初始队列只有 1 依次插入 2~N：每个同学 i 插到已存在的同学 k 的左边(p&#x3D;0) 或右边(p&#x3D;1) 删除 M 个同学（若已删除则忽略） 输出最终从左到右的编号  数据范围： N, M ≤ 1e5，需要 O(N) 或 O(N log N) 解法  关键语法回顾（刚才讲的）std::list 迭代">
 <meta property="og:type" content="article">
-<meta property="og:title" content="104-递推">
-<meta property="og:url" content="https://777728.github.io/2026/05/09/template-104-%E9%80%92%E6%8E%A8/index.html">
+<meta property="og:title" content="108-STL">
+<meta property="og:url" content="https://777728.github.io/2026/05/08/template-108-stl/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="[]template 计算几何题意概括用两种砖块铺满 (2 \times N) 的墙：  (2 \times 1) 长方形（可横放：覆盖 (2 \times 1)；也可竖放：覆盖 (1 \times 2)，但墙宽为 2，所以竖放相当于两个竖条并排放→实际是两块 (1 \times 2) 竖砖） L 型砖（覆盖 3 格，可旋转 4 种方向）  求铺满的方法数，输出最后 4 位（模 10000）。">
+<meta property="og:description" content="[]template P1160 队列安排 （STL list）核心操作：  初始队列只有 1 依次插入 2~N：每个同学 i 插到已存在的同学 k 的左边(p&#x3D;0) 或右边(p&#x3D;1) 删除 M 个同学（若已删除则忽略） 输出最终从左到右的编号  数据范围： N, M ≤ 1e5，需要 O(N) 或 O(N log N) 解法  关键语法回顾（刚才讲的）std::list 迭代">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://777728.github.io/img/104.png">
-<meta property="article:published_time" content="2026-05-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-09T07:30:32.127Z">
+<meta property="article:published_time" content="2026-05-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-10T04:30:03.092Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="104-递推">
+<meta property="article:tag" content="108-STL">
 <meta property="article:tag" content="template">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://777728.github.io/img/104.png">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
   
@@ -162,164 +160,59 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-template-104-递推" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-template-108-stl" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      104-递推
+      108-STL
     </h1>
   
 
         
-        <a href="/2026/05/09/template-104-%E9%80%92%E6%8E%A8/" class="archive-article-date">
-  	<time datetime="2026-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-09</time>
+        <a href="/2026/05/08/template-108-stl/" class="archive-article-date">
+  	<time datetime="2026-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/img/104.png"><br>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h1 id="计算几何"><a href="#计算几何" class="headerlink" title="计算几何"></a>计算几何</h1><h2 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h2><p>用两种砖块铺满 (2 \times N) 的墙：</p>
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h2 id="P1160-队列安排-（STL-list）"><a href="#P1160-队列安排-（STL-list）" class="headerlink" title="P1160 队列安排 （STL list）"></a>P1160 队列安排 （STL list）</h2><p><strong>核心操作：</strong></p>
 <ol>
-<li><strong>(2 \times 1) 长方形</strong>（可横放：覆盖 (2 \times 1)；也可竖放：覆盖 (1 \times 2)，但墙宽为 2，所以竖放相当于两个竖条并排放→实际是两块 (1 \times 2) 竖砖）</li>
-<li><strong>L 型砖</strong>（覆盖 3 格，可旋转 4 种方向）</li>
+<li>初始队列只有 <code>1</code></li>
+<li>依次插入 <code>2~N</code>：每个同学 <code>i</code> 插到已存在的同学 <code>k</code> 的<strong>左边(p&#x3D;0)</strong> 或<strong>右边(p&#x3D;1)</strong></li>
+<li>删除 M 个同学（若已删除则忽略）</li>
+<li>输出最终从左到右的编号</li>
 </ol>
-<p>求铺满的方法数，输出最后 4 位（模 10000）。</p>
+<p><strong>数据范围：</strong> N, M ≤ 1e5，需要 O(N) 或 O(N log N) 解法</p>
 <hr>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>定义两个状态：</p>
+<h2 id="关键语法回顾（刚才讲的）"><a href="#关键语法回顾（刚才讲的）" class="headerlink" title="关键语法回顾（刚才讲的）"></a>关键语法回顾（刚才讲的）</h2><h3 id="std-list-迭代器特性"><a href="#std-list-迭代器特性" class="headerlink" title="std::list 迭代器特性"></a><code>std::list</code> 迭代器特性</h3><ul>
+<li><strong>插入&#x2F;删除不会使其他迭代器失效</strong>（除了被删除的）</li>
+<li><code>insert(pos, val)</code> 在 <code>pos</code> <strong>之前</strong>插入，返回新元素的迭代器</li>
+<li><code>erase(pos)</code> 删除 <code>pos</code> 指向的元素</li>
+</ul>
+<h3 id="代码核心技巧"><a href="#代码核心技巧" class="headerlink" title="代码核心技巧"></a>代码核心技巧</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;list&lt;<span class="type">int</span>&gt;::iterator&gt; <span class="built_in">pos</span>(n + <span class="number">1</span>);  <span class="comment">// 存储每个编号对应的迭代器</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li><strong>(f[i])</strong>：恰好铺满 (2 \times i) 的方法数。</li>
-<li><strong>(g[i])</strong>：铺满 (2 \times i) <strong>但右上角缺 1 格</strong>（左下角被一个 L 型砖占据后，突出 1 格到下一列的形式）。</li>
+<li>通过数组保存迭代器，实现 O(1) 定位元素</li>
+<li>删除时直接 <code>a.erase(pos[x])</code>，无需查找</li>
+</ul>
+<h3 id="插入逻辑解析"><a href="#插入逻辑解析" class="headerlink" title="插入逻辑解析"></a>插入逻辑解析</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p == <span class="number">0</span>) </span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(pos[k], i);   <span class="comment">// 插到 k 左边</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">auto</span> next = pos[k];</span><br><span class="line">    ++next;                          <span class="comment">// 指向 k 的下一个位置</span></span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(next, i);      <span class="comment">// 插到 k 右边（即 next 左边）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键理解：</strong> </p>
+<ul>
+<li>插右边 &#x3D; 插到 <code>k</code> 的下一个元素<strong>之前</strong></li>
+<li>因为 <code>insert</code> 是在指定位置<strong>之前</strong>插入</li>
 </ul>
 <hr>
-<h3 id="递推推导"><a href="#递推推导" class="headerlink" title="递推推导"></a>递推推导</h3><ol>
-<li><p><strong>(f[i]) 的构成</strong>：</p>
-<ul>
-<li>在 (2 \times (i-1)) 基础上，最右边竖着放两块 (1 \times 2) 竖砖 → (f[i-1])</li>
-<li>在 (2 \times (i-2)) 基础上，最右边横着放两块 (2 \times 1) 横砖（上下各一块）→ (f[i-2])</li>
-<li>在 (g[i-2]) 基础上，右边两列用两个 L 型砖填补成满墙（有两种方式：上下对称）→ (2 \times g[i-2])</li>
-</ul>
-<p>所以：<br>[<br>f[i] &#x3D; f[i-1] + f[i-2] + 2 \times g[i-2]<br>]</p>
-</li>
-<li><p><strong>(g[i]) 的构成</strong>：</p>
-<ul>
-<li>在 (g[i-1]) 基础上，右边加一块竖砖（右上角缺的那格刚好被填平？等一下，要小心）</li>
-</ul>
-<p>更严谨的方法：</p>
-<ul>
-<li>(g[i]) 表示 (2 \times i) 但右下角缺一格（或者说右上角缺一格，等价）。</li>
-<li>从 (f[i-1]) 过来：在铺满 (2 \times (i-1)) 的右边，放一个 L 型砖竖着（缺口朝右）→ 产生一个突出在下一列的 1 格缺口 → 得到 (g[i])。</li>
-<li>从 (g[i-1]) 过来：在 (g[i-1]) 的右边，加一块横砖或竖砖来调整？不，这里只有一种方式：在缺口的正下方放一个横砖？不对，仔细画图可得：<ul>
-<li>(g[i]) 也可由 (g[i-1]) 右边放一个 (2 \times 1) 横砖（覆盖两格，但缺的那格在右上角，横砖只能放下面那行）→ 不行，会留下一格还是缺？<br>实际上经典推导：</li>
-<li><strong>(g[i] &#x3D; g[i-1] + f[i-1])</strong><br>解释：<ul>
-<li>由 (g[i-1]) 补齐缺口：在缺口右边放一个 (1 \times 2) 竖砖？不对，仔细想：<br>更简单：(g[i]) 的状态来自：<br>(a) 在 (f[i-1]) 的右下角放一个 L 型砖（竖着放，缺口朝右）→ 得到 (g[i])<br>(b) 在 (g[i-1]) 的缺口右边放一个 (1 \times 2) 竖砖（直接竖着覆盖缺口那一列的上格和下格？缺格只有一格，放不了竖砖）→ 所以要换个思路：</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>实际上标准解：<br>[<br>f[i] &#x3D; f[i-1] + f[i-2] + 2 \times g[i-2]<br>]<br>[<br>g[i] &#x3D; g[i-1] + f[i-1]<br>]<br>初始条件：<br>[<br>f[0] &#x3D; 1,\ f[1] &#x3D; 1<br>]<br>[<br>g[0] &#x3D; 0,\ g[1] &#x3D; 1<br>]</p>
-</li>
-</ol>
-<hr>
-<h2 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 1000005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mod 10000</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> f[maxn], g[maxn];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    f[<span class="number">0</span>] = f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    g[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    g[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        f[i] = (f[i<span class="number">-1</span>] + f[i<span class="number">-2</span>] + <span class="number">2</span> * g[i<span class="number">-2</span>]) % mod;</span><br><span class="line">        g[i] = (g[i<span class="number">-1</span>] + f[i<span class="number">-1</span>]) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; f[n] % mod;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码执行示例（N-4）"><a href="#代码执行示例（N-4）" class="headerlink" title="代码执行示例（N&#x3D;4）"></a>代码执行示例（N&#x3D;4）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">初始: a = [1], pos[1]→1</span><br><span class="line"></span><br><span class="line">i=2, k=1, p=0: 插到1左边 → a=[2,1], pos[2]→2</span><br><span class="line"></span><br><span class="line">i=3, k=2, p=1: 插到2右边</span><br><span class="line">  next = pos[2]→2, ++next→指向1</span><br><span class="line">  insert(1之前,3) → a=[2,3,1], pos[3]→3</span><br><span class="line"></span><br><span class="line">i=4, k=1, p=0: 插到1左边</span><br><span class="line">  insert(pos[1]→1之前,4) → a=[2,3,4,1], pos[4]→4</span><br><span class="line"></span><br><span class="line">删除: m=2, 删3 → a=[2,4,1]; 再删3(已删除,忽略)</span><br><span class="line">输出: 2 4 1 ✓</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h2><ul>
-<li>(g[i]) 表示“缺口状态”，方便处理 L 型砖的拼合。</li>
-<li>取模 10000 只保留最后 4 位。</li>
-<li>递推只需用到前两项，但题目 N 最大 (10^6)，数组开够即可。</li>
-</ul>
-<h1 id="计算几何-1"><a href="#计算几何-1" class="headerlink" title="计算几何"></a>计算几何</h1><h2 id="题意概括-1"><a href="#题意概括-1" class="headerlink" title="题意概括"></a>题意概括</h2><p>输出一个<strong>分形图形</strong>，大小为 (n)（ (1 \le n \le 10) ）。<br>图形由字符 <code>&#39;/&#39;</code>、<code>&#39;\&#39;</code>、<code>&#39;_&#39;</code> 和空格组成，形状类似于<strong>三角形套三角形</strong>，类似谢尔宾斯基三角形。</p>
-<hr>
-<h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><h3 id="观察规律"><a href="#观察规律" class="headerlink" title="观察规律"></a>观察规律</h3><ul>
-<li>(n&#x3D;1) 时：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> /\</span><br><span class="line">/__\</span><br></pre></td></tr></table></figure>
-<ul>
-<li>(n&#x3D;2) 时：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   /\</span><br><span class="line">  /__\</span><br><span class="line"> /\  /\</span><br><span class="line">/__\/__\</span><br></pre></td></tr></table></figure>
-<ul>
-<li>(n&#x3D;3) 时：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       /\</span><br><span class="line">      /__\</span><br><span class="line">     /\  /\</span><br><span class="line">    /__\/__\</span><br><span class="line">   /\      /\</span><br><span class="line">  /__\    /__\</span><br><span class="line"> /\  /\  /\  /\</span><br><span class="line">/__\/__\/__\/__\</span><br></pre></td></tr></table></figure>
-
-<p>可以看到：</p>
-<ul>
-<li>图形高度 &#x3D; (2^n) 行</li>
-<li>图形宽度 ≈ (2^{n+1}) 字符</li>
-<li>每 (2) 行为一组：  <ul>
-<li>奇数行（(i) 从 0 开始，偶数行为第 0,2,4… 行）输出三角形顶部 <code>/\</code>  </li>
-<li>偶数行（第 1,3,5… 行）输出三角形底部 <code>/__\</code></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n, a[<span class="number">1030</span>] = &#123;<span class="number">1</span>&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); ++i) &#123;</span><br><span class="line">        <span class="comment">// 输出前导空格</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; (<span class="number">1</span> &lt;&lt; n) - i; ++j) </span><br><span class="line">            cout &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新数组 a[]（异或递推）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i; j &gt;= <span class="number">0</span>; --j) </span><br><span class="line">            a[j] ^= a[j - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出当前行图形</span></span><br><span class="line">        <span class="keyword">if</span> (!(i % <span class="number">2</span>)) &#123;  <span class="comment">// 奇数行（第 0,2,4... 行）-&gt; 输出 &quot;/\\&quot;</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= i; ++j)</span><br><span class="line">                cout &lt;&lt; (a[j] ? <span class="string">&quot;/\\&quot;</span> : <span class="string">&quot;  &quot;</span>);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> &#123;           <span class="comment">// 偶数行（第 1,3,5... 行）-&gt; 输出 &quot;/__\\&quot;</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= i; j += <span class="number">2</span>)</span><br><span class="line">                cout &lt;&lt; (a[j] ? <span class="string">&quot;/__\\&quot;</span> : <span class="string">&quot;    &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="关键技巧"><a href="#关键技巧" class="headerlink" title="关键技巧"></a>关键技巧</h2><ol>
-<li><p><strong>异或更新</strong><br><code>a[j] ^= a[j-1]</code> 类似<strong>二项式系数 mod 2</strong>（即杨辉三角奇偶性），控制哪些位置有三角形。<br>这是利用<strong>分形自相似性</strong>的位运算技巧。</p>
-</li>
-<li><p><strong>行号奇偶分组</strong>  </p>
-<ul>
-<li>行号 <code>i % 2 == 0</code>：输出 <code>/\</code>，每个占 2 字符  </li>
-<li>行号 <code>i % 2 == 1</code>：输出 <code>/__\</code>，每个占 4 字符</li>
-</ul>
-</li>
-<li><p><strong>前导空格</strong><br><code>(1&lt;&lt;n)-i</code> 让整个图形居中对齐。</p>
-</li>
-</ol>
-<hr>
-<h2 id="手工模拟-n-2"><a href="#手工模拟-n-2" class="headerlink" title="手工模拟 n&#x3D;2"></a>手工模拟 n&#x3D;2</h2><table>
-<thead>
-<tr>
-<th>i</th>
-<th>前导空格</th>
-<th>a[] 更新后</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0</td>
-<td>3个空格</td>
-<td>[1]</td>
-<td>&#x2F;\</td>
-</tr>
-<tr>
-<td>1</td>
-<td>2个空格</td>
-<td>[1,1]</td>
-<td>&#x2F;__\</td>
-</tr>
-<tr>
-<td>2</td>
-<td>1个空格</td>
-<td>[1,0,1]</td>
-<td>&#x2F;\  &#x2F;\</td>
-</tr>
-<tr>
-<td>3</td>
-<td>0个空格</td>
-<td>[1,1,1,1]</td>
-<td>&#x2F;<strong>/</strong>\</td>
-</tr>
-</tbody></table>
-<p>得到：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   /\</span><br><span class="line">  /__\</span><br><span class="line"> /\  /\</span><br><span class="line">/__\/__\</span><br></pre></td></tr></table></figure>
-
-<p>✅ 与样例一致。</p>
-<hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>利用<strong>异或 + 杨辉三角奇偶</strong>模拟分形复制</li>
-<li>每 2 行一组，分别输出“三角形顶部”和“三角形底部”</li>
-<li>前导空格保证居中显示</li>
-</ul>
+<h2 id="代码的正确性保证"><a href="#代码的正确性保证" class="headerlink" title="代码的正确性保证"></a>代码的正确性保证</h2><p>✅ <strong>迭代器永不失效</strong> - list 的特性，即使插入删除，已有迭代器仍指向原元素<br>✅ <strong>删除标记</strong> - <code>removed[]</code> 防止重复删除导致的未定义行为<br>✅ <strong>O(N) 时间复杂度</strong> - 每个操作都是 O(1)<br>✅ <strong>空间 O(N)</strong> - 存储 N 个迭代器</p>
+<p>这段代码是这道题的标准高效解法！</p>
 
       
 
@@ -363,7 +256,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">104-递推</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">108-STL</a>
         		</li>
       		
 		</ul>
@@ -419,7 +312,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/09/template-104-%E9%80%92%E6%8E%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/08/template-108-stl/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -433,18 +326,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/05/09/template-103-%E6%9A%B4%E5%8A%9B%E6%9E%9A%E4%B8%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/08/20260508/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          103-暴力枚举
+          期中考试
         
       </div>
     </a>
   
   
-    <a href="/2026/05/09/template-105-%E8%B4%AA%E5%BF%83/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">105-贪心</div>
+    <a href="/2026/05/07/20260507/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">期中考试</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -471,7 +364,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95"><span class="toc-number">1.</span> <span class="toc-text">计算几何</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E6%8E%A8%E6%8E%A8%E5%AF%BC"><span class="toc-number">1.2.1.</span> <span class="toc-text">递推推导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E"><span class="toc-number">1.3.</span> <span class="toc-text">代码说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9"><span class="toc-number">1.4.</span> <span class="toc-text">关键点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95-1"><span class="toc-number">2.</span> <span class="toc-text">计算几何</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">2.1.</span> <span class="toc-text">题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%A7%84%E5%BE%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">观察规律</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text">代码解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%8A%80%E5%B7%A7"><span class="toc-number">2.4.</span> <span class="toc-text">关键技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5%E6%A8%A1%E6%8B%9F-n-2"><span class="toc-number">2.5.</span> <span class="toc-text">手工模拟 n&#x3D;2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#P1160-%E9%98%9F%E5%88%97%E5%AE%89%E6%8E%92-%EF%BC%88STL-list%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">P1160 队列安排 （STL list）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%AF%AD%E6%B3%95%E5%9B%9E%E9%A1%BE%EF%BC%88%E5%88%9A%E6%89%8D%E8%AE%B2%E7%9A%84%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">关键语法回顾（刚才讲的）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#std-list-%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%89%B9%E6%80%A7"><span class="toc-number">2.1.</span> <span class="toc-text">std::list 迭代器特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%A0%B8%E5%BF%83%E6%8A%80%E5%B7%A7"><span class="toc-number">2.2.</span> <span class="toc-text">代码核心技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E9%80%BB%E8%BE%91%E8%A7%A3%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text">插入逻辑解析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%A4%BA%E4%BE%8B%EF%BC%88N-4%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">代码执行示例（N&#x3D;4）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%80%A7%E4%BF%9D%E8%AF%81"><span class="toc-number">4.</span> <span class="toc-text">代码的正确性保证</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -632,15 +525,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,19 +557,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,7 +573,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +589,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -700,15 +605,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
