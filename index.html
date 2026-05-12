@@ -236,6 +236,85 @@
 
 
   
+    <article id="post-20260512" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/12/20260512/">2026-05-12 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/12/20260512/" class="archive-article-date">
+  	<time datetime="2026-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/img/20260512.png"></p>
+<ol>
+<li>基础篇最后两章</li>
+<li>数学作业高代数分</li>
+<li>英语一份</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/12/20260512/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-template-112-基础数学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -257,7 +336,203 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="数学几何"><a href="#数学几何" class="headerlink" title="数学几何"></a>数学几何</h1><hr>
+<h3 id="📖-1-题意概括"><a href="#📖-1-题意概括" class="headerlink" title="📖 1. 题意概括"></a>📖 1. 题意概括</h3><p>给定 $N$ 条直线，满足<strong>任意三条直线不共点</strong>。通过调整直线之间的平行关系，求这些直线在平面上可能形成的<strong>不同交点总数</strong>的种类数（即有多少种可能的交点数量）。</p>
+<ul>
+<li>数据范围：$1 \le N \le 25$</li>
+<li>核心考点：平行线分组思想、递归状态枚举、布尔数组标记可达状态。</li>
+</ul>
+<hr>
+<h3 id="🧠-2-核心解题思路"><a href="#🧠-2-核心解题思路" class="headerlink" title="🧠 2. 核心解题思路"></a>🧠 2. 核心解题思路</h3><h4 id="①-数学模型转化"><a href="#①-数学模型转化" class="headerlink" title="① 数学模型转化"></a>① 数学模型转化</h4><p>交点数仅由直线的<strong>平行关系</strong>决定。若将 $N$ 条直线划分为若干组平行线，设各组大小为 $a_1, a_2, \dots, a_k$（$\sum a_i &#x3D; N$），则总交点数为：<br>$$ \text{交点数} &#x3D; \sum_{1 \le i &lt; j \le k} a_i \times a_j $$<br>因为不同组的直线必相交，同组内直线平行不相交。</p>
+<h4 id="②-递归状态定义"><a href="#②-递归状态定义" class="headerlink" title="② 递归状态定义"></a>② 递归状态定义</h4><p>直接枚举划分方案较繁琐，可采用<strong>增量递归</strong>思想：</p>
+<ul>
+<li>状态参数：<code>g(剩余直线数 n, 当前已累积交点数 k)</code></li>
+<li>转移策略：每次从剩余 <code>n</code> 条直线中拿出 <code>r</code> 条作为<strong>新的一组平行线</strong>（$1 \le r \le n$）。<ul>
+<li>这 <code>r</code> 条平行线必与剩下的 <code>n-r</code> 条直线各产生一个交点，贡献 <code>r * (n-r)</code> 个交点。</li>
+<li>剩下的 <code>n-r</code> 条直线继续递归处理。</li>
+</ul>
+</li>
+<li>边界条件：<code>n == 0</code> 时，说明所有直线已分配完毕，此时累积的交点数 <code>k</code> 是一种合法方案，标记为可达。</li>
+</ul>
+<h4 id="③-复杂度分析"><a href="#③-复杂度分析" class="headerlink" title="③ 复杂度分析"></a>③ 复杂度分析</h4><ul>
+<li>最大交点数：当所有直线两两相交时，交点数最大为 $\binom{25}{2} &#x3D; 300$，布尔数组开 <code>11000</code> 绝对安全。</li>
+<li>搜索树规模：等价于整数划分问题 $P(25)$，状态数极少，递归深度 $\le 25$，运行时间远低于 $1\text{ms}$。</li>
+</ul>
+<hr>
+<h3 id="🧩-3-题型通用模板"><a href="#🧩-3-题型通用模板" class="headerlink" title="🧩 3. 题型通用模板"></a>🧩 3. 题型通用模板</h3><p>此类“枚举所有可能结果值并统计种类数”的问题，可抽象为以下模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 定义可达性标记数组（或 dp 表）</span></span><br><span class="line"><span class="type">bool</span> reachable[MAX_VAL];</span><br><span class="line"><span class="type">int</span> max_val = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. DFS 枚举状态</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> state_param, <span class="type">int</span> current_val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (state_param == BASE_CASE) &#123; <span class="comment">// 边界</span></span><br><span class="line">        reachable[current_val] = <span class="literal">true</span>;</span><br><span class="line">        max_val = <span class="built_in">max</span>(max_val, current_val);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 枚举当前决策（如：分组大小、选择数量、状态转移等）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> choice = state_param; choice &gt;= MIN_CHOICE; --choice) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(state_param - choice, current_val + <span class="built_in">CALC</span>(choice, state_param));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 主函数调用 + 统计结果</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">dfs</span>(initial_state, <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= max_val; ++i) <span class="keyword">if</span> (reachable[i]) ans++;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>适用场景</strong>：求方案数&#x2F;可达值种类、状态空间较小、结果值域连续且范围可控的题目。</p>
+<hr>
+<h3 id="💻-4-原代码精注版（原模原样-逐行详解）"><a href="#💻-4-原代码精注版（原模原样-逐行详解）" class="headerlink" title="💻 4. 原代码精注版（原模原样+逐行详解）"></a>💻 4. 原代码精注版（原模原样+逐行详解）</h3><blockquote>
+<p>以下为保留你提供代码的完整逻辑与结构，仅添加专业注释，方便对照学习。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, a, b;</span><br><span class="line">__int128 dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];  <span class="comment">// 🔥 改为 __int128</span></span><br><span class="line"><span class="type">bool</span> vis[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br><span class="line"></span><br><span class="line"><span class="function">__int128 <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> ra, <span class="type">int</span> rb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ra &lt; <span class="number">0</span> || rb &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (ra == <span class="number">0</span> &amp;&amp; rb == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (u == n) <span class="keyword">return</span> (__int128)(ra + <span class="number">1</span>) * (rb + <span class="number">1</span>);  <span class="comment">// 🔥 强转</span></span><br><span class="line">    <span class="keyword">if</span> (vis[u][ra][rb]) <span class="keyword">return</span> dp[u][ra][rb];</span><br><span class="line">    </span><br><span class="line">    __int128 res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= ra; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= rb; ++j)</span><br><span class="line">            res += <span class="built_in">dfs</span>(u + <span class="number">1</span>, ra - i, rb - j);</span><br><span class="line">    </span><br><span class="line">    vis[u][ra][rb] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> dp[u][ra][rb] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 🔥 __int128 输出函数（必需！）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(__int128 x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">0</span>) &#123; cout &lt;&lt; <span class="number">0</span>; <span class="keyword">return</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) &#123; cout &lt;&lt; <span class="string">&#x27;-&#x27;</span>; x = -x; &#125;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123; s += <span class="built_in">char</span>(<span class="string">&#x27;0&#x27;</span> + x % <span class="number">10</span>); x /= <span class="number">10</span>; &#125;</span><br><span class="line">    <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">    cout &lt;&lt; s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in">sizeof</span>(vis));</span><br><span class="line">    </span><br><span class="line">    __int128 ans = <span class="built_in">dfs</span>(<span class="number">1</span>, a, b);</span><br><span class="line">    <span class="built_in">print</span>(ans);  <span class="comment">// 🔥 用自定义函数输出</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h3 id="🏆-5-教练进阶点拨（ACM-视角）"><a href="#🏆-5-教练进阶点拨（ACM-视角）" class="headerlink" title="🏆 5. 教练进阶点拨（ACM 视角）"></a>🏆 5. 教练进阶点拨（ACM 视角）</h3><ol>
+<li><strong>为什么能这么做？</strong><br>题目保证“无三线共点”，意味着只要直线不平行就必然相交且交点唯一。因此交点数完全由<strong>平行分组方案</strong>决定，几何问题成功降维为组合枚举问题。</li>
+<li><strong>多组查询如何优化？</strong><br>当前代码针对单次查询 $N$。若题目改为多组 $N$ 询问，可改为二维 DP：<code>dp[i][j]</code> 表示 <code>i</code> 条直线能否得到 <code>j</code> 个交点。预处理 $O(N^3)$，查询 $O(1)$。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> dp[<span class="number">30</span>][<span class="number">350</span>] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=N; ++i)</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">1</span>; r&lt;=i; ++r)</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;=r*(i-r); ++j) <span class="comment">// 注意实际应反向遍历或开临时数组</span></span><br><span class="line">      <span class="keyword">if</span>(dp[i-r][j]) dp[i][j + r*(i-r)] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></li>
+<li><strong>避坑指南</strong>  <ul>
+<li>数组大小：务必估算最大值域 $\frac{N(N-1)}{2}$，开大一点防越界。</li>
+<li><code>MAX</code> 的作用：避免最后 <code>for</code> 循环遍历到未访问的内存区域，是常见的常数优化技巧。</li>
+<li>递归顺序 <code>r</code> 从大到小或从小到大不影响正确性，仅改变搜索树遍历顺序。</li>
+</ul>
+</li>
+</ol>
+<h2 id="另一种思路-📋-代码思路解析：高精度-递推DP"><a href="#另一种思路-📋-代码思路解析：高精度-递推DP" class="headerlink" title="另一种思路 📋 代码思路解析：高精度 + 递推DP"></a>另一种思路 📋 代码思路解析：高精度 + 递推DP</h2><p><strong>递推式动态规划 + 手写高精度</strong>：</p>
+<hr>
+<h2 id="🔧-一、核心数据结构：手写高精度"><a href="#🔧-一、核心数据结构：手写高精度" class="headerlink" title="🔧 一、核心数据结构：手写高精度"></a>🔧 一、核心数据结构：手写高精度</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Num</span>&#123;<span class="type">int</span> l,a[<span class="number">40</span>];&#125; ans,dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">成员</th>
+<th align="left">含义</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>l</code></td>
+<td align="left">数字的位数</td>
+<td align="left">如 123 的 <code>l=3</code></td>
+</tr>
+<tr>
+<td align="left"><code>a[40]</code></td>
+<td align="left">每一位数字</td>
+<td align="left"><strong>低位在前</strong>：<code>a[1]=3, a[2]=2, a[3]=1</code></td>
+</tr>
+<tr>
+<td align="left"><code>dp[i][j][k]</code></td>
+<td align="left">高精度DP数组</td>
+<td align="left">存储方案数（可能超大）</td>
+</tr>
+</tbody></table>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Num <span class="keyword">operator</span> + (Num x,Num y)  <span class="comment">// 重载加法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>按位相加 + 进位处理，实现大整数加法</li>
+<li>⚠️ 注释强调”一定要清零”：避免垃圾值影响计算</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>为什么不用 <code>__int128</code>？</strong><br>手写高精度是通用解法，不依赖编译器特性，移植性更强（虽然代码量稍大）。</p>
+</blockquote>
+<hr>
+<h2 id="🧠-二、DP状态设计"><a href="#🧠-二、DP状态设计" class="headerlink" title="🧠 二、DP状态设计"></a>🧠 二、DP状态设计</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j][k] = 前 i 个储存区，恰好使用 j 个 <span class="number">0</span> 和 k 个 <span class="number">1</span> 的方案数</span><br></pre></td></tr></table></figure>
+
+<h3 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,a,b;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Num</span>&#123;<span class="type">int</span> l,a[<span class="number">40</span>];&#125; ans,dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br><span class="line">Num <span class="keyword">operator</span> + (Num x,Num y)</span><br><span class="line">&#123;</span><br><span class="line">	Num ret;</span><br><span class="line">	ret.l = <span class="built_in">max</span>(x.l,y.l);</span><br><span class="line">	<span class="built_in">memset</span>(ret.a,<span class="number">0</span>,<span class="built_in">sizeof</span>(ret.a));</span><br><span class="line">        <span class="comment">//一定要清零！！！</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= ret.l;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ret.a[i] += x.a[i] + y.a[i];</span><br><span class="line">		ret.a[i + <span class="number">1</span>] += ret.a[i] / <span class="number">10</span>;</span><br><span class="line">		ret.a[i] %= <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ret.a[ret.l + <span class="number">1</span>]) ret.l++;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(Num x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = x.l;i &gt;= <span class="number">1</span>;i--) <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,x.a[i]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;a,&amp;b);</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].l = dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= a;j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>;k &lt;= b;k++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> s1 = <span class="number">0</span>;s1 &lt;= j;s1++)</span><br><span class="line">					<span class="keyword">for</span>(<span class="type">int</span> s2 = <span class="number">0</span>;s2 &lt;= k;s2++)</span><br><span class="line">						dp[i][j][k] = dp[i][j][k] + dp[i - <span class="number">1</span>][s1][s2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= a;i++) <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= b;j++) ans = ans + dp[n][i][j];</span><br><span class="line">	<span class="built_in">print</span>(ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="🔄-转移逻辑图解"><a href="#🔄-转移逻辑图解" class="headerlink" title="🔄 转移逻辑图解"></a>🔄 转移逻辑图解</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前 i-1 个区用了 (s1个0, s2个1)  →  第 i 个区放 (j-s1个0, k-s2个1)</span><br><span class="line">                              ↓</span><br><span class="line">              所有合法的 (s1,s2) 累加 → dp[i][j][k]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 本质：第 <code>i</code> 个区可以放任意数量的 <code>0</code> 和 <code>1</code>（只要不超过剩余量），枚举所有可能的前驱状态累加。</p>
+</blockquote>
+<hr>
+<h2 id="🎯-三、初始状态-答案统计"><a href="#🎯-三、初始状态-答案统计" class="headerlink" title="🎯 三、初始状态 &amp; 答案统计"></a>🎯 三、初始状态 &amp; 答案统计</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].l = dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;  <span class="comment">// 0个区，用0个信号，方案数=1（空方案）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后累加所有&quot;不超过 a 个 0 且不超过 b 个 1&quot;的方案</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= a;i++) </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= b;j++) </span><br><span class="line">        ans = ans + dp[n][i][j];</span><br></pre></td></tr></table></figure>
+
+<h4 id="❓-为什么最后还要累加？"><a href="#❓-为什么最后还要累加？" class="headerlink" title="❓ 为什么最后还要累加？"></a>❓ 为什么最后还要累加？</h4><p>因为题目要求：<strong>信号可以不用全部储存</strong>  </p>
+<ul>
+<li><code>dp[n][i][j]</code> 是”恰好使用 <code>i</code> 个0 + <code>j</code> 个1”  </li>
+<li>答案需要累加所有 <code>0≤i≤a, 0≤j≤b</code> 的情况</li>
+</ul>
+<hr>
+<h2 id="📊-四、复杂度分析"><a href="#📊-四、复杂度分析" class="headerlink" title="📊 四、复杂度分析"></a>📊 四、复杂度分析</h2><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">复杂度</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">时间</td>
+<td align="left">$O(n \cdot a^2 \cdot b^2)$</td>
+<td align="left">5层循环，最坏 $50^5 &#x3D; 3.1 \times 10^8$</td>
+</tr>
+<tr>
+<td align="left">空间</td>
+<td align="left">$O(n \cdot a \cdot b)$</td>
+<td align="left"><code>dp[55][55][55]</code> × 高精度结构体</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 理论复杂度偏高，但实际能过因为：</p>
+<ol>
+<li>题目保证 <code>n+a≤50, n+b≤50</code>，有效状态远少于 $50^3$</li>
+<li>高精度加法常数小（最多40位）</li>
+<li>编译器优化 + 数据不强</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="🔄-五、与之前DFS解法的对比"><a href="#🔄-五、与之前DFS解法的对比" class="headerlink" title="🔄 五、与之前DFS解法的对比"></a>🔄 五、与之前DFS解法的对比</h2><table>
+<thead>
+<tr>
+<th align="left">对比项</th>
+<th align="left">本题代码（递推DP）</th>
+<th align="left">之前代码（记忆化搜索）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>实现方式</strong></td>
+<td align="left">自底向上递推</td>
+<td align="left">自顶向下递归+记忆化</td>
+</tr>
+<tr>
+<td align="left"><strong>状态定义</strong></td>
+<td align="left"><code>dp[i][j][k]</code> &#x3D; 恰好使用</td>
+<td align="left"><code>dfs(u,ra,rb)</code> &#x3D; 剩余可用</td>
+</tr>
+<tr>
+<td align="left"><strong>高精度处理</strong></td>
+<td align="left">手写 <code>Num</code> 结构体</td>
+<td align="left"><code>__int128</code>（依赖编译器）</td>
+</tr>
+<tr>
+<td align="left"><strong>答案统计</strong></td>
+<td align="left">最后累加所有 <code>≤a,≤b</code></td>
+<td align="left">递归中自然处理”可不用完”</td>
+</tr>
+<tr>
+<td align="left"><strong>代码长度</strong></td>
+<td align="left">较长（需重载运算符）</td>
+<td align="left">较短（逻辑更直观）</td>
+</tr>
+<tr>
+<td align="left"><strong>移植性</strong></td>
+<td align="left">⭐⭐⭐⭐⭐ 通用</td>
+<td align="left">⭐⭐⭐ 依赖 <code>__int128</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-六、优化建议（如果追求极致）"><a href="#💡-六、优化建议（如果追求极致）" class="headerlink" title="💡 六、优化建议（如果追求极致）"></a>💡 六、优化建议（如果追求极致）</h2><h3 id="1-降维优化：利用独立性拆分"><a href="#1-降维优化：利用独立性拆分" class="headerlink" title="1. 降维优化：利用独立性拆分"></a>1. 降维优化：利用独立性拆分</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 和 1 独立，分别计算后相乘</span></span><br><span class="line">Num calc0 = 计算_分配_0_的方案数(a, n);</span><br><span class="line">Num calc1 = 计算_分配_1_的方案数(b, n);</span><br><span class="line">ans = calc0 * calc1;  <span class="comment">// 需实现高精度乘法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>状态从三维 → 一维，复杂度降至 $O(n \cdot a + n \cdot b)$</li>
+</ul>
+<h3 id="2-滚动数组优化空间"><a href="#2-滚动数组优化空间" class="headerlink" title="2. 滚动数组优化空间"></a>2. 滚动数组优化空间</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Num dp[<span class="number">2</span>][<span class="number">55</span>][<span class="number">55</span>];  <span class="comment">// 只用两层，交替更新</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>空间从 $55^3$ → $2 \times 55^2$，节省96%内存</li>
+</ul>
+<h3 id="3-组合数公式-高精度（终极优化）"><a href="#3-组合数公式-高精度（终极优化）" class="headerlink" title="3. 组合数公式 + 高精度（终极优化）"></a>3. 组合数公式 + 高精度（终极优化）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 答案 = C(a+n, a) × C(b+n, b)</span></span><br><span class="line"><span class="comment">// 用高精度实现组合数计算和乘法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间 $O(a+b)$，空间 $O(1)$，代码最简</li>
+</ul>
+<hr>
+<h2 id="🏆-教练点评"><a href="#🏆-教练点评" class="headerlink" title="🏆 教练点评"></a>🏆 教练点评</h2><p>✅ <strong>优点</strong>：</p>
+<ol>
+<li>手写高精度，彻底避免溢出问题，稳健可靠</li>
+<li>递推逻辑清晰，状态转移无歧义</li>
+<li>边界处理严谨（初始状态 + 最后累加）</li>
+</ol>
+<p>⚠️ <strong>注意点</strong>：</p>
+<ol>
+<li>高精度加法必须清零 <code>ret.a</code>，否则会有垃圾值</li>
+<li>5层循环理论复杂度高，依赖题目数据范围才能过</li>
+<li>如果 <code>a,b</code> 更大（如100+），需要改用组合数公式</li>
+</ol>
+<blockquote>
+<p>🎯 <strong>学习建议</strong>：<br>这位同学的代码是<strong>工程思维</strong>的体现：宁可代码长一点，也要保证正确性和通用性。在正式比赛&#x2F;工程中，这种”稳”比”快”更重要！</p>
+</blockquote>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
       
 
       
@@ -336,7 +611,7 @@
       
         <p><img src="/img/2026051002.png"></p>
 <ol>
-<li>剩下的基础篇全部</li>
+<li>基础篇两章</li>
 <li>pat5题</li>
 <li>前天剩下的英语卷子</li>
 </ol>
@@ -1149,9 +1424,9 @@
       
         <p><img src="/img/20260509.png"></p>
 <ol>
-<li>上午跑步签到和寝室劳动实践</li>
-<li>下午基础篇一半</li>
-<li>晚上abc457 英语</li>
+<li>剩下的基本篇    </li>
+<li>pat5题</li>
+<li>前天剩下的英语卷子</li>
 </ol>
 
       
@@ -1680,84 +1955,6 @@
 
 
   
-    <article id="post-20260508" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/08/20260508/">期中考试</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/08/20260508/" class="archive-article-date">
-  	<time datetime="2026-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>高代期中考试 还算顺利</li>
-<li>易班八周年晚会</li>
-<li>基础篇第一章<br><img src="/img/20260508.jpg"></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/08/20260508/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1904,11 +2101,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1920,11 +2121,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1936,11 +2137,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1952,15 +2149,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1968,15 +2165,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1984,11 +2177,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1996,15 +2189,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2012,11 +2205,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>
