@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>Tag: atcoder | Cai Haoran&#39;s Blog</title>
+  <title>212-dp引入 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curiosity compete progress">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Cai Haoran&#39;s Blog">
-<meta property="og:url" content="https://777728.github.io/tags/atcoder/index.html">
+  <meta name="description" content="[]template 01背包🔍 01背包核心代码深度解析 📌 这是本题最关键的部分！理解了这个，01背包就通了！  12345for(int i &#x3D; 1; i &lt;&#x3D; n; i++)            &#x2F;&#x2F; 枚举每个好友（物品）&#123;    for(int j &#x3D; x; j &gt;&#x3D; use[i]; j--)   &#x2F;&#x2F; ⚠️ 逆序！从大到小枚举剩余药量      f[j] &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="212-dp引入">
+<meta property="og:url" content="https://777728.github.io/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="curiosity compete progress">
+<meta property="og:description" content="[]template 01背包🔍 01背包核心代码深度解析 📌 这是本题最关键的部分！理解了这个，01背包就通了！  12345for(int i &#x3D; 1; i &lt;&#x3D; n; i++)            &#x2F;&#x2F; 枚举每个好友（物品）&#123;    for(int j &#x3D; x; j &gt;&#x3D; use[i]; j--)   &#x2F;&#x2F; ⚠️ 逆序！从大到小枚举剩余药量      f[j] &#x3D;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-13T14:44:28.318Z">
 <meta property="article:author" content="Cai Haoran">
+<meta property="article:tag" content="212-dp引入">
+<meta property="article:tag" content="template">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -162,190 +166,307 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-template-212-dp引入" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      212-dp引入
+    </h1>
+  
+
+        
+        <a href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/" class="archive-article-date">
+  	<time datetime="2026-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h1><h1 id="🔍-01背包核心代码深度解析"><a href="#🔍-01背包核心代码深度解析" class="headerlink" title="🔍 01背包核心代码深度解析"></a>🔍 01背包核心代码深度解析</h1><blockquote>
+<p>📌 这是本题最关键的部分！理解了这个，01背包就通了！</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)            <span class="comment">// 枚举每个好友（物品）</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)   <span class="comment">// ⚠️ 逆序！从大到小枚举剩余药量</span></span><br><span class="line">      f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);  <span class="comment">// 选或不选取最大</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📊-代码逐行拆解"><a href="#📊-代码逐行拆解" class="headerlink" title="📊 代码逐行拆解"></a>📊 代码逐行拆解</h2><h3 id="第一层循环：枚举物品"><a href="#第一层循环：枚举物品" class="headerlink" title="第一层循环：枚举物品"></a>第一层循环：枚举物品</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code></td>
+<td>当前考虑第 <code>i</code> 个好友</td>
+<td>正在决定”要不要挑战这个好友”</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>好友总数</td>
+<td>一共有n个物品可选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ 外层循环控制”决策顺序”：一个一个好友地考虑</p>
+</blockquote>
+<hr>
+<h3 id="第二层循环：逆序枚举容量（❗核心难点）"><a href="#第二层循环：逆序枚举容量（❗核心难点）" class="headerlink" title="第二层循环：逆序枚举容量（❗核心难点）"></a>第二层循环：逆序枚举容量（❗核心难点）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+<th>为什么这样写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>j</code></td>
+<td>当前背包剩余容量（可用药量）</td>
+<td>从大到小枚举，保证每个物品只选一次</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>背包总容量（药物总数）</td>
+<td>初始最大药量</td>
+</tr>
+<tr>
+<td><code>use[i]</code></td>
+<td>第i个物品的”重量”（打赢最少用药）</td>
+<td>药量不够use[i]时无法挑战赢，循环终止</td>
+</tr>
+</tbody></table>
+<h3 id="🎯-为什么必须逆序？（金牌教练重点讲解）"><a href="#🎯-为什么必须逆序？（金牌教练重点讲解）" class="headerlink" title="🎯 为什么必须逆序？（金牌教练重点讲解）"></a>🎯 为什么必须<strong>逆序</strong>？（金牌教练重点讲解）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">假设正序枚举：j = use[i] → x</span><br><span class="line"></span><br><span class="line">❌ 问题：会重复选择同一个物品！</span><br><span class="line"></span><br><span class="line">举例：物品重量=2，价值=3，背包容量=4</span><br><span class="line">初始：f[0]=f[1]=f[2]=f[3]=f[4]=0</span><br><span class="line"></span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 选了一次</span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 6  ❌ f[2]刚被更新，相当于选了两次！</span><br><span class="line"></span><br><span class="line">✅ 逆序枚举：j = x → use[i]</span><br><span class="line"></span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 3  ✓ f[2]还是上一轮的值（没选当前物品）</span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 正确只选一次</span><br><span class="line"></span><br><span class="line">📌 本质：逆序保证状态转移时，f[j-use[i]] 来自&quot;上一轮&quot;（没选当前物品）</span><br></pre></td></tr></table></figure>
+
+<h3 id="🧠-形象理解：一维数组的”时间魔法”"><a href="#🧠-形象理解：一维数组的”时间魔法”" class="headerlink" title="🧠 形象理解：一维数组的”时间魔法”"></a>🧠 形象理解：一维数组的”时间魔法”</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一维数组 f[] 其实是&quot;滚动数组&quot;，隐含了时间维度：</span><br><span class="line"></span><br><span class="line">正序：  新状态 ← 新状态（同一轮）→ 物品被重复选 → 完全背包 ❌</span><br><span class="line">逆序：  新状态 ← 旧状态（上一轮）→ 物品只选一次 → 01背包  ✅</span><br><span class="line"></span><br><span class="line">🎮 类比游戏：</span><br><span class="line">   逆序 = 从背包&quot;右边&quot;开始装物品，不会污染&quot;左边&quot;还没决策的状态</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="状态转移方程：决策的核心"><a href="#状态转移方程：决策的核心" class="headerlink" title="状态转移方程：决策的核心"></a>状态转移方程：决策的核心</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+<th>决策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>f[j]</code>（等号右边）</td>
+<td><strong>不选</strong>第i个好友：用j个药，但不挑战他</td>
+<td>保持原状</td>
+</tr>
+<tr>
+<td><code>f[j-use[i]] + win[i]</code></td>
+<td><strong>选</strong>第i个好友：花use[i]药打赢他，获得额外收益win[i]</td>
+<td>消耗资源换收益</td>
+</tr>
+<tr>
+<td><code>max(...)</code></td>
+<td>两种决策取最优</td>
+<td>贪心思想：局部最优→全局最优</td>
+</tr>
+</tbody></table>
+<h3 id="🎲-决策过程可视化（样例片段）"><a href="#🎲-决策过程可视化（样例片段）" class="headerlink" title="🎲 决策过程可视化（样例片段）"></a>🎲 决策过程可视化（样例片段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假设当前：i=1, use[1]=2, win[1]=30（额外收益）</span><br><span class="line">背包容量x=5，初始f=[0,0,0,0,0,0]</span><br><span class="line"></span><br><span class="line">j=5: f[5]=max(f[5], f[3]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩3药</span><br><span class="line">j=4: f[4]=max(f[4], f[2]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩2药</span><br><span class="line">j=3: f[3]=max(f[3], f[1]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩1药</span><br><span class="line">j=2: f[2]=max(f[2], f[0]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩0药</span><br><span class="line"></span><br><span class="line">结果：f=[0,0,30,30,30,30] → 用≥2药就能获得30额外经验</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔄-完整流程图解"><a href="#🔄-完整流程图解" class="headerlink" title="🔄 完整流程图解"></a>🔄 完整流程图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">📦 初始状态：</span><br><span class="line">   f = [0, 0, 0, 0, ..., 0]  (长度x+1)</span><br><span class="line">   ohno = lose[1]+lose[2]+...+lose[n]</span><br><span class="line"></span><br><span class="line">🔄 逐个处理好友：</span><br><span class="line">   i=1: 考虑好友1，逆序更新f[] → f记录&quot;选/不选好友1&quot;的最优解</span><br><span class="line">   i=2: 考虑好友2，逆序更新f[] → f记录&quot;选/不选好友1,2&quot;的最优解</span><br><span class="line">   ...</span><br><span class="line">   i=n: 考虑好友n，逆序更新f[] → f[x]即为全局最优额外收益</span><br><span class="line"></span><br><span class="line">🎯 最终答案：</span><br><span class="line">   (f[x] + ohno) * 5</span><br><span class="line">   = (最大额外收益 + 保底经验) × 5倍活动</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧪-小测试：你能判断正误吗？"><a href="#🧪-小测试：你能判断正误吗？" class="headerlink" title="🧪 小测试：你能判断正误吗？"></a>🧪 小测试：你能判断正误吗？</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面哪种写法是正确的01背包？</span></span><br><span class="line"></span><br><span class="line">A. <span class="keyword">for</span>(j=use[i]; j&lt;=x; j++)     <span class="comment">// 正序</span></span><br><span class="line">B. <span class="keyword">for</span>(j=x; j&gt;=use[i]; j--)     <span class="comment">// 逆序 ✓</span></span><br><span class="line">C. <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=x-use[i]; j++)   <span class="comment">// 从0开始正序</span></span><br><span class="line">D. <span class="keyword">for</span>(j=x-use[i]; j&gt;=<span class="number">0</span>; j--)   <span class="comment">// 逆序但起点错</span></span><br><span class="line"></span><br><span class="line">✅ 答案：B</span><br><span class="line"></span><br><span class="line">💡 记忆口诀：</span><br><span class="line">   <span class="string">&quot;01背包要逆序，完全背包才正序&quot;</span></span><br><span class="line">   <span class="string">&quot;从大到小不重复，从小到大随便取&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎁-教练总结：三句话掌握核心"><a href="#🎁-教练总结：三句话掌握核心" class="headerlink" title="🎁 教练总结：三句话掌握核心"></a>🎁 教练总结：三句话掌握核心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ 外层枚举物品 → 一个一个做决策</span><br><span class="line">2️⃣ 内层逆序容量 → 保证每个物品只选一次（01背包灵魂！）</span><br><span class="line">3️⃣ 状态转移取max → 选或不选，哪个收益大要哪个</span><br><span class="line"></span><br><span class="line">🔑 本质：用一维数组+逆序，模拟二维数组的&quot;上一行&quot;状态</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-shoukuan.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/05/09/abc-457/" class="archive-article-date">
-  	<time datetime="2026-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/05/09/abc-457/">AtCoder Beginner Contest 457</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">212-dp引入</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/29/abc-455/" class="archive-article-date">
-  	<time datetime="2026-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2026/05/13/20260513/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2026-05-13 日记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/29/abc-455/">AtCoder Beginner Contest 455</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#01%E8%83%8C%E5%8C%85"><span class="toc-number">1.</span> <span class="toc-text">01背包</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%94%8D-01%E8%83%8C%E5%8C%85%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">🔍 01背包核心代码深度解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8A-%E4%BB%A3%E7%A0%81%E9%80%90%E8%A1%8C%E6%8B%86%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">📊 代码逐行拆解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B1%82%E5%BE%AA%E7%8E%AF%EF%BC%9A%E6%9E%9A%E4%B8%BE%E7%89%A9%E5%93%81"><span class="toc-number">2.1.1.</span> <span class="toc-text">第一层循环：枚举物品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%B1%82%E5%BE%AA%E7%8E%AF%EF%BC%9A%E9%80%86%E5%BA%8F%E6%9E%9A%E4%B8%BE%E5%AE%B9%E9%87%8F%EF%BC%88%E2%9D%97%E6%A0%B8%E5%BF%83%E9%9A%BE%E7%82%B9%EF%BC%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">第二层循环：逆序枚举容量（❗核心难点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E9%80%86%E5%BA%8F%EF%BC%9F%EF%BC%88%E9%87%91%E7%89%8C%E6%95%99%E7%BB%83%E9%87%8D%E7%82%B9%E8%AE%B2%E8%A7%A3%EF%BC%89"><span class="toc-number">2.1.3.</span> <span class="toc-text">🎯 为什么必须逆序？（金牌教练重点讲解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%BD%A2%E8%B1%A1%E7%90%86%E8%A7%A3%EF%BC%9A%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E2%80%9D%E6%97%B6%E9%97%B4%E9%AD%94%E6%B3%95%E2%80%9D"><span class="toc-number">2.1.4.</span> <span class="toc-text">🧠 形象理解：一维数组的”时间魔法”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B%EF%BC%9A%E5%86%B3%E7%AD%96%E7%9A%84%E6%A0%B8%E5%BF%83"><span class="toc-number">2.1.5.</span> <span class="toc-text">状态转移方程：决策的核心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%B2-%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%88%E6%A0%B7%E4%BE%8B%E7%89%87%E6%AE%B5%EF%BC%89"><span class="toc-number">2.1.6.</span> <span class="toc-text">🎲 决策过程可视化（样例片段）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%84-%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="toc-number">2.2.</span> <span class="toc-text">🔄 完整流程图解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%AA-%E5%B0%8F%E6%B5%8B%E8%AF%95%EF%BC%9A%E4%BD%A0%E8%83%BD%E5%88%A4%E6%96%AD%E6%AD%A3%E8%AF%AF%E5%90%97%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">🧪 小测试：你能判断正误吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%81-%E6%95%99%E7%BB%83%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%89%E5%8F%A5%E8%AF%9D%E6%8E%8C%E6%8F%A1%E6%A0%B8%E5%BF%83"><span class="toc-number">2.4.</span> <span class="toc-text">🎁 教练总结：三句话掌握核心</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/18/abc-454/" class="archive-article-date">
-  	<time datetime="2026-04-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-18</time>
-</a>
-        </div>
-    	 
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="template-212-dp引入" data-title="212-dp引入" data-url="https://777728.github.io/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/18/abc-454/">AtCoder Beginner Contest 454</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/13/abc-453/" class="archive-article-date">
-  	<time datetime="2026-04-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/13/abc-453/">AtCoder Beginner Contest 453</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -368,9 +489,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
