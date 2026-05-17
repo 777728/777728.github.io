@@ -16,7 +16,7 @@
 <meta property="og:description" content="[]pat 🌲 PAT 1043 Is It a Binary Search Tree | 错题整理 &amp; BST 遍历重建模板📖 题意概括给定一个长度为 N 的整数序列，判断它是否为某二叉搜索树（BST）或镜像 BST 的前序遍历序列。  若是，首行输出 YES，第二行输出该树的后序遍历序列（空格分隔，行末无空格）。 若否，输出 NO。 BST 定义：左子树所有节点 &lt; 根，右子">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-17T03:29:09.590Z">
+<meta property="article:modified_time" content="2026-05-17T03:33:08.204Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="luogu">
 <meta property="article:tag" content="xcpc">
@@ -280,7 +280,7 @@
 <li>记录中序遍历访问的节点编号顺序，将排序后的数值依次填入数组 <code>a[编号]</code> 中。</li>
 <li>此时数组 <code>a[1] ~ a[N]</code> 已经按照层序排列好，直接顺序输出即可。</li>
 </ol>
-<h2 id="✅-修正后代码（含详细注释，无多余空行）"><a href="#✅-修正后代码（含详细注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含详细注释，无多余空行）"></a>✅ 修正后代码（含详细注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">1001</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; inorder; <span class="comment">// 记录中序遍历访问的节点编号</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; data;    <span class="comment">// 存储输入的原始数据</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 递归访问左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 中序位置记录当前根节点编号</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 递归访问右子树</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">in</span>(<span class="number">1</span>); <span class="comment">// 获取1~n号节点的中序访问顺序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j; i &lt; n; i++) &#123; cin &gt;&gt; j; data.<span class="built_in">push_back</span>(j); &#125;</span><br><span class="line">    <span class="built_in">sort</span>(data.<span class="built_in">begin</span>(), data.<span class="built_in">end</span>()); <span class="comment">// BST的中序遍历必为升序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        a[inorder[i]] = data[i]; <span class="comment">// 按中序顺序将排序后的值填入对应节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 完全二叉树的数组存储下标1~N即为层序遍历，无需队列模拟</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; (i == n ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="comment">// 控制空格格式，行末无多余空格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="✅-修正后代码（含详细注释，无多余空行）"><a href="#✅-修正后代码（含详细注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含详细注释，无多余空行）"></a>✅ 修正后代码（含详细注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">1001</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; inorder; <span class="comment">// 记录中序遍历访问的节点编号</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vals;    <span class="comment">// 存储输入的原始数据（改名避免与std::data冲突）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 递归访问左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 中序位置记录当前根节点编号</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 递归访问右子树</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">in</span>(<span class="number">1</span>); <span class="comment">// 获取1~n号节点的中序访问顺序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x; i &lt; n; i++) &#123; cin &gt;&gt; x; vals.<span class="built_in">push_back</span>(x); &#125;</span><br><span class="line">    <span class="built_in">sort</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>()); <span class="comment">// BST的中序遍历必为升序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        a[inorder[i]] = vals[i]; <span class="comment">// 按中序顺序将排序后的值填入对应节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 完全二叉树的数组存储下标1~N即为层序遍历，无需队列模拟</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; (i == n ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="comment">// 控制空格格式，行末无多余空格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="📦-题型模版总结"><a href="#📦-题型模版总结" class="headerlink" title="📦 题型模版总结"></a>📦 题型模版总结</h2><p>遇到 <strong>“完全&#x2F;满二叉树 + BST + 求层序”</strong> 类题目，可直接套用以下模版：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1005</span>;</span><br><span class="line"><span class="type">int</span> tree[MAXN], val[MAXN], pos[MAXN]; <span class="comment">// tree存结果，val存排序后数据，pos辅助</span></span><br><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span>, n);</span><br><span class="line">    tree[root] = val[idx++]; <span class="comment">// 中序位置填入升序值</span></span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 主流程：</span></span><br><span class="line"><span class="comment">// 1. 读入数据到 val[] 并 sort</span></span><br><span class="line"><span class="comment">// 2. inorder(1, n)</span></span><br><span class="line"><span class="comment">// 3. 直接输出 tree[1]~tree[n] 即为层序</span></span><br></pre></td></tr></table></figure>
@@ -403,18 +403,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/05/16/20260516/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/16/luogu-pat-2026-40/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          2026-05-16 日记
+          pat甲级20-40
         
       </div>
     </a>
   
   
-    <a href="/2026/05/16/luogu-pat-2026-40/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pat甲级20-40</div>
+    <a href="/2026/05/16/luogu-pat-2026-20/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">pat甲级1-20</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -606,7 +606,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,11 +614,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +622,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +638,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -654,7 +650,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,11 +662,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -674,7 +674,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,15 +682,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,7 +698,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,7 +706,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -718,7 +714,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -727,10 +731,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
