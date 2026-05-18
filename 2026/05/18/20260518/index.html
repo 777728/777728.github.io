@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>C++项目导航 | Cai Haoran&#39;s Blog</title>
+  <title>2026-05-18 日记 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="🚀 目标   阶段 核心目标 学习项目 关键产出&#x2F;重点    第一阶段 掌握现代C++并发与任务队列的内存模型 progschj&#x2F;ThreadPool 理解 std::future、任务包装、线程安全队列。建议手写简化版。   第二阶段 系统化理论知识与面试准备 Light-City&#x2F;CPlusPlusThings 作为主干知识库，通读基础、STL源码、现代特性、并发章节，构建完整知识">
+  <meta name="description" content="做算法错题 英语一份 总结常见算法模型于小本子上，之后背诵 C++内存池项目复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++项目导航">
-<meta property="og:url" content="https://777728.github.io/2026/05/13/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA-C++/index.html">
+<meta property="og:title" content="2026-05-18 日记">
+<meta property="og:url" content="https://777728.github.io/2026/05/18/20260518/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="🚀 目标   阶段 核心目标 学习项目 关键产出&#x2F;重点    第一阶段 掌握现代C++并发与任务队列的内存模型 progschj&#x2F;ThreadPool 理解 std::future、任务包装、线程安全队列。建议手写简化版。   第二阶段 系统化理论知识与面试准备 Light-City&#x2F;CPlusPlusThings 作为主干知识库，通读基础、STL源码、现代特性、并发章节，构建完整知识">
+<meta property="og:description" content="做算法错题 英语一份 总结常见算法模型于小本子上，之后背诵 C++内存池项目复现">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-13T12:14:02.601Z">
+<meta property="article:published_time" content="2026-05-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-18T04:53:52.223Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="project">
+<meta property="article:tag" content="diary">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -160,63 +159,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-项目导航-C++" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-20260518" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C++项目导航
+      2026-05-18 日记
     </h1>
   
 
         
-        <a href="/2026/05/13/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA-C++/" class="archive-article-date">
-  	<time datetime="2026-05-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-13</time>
+        <a href="/2026/05/18/20260518/" class="archive-article-date">
+  	<time datetime="2026-05-17T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="🚀-目标"><a href="#🚀-目标" class="headerlink" title="🚀 目标"></a>🚀 目标</h2><table>
-<thead>
-<tr>
-<th align="left">阶段</th>
-<th align="left">核心目标</th>
-<th align="left">学习项目</th>
-<th align="left">关键产出&#x2F;重点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>第一阶段</strong></td>
-<td align="left">掌握现代C++并发与任务队列的内存模型</td>
-<td align="left"><strong><code>progschj/ThreadPool</code></strong></td>
-<td align="left">理解 <code>std::future</code>、任务包装、线程安全队列。建议手写简化版。</td>
-</tr>
-<tr>
-<td align="left"><strong>第二阶段</strong></td>
-<td align="left"><strong>系统化理论知识与面试准备</strong></td>
-<td align="left"><strong><code>Light-City/CPlusPlusThings</code></strong></td>
-<td align="left"><strong>作为主干知识库</strong>，通读基础、STL源码、现代特性、并发章节，构建完整知识体系。</td>
-</tr>
-<tr>
-<td align="left"><strong>第三阶段 (新)</strong></td>
-<td align="left"><strong>实践大型库的设计与高性能数据处理</strong></td>
-<td align="left"><strong><code>hosseinmoein/DataFrame</code></strong></td>
-<td align="left"><strong>承上启下</strong>：运用第二阶段的理论，分析其内存布局、类型系统、访问者模式，并对比其性能基准。<strong>产出：为它贡献一个自定义算法</strong>。</td>
-</tr>
-<tr>
-<td align="left"><strong>第四阶段</strong></td>
-<td align="left">挑战真实世界的极致性能优化</td>
-<td align="left"><strong><code>ggml-org/whisper.cpp</code></strong></td>
-<td align="left">在理解高性能设计原则后，深入分析其内存零分配、SIMD、GPU后端等终极优化技巧。</td>
-</tr>
-</tbody></table>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
-<li>YNU-tune 校园广播网站：<a target="_blank" rel="noopener" href="https://www.ynutune.com/">https://www.ynutune.com/</a> 待开发（动态网站）</li>
-<li>YNU-guild 校园社区：<a target="_blank" rel="noopener" href="https://guild.ynu.edu.cn/">https://guild.ynu.edu.cn/</a> 待开发(静态网站)</li>
+        <ol>
+<li>做算法错题</li>
+<li>英语一份</li>
+<li>总结常见算法模型于小本子上，之后背诵</li>
+<li>C++内存池项目复现</li>
 </ol>
 
       
@@ -257,11 +224,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">project</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
         		</li>
       		
 		</ul>
@@ -317,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/13/%E9%A1%B9%E7%9B%AE%E5%AF%BC%E8%88%AA-C++/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/18/20260518/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -331,18 +294,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/05/13/template-201-%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          201-前缀和差分
+          212-dp引入
         
       </div>
     </a>
   
   
-    <a href="/2026/05/12/20260512/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2026-05-12 日记</div>
+    <a href="/2026/05/17/20260517/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2026-05-17 日记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -369,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">🚀 目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -530,11 +493,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,27 +509,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,15 +517,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,6 +545,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
@@ -598,11 +557,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,7 +581,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -622,11 +597,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,22 +617,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
@@ -666,11 +625,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">project</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
             
             <div class="clearfix"></div>
