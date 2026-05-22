@@ -158,6 +158,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260512" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/12/20260512/">2026-05-12 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/12/20260512/" class="archive-article-date">
+  	<time datetime="2026-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>基础篇最后两章</li>
+<li>数学作业高代数分</li>
+<li>英语半份</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/12/20260512/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-template-112-基础数学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2196,116 +2274,6 @@
 
 
   
-    <article id="post-template-108-stl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/08/template-108-stl/">108-STL</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/08/template-108-stl/" class="archive-article-date">
-  	<time datetime="2026-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h2 id="P1160-队列安排-（STL-list）"><a href="#P1160-队列安排-（STL-list）" class="headerlink" title="P1160 队列安排 （STL list）"></a>P1160 队列安排 （STL list）</h2><p><strong>核心操作：</strong></p>
-<ol>
-<li>初始队列只有 <code>1</code></li>
-<li>依次插入 <code>2~N</code>：每个同学 <code>i</code> 插到已存在的同学 <code>k</code> 的<strong>左边(p&#x3D;0)</strong> 或<strong>右边(p&#x3D;1)</strong></li>
-<li>删除 M 个同学（若已删除则忽略）</li>
-<li>输出最终从左到右的编号</li>
-</ol>
-<p><strong>数据范围：</strong> N, M ≤ 1e5，需要 O(N) 或 O(N log N) 解法</p>
-<hr>
-<h2 id="关键语法回顾（刚才讲的）"><a href="#关键语法回顾（刚才讲的）" class="headerlink" title="关键语法回顾（刚才讲的）"></a>关键语法回顾（刚才讲的）</h2><h3 id="std-list-迭代器特性"><a href="#std-list-迭代器特性" class="headerlink" title="std::list 迭代器特性"></a><code>std::list</code> 迭代器特性</h3><ul>
-<li><strong>插入&#x2F;删除不会使其他迭代器失效</strong>（除了被删除的）</li>
-<li><code>insert(pos, val)</code> 在 <code>pos</code> <strong>之前</strong>插入，返回新元素的迭代器</li>
-<li><code>erase(pos)</code> 删除 <code>pos</code> 指向的元素</li>
-</ul>
-<h3 id="代码核心技巧"><a href="#代码核心技巧" class="headerlink" title="代码核心技巧"></a>代码核心技巧</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;list&lt;<span class="type">int</span>&gt;::iterator&gt; <span class="built_in">pos</span>(n + <span class="number">1</span>);  <span class="comment">// 存储每个编号对应的迭代器</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过数组保存迭代器，实现 O(1) 定位元素</li>
-<li>删除时直接 <code>a.erase(pos[x])</code>，无需查找</li>
-</ul>
-<h3 id="插入逻辑解析"><a href="#插入逻辑解析" class="headerlink" title="插入逻辑解析"></a>插入逻辑解析</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p == <span class="number">0</span>) </span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(pos[k], i);   <span class="comment">// 插到 k 左边</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">auto</span> next = pos[k];</span><br><span class="line">    ++next;                          <span class="comment">// 指向 k 的下一个位置</span></span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(next, i);      <span class="comment">// 插到 k 右边（即 next 左边）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键理解：</strong> </p>
-<ul>
-<li>插右边 &#x3D; 插到 <code>k</code> 的下一个元素<strong>之前</strong></li>
-<li>因为 <code>insert</code> 是在指定位置<strong>之前</strong>插入</li>
-</ul>
-<hr>
-<h2 id="代码执行示例（N-4）"><a href="#代码执行示例（N-4）" class="headerlink" title="代码执行示例（N&#x3D;4）"></a>代码执行示例（N&#x3D;4）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">初始: a = [1], pos[1]→1</span><br><span class="line"></span><br><span class="line">i=2, k=1, p=0: 插到1左边 → a=[2,1], pos[2]→2</span><br><span class="line"></span><br><span class="line">i=3, k=2, p=1: 插到2右边</span><br><span class="line">  next = pos[2]→2, ++next→指向1</span><br><span class="line">  insert(1之前,3) → a=[2,3,1], pos[3]→3</span><br><span class="line"></span><br><span class="line">i=4, k=1, p=0: 插到1左边</span><br><span class="line">  insert(pos[1]→1之前,4) → a=[2,3,4,1], pos[4]→4</span><br><span class="line"></span><br><span class="line">删除: m=2, 删3 → a=[2,4,1]; 再删3(已删除,忽略)</span><br><span class="line">输出: 2 4 1 ✓</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="代码的正确性保证"><a href="#代码的正确性保证" class="headerlink" title="代码的正确性保证"></a>代码的正确性保证</h2><p>✅ <strong>迭代器永不失效</strong> - list 的特性，即使插入删除，已有迭代器仍指向原元素<br>✅ <strong>删除标记</strong> - <code>removed[]</code> 防止重复删除导致的未定义行为<br>✅ <strong>O(N) 时间复杂度</strong> - 每个操作都是 O(1)<br>✅ <strong>空间 O(N)</strong> - 存储 N 个迭代器</p>
-<p>这段代码是这道题的标准高效解法！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">108-STL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/08/template-108-stl/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -2516,11 +2484,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2548,11 +2516,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2564,10 +2536,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
@@ -2576,19 +2544,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
