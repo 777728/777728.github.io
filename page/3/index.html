@@ -158,6 +158,257 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-template-202-单调栈与优化技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/14/template-202-%E5%8D%95%E8%B0%83%E6%A0%88%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">202-单调栈与优化技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/14/template-202-%E5%8D%95%E8%B0%83%E6%A0%88%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/" class="archive-article-date">
+  	<time datetime="2026-05-13T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="P2216-HAOI2007-理想的正方形-算法错题整理"><a href="#P2216-HAOI2007-理想的正方形-算法错题整理" class="headerlink" title="P2216 [HAOI2007] 理想的正方形 - 算法错题整理"></a>P2216 [HAOI2007] 理想的正方形 - 算法错题整理</h1><blockquote>
+<p>📌 题目来源：洛谷 P2216 | 难度：提高+&#x2F;省选- | 标签：单调队列、二维滑动窗口</p>
+</blockquote>
+<hr>
+<h2 id="📋-题意概括"><a href="#📋-题意概括" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><p>给定一个 <code>a × b</code> 的整数矩阵，找出一个 <code>n × n</code> 的正方形子区域，使得该区域内<strong>最大值与最小值的差最小</strong>，输出这个最小差值。</p>
+<p><strong>数据范围</strong>：<code>2 ≤ a,b ≤ 1000</code>，<code>n ≤ 100</code>，矩阵元素 <code>≤ 10^9</code></p>
+<hr>
+<h2 id="🔧-题型模板：二维单调队列（滑动窗口最值）"><a href="#🔧-题型模板：二维单调队列（滑动窗口最值）" class="headerlink" title="🔧 题型模板：二维单调队列（滑动窗口最值）"></a>🔧 题型模板：二维单调队列（滑动窗口最值）</h2><p>本题是经典的<strong>二维滑动窗口最值问题</strong>，核心思路：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一维单调队列 → 行方向预处理 → 列方向二次处理 → 得到二维窗口最值</span><br></pre></td></tr></table></figure>
+
+<h3 id="📦-通用模板框架"><a href="#📦-通用模板框架" class="headerlink" title="📦 通用模板框架"></a>📦 通用模板框架</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一维单调队列求滑动窗口最值（以最大值为例）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">monotonic_queue_max</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len, <span class="type">int</span> k, <span class="type">int</span> result[])</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> q[maxn], h = <span class="number">0</span>, t = <span class="number">0</span>;  <span class="comment">// 队列存下标</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span>(h &lt; t &amp;&amp; q[h] + k &lt;= i) h++;           <span class="comment">// 移除过期元素</span></span><br><span class="line">        <span class="keyword">while</span>(h &lt; t &amp;&amp; arr[q[t<span class="number">-1</span>]] &lt; arr[i]) t--;    <span class="comment">// 维护单调性（递减）</span></span><br><span class="line">        q[t++] = i;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= k) result[i-k<span class="number">+1</span>] = arr[q[h]];        <span class="comment">// 记录窗口起点的最值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>二维扩展</strong>：先对每行做一维滑动窗口，得到 <code>rowMax[row][col]</code>；再对每列在 <code>rowMax</code> 基础上做一维滑动窗口，得到最终的正方形最值。</p>
+<hr>
+<h2 id="❌-代码错误分析"><a href="#❌-代码错误分析" class="headerlink" title="❌ 代码错误分析"></a>❌ 代码错误分析</h2><table>
+<thead>
+<tr>
+<th>问题位置</th>
+<th>问题描述</th>
+<th>严重性</th>
+<th>修复建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ans = 1000000000</code></td>
+<td>初始值设为 <code>10^9</code>，但题目元素范围也是 <code>0~10^9</code>，最大差值可能等于 <code>10^9</code>，用 <code>&lt;</code> 比较时可能无法正确更新</td>
+<td>⚠️ 中</td>
+<td>改为 <code>ans = 0x3f3f3f3f</code> 或 <code>2e9+10</code></td>
+</tr>
+<tr>
+<td>无边界检查</td>
+<td>未判断 &#96;n &gt; a</td>
+<td></td>
+<td>n &gt; b&#96; 的非法输入（虽然题目保证合法）</td>
+</tr>
+<tr>
+<td>变量命名</td>
+<td><code>q</code> 数组复用，逻辑正确但可读性略低</td>
+<td>✅ 低</td>
+<td>可加注释说明复用逻辑</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>关键提醒</strong>：单调队列中存储的是<strong>下标</strong>而非值，比较时要用 <code>arr[q[t-1]]</code> 形式取值！</p>
+</blockquote>
+<hr>
+<h2 id="💡-解题思路整理"><a href="#💡-解题思路整理" class="headerlink" title="💡 解题思路整理"></a>💡 解题思路整理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">🎯 核心思想：降维打击 + 单调队列优化</span><br><span class="line"></span><br><span class="line">┌─────────────────────────────────┐</span><br><span class="line">│ 1️⃣ 行方向预处理                  │</span><br><span class="line">│    • 对每一行，用单调队列        │</span><br><span class="line">│    • 求出每个长度为 n 的窗口     │</span><br><span class="line">│    • 得到 rowMax[row][col]      │</span><br><span class="line">│      rowMin[row][col]           │</span><br><span class="line">└─────────────────────────────────┘</span><br><span class="line">                ↓</span><br><span class="line">┌─────────────────────────────────┐</span><br><span class="line">│ 2️⃣ 列方向二次处理                │</span><br><span class="line">│    • 对每一列（固定左边界）      │</span><br><span class="line">│    • 在 rowMax/rowMin 基础上    │</span><br><span class="line">│    • 再用单调队列求高度为 n 的窗口│</span><br><span class="line">│    • 得到 colMax[i][j]          │</span><br><span class="line">│      colMin[i][j] 表示以        │</span><br><span class="line">│      (i,j) 为左上角的 n×n 正方形最值│</span><br><span class="line">└─────────────────────────────────┘</span><br><span class="line">                ↓</span><br><span class="line">┌─────────────────────────────────┐</span><br><span class="line">│ 3️⃣ 枚举所有正方形左上角          │</span><br><span class="line">│    • 计算 colMax[i][j] - colMin[i][j]│</span><br><span class="line">│    • 更新全局最小差值 ans       │</span><br><span class="line">└─────────────────────────────────┘</span><br><span class="line"></span><br><span class="line">⏱️ 时间复杂度：O(a*b)  每个元素最多入队出队一次</span><br><span class="line">📦 空间复杂度：O(a*b)  需要存储中间结果</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-注释代码（原模原样·无多余空行）"><a href="#📝-注释代码（原模原样·无多余空行）" class="headerlink" title="📝 注释代码（原模原样·无多余空行）"></a>📝 注释代码（原模原样·无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 1010</span></span><br><span class="line"><span class="type">int</span> a,b,n,ans = <span class="number">1000000000</span>;  <span class="comment">// ⚠️建议改为0x3f3f3f3f避免边界问题</span></span><br><span class="line"><span class="type">int</span> m[maxn][maxn],q[maxn];  <span class="comment">// m原矩阵，q单调队列存储下标</span></span><br><span class="line"><span class="type">int</span> rowmin[maxn][maxn],rowmax[maxn][maxn];  <span class="comment">// 行方向滑动窗口最值</span></span><br><span class="line"><span class="type">int</span> colmin[maxn][maxn],colmax[maxn][maxn];  <span class="comment">// 列方向滑动窗口最值（即正方形最值）</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;a&gt;&gt;b&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= a;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= b;j++)&#123;</span><br><span class="line">            cin&gt;&gt;m[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第一步：对每一行用单调队列求长度为n的窗口最值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> row = <span class="number">1</span>;row &lt;= a;row++)&#123;</span><br><span class="line">        <span class="type">int</span> h = <span class="number">0</span>,t = <span class="number">0</span>;  <span class="comment">// 单调队列头尾指针</span></span><br><span class="line">        <span class="comment">// 求行最大值：维护单调递减队列（队头最大）</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= b;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; q[h] + n &lt;= i) h++;  <span class="comment">// 弹出队头超出窗口范围的元素</span></span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; m[row][q[t - <span class="number">1</span>]] &lt; m[row][i]) t--;  <span class="comment">// 弹出队尾小于当前元素的，保持递减</span></span><br><span class="line">            q[t] = i;  <span class="comment">// 当前下标入队</span></span><br><span class="line">            t++;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= n) rowmax[row][i - n + <span class="number">1</span>] = m[row][q[h]];  <span class="comment">// i-n+1是窗口起始列号</span></span><br><span class="line">        &#125;</span><br><span class="line">        h = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 求行最小值：维护单调递增队列（队头最小）</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= b;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; q[h] + n &lt;= i) h++;</span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; m[row][q[t - <span class="number">1</span>]] &gt; m[row][i]) t--;  <span class="comment">// 弹出队尾大于当前元素的，保持递增</span></span><br><span class="line">            q[t] = i;</span><br><span class="line">            t++;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= n) rowmin[row][i - n + <span class="number">1</span>] = m[row][q[h]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第二步：对每一列（在行最值基础上）用单调队列求长度为n的窗口最值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> col = <span class="number">1</span>;col &lt;= b - n + <span class="number">1</span>;col++)&#123;  <span class="comment">// col是正方形左边界列号</span></span><br><span class="line">        <span class="type">int</span> h = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 求列最大值：在rowmax基础上维护单调递减队列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= a;i++)&#123;  <span class="comment">// i是当前处理的行号</span></span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; q[h] + n &lt;= i) h++;  <span class="comment">// 移除垂直方向超出窗口的行</span></span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; rowmax[q[t<span class="number">-1</span>]][col] &lt; rowmax[i][col]) t--;  <span class="comment">// 保持递减</span></span><br><span class="line">            q[t] = i;</span><br><span class="line">            t++;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= n) colmax[i - n + <span class="number">1</span>][col] = rowmax[q[h]][col];  <span class="comment">// i-n+1是正方形上边界行号</span></span><br><span class="line">        &#125;</span><br><span class="line">        h = <span class="number">0</span>,t = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 求列最小值：在rowmin基础上维护单调递增队列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= a;i++)&#123;</span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; q[h] + n &lt;= i) h++;</span><br><span class="line">            <span class="keyword">while</span>(h &lt; t &amp;&amp; rowmin[q[t<span class="number">-1</span>]][col] &gt; rowmin[i][col]) t--;  <span class="comment">// 保持递增</span></span><br><span class="line">            q[t] = i;</span><br><span class="line">            t++;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= n) colmin[i - n + <span class="number">1</span>][col] = rowmin[q[h]][col];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第三步：遍历所有n×n正方形左上角位置，计算差值最小值</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= a - n + <span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= b - n + <span class="number">1</span>;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(colmax[i][j] - colmin[i][j] &lt; ans)&#123;</span><br><span class="line">                ans = colmax[i][j] - colmin[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎯-易错点总结"><a href="#🎯-易错点总结" class="headerlink" title="🎯 易错点总结"></a>🎯 易错点总结</h2><ol>
+<li><strong>单调队列存下标不存值</strong>：比较时要用 <code>arr[q[t-1]]</code> 取值，弹出时用下标判断窗口边界</li>
+<li><strong>窗口起始位置计算</strong>：<code>i &gt;= n</code> 时才有效，起始位置是 <code>i - n + 1</code></li>
+<li><strong>二维处理顺序</strong>：必须先处理行再处理列，<code>colmax[i][j]</code> 的物理意义要清晰</li>
+<li><strong>ans初始化</strong>：差值范围可能达到 <code>10^9</code>，初始值要足够大</li>
+<li><strong>队列复用</strong>：<code>q</code> 数组在四次单调队列中复用，每次都要重置 <code>h=0,t=0</code></li>
+</ol>
+<hr>
+<blockquote>
+<p>✨ <strong>一句话记忆</strong>：二维滑动窗口 &#x3D; 行单调队列 + 列单调队列，降维思想 + 单调性维护 &#x3D; 高效求解！</p>
+</blockquote>
+<p><em>整理时间：2026年 | 适用题型：矩阵区域最值、滑动窗口优化</em></p>
+<h1 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h1><h1 id="📝-算法错题本-P1257-平面上的最接近点对"><a href="#📝-算法错题本-P1257-平面上的最接近点对" class="headerlink" title="📝 算法错题本 | P1257 平面上的最接近点对"></a>📝 算法错题本 | P1257 平面上的最接近点对</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定平面上 $n$ 个点的二维坐标，求所有 $\frac{n(n-1)}{2}$ 个点对中，<strong>欧几里得距离的最小值</strong>。结果需四舍五入保留 $4$ 位小数。数据范围 $n \le 10^4$，坐标 $0 \le x,y \le 10^9$。</p>
+<hr>
+<h2 id="🔍-代码错误诊断"><a href="#🔍-代码错误诊断" class="headerlink" title="🔍 代码错误诊断"></a>🔍 代码错误诊断</h2><table>
+<thead>
+<tr>
+<th align="left">错误位置</th>
+<th align="left">错误代码片段</th>
+<th align="left">问题分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 常量修改</strong></td>
+<td align="left"><code>const double ans = 1e9 + 5;</code><br><code>ans = min(ans,...)</code></td>
+<td align="left"><code>const</code> 修饰后变量不可被赋值，直接导致<strong>编译错误</strong>。且 <code>1e9</code> 初始值偏小，当两点坐标差为 $10^9$ 时实际距离可达 $\approx 1.414\times 10^9$，会误判答案。</td>
+</tr>
+<tr>
+<td align="left"><strong>2. 数组越界</strong></td>
+<td align="left"><code>node[1010]</code></td>
+<td align="left">题目保证 $n \le 10^4$，数组仅开 $1010$ 会导致<strong>越界访问&#x2F;RE</strong>。</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 拼写错误</strong></td>
+<td align="left"><code>set_precision(4)</code></td>
+<td align="left">C++ 标准库操纵符为 <code>setprecision</code>，下划线会导致<strong>编译错误</strong>。</td>
+</tr>
+<tr>
+<td align="left"><strong>4. 潜在命名冲突</strong></td>
+<td align="left"><code>distance(...)</code></td>
+<td align="left"><code>using namespace std;</code> 会引入 <code>std::distance</code>，在部分编译器或头文件包含顺序下可能引发歧义或编译报错。</td>
+</tr>
+<tr>
+<td align="left"><strong>5. 复杂度隐患</strong></td>
+<td align="left">双重 <code>for</code> 循环直接枚举</td>
+<td align="left">$O(n^2)$ 暴力在 $n&#x3D;10^4$ 时运算量约 $5\times 10^7$，极限数据易 <strong>TLE</strong>。缺乏几何剪枝。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-解题思路与优化策略"><a href="#💡-解题思路与优化策略" class="headerlink" title="💡 解题思路与优化策略"></a>💡 解题思路与优化策略</h2><p>本题属于经典的**平面最近点对（Closest Pair of Points）**问题。针对 $n \le 10^4$ 的数据范围，推荐采用 <strong>排序 + 暴力枚举 + 坐标剪枝</strong> 的写法，代码简洁且能稳定通过：</p>
+<ol>
+<li><strong>排序预处理</strong>：将所有点按 $x$ 坐标升序排序。</li>
+<li><strong>枚举剪枝</strong>：外层枚举点 $i$，内层枚举点 $j (j &gt; i)$。若当前点对的横坐标差 <code>node[j].x - node[i].x &gt;= ans</code>，说明后续所有点与点 $i$ 的水平距离已经超过了当前找到的最小距离，<strong>不可能再产生更优解</strong>，直接 <code>break</code> 内层循环。</li>
+<li><strong>类型安全</strong>：坐标与距离计算统一使用 <code>double</code>，避免 <code>int</code> 平方溢出；初始化答案设为极大值 <code>1e18</code>。</li>
+<li>该优化在随机数据或常规构造下可将实际复杂度降至接近 $O(n \log n)$，是竞赛中最实用的轻量级写法。</li>
+</ol>
+<hr>
+<h2 id="🛠️-核心题型模板总结"><a href="#🛠️-核心题型模板总结" class="headerlink" title="🛠️ 核心题型模板总结"></a>🛠️ 核心题型模板总结</h2><blockquote>
+<p><strong>最近点对问题通用处理框架</strong></p>
+<ol>
+<li><strong>结构体存储</strong>：<code>struct Point { double x, y; } p[N];</code></li>
+<li><strong>极值初始化</strong>：<code>double ans = 1e18;</code>（需根据坐标范围估算上限）</li>
+<li><strong>排序预处理</strong>：<code>sort(p, p+n, [](auto a, auto b){return a.x &lt; b.x;});</code></li>
+<li><strong>剪枝枚举</strong>：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i: <span class="number">0</span>-&gt;n<span class="number">-1</span></span><br><span class="line">  <span class="keyword">for</span> j: i<span class="number">+1</span>-&gt;n<span class="number">-1</span></span><br><span class="line">    <span class="keyword">if</span>(p[j].x - p[i].x &gt;= ans) <span class="keyword">break</span>; <span class="comment">// 横坐标剪枝</span></span><br><span class="line">    ans = <span class="built_in">min</span>(ans, <span class="built_in">dist</span>(p[i], p[j]));</span><br></pre></td></tr></table></figure></li>
+<li><strong>规范输出</strong>：<code>cout &lt;&lt; fixed &lt;&lt; setprecision(k) &lt;&lt; ans &lt;&lt; endl;</code></li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="✅-修正后完整代码（含注释-无多余空行）"><a href="#✅-修正后完整代码（含注释-无多余空行）" class="headerlink" title="✅ 修正后完整代码（含注释 &#x2F; 无多余空行）"></a>✅ 修正后完整代码（含注释 &#x2F; 无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Point</span> &#123; <span class="type">double</span> x, y; &#125; node[<span class="number">10010</span>]; <span class="comment">// 修正：数组扩容至10010防越界，坐标改用double防平方溢出</span></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">double</span> ans = <span class="number">1e18</span>; <span class="comment">// 修正：去除const允许更新，初始值1e18覆盖坐标最大可能距离</span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">calc_dist</span><span class="params">(<span class="type">const</span> Point&amp; a, <span class="type">const</span> Point&amp; b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)); <span class="comment">// 修正：重命名避免与std::distance冲突</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cin &gt;&gt; node[i].x &gt;&gt; node[i].y;</span><br><span class="line">    <span class="built_in">sort</span>(node, node + n, [](<span class="type">const</span> Point&amp; a, <span class="type">const</span> Point&amp; b) &#123; <span class="keyword">return</span> a.x &lt; b.x; &#125;); <span class="comment">// 优化：按x升序排序，为剪枝铺垫</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node[j].x - node[i].x &gt;= ans) <span class="keyword">break</span>; <span class="comment">// 核心剪枝：水平距离已超当前最小值，后续不可能更优</span></span><br><span class="line">            ans = <span class="built_in">min</span>(ans, <span class="built_in">calc_dist</span>(node[i], node[j]));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; fixed &lt;&lt; <span class="built_in">setprecision</span>(<span class="number">4</span>) &lt;&lt; ans &lt;&lt; endl; <span class="comment">// 修正：更正为setprecision，补充换行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="单调栈变形-最大不定长子数列"><a href="#单调栈变形-最大不定长子数列" class="headerlink" title="单调栈变形 最大不定长子数列"></a>单调栈变形 最大不定长子数列</h1><h1 id="🍰-P1714-切蛋糕-算法错题整理"><a href="#🍰-P1714-切蛋糕-算法错题整理" class="headerlink" title="🍰 P1714 切蛋糕 | 算法错题整理"></a>🍰 P1714 切蛋糕 | 算法错题整理</h1><h2 id="📖-题意概括-1"><a href="#📖-题意概括-1" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的整数序列，要求找出一个<strong>长度不超过 $m$</strong> 的连续子段，使得该子段的元素和最大。输出最大和。</p>
+<hr>
+<h2 id="🧩-题型与模板"><a href="#🧩-题型与模板" class="headerlink" title="🧩 题型与模板"></a>🧩 题型与模板</h2><p>本题属于 <strong>前缀和 + 单调队列优化（滑动窗口最值）</strong> 典型题。<br>核心思想：将区间和转化为前缀和差值 $S[r] - S[l-1]$。固定右端点 $r$ 时，只需在合法左端点范围 $[r-m, r-1]$ 内寻找最小的 $S[l-1]$，即可得到以 $r$ 结尾的最优解。</p>
+<h3 id="📦-单调队列通用模板（维护滑动窗口最小值）"><a href="#📦-单调队列通用模板（维护滑动窗口最小值）" class="headerlink" title="📦 单调队列通用模板（维护滑动窗口最小值）"></a>📦 单调队列通用模板（维护滑动窗口最小值）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> q[N], head = <span class="number">0</span>, tail = <span class="number">0</span>; <span class="comment">// 队列存下标</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="comment">// 1. 队首过期判断（超出窗口左边界）</span></span><br><span class="line">    <span class="keyword">while</span>(head &lt; tail &amp;&amp; q[head] &lt;= i - k) head++;</span><br><span class="line">    <span class="comment">// 2. 维护单调性（递增队列求最小值）</span></span><br><span class="line">    <span class="keyword">while</span>(head &lt; tail &amp;&amp; val[q[tail<span class="number">-1</span>]] &gt;= val[i]) tail--;</span><br><span class="line">    <span class="comment">// 3. 当前元素入队</span></span><br><span class="line">    q[tail++] = i;</span><br><span class="line">    <span class="comment">// 4. 窗口成型后记录最值</span></span><br><span class="line">    <span class="keyword">if</span>(i &gt;= k) ans = max/<span class="built_in">min</span>(ans, <span class="built_in">calc</span>(i, q[head]));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔍-原代码错误剖析"><a href="#🔍-原代码错误剖析" class="headerlink" title="🔍 原代码错误剖析"></a>🔍 原代码错误剖析</h2><table>
+<thead>
+<tr>
+<th align="left">错误位置</th>
+<th align="left">原代码片段</th>
+<th align="left">错误原因分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>① 答案初始化</strong></td>
+<td align="left"><code>int ans = 1e9;</code></td>
+<td align="left">求最大值应初始化为极小值（如 <code>-2e9</code>），否则无法正确更新。且 <code>1e9</code> 接近 <code>int</code> 上限的一半，易被覆盖。</td>
+</tr>
+<tr>
+<td align="left"><strong>② 维护对象错误</strong></td>
+<td align="left"><code>while(... &amp;&amp; a[q[tail-1]] &gt;= a[i])</code></td>
+<td align="left">单调队列维护的应是<strong>前缀和 <code>sum[i]</code></strong>，而非原数组 <code>a[i]</code>。我们需要的是窗口内最小的前缀和。</td>
+</tr>
+<tr>
+<td align="left"><strong>③ 窗口过期条件反了</strong></td>
+<td align="left"><code>q[head] + m &lt;= i</code></td>
+<td align="left">子段长度应为 <code>i - q[head]</code>，要求 <code>≤ m</code> 即 <code>q[head] ≥ i - m</code>。原代码写成了 <code>≤ i-m</code>，会把合法下标弹出去。</td>
+</tr>
+<tr>
+<td align="left"><strong>④ 状态转移逻辑混乱</strong></td>
+<td align="left"><code>ans = min(ans,sum[i] - sum[i - m] - minn[i]);</code></td>
+<td align="left">1. 用了 <code>min</code> 而非 <code>max</code><br>2. <code>sum[i]-sum[i-m]</code> 强制长度为 <code>m</code>，不符合 $1\le k\le m$<br>3. 正确转移应为 <code>sum[i] - sum[q[head]]</code>，且应在遍历中实时更新，无需二次循环。</td>
+</tr>
+<tr>
+<td align="left"><strong>⑤ 缺失初始状态</strong></td>
+<td align="left">无</td>
+<td align="left">长度可以为 $1$，对应左端点为 $i$，即需要 $S[i]-S[i-1]$。必须<strong>提前将下标 <code>0</code>（代表 $S[0]&#x3D;0$）入队</strong>，否则无法计算长度 $&lt;m$ 的区间。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-核心解题思路"><a href="#💡-核心解题思路" class="headerlink" title="💡 核心解题思路"></a>💡 核心解题思路</h2><ol>
+<li><strong>前缀和转化</strong>：预处理 <code>sum[i] = sum[i-1] + a[i]</code>，任意子段 $[l, r]$ 和为 <code>sum[r] - sum[l-1]</code>。</li>
+<li><strong>滑动窗口</strong>：枚举右端点 $i$，合法的左端点前缀下标 $j$ 需满足 $i - m \le j &lt; i$。</li>
+<li><strong>单调队列维护</strong>：队列按 <code>sum</code> 值<strong>单调递增</strong>。队首始终是窗口 $[i-m, i-1]$ 中 <code>sum</code> 最小的下标。</li>
+<li><strong>实时更新答案</strong>：对每个 $i$，先弹出过期队首，再用 <code>sum[i] - sum[q[head]]</code> 更新 <code>ans</code>，最后维护队尾单调性并将 $i$ 入队。</li>
+<li><strong>复杂度</strong>：每个下标最多入队出队一次，时间复杂度 $O(n)$，空间 $O(n)$，完美通过 $5\times 10^5$ 数据。</li>
+</ol>
+<hr>
+<h2 id="✅-完整正确代码（紧凑版-详细注释）"><a href="#✅-完整正确代码（紧凑版-详细注释）" class="headerlink" title="✅ 完整正确代码（紧凑版+详细注释）"></a>✅ 完整正确代码（紧凑版+详细注释）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">500050</span>;</span><br><span class="line"><span class="type">int</span> n, m, a[MAXN], sum[MAXN], q[MAXN], head = <span class="number">0</span>, tail = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> ans = <span class="number">-0x3f3f3f3f</span>; <span class="comment">// 初始化为极小值</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123; cin &gt;&gt; a[i]; sum[i] = sum[i<span class="number">-1</span>] + a[i]; &#125;</span><br><span class="line">    q[tail++] = <span class="number">0</span>; <span class="comment">// 关键：前缀和0的下标入队，支持长度为1的子段</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span>(head &lt; tail &amp;&amp; q[head] &lt; i - m) head++; <span class="comment">// 1. 弹出超出长度m的过期下标</span></span><br><span class="line">        ans = <span class="built_in">max</span>(ans, sum[i] - sum[q[head]]);        <span class="comment">// 2. 队首即为[i-m, i-1]最小前缀和，更新答案</span></span><br><span class="line">        <span class="keyword">while</span>(head &lt; tail &amp;&amp; sum[q[tail<span class="number">-1</span>]] &gt;= sum[i]) tail--; <span class="comment">// 3. 维护单调递增性</span></span><br><span class="line">        q[tail++] = i;                                <span class="comment">// 4. 当前下标入队</span></span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>💡 <strong>复习建议</strong>：遇到“连续子段和&#x2F;差&#x2F;积的最值”且带长度限制的题目，优先联想 <strong>前缀和 + 单调队列</strong>。注意队列存的是<strong>下标</strong>而非值，过期条件与单调方向需结合题意严格推导。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">202-单调栈与优化技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/14/template-202-%E5%8D%95%E8%B0%83%E6%A0%88%E4%B8%8E%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260513" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2152,85 +2403,6 @@
 
 
   
-    <article id="post-20260509" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/09/20260509/">深入浅出基础篇再回顾</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/09/20260509/" class="archive-article-date">
-  	<time datetime="2026-05-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/20260509.png"></p>
-<ol>
-<li>剩下的基本篇    </li>
-<li>pat5题</li>
-<li>前天剩下的英语卷子</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/09/20260509/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -2397,7 +2569,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2405,15 +2577,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2421,11 +2593,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2461,7 +2633,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2477,19 +2649,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2505,10 +2677,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
@@ -2518,6 +2686,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
             
             <div class="clearfix"></div>
