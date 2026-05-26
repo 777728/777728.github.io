@@ -394,6 +394,36 @@
 <li><strong>最终校验</strong>：检查应用此贪心策略后的结果是否满足条件。如果能满足，则最小参数就是答案的一部分；如果不满足，则问题无解。</li>
 </ol>
 <p><strong>一句话总结：</strong> 想要用最小的代价（最小的 $k$）和最少的变化（贪心地只在必要时加）去达成目标，如果这都做不到，那就真的做不到了。这种“求下界+贪心验证”的思维在算法竞赛中非常普遍和强大。</p>
+<h1 id="📚-算法错题整理：Codeforces-Round-1099-Div-2-C-Chipmunk-Theo-and-Equality"><a href="#📚-算法错题整理：Codeforces-Round-1099-Div-2-C-Chipmunk-Theo-and-Equality" class="headerlink" title="📚 算法错题整理：Codeforces Round 1099 (Div. 2) C. Chipmunk Theo and Equality"></a>📚 算法错题整理：Codeforces Round 1099 (Div. 2) C. Chipmunk Theo and Equality</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的正整数序列。每次操作可任选一个数：若为<strong>偶数</strong>则 <code>÷2</code>，若为<strong>奇数</strong>则 <code>+1</code>。求使序列中所有数字相等所需的<strong>最小操作总数</strong>。</p>
+<hr>
+<h2 id="🐛-原代码错误分析"><a href="#🐛-原代码错误分析" class="headerlink" title="🐛 原代码错误分析"></a>🐛 原代码错误分析</h2><p>原代码尝试使用<strong>双优先队列（最大堆+最小堆）模拟贪心</strong>，但存在致命设计缺陷：</p>
+<ol>
+<li><p><strong>优先队列状态不同步（核心错误）</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> u = maxq.<span class="built_in">top</span>(); maxq.<span class="built_in">pop</span>();</span><br><span class="line"><span class="keyword">if</span> (u % <span class="number">2</span> == <span class="number">1</span>) maxq.<span class="built_in">push</span>(u + <span class="number">1</span>), minq.<span class="built_in">push</span>(u + <span class="number">1</span>);</span><br><span class="line"><span class="keyword">else</span> maxq.<span class="built_in">push</span>(u / <span class="number">2</span>), minq.<span class="built_in">push</span>(u / <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>标准优先队列<strong>不支持高效删除任意元素</strong>。每次只从 <code>maxq</code> 弹出旧值并推入新值到两个队列，会导致 <code>minq</code> 中残留大量<strong>已过期的旧值</strong>。<code>minq.top()</code> 永远无法正确反映当前序列的真实最小值，后续的所有 <code>if</code> 判断逻辑全部建立在错误状态上。</p>
+</li>
+<li><p><strong>贪心策略不成立</strong><br>原代码认为“每次只操作最大值”且“最终只会剩下 <code>a</code> 和 <code>a+1</code>”。但操作路径具有<strong>强依赖性</strong>，局部贪心（只动当前最大）无法保证全局最优。例如某个次大值的路径可能与最大值的路径在中途交汇，贪心模拟极易错过更优的公共汇聚点，甚至陷入无效循环。</p>
+</li>
+<li><p><strong>复杂度失控风险</strong><br>即使修复同步问题，堆模拟每次操作 $O(\log n)$，缺乏明确的收敛终止条件，在 $n&#x3D;10^5$ 时极易 TLE。</p>
+</li>
+</ol>
+<hr>
+<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><ol>
+<li><strong>路径唯一且快速收敛</strong><br>观察操作规则：奇数 <code>+1</code> 必变偶数，偶数下一步最优必 <code>÷2</code>。因此任意正整数 $x$ 的变化路径是<strong>唯一确定</strong>的，且数值整体单调递减（除 $1$ 外）。每个数能到达的状态极少（通常 $\le 30$ 个），最终都会收敛到 <code>1</code>。</li>
+<li><strong>枚举公共目标值</strong><br>既然每个数的可达状态很少，我们可以对每个初始数模拟其完整路径，记录它到达每个值 <code>v</code> 所需的步数。用哈希表统计：<ul>
+<li><code>cnt[v]</code>：有多少个初始数能变成 <code>v</code></li>
+<li><code>sum_ops[v]</code>：所有数变成 <code>v</code> 的步数总和</li>
+</ul>
+</li>
+<li><strong>筛选最优解</strong><br>遍历所有出现过的 <code>v</code>，若 <code>cnt[v] == n</code>（说明所有数都能汇聚到 <code>v</code>），则 <code>ans = min(ans, sum_ops[v])</code>。因为所有数至少都能变成 <code>1</code>，所以答案一定存在。</li>
+</ol>
+<hr>
+<h2 id="🛠️-题型模板总结（路径汇聚型最小代价）"><a href="#🛠️-题型模板总结（路径汇聚型最小代价）" class="headerlink" title="🛠️ 题型模板总结（路径汇聚型最小代价）"></a>🛠️ 题型模板总结（路径汇聚型最小代价）</h2><p>此类题型常见于 Codeforces Div.2 C&#x2F;D，特征为：<strong>每个元素有固定转移规则，最终趋向收敛，求全体相等的最小代价</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通用模板骨架</span></span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; reach_cnt, total_cost;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x : initial_array) &#123;</span><br><span class="line">    <span class="type">int</span> cur = x, steps = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        reach_cnt[cur]++;</span><br><span class="line">        total_cost[cur] += steps;</span><br><span class="line">        <span class="keyword">if</span> (cur == 收敛终点) <span class="keyword">break</span>; <span class="comment">// 防止死循环</span></span><br><span class="line">        cur = 按规则转移(cur);</span><br><span class="line">        steps++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> ans = INF;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span>&amp; [val, c] : reach_cnt) &#123;</span><br><span class="line">    <span class="keyword">if</span> (c == n) ans = <span class="built_in">min</span>(ans, total_cost[val]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 ans</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💻-修正后完整代码（紧凑无多余空行版）"><a href="#💻-修正后完整代码（紧凑无多余空行版）" class="headerlink" title="💻 修正后完整代码（紧凑无多余空行版）"></a>💻 修正后完整代码（紧凑无多余空行版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;cnt,sum_ops; <span class="comment">// cnt记录目标值被覆盖次数，sum_ops记录总步数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,x;i&lt;n;++i)&#123;</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">        <span class="type">int</span> cur=x,steps=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            cnt[cur]++;sum_ops[cur]+=steps; <span class="comment">// 统计当前值可达性及代价</span></span><br><span class="line">            <span class="keyword">if</span>(cur==<span class="number">1</span>)<span class="keyword">break</span>; <span class="comment">// 到达1后停止，避免1-&gt;2-&gt;1死循环</span></span><br><span class="line">            <span class="keyword">if</span>(cur%<span class="number">2</span>==<span class="number">0</span>)cur/=<span class="number">2</span>;<span class="keyword">else</span> cur++; <span class="comment">// 按题目规则单步转移</span></span><br><span class="line">            steps++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">2e9</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span>&amp;[v,c]:cnt)<span class="keyword">if</span>(c==n)ans=<span class="built_in">min</span>(ans,sum_ops[v]); <span class="comment">// 仅当所有数都能到达v时才更新答案</span></span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t;cin&gt;&gt;t;<span class="keyword">while</span>(t--)<span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度</strong>：每个数路径长度 $O(\log \max a_i)$，<code>map</code> 插入查询 $O(\log (\text{状态数}))$，总时间复杂度 $O(n \log n \log (\max a_i))$，空间 $O(n \log (\max a_i))$，完全满足 $2s&#x2F;512MB$ 限制。</p>
 
       
 
@@ -1295,7 +1325,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1303,11 +1337,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,15 +1353,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1343,23 +1377,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1367,19 +1389,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1387,15 +1405,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1407,6 +1429,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
@@ -1415,11 +1445,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>
