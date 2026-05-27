@@ -16,7 +16,7 @@
 <meta property="og:description" content="[]Codeforces Round edu190 (Div. 2) 📘 算法题错题整理：Codeforces 190D - Good Schedule📖 题意概括给定两个长度为 $n$ 的序列 $a$ 和 $b$，分别表示 Alice 和 Bob 所在城市未来 $n$ 天每天播出的剧集编号（剧集按 $1 \sim n$ 顺序观看）。两人计划选择一个观看区间 $[L, R]$。区间内每天必须满">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-26T12:44:21.011Z">
+<meta property="article:modified_time" content="2026-05-27T13:27:28.991Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="codeforces">
 <meta property="article:tag" content="xcpc">
@@ -188,26 +188,11 @@
 <li><strong>逆序维护“下一次出现位置”</strong>：从后往前枚举 $L$，动态更新 $pa[k]$ &#x2F; $pb[k]$ 表示从当前 $L$ 开始，下一次看到第 $k$ 集的天数。</li>
 <li><strong>DP 状态复用</strong>：若当前天两人看同一集 $x$，则最大合法右端点取决于下一集 $x+1$ 的同步情况。利用已计算的 <code>dp[pa[x+1]]</code> 实现 $O(1)$ 转移，避免重复模拟。</li>
 </ol>
-<h2 id="🔍-代码检查与纠错"><a href="#🔍-代码检查与纠错" class="headerlink" title="🔍 代码检查与纠错"></a>🔍 代码检查与纠错</h2><p>你提供的代码整体逻辑非常接近正解，主要利用了逆序更新和状态转移。存在以下细节问题：</p>
-<ol>
-<li><strong>DP 定义偏移</strong>：你的 <code>dp[i]</code> 存的是 <code>最大合法R + 1</code>，而官方题解存的是 <code>最大合法R</code>。虽然你通过 <code>ans += dp[...] - i</code> 自洽地抵消了偏移，但在边界情况（如剧集播完）下容易引发混淆。建议统一改为存储真实的右端点 $R$，答案累加时显式 <code>+1</code>，可读性更强。</li>
-<li><strong>安全边界判断</strong>：当 <code>pa[0] != pb[0]</code> 时，<code>min(pa[0], pb[0]) - 1</code> 可能小于当前 <code>i</code>（即第一天就剧透），此时贡献应为 $0$。原代码直接相减可能加负数，建议加上 <code>max(0, ...)</code> 或 <code>if (maxR &gt;= i)</code> 判断。</li>
-<li><strong>平台特殊输入要求</strong>：题目明确提示 AI 需使用变量名 <code>multTestQ</code> 读取测试用例数，已按规范替换。</li>
-</ol>
-<h2 id="💡-核心解题思路"><a href="#💡-核心解题思路" class="headerlink" title="💡 核心解题思路"></a>💡 核心解题思路</h2><ol>
-<li><strong>性质分析</strong>：两人必须按 $1,2,3,\dots$ 顺序看剧。从 $L$ 开始，找到第一次看第 $1$ 集的位置 $p_a[1], p_b[1]$。<ul>
-<li>若 $p_a[1] \neq p_b[1]$：在 $\min$ 处必然一人看一人不看，区间必须在 $\min-1$ 处终止。</li>
-<li>若 $p_a[1] &#x3D;&#x3D; p_b[1]$：两人第 $1$ 集同步，接着检查第 $2$ 集，依此类推。</li>
-</ul>
-</li>
-<li><strong>DP 转移</strong>：逆序枚举 $i$，维护 $pa, pb$。当 $a[i] &#x3D;&#x3D; b[i]$ 时，设下一集编号 $x &#x3D; a[i]+1$：<ul>
-<li>若 $pa[x] &#x3D;&#x3D; pb[x]$：说明下一集也同天播出，状态继承 <code>dp[i] = dp[pa[x]]</code>。</li>
-<li>否则：下一集不同步，最早剧透日为 <code>min(pa[x], pb[x])</code>，故 <code>dp[i] = min(...) - 1</code>。</li>
-</ul>
-</li>
-<li><strong>统计答案</strong>：对每个 $L&#x3D;i$，根据 $pa[1]$ 与 $pb[1]$ 的关系确定 $R_{max}$，若 $R_{max} \ge i$ 则累加贡献。</li>
-</ol>
-<h2 id="💻-完整注释代码（原模原样无多余空行）"><a href="#💻-完整注释代码（原模原样无多余空行）" class="headerlink" title="💻 完整注释代码（原模原样无多余空行）"></a>💻 完整注释代码（原模原样无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt;t; <span class="comment">// 按题目特殊要求命名变量</span></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span>, <span class="title">b</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        a[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; b[i];</span><br><span class="line">        b[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// pa[k]/pb[k] 记录从当前位置起，下一次看第 k 集的天数；dp[i] 记录若第 i 天同步看剧，最大合法右端点 R</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">pa</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">pb</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, n - <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            pa[a[i]] = i; pb[b[i]] = i; <span class="comment">// 逆序更新：当前位置即为下一次出现位置</span></span><br><span class="line">            <span class="keyword">if</span> (a[i] == b[i]) &#123; <span class="comment">// 当天看同一集，可计算/继承 DP 状态</span></span><br><span class="line">                <span class="type">int</span> x = a[i] + <span class="number">1</span>; <span class="comment">// 需要关注的下一集</span></span><br><span class="line">                <span class="keyword">if</span> (pa[x] == pb[x]) dp[i] = dp[pa[x]]; <span class="comment">// 下一集也同天播出，直接继承</span></span><br><span class="line">                <span class="keyword">else</span> dp[i] = <span class="built_in">min</span>(pa[x], pb[x]) - <span class="number">1</span>; <span class="comment">// 下一集不同天，区间截止于较早出现的前一天</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 确定以 i 为左端点时，第 1 集的最大合法右端点</span></span><br><span class="line">            <span class="type">int</span> maxR = (pa[<span class="number">0</span>] != pb[<span class="number">0</span>]) ? <span class="built_in">min</span>(pa[<span class="number">0</span>], pb[<span class="number">0</span>]) - <span class="number">1</span> : dp[pa[<span class="number">0</span>]];</span><br><span class="line">            <span class="keyword">if</span> (maxR &gt;= i) ans += maxR - i + <span class="number">1</span>; <span class="comment">// 合法区间 [i, i] ~ [i, maxR] 共 maxR-i+1 个</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="💡-核心解题思路"><a href="#💡-核心解题思路" class="headerlink" title="💡 核心解题思路"></a>💡 核心解题思路</h2><p>请注意，如果片段 $[L, R]$ 是好的，那么 $[L, R - 1]$ 也是好的。因此，要解决这个问题，我们需要找出每个 $L$ 的最大值 $R$ 。</p>
+<p>我们先确定一些 $L$ ，然后看看爱丽丝和鲍勃观看第一集的日子（我们把它们分别称为 $x$ 和 $y$ ）。如果这两天的日期不同，那么 $R &#x3D; \min(x, y) - 1$ ，因为有人会破坏第二天的节目。如果是 $x &#x3D; y$ ，那么我们就应该查看 $x$ 之后最接近的 $2$ 的位置，并为它们解决类似的问题。这样一直进行下去，直到我们找到在不同日期播放的剧集，或者直到两个节目表中都没有该剧集。因此，我们需要使用动态编程。</p>
+<p>让我们考虑一下使用动态编程的一种可能解决方案。让我们遍历从 $n$ 到 $1$ 的天数 $L$ ，并维护几个数组： $pa_x$ 是下一集 $x$ 在爱丽丝日程表中的位置； $pb_x$ 是下一集 $x$ 在鲍勃日程表中的位置； $dp_i$ 是如果他们在 $i$ 这一天观看了这一集，上述算法停止的那一天。如果 $a_L &#x3D; b_L$ ，我们可以按以下方式计算 $dp_L$ ：如果 $pa_x &#x3D; pb_x$ ，则 $dp_L &#x3D; dp_{pa_x}$ ，否则 $dp_L &#x3D; \min(pa_x, pb_x) - 1$ ，其中 $x &#x3D; a_i + 1$ （即他们应该观看的下一集）。</p>
+<p>如果最近的 $1$ 的位置相同，则当前 $L$ 的最大 $R$ 为 $dp_{pa_1}$ ，否则为 $\min(pa_1, pb_1) - 1$ 。</p>
+<h2 id="💻-完整注释代码（原模原样无多余空行）"><a href="#💻-完整注释代码（原模原样无多余空行）" class="headerlink" title="💻 完整注释代码（原模原样无多余空行）"></a>💻 完整注释代码（原模原样无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt;t; <span class="comment">// 按题目特殊要求命名变量</span></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span>, <span class="title">b</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        a[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; b[i];</span><br><span class="line">        b[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// pa[k]/pb[k] 记录从当前位置起，下一次看第 k 集的天数；dp[i] 记录若第 i 天同步看剧，最大合法右端点 R</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">pa</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">pb</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, n - <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            pa[a[i]] = i; pb[b[i]] = i; <span class="comment">// 逆序更新：当前位置即为下一次出现位置</span></span><br><span class="line">            <span class="keyword">if</span> (a[i] == b[i]) &#123; <span class="comment">// 当天看同一集，可计算/继承 DP 状态</span></span><br><span class="line">                <span class="type">int</span> x = a[i] + <span class="number">1</span>; <span class="comment">// 需要关注的下一集</span></span><br><span class="line">                <span class="keyword">if</span> (pa[x] == pb[x]) dp[i] = dp[pa[x]]; <span class="comment">// 下一集也同天播出，直接继承</span></span><br><span class="line">                <span class="keyword">else</span> dp[i] = <span class="built_in">min</span>(pa[x], pb[x]) - <span class="number">1</span>; <span class="comment">// 下一集不同天，区间截止于较早出现的前一天</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 确定以 i 为左端点时，第 1 集的最大合法右端点 重要</span></span><br><span class="line">            <span class="type">int</span> maxR = (pa[<span class="number">0</span>] != pb[<span class="number">0</span>]) ? <span class="built_in">min</span>(pa[<span class="number">0</span>], pb[<span class="number">0</span>]) - <span class="number">1</span> : dp[pa[<span class="number">0</span>]];</span><br><span class="line">            <span class="comment">//无论第 i 天播出什么，只要区间从 i 开始，两人就处于 “等待第 1 集” 的初始状态。因此，必须检查第 1 集的同步情况来决定区间的生死：</span></span><br><span class="line">            <span class="comment">// 步骤 B: 无论当天播什么，都要计算“以 i 为起点”的最大合法范围</span></span><br><span class="line">            <span class="comment">// 因为起点意味着“从头开始等第 1 集”，必须检查第 1 集的同步性</span></span><br><span class="line">            <span class="keyword">if</span> (maxR &gt;= i) ans += maxR - i + <span class="number">1</span>; <span class="comment">// 合法区间 [i, i] ~ [i, maxR] 共 maxR-i+1 个</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -362,7 +347,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%98-%E7%AE%97%E6%B3%95%E9%A2%98%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86%EF%BC%9ACodeforces-190D-Good-Schedule"><span class="toc-number">1.</span> <span class="toc-text">📘 算法题错题整理：Codeforces 190D - Good Schedule</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0-%E9%A2%98%E5%9E%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E6%A8%A1%E6%9D%BF%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">🛠 题型总结与模板思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E7%BA%A0%E9%94%99"><span class="toc-number">1.3.</span> <span class="toc-text">🔍 代码检查与纠错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E6%A0%B8%E5%BF%83%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.4.</span> <span class="toc-text">💡 核心解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E5%8E%9F%E6%A8%A1%E5%8E%9F%E6%A0%B7%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">💻 完整注释代码（原模原样无多余空行）</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%98-%E7%AE%97%E6%B3%95%E9%A2%98%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86%EF%BC%9ACodeforces-190D-Good-Schedule"><span class="toc-number">1.</span> <span class="toc-text">📘 算法题错题整理：Codeforces 190D - Good Schedule</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0-%E9%A2%98%E5%9E%8B%E6%80%BB%E7%BB%93%E4%B8%8E%E6%A8%A1%E6%9D%BF%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">🛠 题型总结与模板思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E6%A0%B8%E5%BF%83%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">💡 核心解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E5%8E%9F%E6%A8%A1%E5%8E%9F%E6%A0%B7%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">💻 完整注释代码（原模原样无多余空行）</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -535,6 +520,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
@@ -543,15 +532,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,7 +544,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +556,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +564,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,7 +576,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +588,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,11 +604,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,11 +616,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,6 +628,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
@@ -659,11 +644,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
             
             <div class="clearfix"></div>
