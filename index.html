@@ -236,6 +236,312 @@
 
 
   
+    <article id="post-20260527" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/27/20260527/">2026-05-27 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/27/20260527/" class="archive-article-date">
+  	<time datetime="2026-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语（6h++）</li>
+<li>cf 3h 三题 + 两题看</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/27/20260527/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Codeforces Round 1100 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/">Codeforces Round 1100 (Div. 2)</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/" class="archive-article-date">
+  	<time datetime="2026-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2232/problem/c">Codeforces Round 1100 (Div. 2)</a></p>
+<h1 id="📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version"><a href="#📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version" class="headerlink" title="📝 算法题错题整理：C2. We Be Flipping (Hard Version)"></a>📝 算法题错题整理：C2. We Be Flipping (Hard Version)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的非零整数数组 $a$。你可以执行最多 $n$ 次操作：选择一个索引 $i$（$1 \le i \le n$），<strong>必须满足当前 $a_i &gt; 0$</strong>，然后将前缀 $a[1 \dots i]$ 的所有元素取反。要求构造一个操作序列，使得最终数组的元素之和最大。</p>
+<h2 id="🧩-题型模板与核心思想"><a href="#🧩-题型模板与核心思想" class="headerlink" title="🧩 题型模板与核心思想"></a>🧩 题型模板与核心思想</h2><p><strong>题型标签</strong>：构造 &#x2F; 贪心 &#x2F; 前缀翻转 &#x2F; 逆向思维<br><strong>核心模板思想</strong>：</p>
+<ol>
+<li><strong>逆向处理</strong>：前缀翻转类问题通常从右向左（$n \to 1$）考虑。因为操作 $i$ 只影响 $1 \dots i$，不会影响 $i+1 \dots n$。逆序决策可以保证后面的元素状态已经固定，不会影响前面的决策。</li>
+<li><strong>状态维护</strong>：用变量记录当前累积的翻转奇偶性（或直接维护当前符号），避免每次模拟 $O(n^2)$ 的翻转过程。</li>
+<li><strong>贪心条件</strong>：只有当当前操作能<strong>改善整体收益</strong>且<strong>满足前置条件</strong>（$a_i &gt; 0$）时才执行。对于本题，当当前位置有效值为正，且包含该位置的前缀和为负时，翻转该前缀能显著增大总和。</li>
+</ol>
+<h2 id="🔍-原代码错误分析"><a href="#🔍-原代码错误分析" class="headerlink" title="🔍 原代码错误分析"></a>🔍 原代码错误分析</h2><p>原代码尝试通过一次枚举寻找“最优翻转点”，存在多处逻辑漏洞：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误片段 1：错误假设仅需一次翻转</span></span><br><span class="line">ll best = suf[<span class="number">0</span>];</span><br><span class="line"><span class="type">int</span> idx = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        ll score = pre[i - <span class="number">1</span>] + suf[i + <span class="number">1</span>] - a[i]; <span class="comment">// 假设翻转一次后左侧全变正</span></span><br><span class="line">        <span class="keyword">if</span> (score &gt; best)&#123; ... &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>问题</strong>：题目允许最多 $n$ 次操作，多次组合翻转往往比单次翻转更优。代码强行限制只选一个 <code>idx</code>，丢失了多次操作的优化空间。</li>
+<li><strong>问题</strong>：<code>pre[i-1]</code> 使用 <code>abs</code> 累加，隐含假设“只要在 <code>idx</code> 翻转一次，左边所有元素都能变成正数”。这是错误的，左侧元素的正负取决于它们原始值与翻转次数的奇偶性，不能简单用绝对值替代。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误片段 2：答案构造逻辑混乱</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = idx - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">    <span class="keyword">if</span> (ans.<span class="built_in">size</span>() &amp; <span class="number">1</span>) a[i] = -a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span>) ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">&#125;</span><br><span class="line">ans.<span class="built_in">push_back</span>(idx);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>问题</strong>：用 <code>ans.size()</code> 的奇偶性来决定是否翻转，没有考虑实际数组状态，属于“硬凑”逻辑。翻转操作必须严格满足<strong>执行时</strong> $a_i &gt; 0$，且翻转后的状态会影响后续决策。该构造无法保证合法性和最优性。</li>
+</ul>
+<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><ol>
+<li><strong>逆序扫描</strong>：从 $i &#x3D; n$ 到 $1$ 遍历。维护当前累积的翻转标记 <code>flip</code>（0 表示未翻转，1 表示已翻转奇数次）。</li>
+<li><strong>计算有效值</strong>：当前位置实际值为 <code>val = a[i] * (flip ? -1 : 1)</code>。</li>
+<li><strong>贪心决策</strong>：<ul>
+<li>维护当前后缀和（或动态前缀和）。逆序遍历时，若 <code>val &gt; 0</code>（满足操作条件），且<strong>包含该位置的前缀和为负</strong>，说明翻转该前缀能使总和增加 $-2 \times \text{前缀和}$，此时执行翻转是最优的。</li>
+<li>执行翻转时，记录索引，并将 <code>flip</code> 状态取反，同时更新当前累积和。</li>
+</ul>
+</li>
+<li><strong>输出顺序</strong>：题目要求按执行顺序输出。因为我们是从右向左决策的，最终需将收集到的操作索引<strong>反转</strong>后输出。</li>
+</ol>
+<p>此方法时间复杂度 $O(n)$，空间复杂度 $O(n)$，完全符合题目限制。</p>
+<h2 id="✅-修正后代码（含注释，无多余空行）"><a href="#✅-修正后代码（含注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含注释，无多余空行）"></a>✅ 修正后代码（含注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;ll&gt; <span class="title">a</span><span class="params">(n<span class="number">+1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">    ll cur_sum=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> flip=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        ll val=a[i]*(flip?<span class="number">-1</span>:<span class="number">1</span>);</span><br><span class="line">        cur_sum+=val;</span><br><span class="line">        <span class="keyword">if</span>(val&gt;<span class="number">0</span>&amp;&amp;cur_sum&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">            flip^=<span class="number">1</span>;</span><br><span class="line">            cur_sum+=<span class="number">2</span>*val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">reverse</span>(ans.<span class="built_in">begin</span>(),ans.<span class="built_in">end</span>());</span><br><span class="line">    cout&lt;&lt;ans.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ans.<span class="built_in">size</span>();i++) cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&quot; \n&quot;</span>[i==ans.<span class="built_in">size</span>()<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin&gt;&gt;t; <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="📝-算法错题整理-Codeforces-D-Me-When-Median-Problem"><a href="#📝-算法错题整理-Codeforces-D-Me-When-Median-Problem" class="headerlink" title="📝 算法错题整理 | Codeforces D. Me When Median Problem"></a>📝 算法错题整理 | Codeforces D. Me When Median Problem</h1><h2 id="📖-题意概括-1"><a href="#📖-题意概括-1" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定两个长度为 $n$ 的正整数数组 $a$ 和 $b$。需执行恰好 $n-1$ 次操作：每次任选相邻下标 $i$，取出四元组 ${a_i, a_{i+1}, b_i, b_{i+1}}$ 排序为 $s_1 \le s_2 \le s_3 \le s_4$，将 $a$ 的这两个元素替换为 $s_2$，将 $b$ 的这两个元素替换为 $s_3$（数组长度同步减 $1$）。操作结束后仅剩一个元素，求所有操作顺序中 $\min(a_1, b_1)$ 的<strong>最大可能值</strong>。</p>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>答案单调性 → 二分答案</strong><br>若最终能保留 $\ge X$ 的值，则任意 $Y &lt; X$ 也必然可行。因此可对答案进行二分，将原问题转化为 <strong>可行性判定问题</strong>。</li>
+<li><strong>0&#x2F;1 化简</strong><br>对于二分猜测值 $mid$，将数组中 $\ge mid$ 的数标记为 <code>1</code>，$&lt; mid$ 的标记为 <code>0</code>。问题转化为：能否通过操作使最终剩下的两个数均为 <code>1</code>（即状态为 <code>(1,1)</code>）。</li>
+<li><strong>操作本质与贪心策略</strong><br>观察相邻两对 $(a_i,b_i)$ 和 $(a_{i+1},b_{i+1})$ 的类型组合：<ul>
+<li><code>(1,1)</code>：<strong>优势对</strong>，能稳定贡献 <code>1</code>。</li>
+<li><code>(0,0)</code>：<strong>劣势对</strong>，会贡献 <code>0</code>。</li>
+<li><code>(0,1)</code>：<strong>中立对</strong>，在排序取中位数的操作中，相当于“缓冲垫”，不改变 <code>1</code> 和 <code>0</code> 的相对数量差，可被相邻操作安全吸收。<br>因此，<strong>所有 <code>(0,1)</code> 可直接忽略</strong>。忽略后，数组退化为若干段连续的 <code>(0,0)</code> 块和分散的 <code>(1,1)</code>。每次合并操作会减少一个元素对，要使最终结果为 <code>(1,1)</code>，必须满足：<code>(1,1) 的数量 &gt; (0,0) 连续块的数量</code>。</li>
+</ul>
+</li>
+<li><strong>Check 函数实现</strong><br>遍历数组，跳过 <code>type==1</code>，统计 <code>cnt1</code>（<code>(1,1)</code> 个数）和 <code>cnt0</code>（<code>(0,0)</code> 连通块个数）。若 <code>cnt1 &gt; cnt0</code> 则 <code>mid</code> 可行。</li>
+</ol>
+<h2 id="🔍-代码诊断"><a href="#🔍-代码诊断" class="headerlink" title="🔍 代码诊断"></a>🔍 代码诊断</h2><table>
+<thead>
+<tr>
+<th align="left">诊断项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>✅ 逻辑正确性</strong></td>
+<td align="left">原代码的二分框架与状态机计数逻辑完全契合题解思路。利用 <code>prev</code> 变量跳过 <code>(0,1)</code> 并统计 <code>(0,0)</code> 连通块的做法非常巧妙，核心判定 <code>one &gt; zero</code> 正确。</td>
+</tr>
+<tr>
+<td align="left"><strong>⚠️ 潜在隐患</strong></td>
+<td align="left">1. 二分上界 <code>1e9+5</code> 过大，题目明确 $a_i,b_i \le 2n \le 2\times10^5$，过大范围虽不影响正确性但略微拖慢常数。<br>2. <code>prev</code> 状态机在边界情况（如全 <code>(0,1)</code>）下虽能跑通，但语义不够直观，可改为显式布尔标记提升可读性。<br>3. 缺乏关键步骤注释，复盘时易遗忘“为何跳过 <code>type==1</code>”。</td>
+</tr>
+<tr>
+<td align="left"><strong>🛠️ 修正建议</strong></td>
+<td align="left">收紧二分范围至 <code>[1, 200000]</code>；将 <code>prev</code> 替换为 <code>inZeroBlock</code> 标记；采用 <code>l&lt;=r</code> 配合 <code>ans</code> 记录答案，避免边界 <code>-1</code> 陷阱。</td>
+</tr>
+</tbody></table>
+<h2 id="🧩-同类题型模板：二分答案-贪心Check"><a href="#🧩-同类题型模板：二分答案-贪心Check" class="headerlink" title="🧩 同类题型模板：二分答案 + 贪心Check"></a>🧩 同类题型模板：二分答案 + 贪心Check</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标准二分答案框架（求最大值）</span></span><br><span class="line"><span class="type">int</span> l = MIN_VAL, r = MAX_VAL, ans = MIN_VAL;</span><br><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) &#123;   <span class="comment">// 检查mid是否可行</span></span><br><span class="line">        ans = mid;      <span class="comment">// 记录可行解</span></span><br><span class="line">        l = mid + <span class="number">1</span>;    <span class="comment">// 尝试更大的答案</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        r = mid - <span class="number">1</span>;    <span class="comment">// 答案过大，缩小范围</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ans;</span><br></pre></td></tr></table></figure>
+
+<h2 id="✅-注释完整代码（无多余空行）"><a href="#✅-注释完整代码（无多余空行）" class="headerlink" title="✅ 注释完整代码（无多余空行）"></a>✅ 注释完整代码（无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span>, <span class="title">b</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> &amp;x : a) cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> &amp;x : b) cin &gt;&gt; x;</span><br><span class="line">    <span class="comment">// 二分答案：值域为 [1, 2*10^5]，记录可行最大值</span></span><br><span class="line">    <span class="type">int</span> l = <span class="number">1</span>, r = <span class="number">200005</span>, ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> one = <span class="number">0</span>, zero = <span class="number">0</span>; <span class="comment">// one统计(1,1)数量，zero统计(0,0)连通块数量</span></span><br><span class="line">        <span class="type">bool</span> inZeroBlock = <span class="literal">false</span>; <span class="comment">// 标记当前是否正处于连续的(0,0)块中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="type">int</span> type = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt;= mid) type++;</span><br><span class="line">            <span class="keyword">if</span>(b[i] &gt;= mid) type++;</span><br><span class="line">            <span class="comment">// type==1 为(0,1)或(1,0)，属于中立元素，操作时不改变优劣差，直接跳过</span></span><br><span class="line">            <span class="keyword">if</span>(type == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(type == <span class="number">2</span>)&#123; <span class="comment">// 遇到(1,1)，必然中断前方的(0,0)块，并累加优势计数</span></span><br><span class="line">                inZeroBlock = <span class="literal">false</span>;</span><br><span class="line">                one++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(type == <span class="number">0</span>)&#123; <span class="comment">// 遇到(0,0)</span></span><br><span class="line">                <span class="keyword">if</span>(!inZeroBlock)&#123; <span class="comment">// 仅在新块起点时累加，合并连续(0,0)为一个块</span></span><br><span class="line">                    zero++;</span><br><span class="line">                    inZeroBlock = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 核心结论：优势对数量必须严格多于劣势块数量，才能保证最终剩下(1,1)</span></span><br><span class="line">        <span class="keyword">if</span>(one &gt; zero)&#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            l = mid + <span class="number">1</span>; <span class="comment">// mid可行，尝试更大的值</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = mid - <span class="number">1</span>; <span class="comment">// mid不可行，缩小上界</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📌-复盘总结"><a href="#📌-复盘总结" class="headerlink" title="📌 复盘总结"></a>📌 复盘总结</h2><ul>
+<li><strong>模型识别</strong>：看到“最大化最小值&#x2F;保证最终值≥X”且操作具有单调性，优先尝试 <strong>二分答案</strong>。</li>
+<li><strong>降维技巧</strong>：将具体数值转化为 <code>0/1</code> 状态是处理中位数&#x2F;排序类操作的经典手段。</li>
+<li><strong>连通块思维</strong>：本题的精髓在于发现 <code>(0,1)</code> 是“无效噪声”，剔除后问题退化为经典的 <strong>“多数元素能否覆盖少数连通块”</strong> 的贪心判定。遇到类似合并&#x2F;消除题，多思考“哪些元素会粘连成块，哪些会被吸收”。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260526" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/26/20260526/">2026-05-26 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/26/20260526/" class="archive-article-date">
+  	<time datetime="2026-05-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>六级词汇</li>
+<li>英语（6h++）</li>
+<li>cf 2.5h 一题 + 两题看</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/26/20260526/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Codeforces Round 1099 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -374,84 +680,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/05/26/Codeforces%20Round%201099%20(Div.%202)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260526" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/26/20260526/">2026-05-26 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/26/20260526/" class="archive-article-date">
-  	<time datetime="2026-05-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>六级词汇</li>
-<li>英语（6h++）</li>
-<li>cf 2.5h 一题 + 两题看</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/26/20260526/">展开全文 >></a>
         </p>
       
 
@@ -908,261 +1136,6 @@
 
 
   
-    <article id="post-20260521" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/21/20260521/">2026-05-21 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/21/20260521/" class="archive-article-date">
-  	<time datetime="2026-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>提高篇总结常见算法模型于小本子上</li>
-<li>英语一份</li>
-<li>数学作业</li>
-<li>错题重做</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/21/20260521/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-template-212-dp引入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/">212-dp引入</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/" class="archive-article-date">
-  	<time datetime="2026-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h1 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h1><h1 id="🔍-01背包核心代码深度解析"><a href="#🔍-01背包核心代码深度解析" class="headerlink" title="🔍 01背包核心代码深度解析"></a>🔍 01背包核心代码深度解析</h1><blockquote>
-<p>📌 这是本题最关键的部分！理解了这个，01背包就通了！</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)            <span class="comment">// 枚举每个好友（物品）</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)   <span class="comment">// ⚠️ 逆序！从大到小枚举剩余药量</span></span><br><span class="line">      f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);  <span class="comment">// 选或不选取最大</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="📊-代码逐行拆解"><a href="#📊-代码逐行拆解" class="headerlink" title="📊 代码逐行拆解"></a>📊 代码逐行拆解</h2><h3 id="第一层循环：枚举物品"><a href="#第一层循环：枚举物品" class="headerlink" title="第一层循环：枚举物品"></a>第一层循环：枚举物品</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>含义</th>
-<th>类比</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>i</code></td>
-<td>当前考虑第 <code>i</code> 个好友</td>
-<td>正在决定”要不要挑战这个好友”</td>
-</tr>
-<tr>
-<td><code>n</code></td>
-<td>好友总数</td>
-<td>一共有n个物品可选</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>✅ 外层循环控制”决策顺序”：一个一个好友地考虑</p>
-</blockquote>
-<hr>
-<h3 id="第二层循环：逆序枚举容量（❗核心难点）"><a href="#第二层循环：逆序枚举容量（❗核心难点）" class="headerlink" title="第二层循环：逆序枚举容量（❗核心难点）"></a>第二层循环：逆序枚举容量（❗核心难点）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>含义</th>
-<th>为什么这样写</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>j</code></td>
-<td>当前背包剩余容量（可用药量）</td>
-<td>从大到小枚举，保证每个物品只选一次</td>
-</tr>
-<tr>
-<td><code>x</code></td>
-<td>背包总容量（药物总数）</td>
-<td>初始最大药量</td>
-</tr>
-<tr>
-<td><code>use[i]</code></td>
-<td>第i个物品的”重量”（打赢最少用药）</td>
-<td>药量不够use[i]时无法挑战赢，循环终止</td>
-</tr>
-</tbody></table>
-<h3 id="🎯-为什么必须逆序？（金牌教练重点讲解）"><a href="#🎯-为什么必须逆序？（金牌教练重点讲解）" class="headerlink" title="🎯 为什么必须逆序？（金牌教练重点讲解）"></a>🎯 为什么必须<strong>逆序</strong>？（金牌教练重点讲解）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">假设正序枚举：j = use[i] → x</span><br><span class="line"></span><br><span class="line">❌ 问题：会重复选择同一个物品！</span><br><span class="line"></span><br><span class="line">举例：物品重量=2，价值=3，背包容量=4</span><br><span class="line">初始：f[0]=f[1]=f[2]=f[3]=f[4]=0</span><br><span class="line"></span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 选了一次</span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 6  ❌ f[2]刚被更新，相当于选了两次！</span><br><span class="line"></span><br><span class="line">✅ 逆序枚举：j = x → use[i]</span><br><span class="line"></span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 3  ✓ f[2]还是上一轮的值（没选当前物品）</span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 正确只选一次</span><br><span class="line"></span><br><span class="line">📌 本质：逆序保证状态转移时，f[j-use[i]] 来自&quot;上一轮&quot;（没选当前物品）</span><br></pre></td></tr></table></figure>
-
-<h3 id="🧠-形象理解：一维数组的”时间魔法”"><a href="#🧠-形象理解：一维数组的”时间魔法”" class="headerlink" title="🧠 形象理解：一维数组的”时间魔法”"></a>🧠 形象理解：一维数组的”时间魔法”</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一维数组 f[] 其实是&quot;滚动数组&quot;，隐含了时间维度：</span><br><span class="line"></span><br><span class="line">正序：  新状态 ← 新状态（同一轮）→ 物品被重复选 → 完全背包 ❌</span><br><span class="line">逆序：  新状态 ← 旧状态（上一轮）→ 物品只选一次 → 01背包  ✅</span><br><span class="line"></span><br><span class="line">🎮 类比游戏：</span><br><span class="line">   逆序 = 从背包&quot;右边&quot;开始装物品，不会污染&quot;左边&quot;还没决策的状态</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="状态转移方程：决策的核心"><a href="#状态转移方程：决策的核心" class="headerlink" title="状态转移方程：决策的核心"></a>状态转移方程：决策的核心</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>部分</th>
-<th>含义</th>
-<th>决策</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>f[j]</code>（等号右边）</td>
-<td><strong>不选</strong>第i个好友：用j个药，但不挑战他</td>
-<td>保持原状</td>
-</tr>
-<tr>
-<td><code>f[j-use[i]] + win[i]</code></td>
-<td><strong>选</strong>第i个好友：花use[i]药打赢他，获得额外收益win[i]</td>
-<td>消耗资源换收益</td>
-</tr>
-<tr>
-<td><code>max(...)</code></td>
-<td>两种决策取最优</td>
-<td>贪心思想：局部最优→全局最优</td>
-</tr>
-</tbody></table>
-<h3 id="🎲-决策过程可视化（样例片段）"><a href="#🎲-决策过程可视化（样例片段）" class="headerlink" title="🎲 决策过程可视化（样例片段）"></a>🎲 决策过程可视化（样例片段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假设当前：i=1, use[1]=2, win[1]=30（额外收益）</span><br><span class="line">背包容量x=5，初始f=[0,0,0,0,0,0]</span><br><span class="line"></span><br><span class="line">j=5: f[5]=max(f[5], f[3]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩3药</span><br><span class="line">j=4: f[4]=max(f[4], f[2]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩2药</span><br><span class="line">j=3: f[3]=max(f[3], f[1]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩1药</span><br><span class="line">j=2: f[2]=max(f[2], f[0]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩0药</span><br><span class="line"></span><br><span class="line">结果：f=[0,0,30,30,30,30] → 用≥2药就能获得30额外经验</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🔄-完整流程图解"><a href="#🔄-完整流程图解" class="headerlink" title="🔄 完整流程图解"></a>🔄 完整流程图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">📦 初始状态：</span><br><span class="line">   f = [0, 0, 0, 0, ..., 0]  (长度x+1)</span><br><span class="line">   ohno = lose[1]+lose[2]+...+lose[n]</span><br><span class="line"></span><br><span class="line">🔄 逐个处理好友：</span><br><span class="line">   i=1: 考虑好友1，逆序更新f[] → f记录&quot;选/不选好友1&quot;的最优解</span><br><span class="line">   i=2: 考虑好友2，逆序更新f[] → f记录&quot;选/不选好友1,2&quot;的最优解</span><br><span class="line">   ...</span><br><span class="line">   i=n: 考虑好友n，逆序更新f[] → f[x]即为全局最优额外收益</span><br><span class="line"></span><br><span class="line">🎯 最终答案：</span><br><span class="line">   (f[x] + ohno) * 5</span><br><span class="line">   = (最大额外收益 + 保底经验) × 5倍活动</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🧪-小测试：你能判断正误吗？"><a href="#🧪-小测试：你能判断正误吗？" class="headerlink" title="🧪 小测试：你能判断正误吗？"></a>🧪 小测试：你能判断正误吗？</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面哪种写法是正确的01背包？</span></span><br><span class="line"></span><br><span class="line">A. <span class="keyword">for</span>(j=use[i]; j&lt;=x; j++)     <span class="comment">// 正序</span></span><br><span class="line">B. <span class="keyword">for</span>(j=x; j&gt;=use[i]; j--)     <span class="comment">// 逆序 ✓</span></span><br><span class="line">C. <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=x-use[i]; j++)   <span class="comment">// 从0开始正序</span></span><br><span class="line">D. <span class="keyword">for</span>(j=x-use[i]; j&gt;=<span class="number">0</span>; j--)   <span class="comment">// 逆序但起点错</span></span><br><span class="line"></span><br><span class="line">✅ 答案：B</span><br><span class="line"></span><br><span class="line">💡 记忆口诀：</span><br><span class="line">   <span class="string">&quot;01背包要逆序，完全背包才正序&quot;</span></span><br><span class="line">   <span class="string">&quot;从大到小不重复，从小到大随便取&quot;</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🎁-教练总结：三句话掌握核心"><a href="#🎁-教练总结：三句话掌握核心" class="headerlink" title="🎁 教练总结：三句话掌握核心"></a>🎁 教练总结：三句话掌握核心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ 外层枚举物品 → 一个一个做决策</span><br><span class="line">2️⃣ 内层逆序容量 → 保证每个物品只选一次（01背包灵魂！）</span><br><span class="line">3️⃣ 状态转移取max → 选或不选，哪个收益大要哪个</span><br><span class="line"></span><br><span class="line">🔑 本质：用一维数组+逆序，模拟二维数组的&quot;上一行&quot;状态</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">212-dp引入</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1325,6 +1298,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
@@ -1333,15 +1310,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1357,15 +1330,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1377,15 +1342,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1393,7 +1354,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1401,7 +1366,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1409,7 +1378,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1425,6 +1394,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
@@ -1433,15 +1410,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1450,6 +1419,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
               </li>
             
             <div class="clearfix"></div>

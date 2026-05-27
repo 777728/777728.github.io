@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>Tag: 最小生成树 | Cai Haoran&#39;s Blog</title>
+  <title>Codeforces Round 1100 (Div. 2) | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="curiosity compete progress">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Cai Haoran&#39;s Blog">
-<meta property="og:url" content="https://777728.github.io/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/index.html">
+  <meta name="description" content="[]Codeforces Round 1100 (Div. 2) 📝 算法题错题整理：C2. We Be Flipping (Hard Version)📖 题意概括给定一个长度为 $n$ 的非零整数数组 $a$。你可以执行最多 $n$ 次操作：选择一个索引 $i$（$1 \le i \le n$），必须满足当前 $a_i &gt; 0$，然后将前缀 $a[1 \dots i]$ 的所有元素取反">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces Round 1100 (Div. 2)">
+<meta property="og:url" content="https://777728.github.io/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="curiosity compete progress">
+<meta property="og:description" content="[]Codeforces Round 1100 (Div. 2) 📝 算法题错题整理：C2. We Be Flipping (Hard Version)📖 题意概括给定一个长度为 $n$ 的非零整数数组 $a$。你可以执行最多 $n$ 次操作：选择一个索引 $i$（$1 \le i \le n$），必须满足当前 $a_i &gt; 0$，然后将前缀 $a[1 \dots i]$ 的所有元素取反">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-27T07:37:13.628Z">
 <meta property="article:author" content="Cai Haoran">
+<meta property="article:tag" content="codeforces">
+<meta property="article:tag" content="xcpc">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -156,64 +160,271 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Codeforces Round 1100 (Div. 2)" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2026" class="archive-year">2026</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2026/04/05/template-zuixiaoshenchenshu/" class="archive-article-date">
-  	<time datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2026/04/05/template-zuixiaoshenchenshu/">最小生成树</a>
+    <h1 class="article-title" itemprop="name">
+      Codeforces Round 1100 (Div. 2)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/" class="archive-article-date">
+  	<time datetime="2026-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2232/problem/c">Codeforces Round 1100 (Div. 2)</a></p>
+<h1 id="📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version"><a href="#📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version" class="headerlink" title="📝 算法题错题整理：C2. We Be Flipping (Hard Version)"></a>📝 算法题错题整理：C2. We Be Flipping (Hard Version)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的非零整数数组 $a$。你可以执行最多 $n$ 次操作：选择一个索引 $i$（$1 \le i \le n$），<strong>必须满足当前 $a_i &gt; 0$</strong>，然后将前缀 $a[1 \dots i]$ 的所有元素取反。要求构造一个操作序列，使得最终数组的元素之和最大。</p>
+<h2 id="🧩-题型模板与核心思想"><a href="#🧩-题型模板与核心思想" class="headerlink" title="🧩 题型模板与核心思想"></a>🧩 题型模板与核心思想</h2><p><strong>题型标签</strong>：构造 &#x2F; 贪心 &#x2F; 前缀翻转 &#x2F; 逆向思维<br><strong>核心模板思想</strong>：</p>
+<ol>
+<li><strong>逆向处理</strong>：前缀翻转类问题通常从右向左（$n \to 1$）考虑。因为操作 $i$ 只影响 $1 \dots i$，不会影响 $i+1 \dots n$。逆序决策可以保证后面的元素状态已经固定，不会影响前面的决策。</li>
+<li><strong>状态维护</strong>：用变量记录当前累积的翻转奇偶性（或直接维护当前符号），避免每次模拟 $O(n^2)$ 的翻转过程。</li>
+<li><strong>贪心条件</strong>：只有当当前操作能<strong>改善整体收益</strong>且<strong>满足前置条件</strong>（$a_i &gt; 0$）时才执行。对于本题，当当前位置有效值为正，且包含该位置的前缀和为负时，翻转该前缀能显著增大总和。</li>
+</ol>
+<h2 id="🔍-原代码错误分析"><a href="#🔍-原代码错误分析" class="headerlink" title="🔍 原代码错误分析"></a>🔍 原代码错误分析</h2><p>原代码尝试通过一次枚举寻找“最优翻转点”，存在多处逻辑漏洞：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误片段 1：错误假设仅需一次翻转</span></span><br><span class="line">ll best = suf[<span class="number">0</span>];</span><br><span class="line"><span class="type">int</span> idx = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        ll score = pre[i - <span class="number">1</span>] + suf[i + <span class="number">1</span>] - a[i]; <span class="comment">// 假设翻转一次后左侧全变正</span></span><br><span class="line">        <span class="keyword">if</span> (score &gt; best)&#123; ... &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>问题</strong>：题目允许最多 $n$ 次操作，多次组合翻转往往比单次翻转更优。代码强行限制只选一个 <code>idx</code>，丢失了多次操作的优化空间。</li>
+<li><strong>问题</strong>：<code>pre[i-1]</code> 使用 <code>abs</code> 累加，隐含假设“只要在 <code>idx</code> 翻转一次，左边所有元素都能变成正数”。这是错误的，左侧元素的正负取决于它们原始值与翻转次数的奇偶性，不能简单用绝对值替代。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误片段 2：答案构造逻辑混乱</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = idx - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">    <span class="keyword">if</span> (ans.<span class="built_in">size</span>() &amp; <span class="number">1</span>) a[i] = -a[i];</span><br><span class="line">    <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span>) ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">&#125;</span><br><span class="line">ans.<span class="built_in">push_back</span>(idx);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>问题</strong>：用 <code>ans.size()</code> 的奇偶性来决定是否翻转，没有考虑实际数组状态，属于“硬凑”逻辑。翻转操作必须严格满足<strong>执行时</strong> $a_i &gt; 0$，且翻转后的状态会影响后续决策。该构造无法保证合法性和最优性。</li>
+</ul>
+<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><ol>
+<li><strong>逆序扫描</strong>：从 $i &#x3D; n$ 到 $1$ 遍历。维护当前累积的翻转标记 <code>flip</code>（0 表示未翻转，1 表示已翻转奇数次）。</li>
+<li><strong>计算有效值</strong>：当前位置实际值为 <code>val = a[i] * (flip ? -1 : 1)</code>。</li>
+<li><strong>贪心决策</strong>：<ul>
+<li>维护当前后缀和（或动态前缀和）。逆序遍历时，若 <code>val &gt; 0</code>（满足操作条件），且<strong>包含该位置的前缀和为负</strong>，说明翻转该前缀能使总和增加 $-2 \times \text{前缀和}$，此时执行翻转是最优的。</li>
+<li>执行翻转时，记录索引，并将 <code>flip</code> 状态取反，同时更新当前累积和。</li>
+</ul>
+</li>
+<li><strong>输出顺序</strong>：题目要求按执行顺序输出。因为我们是从右向左决策的，最终需将收集到的操作索引<strong>反转</strong>后输出。</li>
+</ol>
+<p>此方法时间复杂度 $O(n)$，空间复杂度 $O(n)$，完全符合题目限制。</p>
+<h2 id="✅-修正后代码（含注释，无多余空行）"><a href="#✅-修正后代码（含注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含注释，无多余空行）"></a>✅ 修正后代码（含注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin&gt;&gt;n;</span><br><span class="line">    <span class="function">vector&lt;ll&gt; <span class="title">a</span><span class="params">(n<span class="number">+1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">    ll cur_sum=<span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> flip=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        ll val=a[i]*(flip?<span class="number">-1</span>:<span class="number">1</span>);</span><br><span class="line">        cur_sum+=val;</span><br><span class="line">        <span class="keyword">if</span>(val&gt;<span class="number">0</span>&amp;&amp;cur_sum&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">            flip^=<span class="number">1</span>;</span><br><span class="line">            cur_sum+=<span class="number">2</span>*val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">reverse</span>(ans.<span class="built_in">begin</span>(),ans.<span class="built_in">end</span>());</span><br><span class="line">    cout&lt;&lt;ans.<span class="built_in">size</span>()&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ans.<span class="built_in">size</span>();i++) cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&quot; \n&quot;</span>[i==ans.<span class="built_in">size</span>()<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin&gt;&gt;t; <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="📝-算法错题整理-Codeforces-D-Me-When-Median-Problem"><a href="#📝-算法错题整理-Codeforces-D-Me-When-Median-Problem" class="headerlink" title="📝 算法错题整理 | Codeforces D. Me When Median Problem"></a>📝 算法错题整理 | Codeforces D. Me When Median Problem</h1><h2 id="📖-题意概括-1"><a href="#📖-题意概括-1" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定两个长度为 $n$ 的正整数数组 $a$ 和 $b$。需执行恰好 $n-1$ 次操作：每次任选相邻下标 $i$，取出四元组 ${a_i, a_{i+1}, b_i, b_{i+1}}$ 排序为 $s_1 \le s_2 \le s_3 \le s_4$，将 $a$ 的这两个元素替换为 $s_2$，将 $b$ 的这两个元素替换为 $s_3$（数组长度同步减 $1$）。操作结束后仅剩一个元素，求所有操作顺序中 $\min(a_1, b_1)$ 的<strong>最大可能值</strong>。</p>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>答案单调性 → 二分答案</strong><br>若最终能保留 $\ge X$ 的值，则任意 $Y &lt; X$ 也必然可行。因此可对答案进行二分，将原问题转化为 <strong>可行性判定问题</strong>。</li>
+<li><strong>0&#x2F;1 化简</strong><br>对于二分猜测值 $mid$，将数组中 $\ge mid$ 的数标记为 <code>1</code>，$&lt; mid$ 的标记为 <code>0</code>。问题转化为：能否通过操作使最终剩下的两个数均为 <code>1</code>（即状态为 <code>(1,1)</code>）。</li>
+<li><strong>操作本质与贪心策略</strong><br>观察相邻两对 $(a_i,b_i)$ 和 $(a_{i+1},b_{i+1})$ 的类型组合：<ul>
+<li><code>(1,1)</code>：<strong>优势对</strong>，能稳定贡献 <code>1</code>。</li>
+<li><code>(0,0)</code>：<strong>劣势对</strong>，会贡献 <code>0</code>。</li>
+<li><code>(0,1)</code>：<strong>中立对</strong>，在排序取中位数的操作中，相当于“缓冲垫”，不改变 <code>1</code> 和 <code>0</code> 的相对数量差，可被相邻操作安全吸收。<br>因此，<strong>所有 <code>(0,1)</code> 可直接忽略</strong>。忽略后，数组退化为若干段连续的 <code>(0,0)</code> 块和分散的 <code>(1,1)</code>。每次合并操作会减少一个元素对，要使最终结果为 <code>(1,1)</code>，必须满足：<code>(1,1) 的数量 &gt; (0,0) 连续块的数量</code>。</li>
+</ul>
+</li>
+<li><strong>Check 函数实现</strong><br>遍历数组，跳过 <code>type==1</code>，统计 <code>cnt1</code>（<code>(1,1)</code> 个数）和 <code>cnt0</code>（<code>(0,0)</code> 连通块个数）。若 <code>cnt1 &gt; cnt0</code> 则 <code>mid</code> 可行。</li>
+</ol>
+<h2 id="🔍-代码诊断"><a href="#🔍-代码诊断" class="headerlink" title="🔍 代码诊断"></a>🔍 代码诊断</h2><table>
+<thead>
+<tr>
+<th align="left">诊断项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>✅ 逻辑正确性</strong></td>
+<td align="left">原代码的二分框架与状态机计数逻辑完全契合题解思路。利用 <code>prev</code> 变量跳过 <code>(0,1)</code> 并统计 <code>(0,0)</code> 连通块的做法非常巧妙，核心判定 <code>one &gt; zero</code> 正确。</td>
+</tr>
+<tr>
+<td align="left"><strong>⚠️ 潜在隐患</strong></td>
+<td align="left">1. 二分上界 <code>1e9+5</code> 过大，题目明确 $a_i,b_i \le 2n \le 2\times10^5$，过大范围虽不影响正确性但略微拖慢常数。<br>2. <code>prev</code> 状态机在边界情况（如全 <code>(0,1)</code>）下虽能跑通，但语义不够直观，可改为显式布尔标记提升可读性。<br>3. 缺乏关键步骤注释，复盘时易遗忘“为何跳过 <code>type==1</code>”。</td>
+</tr>
+<tr>
+<td align="left"><strong>🛠️ 修正建议</strong></td>
+<td align="left">收紧二分范围至 <code>[1, 200000]</code>；将 <code>prev</code> 替换为 <code>inZeroBlock</code> 标记；采用 <code>l&lt;=r</code> 配合 <code>ans</code> 记录答案，避免边界 <code>-1</code> 陷阱。</td>
+</tr>
+</tbody></table>
+<h2 id="🧩-同类题型模板：二分答案-贪心Check"><a href="#🧩-同类题型模板：二分答案-贪心Check" class="headerlink" title="🧩 同类题型模板：二分答案 + 贪心Check"></a>🧩 同类题型模板：二分答案 + 贪心Check</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标准二分答案框架（求最大值）</span></span><br><span class="line"><span class="type">int</span> l = MIN_VAL, r = MAX_VAL, ans = MIN_VAL;</span><br><span class="line"><span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) &#123;   <span class="comment">// 检查mid是否可行</span></span><br><span class="line">        ans = mid;      <span class="comment">// 记录可行解</span></span><br><span class="line">        l = mid + <span class="number">1</span>;    <span class="comment">// 尝试更大的答案</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        r = mid - <span class="number">1</span>;    <span class="comment">// 答案过大，缩小范围</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ans;</span><br></pre></td></tr></table></figure>
+
+<h2 id="✅-注释完整代码（无多余空行）"><a href="#✅-注释完整代码（无多余空行）" class="headerlink" title="✅ 注释完整代码（无多余空行）"></a>✅ 注释完整代码（无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span>, <span class="title">b</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> &amp;x : a) cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> &amp;x : b) cin &gt;&gt; x;</span><br><span class="line">    <span class="comment">// 二分答案：值域为 [1, 2*10^5]，记录可行最大值</span></span><br><span class="line">    <span class="type">int</span> l = <span class="number">1</span>, r = <span class="number">200005</span>, ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">        <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> one = <span class="number">0</span>, zero = <span class="number">0</span>; <span class="comment">// one统计(1,1)数量，zero统计(0,0)连通块数量</span></span><br><span class="line">        <span class="type">bool</span> inZeroBlock = <span class="literal">false</span>; <span class="comment">// 标记当前是否正处于连续的(0,0)块中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="type">int</span> type = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt;= mid) type++;</span><br><span class="line">            <span class="keyword">if</span>(b[i] &gt;= mid) type++;</span><br><span class="line">            <span class="comment">// type==1 为(0,1)或(1,0)，属于中立元素，操作时不改变优劣差，直接跳过</span></span><br><span class="line">            <span class="keyword">if</span>(type == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(type == <span class="number">2</span>)&#123; <span class="comment">// 遇到(1,1)，必然中断前方的(0,0)块，并累加优势计数</span></span><br><span class="line">                inZeroBlock = <span class="literal">false</span>;</span><br><span class="line">                one++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(type == <span class="number">0</span>)&#123; <span class="comment">// 遇到(0,0)</span></span><br><span class="line">                <span class="keyword">if</span>(!inZeroBlock)&#123; <span class="comment">// 仅在新块起点时累加，合并连续(0,0)为一个块</span></span><br><span class="line">                    zero++;</span><br><span class="line">                    inZeroBlock = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 核心结论：优势对数量必须严格多于劣势块数量，才能保证最终剩下(1,1)</span></span><br><span class="line">        <span class="keyword">if</span>(one &gt; zero)&#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            l = mid + <span class="number">1</span>; <span class="comment">// mid可行，尝试更大的值</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = mid - <span class="number">1</span>; <span class="comment">// mid不可行，缩小上界</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📌-复盘总结"><a href="#📌-复盘总结" class="headerlink" title="📌 复盘总结"></a>📌 复盘总结</h2><ul>
+<li><strong>模型识别</strong>：看到“最大化最小值&#x2F;保证最终值≥X”且操作具有单调性，优先尝试 <strong>二分答案</strong>。</li>
+<li><strong>降维技巧</strong>：将具体数值转化为 <code>0/1</code> 状态是处理中位数&#x2F;排序类操作的经典手段。</li>
+<li><strong>连通块思维</strong>：本题的精髓在于发现 <code>(0,1)</code> 是“无效噪声”，剔除后问题退化为经典的 <strong>“多数元素能否覆盖少数连通块”</strong> 的贪心判定。遇到类似合并&#x2F;消除题，多思考“哪些元素会粘连成块，哪些会被吸收”。</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat-shoukuan.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">最小生成树</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2026/05/27/20260527/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          2026-05-27 日记
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2026/05/26/20260526/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2026-05-26 日记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%A2%98%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86%EF%BC%9AC2-We-Be-Flipping-Hard-Version"><span class="toc-number">1.</span> <span class="toc-text">📝 算法题错题整理：C2. We Be Flipping (Hard Version)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A9-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-number">1.2.</span> <span class="toc-text">🧩 题型模板与核心思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E5%8E%9F%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">🔍 原代码错误分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E6%AD%A3%E7%A1%AE%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.4.</span> <span class="toc-text">💡 正确解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E4%BF%AE%E6%AD%A3%E5%90%8E%E4%BB%A3%E7%A0%81%EF%BC%88%E5%90%AB%E6%B3%A8%E9%87%8A%EF%BC%8C%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">✅ 修正后代码（含注释，无多余空行）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-D-Me-When-Median-Problem"><span class="toc-number">2.</span> <span class="toc-text">📝 算法错题整理 | Codeforces D. Me When Median Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">2.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.</span> <span class="toc-text">💡 解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E8%AF%8A%E6%96%AD"><span class="toc-number">2.3.</span> <span class="toc-text">🔍 代码诊断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A9-%E5%90%8C%E7%B1%BB%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%EF%BC%9A%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E8%B4%AA%E5%BF%83Check"><span class="toc-number">2.4.</span> <span class="toc-text">🧩 同类题型模板：二分答案 + 贪心Check</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9C%85-%E6%B3%A8%E9%87%8A%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%EF%BC%88%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">✅ 注释完整代码（无多余空行）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E5%A4%8D%E7%9B%98%E6%80%BB%E7%BB%93"><span class="toc-number">2.6.</span> <span class="toc-text">📌 复盘总结</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +447,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
