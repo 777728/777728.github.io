@@ -236,6 +236,196 @@
 
 
   
+    <article id="post-20260528" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/28/20260528/">2026-05-28 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/28/20260528/" class="archive-article-date">
+  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语（6h++）</li>
+<li>cf 3h 博弈论 &amp; 动态规划 两题 + 两题看</li>
+<li>数学作业</li>
+<li>副部长竞选ppt</li>
+<li>数分讲题</li>
+<li>数据结构期中 做</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/28/20260528/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf-gametheory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/28/cf-gametheory/">Codeforces Game Theory</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/28/cf-gametheory/" class="archive-article-date">
+  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=games,1200-">Codeforces</a></p>
+<h1 id="📝-错题整理-Codeforces-1472D-Even-Odd-Game-博弈论-贪心"><a href="#📝-错题整理-Codeforces-1472D-Even-Odd-Game-博弈论-贪心" class="headerlink" title="📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)"></a>📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个包含 $n$ 个整数的数组，Alice 和 Bob 轮流从中取数（Alice 先手）。</p>
+<ul>
+<li>若 <strong>Alice</strong> 取到 <strong>偶数</strong>，则将该数加入自己的得分；取到奇数不得分。</li>
+<li>若 <strong>Bob</strong> 取到 <strong>奇数</strong>，则将该数加入自己的得分；取到偶数不得分。<br>每次取数后该元素从数组中删除，数组为空时游戏结束。两人均采取<strong>最优策略</strong>，求最终谁获胜或是否平局。</li>
+</ul>
+<h2 id="🔍-错因分析"><a href="#🔍-错因分析" class="headerlink" title="🔍 错因分析"></a>🔍 错因分析</h2><p>学生的代码将原数组按奇偶性拆分成了 <code>alice</code>（偶数）和 <code>bob</code>（奇数）两个独立数组，并假设两人会先在“对自己有利的数”中交替拿取。<br><strong>❌ 核心错误逻辑片段：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误假设：两人只在各自的优势池子里轮流拿</span></span><br><span class="line"><span class="built_in">sort</span>(alice.<span class="built_in">begin</span>(),alice.<span class="built_in">end</span>(),<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line"><span class="built_in">sort</span>(bob.<span class="built_in">begin</span>(),bob.<span class="built_in">end</span>(),<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = minlen;i &lt; alice.<span class="built_in">size</span>();i+=<span class="number">2</span>) al += alice[i]; <span class="comment">// 仅在自己的剩余偶数里隔一个加一个</span></span><br></pre></td></tr></table></figure>
+<p><strong>💡 为什么错？</strong></p>
+<ol>
+<li><strong>池子是统一的</strong>：游戏规则并未限制只能拿特定奇偶性的数。两人每次面对的是<strong>全局剩余的所有数</strong>。</li>
+<li><strong>最优策略包含“干扰”</strong>：如果当前全局最大值是对方的得分牌（例如 Alice 面对一个巨大的奇数），最优解往往是<strong>直接拿走它</strong>（虽然自己不得分，但阻止了 Bob 得分）。拆分数组的做法完全抹除了“干扰&#x2F;抢夺”这一博弈核心，导致模拟顺序与实际回合严重脱节，必然 WA。</li>
+</ol>
+<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><ol>
+<li><strong>贪心正确性</strong>：无论当前轮到谁，拿走<strong>剩余数字中的最大值</strong>永远是最优选择。如果是自己的得分牌则直接获利；如果是对方的得分牌则等价于“让对方少得分”，收益绝对值相同。</li>
+<li><strong>模拟流程</strong>：<ul>
+<li>将所有数字<strong>从大到小排序</strong>。</li>
+<li>按顺序轮流取数：索引 <code>i</code> 为偶数时是 Alice 的回合，为奇数时是 Bob 的回合。</li>
+<li>维护差值 <code>ans = Alice得分 - Bob得分</code>。Alice 回合遇偶数 <code>ans += v[i]</code>；Bob 回合遇奇数 <code>ans -= v[i]</code>。</li>
+</ul>
+</li>
+<li><strong>结果判定</strong>：遍历结束后，根据 <code>ans</code> 的正负零直接输出 <code>Alice</code>&#x2F;<code>Bob</code>&#x2F;<code>Tie</code>。</li>
+</ol>
+<h2 id="🛠️-题型模板总结（最优策略轮流取数）"><a href="#🛠️-题型模板总结（最优策略轮流取数）" class="headerlink" title="🛠️ 题型模板总结（最优策略轮流取数）"></a>🛠️ 题型模板总结（最优策略轮流取数）</h2><p>此类题目（双方轮流从集合中取数，均采取最优策略）通常遵循固定套路：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 全局排序（通常降序，核心是证明“贪心取最大值”的合理性）</span></span><br><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">rbegin</span>(), a.<span class="built_in">rend</span>());</span><br><span class="line"><span class="comment">// 2. 差值法模拟回合</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> diff = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">0</span>)&#123; <span class="comment">// 先手回合</span></span><br><span class="line">        <span class="keyword">if</span>(满足先手得分条件) diff += a[i];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;        <span class="comment">// 后手回合</span></span><br><span class="line">        <span class="keyword">if</span>(满足后手得分条件) diff -= a[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3. 根据 diff 判定胜负</span></span><br><span class="line"><span class="keyword">if</span>(diff &gt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;First Wins&quot;</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(diff &lt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Second Wins&quot;</span>;</span><br><span class="line"><span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;Tie&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>🔑 避坑指南</strong>：绝对不要按属性拆分数组！保持全局顺序，回合严格交替，抓住“拿最大值”的博弈本质。</p>
+<h2 id="📜-完整注释代码（无多余空行版）"><a href="#📜-完整注释代码（无多余空行版）" class="headerlink" title="📜 完整注释代码（无多余空行版）"></a>📜 完整注释代码（无多余空行版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(n)</span></span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> &amp;e : v) cin &gt;&gt; e;</span><br><span class="line">  <span class="comment">// 贪心核心：全局从大到小排序，保证每次拿的都是当前最优决策</span></span><br><span class="line">  <span class="built_in">sort</span>(v.<span class="built_in">rbegin</span>(), v.<span class="built_in">rend</span>());</span><br><span class="line">  ll ans = <span class="number">0</span>; <span class="comment">// 记录 Alice得分 - Bob得分 的差值</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123; <span class="comment">// Alice 的回合</span></span><br><span class="line">      <span class="keyword">if</span> (v[i] % <span class="number">2</span> == <span class="number">0</span>) ans += v[i]; <span class="comment">// 偶数得分，奇数不得分(等价于不操作)</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// Bob 的回合</span></span><br><span class="line">      <span class="keyword">if</span> (v[i] % <span class="number">2</span> == <span class="number">1</span>) ans -= v[i]; <span class="comment">// 奇数得分，对差值贡献为负</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ans == <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Tie\n&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (ans &gt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Alice\n&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;Bob\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>), cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">  <span class="type">int</span> t;</span><br><span class="line">  cin &gt;&gt; t;</span><br><span class="line">  <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="⏱-复杂度分析"><a href="#⏱-复杂度分析" class="headerlink" title="⏱ 复杂度分析"></a>⏱ 复杂度分析</h2><ul>
+<li><strong>时间复杂度</strong>：$O(N \log N)$，主要耗时在排序。后续单次遍历为 $O(N)$，完美契合题目 $N \le 2 \cdot 10^5$ 的限制。</li>
+<li><strong>空间复杂度</strong>：$O(N)$，用于存储输入数组。排序可原地进行，无额外空间开销。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/28/cf-gametheory/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260527" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -863,170 +1053,9 @@
 
 
   
-    <article id="post-20260523" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/23/20260523/">2026-05-23 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/23/20260523/" class="archive-article-date">
-  	<time datetime="2026-05-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>二份英语</li>
-<li>六级高频词八章</li>
-<li>网站上的算法笔记两小时</li>
-<li>算法导论第三部分</li>
-</ol>
-<h1 id="之后八周的任务"><a href="#之后八周的任务" class="headerlink" title="之后八周的任务"></a>之后八周的任务</h1><ol>
-<li>六级每天早一下一晚四个小时 单词和真题和作文翻译—6h 7:30 - 8:30 13:00 - 14:00 23:00-24:00 18:30-20:00 + 两节课</li>
-<li>算法题 + 回顾—1h 20:00 - 22:30</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/23/20260523/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260522" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/22/20260522/">2026-05-22 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/22/20260522/" class="archive-article-date">
-  	<time datetime="2026-05-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>补上昨天半分英语</li>
-<li>网站上的算法笔记部分</li>
-<li>吃 水活动</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/22/20260522/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1214,15 +1243,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1230,7 +1259,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1242,15 +1275,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1262,23 +1295,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,7 +1303,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1294,7 +1327,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1306,11 +1339,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
             
             <div class="clearfix"></div>
