@@ -768,7 +768,36 @@
 <hr>
 <h2 id="🎁-教练总结：三句话掌握核心"><a href="#🎁-教练总结：三句话掌握核心" class="headerlink" title="🎁 教练总结：三句话掌握核心"></a>🎁 教练总结：三句话掌握核心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ 外层枚举物品 → 一个一个做决策</span><br><span class="line">2️⃣ 内层逆序容量 → 保证每个物品只选一次（01背包灵魂！）</span><br><span class="line">3️⃣ 状态转移取max → 选或不选，哪个收益大要哪个</span><br><span class="line"></span><br><span class="line">🔑 本质：用一维数组+逆序，模拟二维数组的&quot;上一行&quot;状态</span><br></pre></td></tr></table></figure>
 
+<h1 id="📦-P1049-NOIP-2001-普及组-装箱问题-错题整理"><a href="#📦-P1049-NOIP-2001-普及组-装箱问题-错题整理" class="headerlink" title="📦 P1049 [NOIP 2001 普及组] 装箱问题 | 错题整理"></a>📦 P1049 [NOIP 2001 普及组] 装箱问题 | 错题整理</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个容量为 $V$ 的箱子和 $n$ 个物品（每个物品有特定体积）。要求从中挑选若干个物品放入箱子，使得<strong>箱子剩余空间最小</strong>。<br><strong>核心转化：</strong> 剩余空间最小 $\Leftrightarrow$ 装入物品的总体积最大。本题等价于求解在容量限制 $V$ 下，能获得的最大物品体积和。</p>
+<hr>
+<h2 id="🏷️-题型归类-模板代码"><a href="#🏷️-题型归类-模板代码" class="headerlink" title="🏷️ 题型归类 &amp; 模板代码"></a>🏷️ 题型归类 &amp; 模板代码</h2><p><strong>题型：</strong> 动态规划（01背包问题）<br><strong>适用场景：</strong> 每个物品只有“选”或“不选”两种状态，求不超过容量限制下的最大价值&#x2F;体积。<br><strong>一维 DP 核心模板：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dp[j] 表示容量为 j 时的最大价值/体积</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;          <span class="comment">// 枚举物品</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = V; j &gt;= w[i]; j--) &#123;  <span class="comment">// 逆序枚举容量（关键！）</span></span><br><span class="line">        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - w[i]] + v[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="🔍-错误定位与分析"><a href="#🔍-错误定位与分析" class="headerlink" title="🔍 错误定位与分析"></a>🔍 错误定位与分析</h2><p>你提供的初始代码存在以下关键问题：</p>
+<ol>
+<li><strong>循环方向错误（致命）</strong>：内层循环 <code>for(int j = v - a[i]; j &lt;= v; j++)</code> 是<strong>从小到大</strong>遍历。在一维数组优化 01背包 时，必须<strong>从大到小</strong>遍历，否则 <code>dp[j - a[i]]</code> 会引用到当前物品已经更新过的状态，导致同一物品被重复装入（退化为完全背包）。</li>
+<li><strong>状态转移缺失&#x2F;语法错误</strong>：<code>if()</code> 条件为空，且未定义 <code>dp</code> 数组。01背包的转移应为直接比较更新，无需额外 <code>if</code>。</li>
+<li><strong>答案逻辑错误</strong>：定义了 <code>int ans = v;</code> 但未参与状态更新。最终答案应为 <code>总容量 V - 最大已装体积 dp[V]</code>。</li>
+</ol>
+<p><strong>错误片段定位：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 原代码片段</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = v - a[i];j &lt;=v;j++)&#123;</span><br><span class="line">    <span class="keyword">if</span>() <span class="comment">// 条件为空，未定义dp数组，循环方向反了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💡-解题思路拆解"><a href="#💡-解题思路拆解" class="headerlink" title="💡 解题思路拆解"></a>💡 解题思路拆解</h2><ol>
+<li><strong>定义状态</strong>：设 <code>dp[j]</code> 表示当箱子容量为 <code>j</code> 时，能装入物品的<strong>最大总体积</strong>。</li>
+<li><strong>初始化</strong>：<code>dp</code> 数组初始化为 <code>0</code>。表示容量为 <code>0</code> 时最大体积为 <code>0</code>，其余状态由转移方程自然推导。</li>
+<li><strong>状态转移</strong>：对于第 <code>i</code> 个物品（体积为 <code>a[i]</code>），考虑容量 <code>j</code>：<ul>
+<li>不装：<code>dp[j]</code> 保持不变。</li>
+<li>装：前提是 <code>j &gt;= a[i]</code>，体积变为 <code>dp[j - a[i]] + a[i]</code>。</li>
+<li>取两者最大值：<code>dp[j] = max(dp[j], dp[j - a[i]] + a[i])</code>。</li>
+</ul>
+</li>
+<li><strong>空间优化（逆序枚举）</strong>：使用一维数组时，计算 <code>dp[j]</code> 需要依赖上一轮（未考虑当前物品）的 <code>dp[j - a[i]]</code>。若正序遍历，<code>dp[j - a[i]]</code> 会被当前物品提前更新，造成重复使用。<strong>逆序遍历可保证依赖的是上一轮数据。</strong></li>
+<li><strong>输出结果</strong>：<code>dp[V]</code> 即为最大可装体积，最小剩余空间 &#x3D; <code>V - dp[V]</code>。</li>
+</ol>
+<hr>
+<h2 id="💻-完整参考代码（已注释-无多余空行）"><a href="#💻-完整参考代码（已注释-无多余空行）" class="headerlink" title="💻 完整参考代码（已注释 &#x2F; 无多余空行）"></a>💻 完整参考代码（已注释 &#x2F; 无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> v,n;</span><br><span class="line">    cin&gt;&gt;v&gt;&gt;n;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">a</span>(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(v<span class="number">+1</span>,<span class="number">0</span>);<span class="comment">//dp[j]表示容量为j时能装的最大体积，初始化为0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;<span class="comment">//枚举每一个物品</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=v;j&gt;=a[i];j--)&#123;<span class="comment">//逆序枚举容量，保证每个物品只被考虑一次</span></span><br><span class="line">            dp[j]=<span class="built_in">max</span>(dp[j],dp[j-a[i]]+a[i]);<span class="comment">//状态转移：选或不选当前物品</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;v-dp[v]&lt;&lt;endl;<span class="comment">//总容量减去最大已装体积，即为最小剩余空间</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1219,11 +1248,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1235,15 +1264,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1251,19 +1272,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1275,19 +1292,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1299,6 +1320,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
@@ -1307,23 +1336,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1331,7 +1348,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1339,11 +1364,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
