@@ -236,6 +236,84 @@
 
 
   
+    <article id="post-20260531" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/31/20260531/">2026-05-31 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/31/20260531/" class="archive-article-date">
+  	<time datetime="2026-05-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语 一份听力和一份阅读+翻译20（30）+ 单词一章 + 复习</li>
+<li>cf 1h 博弈论 一题 &amp; 洛谷 一题</li>
+<li>徒步东🦌 + 恒隆 + 飞虎队</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/31/20260531/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260530" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -445,6 +523,104 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/05/28/20260528/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf-datastructure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/28/cf-datastructure/">Codeforces Data Structures</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/28/cf-datastructure/" class="archive-article-date">
+  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/problemset/page/1?tags=combine-tags-by-or,data+structures,dfs+and+similar,dp,graphs,1200-1600">Codeforces</a></p>
+<h1 id="📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks"><a href="#📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks" class="headerlink" title="📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks"></a>📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks</h1><h2 id="📂-题型模板"><a href="#📂-题型模板" class="headerlink" title="📂 题型模板"></a>📂 题型模板</h2><p><strong>逆序动态规划 &#x2F; 状态线性缩放模型</strong><br>适用于“当前操作会按固定比例影响后续所有收益&#x2F;状态”的问题。核心套路是<strong>剥离公共缩放因子</strong>，定义“单位初始状态”下的最优子结构，通过<strong>逆序递推</strong>或<strong>贪心决策</strong>求解。空间通常可优化至 $O(1)$。</p>
+<hr>
+<h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定 $n$ 个必须<strong>严格按顺序</strong>处理的任务。初始体力 $S&#x3D;1$。<br>对于任务 $i$（价值 $c_i$，难度衰减 $p_i%$）：</p>
+<ul>
+<li><strong>放弃</strong>：体力 $S$ 不变，不加分。</li>
+<li><strong>完成</strong>：获得 $S \cdot c_i$ 分，随后体力变为 $S \cdot (1 - \frac{p_i}{100})$。<br>求处理完所有任务后能获得的最大总分数。</li>
+</ul>
+<hr>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>核心性质（乘法分配律）</strong>：<br>体力 $S$ 对后续所有任务收益的影响是<strong>纯乘法</strong>的。若后续最优收益为 $K$，则当前体力为 $S$ 时实际收益必为 $S \times K$。因此，<strong>$S$ 的具体数值不改变“做&#x2F;不做”的相对优劣</strong>，仅作为全局乘数。</li>
+<li><strong>逆序 DP 设计</strong>：<br>定义 $f_i$：仅考虑任务 $[i, n]$，且<strong>进入该区间时体力恰好为 1</strong> 时的最大得分。</li>
+<li><strong>状态转移</strong>：  <ul>
+<li><strong>跳过</strong>：体力保持 1，后续收益为 $f_{i+1}$。</li>
+<li><strong>完成</strong>：当前得 $1 \cdot c_i$，体力变为 $1 - p_i&#x2F;100$，后续收益缩放为 $(1 - p_i&#x2F;100) \cdot f_{i+1}$。总收益 $c_i + (1 - \frac{p_i}{100})f_{i+1}$。<br>决策取优：$f_i &#x3D; \max(f_{i+1},\ c_i + (1 - \frac{p_i}{100})f_{i+1})$</li>
+</ul>
+</li>
+<li><strong>边界与滚动</strong>：$f_{n+1}&#x3D;0$。倒序迭代，用 <code>ans</code> 维护上一轮 $f_{i+1}$，更新后即为 $f_i$。</li>
+</ol>
+<hr>
+<h2 id="🛠️-注释后完整代码"><a href="#🛠️-注释后完整代码" class="headerlink" title="🛠️ 注释后完整代码"></a>🛠️ 注释后完整代码</h2><p><em>(已去除多余空行，保留原逻辑结构，添加关键注释，符合 CF 提交规范)</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span><span class="number">+5</span>;</span><br><span class="line"><span class="keyword">using</span> ld=<span class="type">long</span> <span class="type">double</span>;</span><br><span class="line">ld c[N],p[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> cv,pv;cin&gt;&gt;cv&gt;&gt;pv;</span><br><span class="line">        c[i]=cv,p[i]=pv/<span class="number">100.0</span>;<span class="comment">//必须浮点除，否则整型截断为0/1</span></span><br><span class="line">    &#125;</span><br><span class="line">    ld ans=<span class="number">0</span>;<span class="comment">//边界：f[n+1]=0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        <span class="comment">//逆序DP滚动更新：ans当前为f[i+1]，计算后变为f[i]</span></span><br><span class="line">        <span class="comment">//跳过收益f[i+1] vs 完成收益c[i]+f[i+1]*(1-p[i])</span></span><br><span class="line">        ans=<span class="built_in">max</span>(ans,c[i]+ans*(<span class="number">1</span>-p[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;fixed&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> T;cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--) <span class="built_in">solve</span>();<span class="comment">//标准多测循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/28/cf-datastructure/">展开全文 >></a>
         </p>
       
 
@@ -718,6 +894,40 @@
 <li><strong>空间复杂度</strong>：$O(1)$。仅需维护 <code>sum</code> 和 <code>cnt_odd</code>，无需额外数组。</li>
 <li><strong>💡 避坑总结</strong>：遇到“两数合并求最终值”的博弈题，<strong>第一时间分析操作对奇偶性&#x2F;总和的净影响</strong>。本题的核心突破点在于发现 <code>奇数数量每减3必伴随1次总和-1</code>，将复杂博弈降维成简单的取模分类。务必注意前缀和的数据类型与 $k&#x3D;1$ 的边界特判。</li>
 </ul>
+<h1 id="T766535-题解分析"><a href="#T766535-题解分析" class="headerlink" title="T766535 题解分析"></a>T766535 题解分析</h1><h2 id="题目核心"><a href="#题目核心" class="headerlink" title="题目核心"></a>题目核心</h2><ul>
+<li>奇数下标字符可任意重排，偶数下标字符可任意重排</li>
+<li>问能否重排后形成回文串</li>
+</ul>
+<h2 id="正确思路"><a href="#正确思路" class="headerlink" title="正确思路"></a>正确思路</h2><p><strong>关键观察</strong>：回文串中位置 <code>i</code> 和 <code>n+1-i</code> 字符必须相同</p>
+<table>
+<thead>
+<tr>
+<th>字符串长度</th>
+<th>配对位置奇偶性</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>偶数</strong></td>
+<td>一奇一偶</td>
+<td>奇数位字符多重集 &#x3D; 偶数位字符多重集</td>
+</tr>
+<tr>
+<td><strong>奇数</strong></td>
+<td>同奇或同偶</td>
+<td>奇数位字符能自成回文 <strong>且</strong> 偶数位字符能自成回文</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>“能自成回文” &#x3D; 最多一个字符出现奇数次</p>
+</blockquote>
+<h2 id="代码问题"><a href="#代码问题" class="headerlink" title="代码问题"></a>代码问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 中间位置判断错误（下标从0开始时）</span></span><br><span class="line"><span class="keyword">if</span>(s.<span class="built_in">size</span>() % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; i * <span class="number">2</span> == (s.<span class="built_in">size</span>() + <span class="number">1</span>)) <span class="comment">// 应为 i*2 == n-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 未区分 n 奇偶，统一比较 cnt1==cnt2</span></span><br><span class="line"><span class="comment">// n为奇数时应分别检查奇/偶位字符能否各自形成回文</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="参考代码（简洁版）"><a href="#参考代码（简洁版）" class="headerlink" title="参考代码（简洁版）"></a>参考代码（简洁版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">canPalindrome</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cnt)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> odd = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> x : cnt) <span class="keyword">if</span>(x % <span class="number">2</span>) odd++;</span><br><span class="line">    <span class="keyword">return</span> odd &lt;= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) &#123;</span><br><span class="line">        string s; cin &gt;&gt; s;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt1</span><span class="params">(<span class="number">26</span>)</span>, <span class="title">cnt2</span><span class="params">(<span class="number">26</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) </span><br><span class="line">            (i % <span class="number">2</span> == <span class="number">0</span> ? cnt1 : cnt2)[s[i]-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; (cnt1 == cnt2 ? <span class="string">&quot;YES&quot;</span> : <span class="string">&quot;NO&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; (<span class="built_in">canPalindrome</span>(cnt1) &amp;&amp; <span class="built_in">canPalindrome</span>(cnt2) ? <span class="string">&quot;YES&quot;</span> : <span class="string">&quot;NO&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 你的代码能 AC 可能是样例较弱（如 <code>abcba</code> 本身已是回文，走了 <code>s2==s</code> 的捷径）。建议用 <code>acacb</code> 这类边界数据自测。</p>
+</blockquote>
 
       
 
@@ -746,104 +956,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/05/28/cf-gametheory/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-cf-datastructure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/28/cf-datastructure/">Codeforces Data Structures</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/28/cf-datastructure/" class="archive-article-date">
-  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/problemset/page/1?tags=combine-tags-by-or,data+structures,dfs+and+similar,dp,graphs,1200-1600">Codeforces</a></p>
-<h1 id="📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks"><a href="#📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks" class="headerlink" title="📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks"></a>📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks</h1><h2 id="📂-题型模板"><a href="#📂-题型模板" class="headerlink" title="📂 题型模板"></a>📂 题型模板</h2><p><strong>逆序动态规划 &#x2F; 状态线性缩放模型</strong><br>适用于“当前操作会按固定比例影响后续所有收益&#x2F;状态”的问题。核心套路是<strong>剥离公共缩放因子</strong>，定义“单位初始状态”下的最优子结构，通过<strong>逆序递推</strong>或<strong>贪心决策</strong>求解。空间通常可优化至 $O(1)$。</p>
-<hr>
-<h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定 $n$ 个必须<strong>严格按顺序</strong>处理的任务。初始体力 $S&#x3D;1$。<br>对于任务 $i$（价值 $c_i$，难度衰减 $p_i%$）：</p>
-<ul>
-<li><strong>放弃</strong>：体力 $S$ 不变，不加分。</li>
-<li><strong>完成</strong>：获得 $S \cdot c_i$ 分，随后体力变为 $S \cdot (1 - \frac{p_i}{100})$。<br>求处理完所有任务后能获得的最大总分数。</li>
-</ul>
-<hr>
-<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
-<li><strong>核心性质（乘法分配律）</strong>：<br>体力 $S$ 对后续所有任务收益的影响是<strong>纯乘法</strong>的。若后续最优收益为 $K$，则当前体力为 $S$ 时实际收益必为 $S \times K$。因此，<strong>$S$ 的具体数值不改变“做&#x2F;不做”的相对优劣</strong>，仅作为全局乘数。</li>
-<li><strong>逆序 DP 设计</strong>：<br>定义 $f_i$：仅考虑任务 $[i, n]$，且<strong>进入该区间时体力恰好为 1</strong> 时的最大得分。</li>
-<li><strong>状态转移</strong>：  <ul>
-<li><strong>跳过</strong>：体力保持 1，后续收益为 $f_{i+1}$。</li>
-<li><strong>完成</strong>：当前得 $1 \cdot c_i$，体力变为 $1 - p_i&#x2F;100$，后续收益缩放为 $(1 - p_i&#x2F;100) \cdot f_{i+1}$。总收益 $c_i + (1 - \frac{p_i}{100})f_{i+1}$。<br>决策取优：$f_i &#x3D; \max(f_{i+1},\ c_i + (1 - \frac{p_i}{100})f_{i+1})$</li>
-</ul>
-</li>
-<li><strong>边界与滚动</strong>：$f_{n+1}&#x3D;0$。倒序迭代，用 <code>ans</code> 维护上一轮 $f_{i+1}$，更新后即为 $f_i$。</li>
-</ol>
-<hr>
-<h2 id="🛠️-注释后完整代码"><a href="#🛠️-注释后完整代码" class="headerlink" title="🛠️ 注释后完整代码"></a>🛠️ 注释后完整代码</h2><p><em>(已去除多余空行，保留原逻辑结构，添加关键注释，符合 CF 提交规范)</em></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span><span class="number">+5</span>;</span><br><span class="line"><span class="keyword">using</span> ld=<span class="type">long</span> <span class="type">double</span>;</span><br><span class="line">ld c[N],p[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> cv,pv;cin&gt;&gt;cv&gt;&gt;pv;</span><br><span class="line">        c[i]=cv,p[i]=pv/<span class="number">100.0</span>;<span class="comment">//必须浮点除，否则整型截断为0/1</span></span><br><span class="line">    &#125;</span><br><span class="line">    ld ans=<span class="number">0</span>;<span class="comment">//边界：f[n+1]=0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        <span class="comment">//逆序DP滚动更新：ans当前为f[i+1]，计算后变为f[i]</span></span><br><span class="line">        <span class="comment">//跳过收益f[i+1] vs 完成收益c[i]+f[i+1]*(1-p[i])</span></span><br><span class="line">        ans=<span class="built_in">max</span>(ans,c[i]+ans*(<span class="number">1</span>-p[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;fixed&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> T;cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--) <span class="built_in">solve</span>();<span class="comment">//标准多测循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/28/cf-datastructure/">展开全文 >></a>
         </p>
       
 
@@ -1121,134 +1233,6 @@
 
 
   
-    <article id="post-Codeforces Round 1099 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/26/Codeforces%20Round%201099%20(Div.%202)/">Codeforces Round 1099 (Div. 2)</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/26/Codeforces%20Round%201099%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-05-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2231/problem/c">Codeforces Round 1099 (Div. 2)</a></p>
-<hr>
-<h2 id="Codeforces-Round-1099-Div-2-B-Another-Sorting-Problem-错题整理"><a href="#Codeforces-Round-1099-Div-2-B-Another-Sorting-Problem-错题整理" class="headerlink" title="Codeforces Round 1099 (Div. 2) B. Another Sorting Problem 错题整理"></a>Codeforces Round 1099 (Div. 2) B. Another Sorting Problem 错题整理</h2><h3 id="一、-题意概括"><a href="#一、-题意概括" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h3><p>给定一个长度为 $n$ 的数组 $a$。你可以进行<strong>至多一次</strong>操作：</p>
-<ul>
-<li>选择一个正整数 $k$。</li>
-<li>选择数组 $a$ 的一个<strong>子序列</strong>（不要求连续）。</li>
-<li>将子序列中的<strong>每个</strong>元素都加上 $k$。</li>
-</ul>
-<p>问题是：能否通过最多一次操作，使得整个数组变成<strong>非递减</strong>（即有序）的？</p>
-<p><strong>核心难点：</strong> 子序列可以是任意位置的元素，它们加上相同的 $k$。如何判断是否存在这样的 $k$ 和子序列是解题关键。</p>
-<h3 id="二、-学生代码分析"><a href="#二、-学生代码分析" class="headerlink" title="二、 学生代码分析"></a>二、 学生代码分析</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    stack&lt;<span class="type">int</span>&gt;a,b;</span><br><span class="line">    <span class="type">int</span> maxsize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        cin&gt;&gt;x;</span><br><span class="line">        <span class="type">int</span> maxa = <span class="number">0</span>,maxb = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(!a.<span class="built_in">empty</span>()) maxa = a.<span class="built_in">top</span>();</span><br><span class="line">        <span class="keyword">if</span>(!b.<span class="built_in">empty</span>()) maxb = b.<span class="built_in">top</span>();</span><br><span class="line">        <span class="type">int</span> minab = <span class="built_in">min</span>(maxa,maxb);</span><br><span class="line">        <span class="keyword">if</span>(x &lt; minab)&#123;</span><br><span class="line">            cout&lt;&lt;<span class="string">&quot;NO&quot;</span>&lt;&lt;endl;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(x &gt;= maxa) a.<span class="built_in">push</span>(x);</span><br><span class="line">        <span class="keyword">else</span> b.<span class="built_in">push</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> lena = a.<span class="built_in">size</span>();</span><br><span class="line">    <span class="type">int</span> lenb = b.<span class="built_in">size</span>();</span><br><span class="line">    <span class="type">int</span> minlen = <span class="built_in">min</span>(lena,lenb);</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">ansa</span>(minlen),<span class="built_in">ansb</span>(minlen);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = minlen - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">        ansa[i] = a.<span class="built_in">top</span>();</span><br><span class="line">        a.<span class="built_in">pop</span>();</span><br><span class="line">        ansb[i] = b.<span class="built_in">top</span>();</span><br><span class="line">        b.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> kl = <span class="number">0</span>,kr = <span class="number">1000000000</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; minlen;i++)&#123;</span><br><span class="line">        kl = <span class="built_in">max</span>(kl,ansa[i] - ansb[i]);</span><br><span class="line">        <span class="keyword">if</span>(i + <span class="number">1</span> &lt; lena) kr = <span class="built_in">min</span>(ansa[i + <span class="number">1</span>] - ansb[i],kr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(kl &lt;= kr) cout&lt;&lt;<span class="string">&quot;YES&quot;</span>&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">else</span> cout&lt;&lt;<span class="string">&quot;NO&quot;</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-1-整体思路-学生的思路"><a href="#2-1-整体思路-学生的思路" class="headerlink" title="2.1 整体思路 (学生的思路)"></a>2.1 整体思路 (学生的思路)</h4><p>学生代码尝试通过维护两个栈 <code>a</code> 和 <code>b</code> 来将原数组的元素分成两组：</p>
-<ul>
-<li>栈 <code>a</code> 模拟“不进行操作”的元素序列。</li>
-<li>栈 <code>b</code> 模拟“进行操作（加 $k$）”的元素序列。</li>
-</ul>
-<p>在遍历过程中，它试图保证 <code>a</code> 和 <code>b</code> 内部都是非递减的。最后，它尝试计算一个合法的 $k$ 的范围 $[kl, kr]$，如果范围非空，则输出 <code>YES</code>。</p>
-<p>这个思路非常复杂，把问题转化为了一个类似“双栈排序”或“划分两个非递减子序列”的问题，并且后续对 $k$ 的范围计算也不正确。这个方向从根本上就走远了。</p>
-<h4 id="2-2-错误点详解"><a href="#2-2-错误点详解" class="headerlink" title="2.2 错误点详解"></a>2.2 错误点详解</h4><p><strong>核心错误：复杂化了问题模型，且划分逻辑错误</strong></p>
-<p>代码错误地假设可以将原数组完美地划分为两个非递减的子序列，其中一个子序列的每个元素都需要加上同一个 $k$ 来使得最终数组有序。这个模型本身就与原题操作不符，并且会导致错误的判断。</p>
-<p><strong>具体错误代码片段及分析：</strong></p>
-<p><strong>错误点 1： 栈顶比较逻辑错误</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> minab = <span class="built_in">min</span>(maxa, maxb);</span><br><span class="line"><span class="keyword">if</span>(x &lt; minab)&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;NO&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(x &gt;= maxa) a.<span class="built_in">push</span>(x);</span><br><span class="line"><span class="keyword">else</span> b.<span class="built_in">push</span>(x);</span><br></pre></td></tr></table></figure>
-<p>这里，学生试图保证每个栈都是非递减的（栈顶是最大值）。如果当前元素 <code>x</code> 比两个栈顶元素的<strong>较小值</strong>还要小，就直接判 <code>NO</code>。这是错误的。</p>
-<ul>
-<li><strong>反例</strong>：对于数组 <code>[3， 1, 2]</code>，第一个元素 <code>3</code> 入栈 <code>a</code>。第二个元素 <code>1</code> 比栈 <code>a</code> 的栈顶 <code>3</code> 小，也比空栈 <code>b</code> 的栈顶（视为负无穷）小，因此 <code>1 &lt; min(3, -∞) = -∞</code> 不成立，程序会将 <code>1</code> 推入栈 <code>b</code>。此时栈 <code>a</code> 为 <code>[3]</code>，栈 <code>b</code> 为 <code>[1]</code>。第三个元素 <code>2</code> 比 <code>min(3, 1) = 1</code> 大，且大于等于栈 <code>a</code> 的栈顶 <code>3</code> 吗？不，<code>2 &lt; 3</code>。程序会将其推入栈 <code>b</code>。栈 <code>b</code> 变为 <code>[1, 2]</code>。最终栈 <code>a</code> 只有 <code>[3]</code>，栈 <code>b</code> 是 <code>[1, 2]</code>。后续计算 $k$ 的范围会得出 <code>[1, 1]</code>，从而输出 <code>YES</code>。</li>
-<li><strong>问题所在</strong>：这个输出虽然是 <code>YES</code>，但逻辑是歪打正着的。正确的操作应该是：令 $k&#x3D;1$，对子序列 <code>[3]</code> 进行操作，数组变为 <code>[4， 1, 2]</code>，这显然不是有序的。正确的答案应该是 <code>NO</code>。这个例子暴露了学生划分逻辑的致命缺陷：它只是机械地把小的数往后放，完全没有和“同一个 $k$”这个条件有效结合。</li>
-</ul>
-<p><strong>错误点 2： $k$ 的范围计算错误且复杂</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> kl = <span class="number">0</span>, kr = <span class="number">1000000000</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; minlen; i++)&#123;</span><br><span class="line">    kl = <span class="built_in">max</span>(kl, ansa[i] - ansb[i]);</span><br><span class="line">    <span class="keyword">if</span>(i + <span class="number">1</span> &lt; lena) kr = <span class="built_in">min</span>(ansa[i + <span class="number">1</span>] - ansb[i], kr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(kl &lt;= kr) cout &lt;&lt; <span class="string">&quot;YES&quot;</span> &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-<p>这段代码尝试通过对应位置的元素差值来确定 $k$ 的上下界。这个计算方式是基于“栈 <code>a</code> 的元素和栈 <code>b</code> 的元素一一对应”的错误假设上的。实际上，加 $k$ 的子序列和未加 $k$ 的子序列长度不一定相同，它们的相对位置也更复杂。这个计算方法是完全错误的，无法得出正确答案。</p>
-<h3 id="三、-正确思路与模版代码"><a href="#三、-正确思路与模版代码" class="headerlink" title="三、 正确思路与模版代码"></a>三、 正确思路与模版代码</h3><h4 id="3-1-解题思路"><a href="#3-1-解题思路" class="headerlink" title="3.1 解题思路"></a>3.1 解题思路</h4><p>请注意，如果 $a_i \gt a_{i + 1}$ 成立，那么就需要在 $a_{i + 1}$ 中加入 $k$ ，其中 $k \geq a_i - a_{i + 1}$ 。因此， $k \geq \max(0, a_1 - a_2, a_2 - a_3, \ldots, a_{n - 1} - a_n)$ 一定成立。</p>
-<p>让我们证明，如果存在一个合适的 $k$ 和一个序列 $b_1, \ldots, b_m$ 使得序列变得有序，那么我们可以取 $k &#x3D; \max(0, a_1 - a_2, a_2 - a_3, \ldots, a_{n - 1} - a_n)$ 即可能固定数组的最小 $k$ 。为此，我们可以考虑以下几种情况：</p>
-<ul>
-<li>如果索引 $i$ 的元素 $a_i$ 和 $a_{i + 1}$ 都添加了 $k$ ，那么更改 $k$ 并不会改变它们的相对顺序。</li>
-<li>如果在索引 $i$ 中，我们将 $k$ 添加到元素 $a_i$ 中，但没有将其添加到元素 $a_{i + 1}$ 中，那么显然，当减少 $k$ 时，条件仍然满足。(因为在这种情况下，必须取可能的最小数）。</li>
-<li>如果对于索引 $i$ 我们将 $k$ 添加到元素 $a_{i + 1}$ 中，但没有将其添加到元素 $a_i$ 中，那么只有当 $a_i \gt a_{i + 1}$ 时才会出现 $a_{i + 1} + k \lt a_i$ 的情况，但是我们选择了足够大的 $k$ ，因此在这种情况下，操作后 $a_i \geq a_{i + 1} + k$ 成立。</li>
-</ul>
-<p>因此，问题简化为检查是否有可能在某些元素上添加一个固定的数字，从而使序列变得排序。这可以通过一个直接的贪婪算法来完成：我们从左到右进行操作，如果 $a_{i - 1} \gt a_i$ ，那么就需要执行 $a_i :&#x3D; a_i + k$ 。如果这样做之后数组排序了，那么答案就是 “是”，否则就是 “否”。</p>
-<h4 id="3-2-正确代码（带注释）"><a href="#3-2-正确代码（带注释）" class="headerlink" title="3.2 正确代码（带注释）"></a>3.2 正确代码（带注释）</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="type">int</span> mx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) mx = <span class="built_in">max</span>(mx, a[i] - a[i + <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[i - <span class="number">1</span>]) a[i] += mx;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_sorted</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>())) cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="四、-题型模版总结"><a href="#四、-题型模版总结" class="headerlink" title="四、 题型模版总结"></a>四、 题型模版总结</h3><p>这类问题属于 <strong>“至多一次操作使数组有序”</strong> 的构造题或贪心题。</p>
-<p><strong>核心模版：寻找必要操作的下界</strong></p>
-<ol>
-<li><strong>分析“必须修复”的地方</strong>：观察数组中哪些地方是“坏”的（比如本题中的逆序对）。要修复这些地方，操作参数必须满足一个最低要求。</li>
-<li><strong>推导参数下界</strong>：计算出一个操作参数（本题中的 $k$）的最小可能值。这个值是由所有“坏”的地方共同决定的，是所有局部需求的最大值。</li>
-<li><strong>应用最小参数并贪心构造</strong>：使用计算出的最小参数，尝试用最“懒”的策略去解决问题（仅在必要时应用操作）。</li>
-<li><strong>最终校验</strong>：检查应用此贪心策略后的结果是否满足条件。如果能满足，则最小参数就是答案的一部分；如果不满足，则问题无解。</li>
-</ol>
-<p><strong>一句话总结：</strong> 想要用最小的代价（最小的 $k$）和最少的变化（贪心地只在必要时加）去达成目标，如果这都做不到，那就真的做不到了。这种“求下界+贪心验证”的思维在算法竞赛中非常普遍和强大。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/26/Codeforces%20Round%201099%20(Div.%202)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1387,11 +1371,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">luogu</a>
+                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
+                <a href="javascript:void(0)" class="js-tag color1">luogu</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1399,19 +1383,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1423,11 +1395,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1439,19 +1423,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1463,11 +1439,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1475,7 +1447,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1487,7 +1475,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1499,19 +1495,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1523,15 +1511,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
