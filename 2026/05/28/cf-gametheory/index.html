@@ -16,7 +16,7 @@
 <meta property="og:description" content="[]Codeforces 📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)📖 题意概括给定一个包含 $n$ 个整数的数组，Alice 和 Bob 轮流从中取数（Alice 先手）。  若 Alice 取到 偶数，则将该数加入自己的得分；取到奇数不得分。 若 Bob 取到 奇数，则将该数加入自己的得分；取到偶数不得分。每次取数后该元素从数组">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-30T09:24:59.099Z">
+<meta property="article:modified_time" content="2026-05-31T09:18:21.931Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="codeforces">
 <meta property="article:tag" content="xcpc">
@@ -342,6 +342,69 @@
 <hr>
 <h2 id="💻-完整注释代码"><a href="#💻-完整注释代码" class="headerlink" title="💻 完整注释代码"></a>💻 完整注释代码</h2><p><em>(严格按原代码结构添加注释，无多余空行)</em></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, k, cnt = <span class="number">0</span>;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k &gt;&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> c : s) <span class="keyword">if</span>(c == <span class="string">&#x27;1&#x27;</span>) cnt++; <span class="comment">// 统计初始&#x27;1&#x27;的个数</span></span><br><span class="line">    <span class="comment">// 判定逻辑：</span></span><br><span class="line">    <span class="comment">// ① cnt&lt;=k：Alice首轮可直接清零所有&#x27;1&#x27;，立即获胜。</span></span><br><span class="line">    <span class="comment">// ② n&lt;2*k：任意长为k的子串必相交，Bob操作受限，Alice可保证cnt每轮严格递减至0。</span></span><br><span class="line">    <span class="comment">// ③ 否则：Bob总能找到不相交子串固定制造k个&#x27;1&#x27;，抵消Alice消除，游戏无限进行。</span></span><br><span class="line">    cout &lt;&lt; (cnt &lt;= k || n &lt; <span class="number">2</span>*k ? <span class="string">&quot;Alice&quot;</span> : <span class="string">&quot;Bob&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="📝-算法错题整理-Codeforces-Good-Bye-2023-C-Training-Before-the-Olympiad"><a href="#📝-算法错题整理-Codeforces-Good-Bye-2023-C-Training-Before-the-Olympiad" class="headerlink" title="📝 算法错题整理 | Codeforces Good Bye 2023 C. Training Before the Olympiad"></a>📝 算法错题整理 | Codeforces Good Bye 2023 C. Training Before the Olympiad</h1><h2 id="📖-一、题意概括"><a href="#📖-一、题意概括" class="headerlink" title="📖 一、题意概括"></a>📖 一、题意概括</h2><p>给定一个长度为 $n$ 的数组 $a$。Masha（先手）与 Olya（后手）轮流操作，直到数组只剩 $1$ 个元素：</p>
+<ul>
+<li>每次任选两个不同位置的数 $a_i, a_j$，将其移除，并加入新数 $\lfloor \frac{a_i+a_j}{2} \rfloor \times 2$。</li>
+<li>Masha 希望最终值<strong>最大</strong>，Olya 希望最终值<strong>最小</strong>。<br><strong>要求</strong>：对每个前缀长度 $k&#x3D;1,2,\dots,n$，输出双方最优策略下的最终结果。</li>
+</ul>
+<h2 id="🧩-二、题型定位与核心考点"><a href="#🧩-二、题型定位与核心考点" class="headerlink" title="🧩 二、题型定位与核心考点"></a>🧩 二、题型定位与核心考点</h2><ul>
+<li><strong>题型</strong>：博弈论 + 数学思维 + 前缀维护</li>
+<li><strong>核心考点</strong>：操作本质分析、奇偶性对总和的影响、周期性规律提取、$O(1)$ 递推</li>
+<li><strong>模板框架</strong>：此类“博弈操作求极值”且数据范围达 $10^5$ 的题目，通常<strong>不能模拟&#x2F;DFS</strong>，必须寻找操作对全局变量（如总和、奇偶计数）的固定影响规律，转化为数学公式。</li>
+</ul>
+<h2 id="🚨-三、代码错误剖析（附典型片段）"><a href="#🚨-三、代码错误剖析（附典型片段）" class="headerlink" title="🚨 三、代码错误剖析（附典型片段）"></a>🚨 三、代码错误剖析（附典型片段）</h2><blockquote>
+<p>💡 注：您未提供个人提交代码。以下整理本题在训练中<strong>最高频的 3 类错误写法</strong>，请对照自查：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">错误类型</th>
+<th align="left">典型错误片段</th>
+<th align="left">错误原因与修正建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>1. 未特判 $k&#x3D;1$</strong></td>
+<td align="left"><code>if (cnt % 3 == 1) ans = sum - cnt/3 - 1;</code></td>
+<td align="left">当 $k&#x3D;1$ 且 $a_1$ 为奇数时，公式会错误地 $-1$。<strong>修正</strong>：必须单独处理 <code>if (k == 1) { cout &lt;&lt; a[1]; continue; }</code></td>
+</tr>
+<tr>
+<td align="left"><strong>2. 前缀和未开 <code>long long</code></strong></td>
+<td align="left"><code>int sum = 0; sum += a[i];</code></td>
+<td align="left">$a_i \le 10^9$，累加后极易溢出 <code>int</code> 范围（最大约 $10^{14}$）。<strong>修正</strong>：统一使用 <code>long long</code> 存储和与答案。</td>
+</tr>
+<tr>
+<td align="left"><strong>3. 误用贪心模拟&#x2F;暴力配对</strong></td>
+<td align="left"><code>for(int i=0;i&lt;k;i++) for(int j=i+1;j&lt;k;j++) { ... }</code></td>
+<td align="left">每次操作后数组重组，模拟复杂度为 $O(k^2)$ 或指数级，直接 TLE。<strong>修正</strong>：抓住“每 3 个奇数必产生 1 次损失”的周期规律，$O(1)$ 计算。</td>
+</tr>
+</tbody></table>
+<h2 id="🧠-四、完整解题思路"><a href="#🧠-四、完整解题思路" class="headerlink" title="🧠 四、完整解题思路"></a>🧠 四、完整解题思路</h2><ol>
+<li><strong>操作本质转换</strong>：$\lfloor \frac{x+y}{2} \rfloor \times 2$ 等价于：若 $x,y$ 同奇偶，和不变；若一奇一偶，总和 $-1$。因此<strong>最终答案 &#x3D; 前缀和 - 损失次数</strong>。</li>
+<li><strong>博弈策略分析</strong>：<ul>
+<li>Masha（最大化）：优先配对<strong>两个奇数</strong>（消耗 2 个奇数，生成 1 个偶数，损失 $0$）。</li>
+<li>Olya（最小化）：优先配对<strong>一奇一偶</strong>（消耗 1 个奇数，生成 1 个偶数，损失 $1$）。</li>
+</ul>
+</li>
+<li><strong>周期规律提取</strong>：设前缀奇数个数为 $cnt$。Masha 先手消耗 2 个奇数 $\rightarrow$ Olya 后手消耗 1 个奇数。<strong>每两轮 $cnt$ 减少 3，总损失固定 $+1$</strong>。</li>
+<li><strong>分类讨论</strong>（$k&gt;1$ 时）：<ul>
+<li>$cnt \bmod 3 &#x3D; 0$：奇数刚好分完，损失 $&#x3D; cnt&#x2F;3$。答案 $&#x3D; sum - cnt&#x2F;3$。</li>
+<li>$cnt \bmod 3 &#x3D; 1$：剩 1 个奇数，Olya 必能再制造 1 次奇偶配对。损失 $&#x3D; cnt&#x2F;3 + 1$。答案 $&#x3D; sum - cnt&#x2F;3 - 1$。</li>
+<li>$cnt \bmod 3 &#x3D; 2$：剩 2 个奇数，Masha 将其配对成偶数（无损失），后续全偶数配对无损失。损失 $&#x3D; cnt&#x2F;3$。答案 $&#x3D; sum - cnt&#x2F;3$。</li>
+</ul>
+</li>
+<li><strong>统一公式</strong>：<code>loss = cnt / 3 + (cnt % 3 == 1 ? 1 : 0)</code>，直接输出 <code>sum - loss</code> 即可。</li>
+</ol>
+<h2 id="💻-五、AC-模板代码（C-已注释-无多余空行）"><a href="#💻-五、AC-模板代码（C-已注释-无多余空行）" class="headerlink" title="💻 五、AC 模板代码（C++ | 已注释 | 无多余空行）"></a>💻 五、AC 模板代码（C++ | 已注释 | 无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> sum = <span class="number">0</span>; <span class="type">int</span> cnt_odd = <span class="number">0</span>, x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; x; sum += x; <span class="keyword">if</span> (x % <span class="number">2</span> != <span class="number">0</span>) cnt_odd++;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">1</span>) &#123; cout &lt;&lt; x &lt;&lt; (i == n ? <span class="string">&quot;\n&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="keyword">continue</span>; &#125;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> loss = cnt_odd / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (cnt_odd % <span class="number">3</span> == <span class="number">1</span>) loss += <span class="number">1</span>;</span><br><span class="line">        cout &lt;&lt; sum - loss &lt;&lt; (i == n ? <span class="string">&quot;\n&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t; <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📊-六、复杂度与复习建议"><a href="#📊-六、复杂度与复习建议" class="headerlink" title="📊 六、复杂度与复习建议"></a>📊 六、复杂度与复习建议</h2><ul>
+<li><strong>时间复杂度</strong>：$O(n)$。单次遍历前缀，每次 $O(1)$ 公式计算，完美契合 $\sum n \le 10^5$。</li>
+<li><strong>空间复杂度</strong>：$O(1)$。仅需维护 <code>sum</code> 和 <code>cnt_odd</code>，无需额外数组。</li>
+<li><strong>💡 避坑总结</strong>：遇到“两数合并求最终值”的博弈题，<strong>第一时间分析操作对奇偶性&#x2F;总和的净影响</strong>。本题的核心突破点在于发现 <code>奇数数量每减3必伴随1次总和-1</code>，将复杂博弈降维成简单的取模分类。务必注意前缀和的数据类型与 $k&#x3D;1$ 的边界特判。</li>
+</ul>
+
       
 
       
@@ -454,18 +517,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2026/05/28/cf-datastructure/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/05/28/20260528/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Codeforces Data Structures
+          2026-05-28 日记
         
       </div>
     </a>
   
   
-    <a href="/2026/05/27/20260527/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">2026-05-27 日记</div>
+    <a href="/2026/05/28/cf-datastructure/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Codeforces Data Structures</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -492,7 +555,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-1472D-Even-Odd-Game-%E5%8D%9A%E5%BC%88%E8%AE%BA-%E8%B4%AA%E5%BF%83"><span class="toc-number">1.</span> <span class="toc-text">📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E9%94%99%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">🔍 错因分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E6%AD%A3%E7%A1%AE%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">💡 正确解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E6%80%BB%E7%BB%93%EF%BC%88%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5%E8%BD%AE%E6%B5%81%E5%8F%96%E6%95%B0%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">🛠️ 题型模板总结（最优策略轮流取数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%E7%89%88%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">📜 完整注释代码（无多余空行版）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%8F%B1-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">⏱ 复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-832-Div-2-C-Swap-Game"><span class="toc-number">2.</span> <span class="toc-text">📝 算法错题整理 | Codeforces 832 Div.2 C. Swap Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-%E4%B8%80%E3%80%81%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">2.1.</span> <span class="toc-text">📋 一、题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E4%BA%8C%E3%80%81%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">💡 二、核心思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%91-%E5%85%B3%E9%94%AE%E8%A7%82%E5%AF%9F"><span class="toc-number">2.2.1.</span> <span class="toc-text">🔑 关键观察</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E8%83%9C%E8%B4%9F%E5%88%A4%E5%AE%9A%E7%BB%93%E8%AE%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">🎯 胜负判定结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%90-%E8%AF%81%E6%98%8E%E7%AE%80%E8%BF%B0%EF%BC%88%E5%8F%8D%E8%AF%81%E6%B3%95-%E7%AD%96%E7%95%A5%E6%A8%A1%E4%BB%BF%EF%BC%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">📐 证明简述（反证法+策略模仿）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%A9-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E6%8F%90%E7%82%BC"><span class="toc-number">2.2.4.</span> <span class="toc-text">🧩 题型模板提炼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E6%9E%90"><span class="toc-number">2.2.5.</span> <span class="toc-text">🔍 代码片段分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%9B%9B%E3%80%81%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E5%8E%9F%E6%A0%B7-%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">🧠 四、完整注释代码（原样+无多余空行）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%8E-%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93"><span class="toc-number">2.3.1.</span> <span class="toc-text">💎 解题技巧总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-1034-D-Binary-String-Battle"><span class="toc-number">3.</span> <span class="toc-text">📝 算法错题整理 | Codeforces 1034 D. Binary String Battle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">3.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8B%98%E8%AF%AF"><span class="toc-number">3.2.</span> <span class="toc-text">🔍 代码检查与勘误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E6%A2%B3%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">💡 解题思路梳理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%8A%80%E5%B7%A7"><span class="toc-number">3.4.</span> <span class="toc-text">🛠️ 题型模板与核心技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">3.5.</span> <span class="toc-text">💻 完整注释代码</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-1472D-Even-Odd-Game-%E5%8D%9A%E5%BC%88%E8%AE%BA-%E8%B4%AA%E5%BF%83"><span class="toc-number">1.</span> <span class="toc-text">📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">1.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E9%94%99%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">🔍 错因分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E6%AD%A3%E7%A1%AE%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">💡 正确解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E6%80%BB%E7%BB%93%EF%BC%88%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5%E8%BD%AE%E6%B5%81%E5%8F%96%E6%95%B0%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">🛠️ 题型模板总结（最优策略轮流取数）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%9C-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%E7%89%88%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">📜 完整注释代码（无多余空行版）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%8F%B1-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">⏱ 复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-832-Div-2-C-Swap-Game"><span class="toc-number">2.</span> <span class="toc-text">📝 算法错题整理 | Codeforces 832 Div.2 C. Swap Game</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-%E4%B8%80%E3%80%81%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">2.1.</span> <span class="toc-text">📋 一、题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E4%BA%8C%E3%80%81%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">2.2.</span> <span class="toc-text">💡 二、核心思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%91-%E5%85%B3%E9%94%AE%E8%A7%82%E5%AF%9F"><span class="toc-number">2.2.1.</span> <span class="toc-text">🔑 关键观察</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E8%83%9C%E8%B4%9F%E5%88%A4%E5%AE%9A%E7%BB%93%E8%AE%BA"><span class="toc-number">2.2.2.</span> <span class="toc-text">🎯 胜负判定结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%90-%E8%AF%81%E6%98%8E%E7%AE%80%E8%BF%B0%EF%BC%88%E5%8F%8D%E8%AF%81%E6%B3%95-%E7%AD%96%E7%95%A5%E6%A8%A1%E4%BB%BF%EF%BC%89"><span class="toc-number">2.2.3.</span> <span class="toc-text">📐 证明简述（反证法+策略模仿）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A7%A9-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E6%8F%90%E7%82%BC"><span class="toc-number">2.2.4.</span> <span class="toc-text">🧩 题型模板提炼</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%88%86%E6%9E%90"><span class="toc-number">2.2.5.</span> <span class="toc-text">🔍 代码片段分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%9B%9B%E3%80%81%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81%EF%BC%88%E5%8E%9F%E6%A0%B7-%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">🧠 四、完整注释代码（原样+无多余空行）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%8E-%E8%A7%A3%E9%A2%98%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93"><span class="toc-number">2.3.1.</span> <span class="toc-text">💎 解题技巧总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-1034-D-Binary-String-Battle"><span class="toc-number">3.</span> <span class="toc-text">📝 算法错题整理 | Codeforces 1034 D. Binary String Battle</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC-1"><span class="toc-number">3.1.</span> <span class="toc-text">📖 题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%8D-%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8B%98%E8%AF%AF"><span class="toc-number">3.2.</span> <span class="toc-text">🔍 代码检查与勘误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%A1-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E6%A2%B3%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">💡 解题思路梳理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E9%A2%98%E5%9E%8B%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%8A%80%E5%B7%A7"><span class="toc-number">3.4.</span> <span class="toc-text">🛠️ 题型模板与核心技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E5%AE%8C%E6%95%B4%E6%B3%A8%E9%87%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">3.5.</span> <span class="toc-text">💻 完整注释代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%9D-%E7%AE%97%E6%B3%95%E9%94%99%E9%A2%98%E6%95%B4%E7%90%86-Codeforces-Good-Bye-2023-C-Training-Before-the-Olympiad"><span class="toc-number">4.</span> <span class="toc-text">📝 算法错题整理 | Codeforces Good Bye 2023 C. Training Before the Olympiad</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%96-%E4%B8%80%E3%80%81%E9%A2%98%E6%84%8F%E6%A6%82%E6%8B%AC"><span class="toc-number">4.1.</span> <span class="toc-text">📖 一、题意概括</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A9-%E4%BA%8C%E3%80%81%E9%A2%98%E5%9E%8B%E5%AE%9A%E4%BD%8D%E4%B8%8E%E6%A0%B8%E5%BF%83%E8%80%83%E7%82%B9"><span class="toc-number">4.2.</span> <span class="toc-text">🧩 二、题型定位与核心考点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%A8-%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E9%94%99%E8%AF%AF%E5%89%96%E6%9E%90%EF%BC%88%E9%99%84%E5%85%B8%E5%9E%8B%E7%89%87%E6%AE%B5%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">🚨 三、代码错误剖析（附典型片段）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%A7%A0-%E5%9B%9B%E3%80%81%E5%AE%8C%E6%95%B4%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">4.4.</span> <span class="toc-text">🧠 四、完整解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%92%BB-%E4%BA%94%E3%80%81AC-%E6%A8%A1%E6%9D%BF%E4%BB%A3%E7%A0%81%EF%BC%88C-%E5%B7%B2%E6%B3%A8%E9%87%8A-%E6%97%A0%E5%A4%9A%E4%BD%99%E7%A9%BA%E8%A1%8C%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">💻 五、AC 模板代码（C++ | 已注释 | 无多余空行）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8A-%E5%85%AD%E3%80%81%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E5%A4%8D%E4%B9%A0%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.6.</span> <span class="toc-text">📊 六、复杂度与复习建议</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -653,14 +716,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">project</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
@@ -673,11 +728,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -685,11 +752,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -709,15 +776,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,18 +800,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
@@ -749,7 +808,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -761,19 +836,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -781,11 +844,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
