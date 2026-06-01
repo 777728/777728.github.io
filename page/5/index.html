@@ -158,6 +158,339 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-template-110-集合" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/10/template-110-%E9%9B%86%E5%90%88/">110-集合</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/10/template-110-%E9%9B%86%E5%90%88/" class="archive-article-date">
+  	<time datetime="2026-05-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="“最小化最大值”-“二分图染色”"><a href="#“最小化最大值”-“二分图染色”" class="headerlink" title="“最小化最大值” + “二分图染色”"></a>“最小化最大值” + “二分图染色”</h1><h1 id="🎯-P1892-BalticOI-2003-团伙-金牌教练详解"><a href="#🎯-P1892-BalticOI-2003-团伙-金牌教练详解" class="headerlink" title="🎯 P1892 [BalticOI 2003] 团伙 - 金牌教练详解"></a>🎯 P1892 [BalticOI 2003] 团伙 - 金牌教练详解</h1><blockquote>
+<p>📌 <strong>一句话题意</strong>：n个人，给定朋友&#x2F;敌人关系，满足”朋友的朋友是朋友”、”敌人的敌人是朋友”，求最多能分成多少个团体（连通块）。</p>
+</blockquote>
+<hr>
+<h2 id="📚-核心知识点"><a href="#📚-核心知识点" class="headerlink" title="📚 核心知识点"></a>📚 核心知识点</h2><h3 id="1️⃣-并查集（Union-Find）基础"><a href="#1️⃣-并查集（Union-Find）基础" class="headerlink" title="1️⃣ 并查集（Union-Find）基础"></a>1️⃣ 并查集（Union-Find）基础</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────┐</span><br><span class="line">│  • find(x): 查找x所在集合的代表元  │</span><br><span class="line">│  • union(x,y): 合并x和y的集合    │</span><br><span class="line">│  • 核心思想：用树结构维护等价关系  │</span><br><span class="line">└─────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="2️⃣-本题关键：敌人关系的传递性建模"><a href="#2️⃣-本题关键：敌人关系的传递性建模" class="headerlink" title="2️⃣ 本题关键：敌人关系的传递性建模"></a>2️⃣ 本题关键：敌人关系的传递性建模</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">💡 &quot;敌人的敌人是朋友&quot; 如何转化为并查集操作？</span><br><span class="line"></span><br><span class="line">假设：A与B是敌人，A与C也是敌人</span><br><span class="line">推导：B和C都是A的敌人 → B和C应该是朋友 → 合并B和C</span><br><span class="line"></span><br><span class="line">实现技巧：用 enm[i] 记录 i 的&quot;敌人代表&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧠-解题思路图解"><a href="#🧠-解题思路图解" class="headerlink" title="🧠 解题思路图解"></a>🧠 解题思路图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">输入处理流程：</span><br><span class="line">                    </span><br><span class="line">  读入关系 opt p q</span><br><span class="line">         │</span><br><span class="line">    ┌────┴────┐</span><br><span class="line">    ▼         ▼</span><br><span class="line">  opt==&#x27;F&#x27;  opt==&#x27;E&#x27;</span><br><span class="line">    │         │</span><br><span class="line">    ▼         ▼</span><br><span class="line"> 合并p,q    ┌─────────────────┐</span><br><span class="line">           │ 处理p的敌人记录： │</span><br><span class="line">           │ • enm[p]==0 → 记录enm[p]=find(q)</span><br><span class="line">           │ • enm[p]!=0 → 合并q和enm[p]（敌人的敌人）</span><br><span class="line">           │ 对称处理q...    │</span><br><span class="line">           └─────────────────┘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💻-原代码-逐行注释（保持原样）"><a href="#💻-原代码-逐行注释（保持原样）" class="headerlink" title="💻 原代码 + 逐行注释（保持原样）"></a>💻 原代码 + 逐行注释（保持原样）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,m,f[<span class="number">1001</span>],enm[<span class="number">1001</span>];  <span class="comment">// f[i]: i在并查集中的父节点; enm[i]: i的&quot;敌人代表&quot;(记录第一个敌人所在集合的根)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找x的根节点（祖先）- 简化版，无路径压缩</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span>            </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(f[x]!=x) x=f[x]; <span class="comment">// 不断向上跳，直到找到根节点（f[x]==x）</span></span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并x和y所在的集合 - 简单合并，无按秩优化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">hebing</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span>    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x=<span class="built_in">find</span>(x); y=<span class="built_in">find</span>(y);  <span class="comment">// 先找到x和y各自的根节点</span></span><br><span class="line">    <span class="keyword">if</span>(x==y) <span class="keyword">return</span>;       <span class="comment">// 如果已在同一集合，无需操作</span></span><br><span class="line">    f[y]=x;                <span class="comment">// 将y的根挂到x的根下，完成合并</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">     <span class="comment">// 初始化：每个人自成一个集合，父节点指向自己</span></span><br><span class="line">     <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        f[i]=i;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 处理m条关系</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> p,q;</span><br><span class="line">        <span class="type">char</span> c;</span><br><span class="line">        cin&gt;&gt;c&gt;&gt;p&gt;&gt;q;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">&#x27;F&#x27;</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">hebing</span>(p,q);  <span class="comment">// 【朋友关系】直接合并两人所在集合</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// c==&#x27;E&#x27;，【敌人关系】核心逻辑在此！</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 处理p的敌人记录</span></span><br><span class="line">            <span class="keyword">if</span>(enm[p]==<span class="number">0</span>) </span><br><span class="line">                enm[p]=<span class="built_in">find</span>(q);        <span class="comment">// p第一次有敌人，记录q的根作为p的敌人代表</span></span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="built_in">hebing</span>(q,enm[p]);      <span class="comment">// p已有敌人，新敌人q应与旧敌人代表合并（敌人的敌人=朋友）</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 对称处理q的敌人记录（双向关系）</span></span><br><span class="line">            <span class="keyword">if</span>(enm[q]==<span class="number">0</span>) </span><br><span class="line">                enm[q]=<span class="built_in">find</span>(p);        <span class="comment">// q第一次有敌人，记录p的根作为q的敌人代表</span></span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="built_in">hebing</span>(p,enm[q]);      <span class="comment">// q已有敌人，新敌人p应与旧敌人代表合并</span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 统计每个集合的大小（通过根节点计数）</span></span><br><span class="line">    <span class="type">int</span> count[<span class="number">1001</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        count[<span class="built_in">find</span>(i)]++;  <span class="comment">// 找到i的根，该集合人数+1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 统计有多少个非空集合 = 团体数量</span></span><br><span class="line">    <span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">if</span>(count[i]) cnt++;  <span class="comment">// count[i]&gt;0 说明i是某个集合的根节点</span></span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;cnt;  <span class="comment">// 输出答案</span></span><br><span class="line"> &#125; </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔑-题型模板总结"><a href="#🔑-题型模板总结" class="headerlink" title="🔑 题型模板总结"></a>🔑 题型模板总结</h2><h3 id="📦-并查集基础模板（建议掌握路径压缩-按秩合并）"><a href="#📦-并查集基础模板（建议掌握路径压缩-按秩合并）" class="headerlink" title="📦 并查集基础模板（建议掌握路径压缩+按秩合并）"></a>📦 并查集基础模板（建议掌握路径压缩+按秩合并）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> f[MAXN];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> f[x] == x ? x : f[x] = <span class="built_in">find</span>(f[x]);  <span class="comment">// 路径压缩</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    x = <span class="built_in">find</span>(x), y = <span class="built_in">find</span>(y);</span><br><span class="line">    <span class="keyword">if</span>(x != y) f[y] = x;  <span class="comment">// 可加按秩合并优化</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="🎭-“敌人关系”类题目两种解法对比"><a href="#🎭-“敌人关系”类题目两种解法对比" class="headerlink" title="🎭 “敌人关系”类题目两种解法对比"></a>🎭 “敌人关系”类题目两种解法对比</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>核心思想</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>enm数组法</strong>（本题）</td>
+<td>记录每个人的”敌人代表”，新敌人与旧敌人合并</td>
+<td>代码短，空间小</td>
+<td>逻辑稍绕，易漏对称处理</td>
+</tr>
+<tr>
+<td><strong>扩展域法</strong>⭐推荐</td>
+<td>每人拆成”自己”和”敌人”两个域，用并查集维护</td>
+<td>逻辑清晰，易扩展</td>
+<td>空间×2，需理解拆点思想</td>
+</tr>
+</tbody></table>
+<h3 id="🌟-扩展域解法（更优雅，建议掌握）"><a href="#🌟-扩展域解法（更优雅，建议掌握）" class="headerlink" title="🌟 扩展域解法（更优雅，建议掌握）"></a>🌟 扩展域解法（更优雅，建议掌握）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将i拆成：i(自己), i+n(敌人)</span></span><br><span class="line"><span class="comment">// F p q: merge(p,q), merge(p+n, q+n)  // 朋友的朋友是朋友</span></span><br><span class="line"><span class="comment">// E p q: merge(p, q+n), merge(p+n, q)  // 敌人的敌人是朋友</span></span><br><span class="line"><span class="comment">// 答案：统计1~n中不同根的数量</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧪-样例手动模拟（输入-1）"><a href="#🧪-样例手动模拟（输入-1）" class="headerlink" title="🧪 样例手动模拟（输入#1）"></a>🧪 样例手动模拟（输入#1）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">初始：6个人，各自独立 &#123;1&#125;&#123;2&#125;&#123;3&#125;&#123;4&#125;&#123;5&#125;&#123;6&#125;</span><br><span class="line"></span><br><span class="line">1. E 1 4: </span><br><span class="line">   enm[1]=4, enm[4]=1  → 集合不变</span><br><span class="line"></span><br><span class="line">2. F 3 5: </span><br><span class="line">   合并3和5 → &#123;3,5&#125;</span><br><span class="line"></span><br><span class="line">3. F 4 6: </span><br><span class="line">   合并4和6 → &#123;4,6&#125;</span><br><span class="line"></span><br><span class="line">4. E 1 2: </span><br><span class="line">   enm[1]=4(已有) → 合并2和4 → &#123;2,4,6&#125;</span><br><span class="line">   enm[2]=1(新) → 记录</span><br><span class="line">   同时：enm[1]已存在，2与4合并 ✓</span><br><span class="line"></span><br><span class="line">最终集合：&#123;1&#125;, &#123;2,4,6&#125;, &#123;3,5&#125; → 共3个团体 ✓</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-易错点提醒"><a href="#⚠️-易错点提醒" class="headerlink" title="⚠️ 易错点提醒"></a>⚠️ 易错点提醒</h2><ol>
+<li><strong>敌人关系要双向处理</strong>：处理p时别忘了对称处理q</li>
+<li><strong>enm存的是根节点</strong>：<code>enm[p]=find(q)</code> 而不是 <code>enm[p]=q</code></li>
+<li><strong>统计答案时用find(i)</strong>：确保找到最终根节点</li>
+<li><strong>数组下标从1开始</strong>：题目人员编号1~n</li>
+</ol>
+<hr>
+<h2 id="🎓-教练总结"><a href="#🎓-教练总结" class="headerlink" title="🎓 教练总结"></a>🎓 教练总结</h2><blockquote>
+<p>这道题是并查集的经典变形，核心在于<strong>将逻辑关系转化为集合操作</strong>。</p>
+<p>✅ 掌握要点：</p>
+<ul>
+<li>朋友关系 → 直接合并</li>
+<li>敌人关系 → 用辅助数组记录，通过”敌人的敌人”间接合并</li>
+</ul>
+<p>🚀 进阶建议：尝试用<strong>扩展域并查集</strong>重写本题，理解”拆点”思想，这对后续处理2-SAT、二分图等问题大有裨益！</p>
+</blockquote>
+<h2 id="P1525-关押罪犯-题解"><a href="#P1525-关押罪犯-题解" class="headerlink" title="P1525 关押罪犯 | 题解"></a>P1525 关押罪犯 | 题解</h2><h2 id="📋-题意概括"><a href="#📋-题意概括" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><ul>
+<li><code>N</code> 名罪犯，<code>M</code> 对仇恨关系，每对怨气值为 <code>c</code></li>
+<li>分配到 <strong>2 个监狱</strong>，若同一监狱内有仇恨的两人 → 产生影响力为 <code>c</code> 的冲突</li>
+<li><strong>目标</strong>：最小化所有冲突中 <strong>影响力最大的那个值</strong></li>
+<li>输出这个最小化的最大值；若无冲突输出 <code>0</code></li>
+</ul>
+<blockquote>
+<p>本质：<strong>最小化最大值</strong> + <strong>二分图判定</strong></p>
+</blockquote>
+<hr>
+<h2 id="💡-核心思路"><a href="#💡-核心思路" class="headerlink" title="💡 核心思路"></a>💡 核心思路</h2><h3 id="方法：贪心-并查集（敌人合并法）"><a href="#方法：贪心-并查集（敌人合并法）" class="headerlink" title="方法：贪心 + 并查集（敌人合并法）"></a>方法：贪心 + 并查集（敌人合并法）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关键观察：让怨气大的罪犯尽量分开，第一个&quot;无法分开&quot;的怨气值就是答案</span><br></pre></td></tr></table></figure>
+
+<p><strong>算法步骤</strong>：</p>
+<ol>
+<li>所有边按怨气值 <strong>从大到小排序</strong></li>
+<li>依次处理每条边 <code>(u, v, w)</code>：<ul>
+<li>若 <code>u</code> 和 <code>v</code> 已在同一集合 → 不可避免冲突，输出 <code>w</code> 结束</li>
+<li>否则：将 <code>u</code> 与 <code>v</code> 的敌人合并，<code>v</code> 与 <code>u</code> 的敌人合并（敌人的敌人&#x3D;朋友）</li>
+</ul>
+</li>
+<li>若全部处理完无冲突 → 输出 <code>0</code></li>
+</ol>
+<p><strong>并查集维护</strong>：</p>
+<ul>
+<li><code>fa[x]</code>：x 所在集合</li>
+<li><code>enemy[x]</code>：x 的敌人（只需记录一个，其余通过并查集传递）</li>
+</ul>
+<hr>
+<h2 id="🧩-代码实现（优化版）"><a href="#🧩-代码实现（优化版）" class="headerlink" title="🧩 代码实现（优化版）"></a>🧩 代码实现（优化版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">20005</span>, M = <span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    <span class="type">int</span> u, v, w;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> Edge&amp; t) <span class="type">const</span> &#123; <span class="keyword">return</span> w &gt; t.w; &#125; <span class="comment">// 从大到小</span></span><br><span class="line">&#125; e[M];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, fa[N], enemy[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fa[x] == x ? x : fa[x] = <span class="built_in">find</span>(fa[x]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    x = <span class="built_in">find</span>(x), y = <span class="built_in">find</span>(y);</span><br><span class="line">    <span class="keyword">if</span> (x != y) fa[x] = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) fa[i] = i;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;e[i].u, &amp;e[i].v, &amp;e[i].w);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">sort</span>(e + <span class="number">1</span>, e + m + <span class="number">1</span>); <span class="comment">// 怨气值降序</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        <span class="type">int</span> u = e[i].u, v = e[i].v, w = e[i].w;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">find</span>(u) == <span class="built_in">find</span>(v)) &#123; <span class="comment">// 无法分开，当前w即为答案</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, w);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 敌人的敌人合并</span></span><br><span class="line">        <span class="keyword">if</span> (enemy[u]) <span class="built_in">merge</span>(enemy[u], v);</span><br><span class="line">        <span class="keyword">else</span> enemy[u] = v;</span><br><span class="line">        <span class="keyword">if</span> (enemy[v]) <span class="built_in">merge</span>(enemy[v], u);</span><br><span class="line">        <span class="keyword">else</span> enemy[v] = u;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;0&quot;</span>); <span class="comment">// 无冲突</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔍-复杂度分析"><a href="#🔍-复杂度分析" class="headerlink" title="🔍 复杂度分析"></a>🔍 复杂度分析</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>排序</td>
+<td><code>O(M log M)</code></td>
+</tr>
+<tr>
+<td>并查集操作</td>
+<td><code>O(M · α(N))</code> ≈ <code>O(M)</code></td>
+</tr>
+<tr>
+<td><strong>总复杂度</strong></td>
+<td><strong><code>O(M log M)</code></strong></td>
+</tr>
+<tr>
+<td>空间</td>
+<td><code>O(N + M)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h2><ol>
+<li><strong>必须排序</strong>：贪心核心，先处理大怨气边</li>
+<li><strong>敌人合并逻辑</strong>：<code>enemy[u]</code> 只存一个代表，其余关系靠并查集传递</li>
+<li><strong>无冲突输出 0</strong>：循环正常结束说明所有仇恨对都可分开</li>
+<li>也可用 <strong>扩展域并查集</strong>（<code>x</code> 和 <code>x+N</code> 表示两个监狱），逻辑更对称</li>
+</ol>
+<h1 id="线性筛-并查集"><a href="#线性筛-并查集" class="headerlink" title="线性筛+并查集"></a>线性筛+并查集</h1><h3 id="【题意概括】"><a href="#【题意概括】" class="headerlink" title="【题意概括】"></a>【题意概括】</h3><p>给定区间 $[a,b]$ 内的整数，初始各自独立。若两数存在公共质因数 $\ge p$，则合并它们所在的集合。重复至无法合并，求最终集合总数。</p>
+<h3 id="【类题模版思路】"><a href="#【类题模版思路】" class="headerlink" title="【类题模版思路】"></a>【类题模版思路】</h3><ul>
+<li><strong>核心模型</strong>：并查集（DSU）处理集合合并与连通块统计。</li>
+<li><strong>因数&#x2F;倍数合并技巧</strong>：以<strong>质数</strong>为“中转枢纽”，枚举质数 $q$，将其在目标区间内的所有倍数批量 <code>union</code>，避免两两建边的 $O(n^2)$ 复杂度。</li>
+<li><strong>答案统计</strong>：遍历目标区间，统计 <code>find(i) == i</code> 的数量。</li>
+</ul>
+<h3 id="【本题思路】"><a href="#【本题思路】" class="headerlink" title="【本题思路】"></a>【本题思路】</h3><ol>
+<li><strong>筛法预处理</strong>：埃筛标记 $[2,b]$ 的合数，筛出的即为质数。</li>
+<li><strong>质数桥接合并</strong>：对每个质数 $q \ge p$，计算其在 $[a,b]$ 内的首个倍数，将该倍数与区间内后续所有 $q$ 的倍数依次合并。</li>
+<li><strong>统计连通块</strong>：遍历 $[a,b]$，调用 <code>find</code> 统计不同根节点个数。</li>
+</ol>
+<ul>
+<li>复杂度：$O(b \log \log b)$，完全满足 $10^5$ 规模。</li>
+</ul>
+<h3 id="【参考代码】（DSU-标准实现，更简洁高效）"><a href="#【参考代码】（DSU-标准实现，更简洁高效）" class="headerlink" title="【参考代码】（DSU 标准实现，更简洁高效）"></a>【参考代码】（DSU 标准实现，更简洁高效）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">100005</span>;</span><br><span class="line"><span class="type">int</span> fa[N];</span><br><span class="line"><span class="type">bool</span> is_comp[N]; <span class="comment">// 合数标记</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; <span class="keyword">return</span> fa[x] == x ? x : fa[x] = <span class="built_in">find</span>(fa[x]); &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">unite</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123; x = <span class="built_in">find</span>(x), y = <span class="built_in">find</span>(y); <span class="keyword">if</span> (x != y) fa[x] = y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a, b, p;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b &gt;&gt; p;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= b; ++i) fa[i] = i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= b; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!is_comp[i]) &#123; <span class="comment">// i 为质数</span></span><br><span class="line">            <span class="keyword">if</span> (i &gt;= p) &#123;</span><br><span class="line">                <span class="comment">// 合并 [a,b] 中 i 的所有倍数</span></span><br><span class="line">                <span class="type">int</span> first = (a + i - <span class="number">1</span>) / i * i; </span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = first + i; j &lt;= b; j += i) <span class="built_in">unite</span>(first, j);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i * <span class="number">2</span>; j &lt;= b; j += i) is_comp[j] = <span class="literal">true</span>; <span class="comment">// 筛合数</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = a; i &lt;= b; ++i) <span class="keyword">if</span> (<span class="built_in">find</span>(i) == i) ++ans;</span><br><span class="line">    cout &lt;&lt; ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="并查集-离散化"><a href="#并查集-离散化" class="headerlink" title="并查集+离散化"></a>并查集+离散化</h1><h1 id="🎯-P1955-NOI2015-程序自动分析-金牌教练精讲"><a href="#🎯-P1955-NOI2015-程序自动分析-金牌教练精讲" class="headerlink" title="🎯 P1955 [NOI2015] 程序自动分析 - 金牌教练精讲"></a>🎯 P1955 [NOI2015] 程序自动分析 - 金牌教练精讲</h1><blockquote>
+<p>📌 <strong>题型分类</strong>：并查集 + 离散化 + 约束满足问题</p>
+</blockquote>
+<hr>
+<h2 id="📋-题意概括-1"><a href="#📋-题意概括-1" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><p>给定 <code>n</code> 个约束条件，每个条件形如：</p>
+<ul>
+<li><code>x_i = x_j</code>（e&#x3D;1）：两变量<strong>必须相等</strong></li>
+<li><code>x_i ≠ x_j</code>（e&#x3D;0）：两变量<strong>必须不等</strong></li>
+</ul>
+<p>🔍 <strong>目标</strong>：判断是否存在一种赋值方案，使得<strong>所有约束同时满足</strong>。</p>
+<p>✅ 满足 → 输出 <code>YES</code><br>❌ 矛盾 → 输出 <code>NO</code></p>
+<hr>
+<h2 id="💡-核心思路-1"><a href="#💡-核心思路-1" class="headerlink" title="💡 核心思路"></a>💡 核心思路</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│  相等关系具有传递性 → 并查集维护    │</span><br><span class="line">│  不等关系用于验证 → 检查是否同集合  │</span><br><span class="line">│  变量范围10^9 → 离散化压缩坐标      │</span><br><span class="line">└─────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="🔄-解题四步法"><a href="#🔄-解题四步法" class="headerlink" title="🔄 解题四步法"></a>🔄 解题四步法</h3><table>
+<thead>
+<tr>
+<th align="center">步骤</th>
+<th>操作</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1️⃣</td>
+<td><strong>收集+离散化</strong></td>
+<td>将10^9范围的变量映射到[1,2n]</td>
+</tr>
+<tr>
+<td align="center">2️⃣</td>
+<td><strong>并查集初始化</strong></td>
+<td><code>fa[i]=i</code>，每个变量独立</td>
+</tr>
+<tr>
+<td align="center">3️⃣</td>
+<td><strong>先处理相等约束</strong></td>
+<td><code>e=1</code> 的合并到同一集合</td>
+</tr>
+<tr>
+<td align="center">4️⃣</td>
+<td><strong>再验证不等约束</strong></td>
+<td><code>e=0</code> 的若在同一集合则矛盾</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>关键</strong>：必须先处理所有相等约束，再检查不等约束！否则可能误判。</p>
+</blockquote>
+<hr>
+<h2 id="🧩-并查集模板（路径压缩版）"><a href="#🧩-并查集模板（路径压缩版）" class="headerlink" title="🧩 并查集模板（路径压缩版）"></a>🧩 并查集模板（路径压缩版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找根节点 + 路径压缩</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == fa[x]) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> fa[x] = <span class="built_in">get</span>(fa[x]);  <span class="comment">// 压缩路径，加速后续查询</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并两个集合</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">    fa[<span class="built_in">get</span>(x)] = <span class="built_in">get</span>(y);  <span class="comment">// 让x的根指向y的根</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🗂️-离散化三步走"><a href="#🗂️-离散化三步走" class="headerlink" title="🗂️ 离散化三步走"></a>🗂️ 离散化三步走</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设 book[] 存储了所有出现过的变量值</span></span><br><span class="line"><span class="comment">// step1: 排序</span></span><br><span class="line"><span class="built_in">sort</span>(book, book + tot);</span><br><span class="line"></span><br><span class="line"><span class="comment">// step2: 去重，reu为去重后的元素个数</span></span><br><span class="line"><span class="type">int</span> reu = <span class="built_in">unique</span>(book, book + tot) - book;</span><br><span class="line"></span><br><span class="line"><span class="comment">// step3: 二分映射，将原值映射到[0, reu-1]</span></span><br><span class="line">a[i].x = <span class="built_in">lower_bound</span>(book, book + reu, a[i].x) - book;</span><br><span class="line">a[i].y = <span class="built_in">lower_bound</span>(book, book + reu, a[i].y) - book;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>📝 <code>unique</code> 返回去重后末尾迭代器，<code>lower_bound</code> 返回第一个≥目标值的位置</p>
+</blockquote>
+<hr>
+<h2 id="💻-注释完整版代码（原汁原味-详解）"><a href="#💻-注释完整版代码（原汁原味-详解）" class="headerlink" title="💻 注释完整版代码（原汁原味+详解）"></a>💻 注释完整版代码（原汁原味+详解）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> t, n, f[<span class="number">1000007</span>], book[<span class="number">1000007</span>*<span class="number">3</span>];  </span><br><span class="line"><span class="comment">// t:测试组数, n:约束个数, f[]:并查集父节点, book[]:离散化缓存数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span> &#123;</span><br><span class="line">    <span class="type">int</span> x, y, e;  <span class="comment">// x,y:变量编号(离散化前), e:1表示相等,0表示不等</span></span><br><span class="line">&#125; a[<span class="number">1000001</span>];  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 排序规则：e大的(相等约束)排前面，确保先处理相等关系</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.e &gt; b.e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并查集初始化：每个节点的父节点是自己</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">first</span><span class="params">(<span class="type">int</span> kkk)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= kkk; i++) f[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并查集查找 + 路径压缩</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x == f[x]) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> f[x] = <span class="built_in">get</span>(f[x]);  <span class="comment">// 递归压缩，下次查询O(1)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--) &#123;</span><br><span class="line">        <span class="type">int</span> tot = <span class="number">-1</span>;  <span class="comment">// book数组的有效下标（从0开始）</span></span><br><span class="line">        <span class="built_in">memset</span>(book, <span class="number">0</span>, <span class="built_in">sizeof</span>(book));</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(f, <span class="number">0</span>, <span class="built_in">sizeof</span>(f));</span><br><span class="line">        <span class="type">int</span> flag = <span class="number">1</span>;  <span class="comment">// 标记当前测试用例是否可行</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 读入所有约束，同时收集变量值用于离散化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;a[i].x, &amp;a[i].y, &amp;a[i].e);</span><br><span class="line">            book[++tot] = a[i].x;  <span class="comment">// 收集x</span></span><br><span class="line">            book[++tot] = a[i].y;  <span class="comment">// 收集y</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ========== 离散化开始 ==========</span></span><br><span class="line">        <span class="built_in">sort</span>(book, book + tot);  <span class="comment">// 排序</span></span><br><span class="line">        <span class="type">int</span> reu = <span class="built_in">unique</span>(book, book + tot) - book;  <span class="comment">// 去重，reu=不同变量个数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将原变量值映射到[0, reu-1]的连续整数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            a[i].x = <span class="built_in">lower_bound</span>(book, book + reu, a[i].x) - book;</span><br><span class="line">            a[i].y = <span class="built_in">lower_bound</span>(book, book + reu, a[i].y) - book;   </span><br><span class="line">        &#125; </span><br><span class="line">        <span class="comment">// ========== 离散化结束 ==========</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">first</span>(reu);   <span class="comment">// 初始化并查集，大小为去重后的变量数</span></span><br><span class="line">        <span class="built_in">sort</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>, cmp);  <span class="comment">// 按e降序：先处理相等约束</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 核心逻辑：合并+验证</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> r1 = <span class="built_in">get</span>(a[i].x);</span><br><span class="line">            <span class="type">int</span> r2 = <span class="built_in">get</span>(a[i].y);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(a[i].e) &#123;</span><br><span class="line">                <span class="comment">// 相等约束：合并两个变量所在集合</span></span><br><span class="line">                f[r1] = r2;  <span class="comment">// merge操作</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(r1 == r2) &#123;</span><br><span class="line">                <span class="comment">// 不等约束：若已在同一集合，矛盾！</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">                flag = <span class="number">0</span>;  <span class="comment">// 标记失败</span></span><br><span class="line">                <span class="keyword">break</span>;     <span class="comment">// 提前退出，节省时间</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);  <span class="comment">// 所有约束都满足</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎁-通用模板提炼（背下来！）"><a href="#🎁-通用模板提炼（背下来！）" class="headerlink" title="🎁 通用模板提炼（背下来！）"></a>🎁 通用模板提炼（背下来！）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 【并查集+离散化】约束满足问题通用框架</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 离散化函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">discretize</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; vals)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">sort</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>());</span><br><span class="line">    vals.<span class="built_in">erase</span>(<span class="built_in">unique</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>()), vals.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">getId</span><span class="params">(<span class="type">int</span> x, <span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vals)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lower_bound</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>(), x) - vals.<span class="built_in">begin</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 并查集类（建议封装）</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">DSU</span> &#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; fa;</span><br><span class="line">    <span class="built_in">DSU</span>(<span class="type">int</span> n) : <span class="built_in">fa</span>(n) &#123; <span class="built_in">iota</span>(fa.<span class="built_in">begin</span>(), fa.<span class="built_in">end</span>(), <span class="number">0</span>); &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x == fa[x] ? x : fa[x] = <span class="built_in">find</span>(fa[x]); &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">unite</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123; fa[<span class="built_in">find</span>(x)] = <span class="built_in">find</span>(y); &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">same</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">find</span>(x) == <span class="built_in">find</span>(y); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 主逻辑骨架</span></span><br><span class="line"><span class="comment">// (1) 读入所有约束，收集变量值</span></span><br><span class="line"><span class="comment">// (2) 离散化变量</span></span><br><span class="line"><span class="comment">// (3) 初始化并查集</span></span><br><span class="line"><span class="comment">// (4) 先处理所有&quot;相等&quot;约束：unite(x,y)</span></span><br><span class="line"><span class="comment">// (5) 再验证所有&quot;不等&quot;约束：若same(x,y)则矛盾</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-易错点提醒（血泪经验！）"><a href="#⚠️-易错点提醒（血泪经验！）" class="headerlink" title="⚠️ 易错点提醒（血泪经验！）"></a>⚠️ 易错点提醒（血泪经验！）</h2><table>
+<thead>
+<tr>
+<th align="left">错误</th>
+<th align="left">后果</th>
+<th align="left">正确做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">❌ 不开离散化</td>
+<td align="left">MLE&#x2F;RE（10^9数组开不下）</td>
+<td align="left">✅ 用<code>unique+lower_bound</code>压缩</td>
+</tr>
+<tr>
+<td align="left">❌ 先处理不等约束</td>
+<td align="left">误判（相等关系未传递）</td>
+<td align="left">✅ 按<code>e</code>降序排序，相等优先</td>
+</tr>
+<tr>
+<td align="left">❌ 并查集不初始化</td>
+<td align="left">父节点随机，结果错误</td>
+<td align="left">✅ 每组数据<code>fa[i]=i</code></td>
+</tr>
+<tr>
+<td align="left">❌ 忘记路径压缩</td>
+<td align="left">超时（退化成链）</td>
+<td align="left">✅ <code>return fa[x]=get(fa[x])</code></td>
+</tr>
+<tr>
+<td align="left">❌ 多组数据不清空</td>
+<td align="left">上组数据污染</td>
+<td align="left">✅ <code>memset</code>或局部变量重置</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📈-复杂度分析"><a href="#📈-复杂度分析" class="headerlink" title="📈 复杂度分析"></a>📈 复杂度分析</h2><ul>
+<li><strong>时间</strong>：<code>O(t × n log n)</code>  <ul>
+<li>离散化排序 <code>O(n log n)</code>  </li>
+<li>并查集操作 <code>O(α(n))</code> ≈ O(1)</li>
+</ul>
+</li>
+<li><strong>空间</strong>：<code>O(n)</code>  <ul>
+<li>存储约束 + 离散化数组 + 并查集</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>🏆 <strong>教练寄语</strong>：这道题是并查集+离散化的经典组合，掌握后能解决一大类”等价关系传递+矛盾检测”问题。记住：<strong>先合并，再验证；大坐标，先离散</strong>！加油，下次比赛稳拿这100分！💪</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">110-集合</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/10/template-110-%E9%9B%86%E5%90%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260509" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1441,83 +1774,6 @@
 
 
   
-    <article id="post-20260505" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/05/20260505/">假期</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/05/20260505/" class="archive-article-date">
-  	<time datetime="2026-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>回家九小时</li>
-<li>数分期中复习</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/05/20260505/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1656,19 +1912,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">luogu</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1680,7 +1924,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color1">niuke</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1688,11 +1936,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1700,11 +1944,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1716,7 +1968,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1724,11 +1984,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1736,11 +1992,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1748,35 +2004,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1784,19 +2016,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1804,7 +2044,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深入浅出基础篇重点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
             
             <div class="clearfix"></div>
