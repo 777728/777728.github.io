@@ -158,6 +158,336 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260604" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/04/20260604/">2026-06-04 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/04/20260604/" class="archive-article-date">
+  	<time datetime="2026-06-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语 两份听力和一份阅读+翻译20（70）+ 单词一章 + 复习</li>
+<li>cf 1h 博弈论 一题 &amp; 马蹄杯进阶塔01</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/04/20260604/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-luogu-mati-进阶塔" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/04/luogu-mati-%E8%BF%9B%E9%98%B6%E5%A1%94/">洛谷马蹄杯进阶塔</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/04/luogu-mati-%E8%BF%9B%E9%98%B6%E5%A1%94/" class="archive-article-date">
+  	<time datetime="2026-06-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="MT2002-·-买马-算法题错题整理"><a href="#MT2002-·-买马-算法题错题整理" class="headerlink" title="MT2002 · 买马 - 算法题错题整理"></a>MT2002 · 买马 - 算法题错题整理</h3><h4 id="1-题型总结"><a href="#1-题型总结" class="headerlink" title="1. 题型总结"></a>1. 题型总结</h4><ul>
+<li><strong>核心算法</strong>：枚举（Brute Force） + 哈希判重（Hashing &#x2F; Duplicate Check）。</li>
+<li><strong>解题模版</strong>：<ol>
+<li>确定枚举变量（本题为模数 $k$）的范围。</li>
+<li>在循环内，使用一个标记数组（或 <code>set</code>&#x2F;<code>map</code>）来记录当前 $k$ 下产生的余数。</li>
+<li>遍历所有数据，计算余数。如果余数已存在，说明冲突，当前 $k$ 不合法；否则标记该余数。</li>
+<li>如果所有数据都无冲突，则找到答案。</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-题意概括"><a href="#2-题意概括" class="headerlink" title="2. 题意概括"></a>2. 题意概括</h4><p>市场中有 $n$ 匹马，编号为 $s_i$。需要找到一个最小的整数 $k$，使得所有马的编号对 $k$ 取模（$s_i \pmod k$）的结果互不相同（即没有两匹马被映射到同一个马厩）。</p>
+<h4 id="3-代码错误分析"><a href="#3-代码错误分析" class="headerlink" title="3. 代码错误分析"></a>3. 代码错误分析</h4><p>学生的代码逻辑大体正确（枚举 $k$ 并检查冲突），但在<strong>边界条件</strong>和<strong>数组大小</strong>上存在严重错误，会导致答案错误或运行时错误（Runtime Error）。</p>
+<ul>
+<li><strong>错误点 1：枚举范围过小</strong><ul>
+<li><strong>原代码</strong>：<code>for(int i = 1; i &lt;= 100; i++)</code></li>
+<li><strong>分析</strong>：题目中马的数量 $n \le 100$。根据鸽巢原理，要让 $n$ 个数取模后互不相同，模数 $k$ 至少要等于 $n$。如果 $n&#x3D;100$，且答案恰好是 101 或更大，原代码循环到 100 就停止了，会导致找不到答案。题目中马的编号可达 1000，因此 $k$ 的枚举上限应该更大（例如 1000 或 2000）。</li>
+</ul>
+</li>
+<li><strong>错误点 2：标记数组（vis）大小固定</strong><ul>
+<li><strong>原代码</strong>：<code>vector&lt;int&gt;vis(100, 0);</code></li>
+<li><strong>分析</strong>：<code>vis</code> 数组用来存储余数是否出现过。余数的范围是 $0$ 到 $k-1$。原代码固定 <code>vis</code> 大小为 100。<ul>
+<li>如果修正了循环上限（例如到 1000），当 $k&#x3D;500$ 时，余数可能是 499，访问 <code>vis[499]</code> 会导致<strong>数组越界（Segmentation Fault）</strong>。</li>
+<li><code>vis</code> 的大小应该动态设置为当前的模数 $k$（即代码中的 <code>i</code>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>错误点 3：枚举起始值 inefficient</strong><ul>
+<li><strong>原代码</strong>：<code>i = 1</code></li>
+<li><strong>分析</strong>：虽然从 1 开始枚举逻辑上没错（因为 $k &lt; n$ 时一定会冲突），但效率低。直接从 $n$ 开始枚举更符合逻辑。</li>
+</ul>
+</li>
+</ul>
+<h1 id="算法题错题整理：MT2003-·-三角数"><a href="#算法题错题整理：MT2003-·-三角数" class="headerlink" title="算法题错题整理：MT2003 · 三角数"></a>算法题错题整理：MT2003 · 三角数</h1><h2 id="1-题意概括"><a href="#1-题意概括" class="headerlink" title="1. 题意概括"></a>1. 题意概括</h2><p><strong>题目描述</strong>：<br>定义三角数为 $T_k &#x3D; \frac{k(k+1)}{2}$ （$k$ 为正整数）。<br>如果一个数 $x$ 可以表示为两个三角数之和（即 $x &#x3D; T_a + T_b$），则称 $x$ 为“双倍三角数”。<br>给定一个整数 $n$ ($1 \le n \le 10^9$)，判断 $n$ 是否为双倍三角数。如果是输出 <code>YES</code>，否则输出 <code>NO</code>。</p>
+<hr>
+<h2 id="2-代码错误分析"><a href="#2-代码错误分析" class="headerlink" title="2. 代码错误分析"></a>2. 代码错误分析</h2><p>你提供的代码主要存在**严重的内存溢出（MLE）**问题，以及算法效率低下的问题。</p>
+<h3 id="错误点-1：数组开太大-Memory-Limit-Exceeded"><a href="#错误点-1：数组开太大-Memory-Limit-Exceeded" class="headerlink" title="错误点 1：数组开太大 (Memory Limit Exceeded)"></a>错误点 1：数组开太大 (Memory Limit Exceeded)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1e9</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="type">int</span> vis[maxn] = &#123;<span class="number">0</span>&#125;; </span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>原因</strong>：你试图定义一个大小为 $10^9$ 的 <code>int</code> 数组。</li>
+<li><strong>计算</strong>：$10^9$ 个 <code>int</code> 大约占用 $4 \times 10^9$ 字节 $\approx 4 \text{ GB}$。</li>
+<li><strong>后果</strong>：一般在线判题系统（OJ）的内存限制通常是 128MB 或 256MB。你的代码一运行就会因为申请内存过大直接崩溃（RE）或者被判定为 MLE。</li>
+</ul>
+<h3 id="错误点-2：算法逻辑冗余"><a href="#错误点-2：算法逻辑冗余" class="headerlink" title="错误点 2：算法逻辑冗余"></a>错误点 2：算法逻辑冗余</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 双重循环预处理所有可能的和</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; san.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = i;j &lt; san.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>原因</strong>：题目只需要判断<strong>一个</strong>特定的数 $n$ 是否满足条件，不需要预处理出 $1$ 到 $10^9$ 之间所有数的状态。</li>
+<li><strong>后果</strong>：三角数的数量大约是 $\sqrt{2n} \approx 45000$ 个。双重循环的次数约为 $45000^2 &#x2F; 2 \approx 10^9$ 次运算，这会直接导致<strong>超时（TLE）</strong>。</li>
+</ul>
+<hr>
+<h2 id="3-解题思路整理"><a href="#3-解题思路整理" class="headerlink" title="3. 解题思路整理"></a>3. 解题思路整理</h2><p>我们需要一个 $O(\sqrt{n})$ 或者 $O(1)$ 的算法。</p>
+<p><strong>核心思路：枚举 + 验证</strong></p>
+<ol>
+<li><strong>枚举</strong>：我们可以枚举第一个三角数 $T_1 &#x3D; \frac{k_1(k_1+1)}{2}$。<ul>
+<li>因为 $T_1 \le n$，所以 $k_1$ 的范围大约是 $\sqrt{2n}$。对于 $n&#x3D;10^9$， $k_1$ 最大约为 44721，循环次数非常少，完全不会超时。</li>
+</ul>
+</li>
+<li><strong>计算剩余部分</strong>：令 $rem &#x3D; n - T_1$。</li>
+<li><strong>验证</strong>：判断 $rem$ 是否也是一个三角数。<ul>
+<li>如果 $rem$ 是三角数，说明 $n &#x3D; T_1 + T_{rem_k}$，满足条件，输出 <code>YES</code>。</li>
+<li>如果枚举完所有可能的 $T_1$ 都没找到，输出 <code>NO</code>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>如何快速判断一个数 $x$ 是否为三角数？</strong><br>由公式 $x &#x3D; \frac{k(k+1)}{2}$ 可得 $2x &#x3D; k^2 + k$。<br>这是一个关于 $k$ 的一元二次方程：$k^2 + k - 2x &#x3D; 0$。<br>根据求根公式：<br>$$k &#x3D; \frac{-1 + \sqrt{1 + 8x}}{2} &#x3D; \sqrt{2x + 0.25} - 0.5$$<br>我们可以算出这个 $k$，然后取整验证 $k(k+1)&#x2F;2$ 是否等于 $x$ 即可。</p>
+<hr>
+<h2 id="4-参考代码-AC代码"><a href="#4-参考代码-AC代码" class="headerlink" title="4. 参考代码 (AC代码)"></a>4. 参考代码 (AC代码)</h2><p>这里结合了截图中高效的数学解法，去掉了多余的数组。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1e9</span>;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> temp = n - i * (i + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(temp &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">            cout&lt;&lt;<span class="string">&quot;NO&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">int</span> k2 = <span class="built_in">sqrt</span>(<span class="number">2</span> * temp + <span class="number">0.25</span>) - <span class="number">0.5</span>;</span><br><span class="line">            <span class="keyword">if</span>(temp * <span class="number">2</span> == (k2 + <span class="number">1</span>) * k2 &amp;&amp; k2 &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                cout&lt;&lt;<span class="string">&quot;YES&quot;</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h1 id="MT2243-继续跑图-算法题错题整理"><a href="#MT2243-继续跑图-算法题错题整理" class="headerlink" title="MT2243 继续跑图 - 算法题错题整理"></a>MT2243 继续跑图 - 算法题错题整理</h1><h2 id="1-题意概括-1"><a href="#1-题意概括-1" class="headerlink" title="1. 题意概括"></a>1. 题意概括</h2><ul>
+<li><strong>题目类型</strong>：图论、模拟、贪心。</li>
+<li><strong>核心任务</strong>：从节点 $1$ 出发，每次选择当前节点<strong>长度最长</strong>的出边。</li>
+<li><strong>输出内容</strong>：每一步走到的<strong>目标节点</strong>和<strong>边的长度</strong>。</li>
+<li><strong>停止条件</strong>（满足任意一个即停止）：<ol>
+<li>当前节点没有出边。</li>
+<li><strong>目标节点</strong>（即下一步即将走到的节点）之前已经被<strong>输出</strong>过。</li>
+</ol>
+</li>
+<li><strong>特殊情况</strong>：如果一步都没走（节点 1 无出边），输出 <code>none</code>。</li>
+</ul>
+<h2 id="2-题型模版"><a href="#2-题型模版" class="headerlink" title="2. 题型模版"></a>2. 题型模版</h2><p>本题属于<strong>图上的贪心模拟</strong>。</p>
+<ul>
+<li><strong>存图方式</strong>：邻接表 (<code>vector&lt;vector&lt;Edge&gt;&gt;</code>)。</li>
+<li><strong>核心策略</strong>：<ol>
+<li><strong>预处理</strong>：输入完成后，对每个节点的出边列表按长度<strong>从大到小排序</strong>。这样每次取列表第一个元素即为最长边。</li>
+<li><strong>模拟行走</strong>：维护一个 <code>printed</code> 数组，专门记录哪些节点已经被作为“目标节点”<strong>输出</strong>过。</li>
+<li><strong>循环逻辑</strong>：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (当前节点有出边) &#123;</span><br><span class="line">    找到最长边指向的目标节点 next_node;</span><br><span class="line">    <span class="keyword">if</span> (printed[next_node]) <span class="keyword">break</span>; <span class="comment">// 关键：检查目标节点是否已输出</span></span><br><span class="line">    输出 next_node 和长度;</span><br><span class="line">    标记 printed[next_node] = <span class="literal">true</span>;</span><br><span class="line">    更新当前节点 now = next_node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h2 id="3-代码分析与纠错"><a href="#3-代码分析与纠错" class="headerlink" title="3. 代码分析与纠错"></a>3. 代码分析与纠错</h2><h3 id="❌-错误代码分析"><a href="#❌-错误代码分析" class="headerlink" title="❌ 错误代码分析"></a>❌ 错误代码分析</h3><p>你提供的这段代码逻辑非常接近正确答案，但有一个<strong>致命的逻辑漏洞</strong>，导致在特定情况（如路径形成环回到起点 1）下会提前停止，少输出内容。</p>
+<p><strong>错误片段：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt;<span class="built_in">vis</span>(n + <span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"><span class="type">int</span> now = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">while</span>(adg[now].<span class="built_in">size</span>() != <span class="number">0</span> &amp;&amp; vis[now] == <span class="number">0</span>)&#123;</span><br><span class="line">    vis[now] = <span class="number">1</span>; <span class="comment">// &lt;--- 错误点1：起点1在这里被标记为1</span></span><br><span class="line">    <span class="built_in">sort</span>(adg[now].<span class="built_in">begin</span>(),adg[now].<span class="built_in">end</span>(),cmp);</span><br><span class="line">    <span class="type">int</span> temp = adg[now][<span class="number">0</span>].bian;</span><br><span class="line">    <span class="type">int</span> val = adg[now][<span class="number">0</span>].len;</span><br><span class="line">    <span class="keyword">if</span>(vis[temp])<span class="keyword">break</span>; <span class="comment">// &lt;--- 错误点2：用 vis 判断是否被输出过</span></span><br><span class="line">    cout&lt;&lt;temp&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;val&lt;&lt;endl;</span><br><span class="line">    now = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>具体错误原因：</strong></p>
+<ol>
+<li><strong>混淆了“访问”与“输出”</strong>：题目要求是“直到目标节点已经被<strong>输出</strong>过”。你的代码用 <code>vis</code> 数组标记节点是否被<strong>访问</strong>（作为出发点）。</li>
+<li><strong>起点 1 的误判</strong>：<ul>
+<li>节点 $1$ 是起点，它从来没有被<strong>输出</strong>过。</li>
+<li>但在你的代码中，第一轮循环 <code>vis[now] = 1</code> 会把 <code>vis[1]</code> 设为 $1$。</li>
+<li>如果路径是 $1 \to 2 \to 1$。当走到节点 $2$ 时，最长边指向 $1$。此时 <code>vis[1]</code> 已经是 $1$ 了，代码执行 <code>if(vis[temp]) break;</code> 直接停止。</li>
+<li><strong>后果</strong>：漏输出了节点 $1$。正确逻辑应该是：$1$ 没被输出过，所以应该输出 $1$，然后从 $1$ 继续走（发现 $2$ 被输出过，再停止）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-解题思路整理"><a href="#4-解题思路整理" class="headerlink" title="4. 解题思路整理"></a>4. 解题思路整理</h2><ol>
+<li><strong>建图与预处理</strong>：读入边，对每个节点的出边按长度降序排序。</li>
+<li><strong>定义状态</strong>：使用 <code>printed</code> 数组专门记录<strong>被输出过</strong>的节点。初始全为 0。</li>
+<li><strong>模拟过程</strong>：<ul>
+<li><code>now</code> 指针初始为 1。</li>
+<li>循环条件：只要 <code>now</code> 有出边。</li>
+<li>取最长边的目标节点 <code>temp</code>。</li>
+<li><strong>判断</strong>：如果 <code>printed[temp]</code> 为真，说明目标节点已输出，<code>break</code>。</li>
+<li><strong>输出</strong>：打印 <code>temp</code> 和长度。</li>
+<li><strong>标记</strong>：<code>printed[temp] = 1</code>。</li>
+<li><strong>跳转</strong>：<code>now = temp</code>。</li>
+</ul>
+</li>
+<li><strong>特判</strong>：如果一次都没输出，输出 <code>none</code>。</li>
+</ol>
+<h2 id="5-完整代码（修正后-注释）"><a href="#5-完整代码（修正后-注释）" class="headerlink" title="5. 完整代码（修正后 + 注释）"></a>5. 完整代码（修正后 + 注释）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, m, x, y, z;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span> &#123;</span><br><span class="line">    <span class="type">int</span> bian;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(edge &amp;x, edge &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.len &gt; y.len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    vector&lt;edge&gt; adg[n + <span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(m--) &#123;</span><br><span class="line">        cin &gt;&gt; x &gt;&gt; y &gt;&gt; z;</span><br><span class="line">        adg[x].<span class="built_in">push_back</span>(&#123;y, z&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 预处理：对所有节点的出边按长度从大到小排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">sort</span>(adg[i].<span class="built_in">begin</span>(), adg[i].<span class="built_in">end</span>(), cmp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// printed 数组专门记录哪些节点已经被“输出”过</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">printed</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="type">int</span> now = <span class="number">1</span>;</span><br><span class="line">    <span class="type">bool</span> has_output = <span class="literal">false</span>; <span class="comment">// 标记是否有过输出</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 特判：起点无出边</span></span><br><span class="line">    <span class="keyword">if</span>(adg[now].<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;none&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环条件：只要当前节点有出边就继续</span></span><br><span class="line">    <span class="keyword">while</span>(adg[now].<span class="built_in">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取最长边指向的目标节点（排序后第一条）</span></span><br><span class="line">        <span class="type">int</span> temp = adg[now][<span class="number">0</span>].bian;</span><br><span class="line">        <span class="type">int</span> val = adg[now][<span class="number">0</span>].len;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 核心判断：如果目标节点已经被输出过，停止！</span></span><br><span class="line">        <span class="keyword">if</span>(printed[temp]) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出并标记</span></span><br><span class="line">        cout &lt;&lt; temp &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; val &lt;&lt; endl;</span><br><span class="line">        printed[temp] = <span class="number">1</span>;</span><br><span class="line">        has_output = <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 跳转到下一个节点</span></span><br><span class="line">        now = temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果完全没有输出内容（其实前面特判过了，这里双重保险）</span></span><br><span class="line">    <span class="keyword">if</span>(!has_output) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;none&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="MT2007-·-九次九日九重色-错题整理"><a href="#MT2007-·-九次九日九重色-错题整理" class="headerlink" title="MT2007 · 九次九日九重色 - 错题整理"></a>MT2007 · 九次九日九重色 - 错题整理</h1><h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定一个字符串集合 P（以 “.” 结束）和一个字符串 s（可能跨多行），求 s 的<strong>最长前缀长度</strong>，使得该前缀可以由 P 中的字符串<strong>拼接</strong>而成。如果无法分解，输出 0。</p>
+<p><strong>示例</strong>：</p>
+<ul>
+<li>P &#x3D; {A, AB, BA, CA, BBC}, s &#x3D; “ABABACABAABC”</li>
+<li>可以分解为：A + B + A + B + A + C + A + B + A + A + BC（长度11）</li>
+</ul>
+<hr>
+<h2 id="❌-代码错误分析"><a href="#❌-代码错误分析" class="headerlink" title="❌ 代码错误分析"></a>❌ 代码错误分析</h2><h3 id="错误1：调试代码未删除（导致输出错误）"><a href="#错误1：调试代码未删除（导致输出错误）" class="headerlink" title="错误1：调试代码未删除（导致输出错误）"></a>错误1：调试代码未删除（导致输出错误）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cout&lt;&lt;temp1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;temp2&lt;&lt;endl;  <span class="comment">// 这行会输出调试信息，导致答案错误</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="错误2：状态转移逻辑错误-⚠️"><a href="#错误2：状态转移逻辑错误-⚠️" class="headerlink" title="错误2：状态转移逻辑错误 ⚠️"></a>错误2：状态转移逻辑错误 ⚠️</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生的错误代码：</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>;j &lt;= i;j++)&#123;</span><br><span class="line">    string temp1 = s.<span class="built_in">substr</span>(<span class="number">0</span>,j);</span><br><span class="line">    string temp2 = s.<span class="built_in">substr</span>(j,i - j);</span><br><span class="line">    <span class="keyword">if</span>(f[temp1] &amp;&amp; f[temp2]) &#123;  <span class="comment">// ❌ 错误：只检查了两段都在P中</span></span><br><span class="line">        f[s.<span class="built_in">substr</span>(<span class="number">0</span>,i)] = <span class="number">1</span>;</span><br><span class="line">        found = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题分析</strong>：</p>
+<ul>
+<li>学生将 s[0,i) 分成两段，检查两段是否都在集合 P 中</li>
+<li>但题目要求的是<strong>任意多段</strong>拼接，不仅仅是两段</li>
+<li>例如：”ABAB” 可能是 “A”+”B”+”A”+”B”，而不是只能分成两段</li>
+</ul>
+<h3 id="错误3：边界判断问题"><a href="#错误3：边界判断问题" class="headerlink" title="错误3：边界判断问题"></a>错误3：边界判断问题</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(i == <span class="number">1</span>) cout&lt;&lt;<span class="number">0</span>;  <span class="comment">// ❌ 当第一个字符就无法分解时，i会在循环后为1</span></span><br><span class="line"><span class="keyword">else</span> cout&lt;&lt;i;         <span class="comment">// 但这里应该输出 i-1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-正确思路（线性DP）"><a href="#✅-正确思路（线性DP）" class="headerlink" title="✅ 正确思路（线性DP）"></a>✅ 正确思路（线性DP）</h2><h3 id="状态定义"><a href="#状态定义" class="headerlink" title="状态定义"></a>状态定义</h3><p><code>f[i]</code> &#x3D; true 表示字符串 s 的<strong>前 i 个字符</strong>可以由 P 中的字符串拼接而成</p>
+<h3 id="状态转移"><a href="#状态转移" class="headerlink" title="状态转移"></a>状态转移</h3><p>对于每个位置 i，枚举 P 中的每个字符串 p：</p>
+<ul>
+<li>如果 s 的末尾 l 个字符等于 p（l 为 p 的长度）</li>
+<li>且 f[i-l] &#x3D; true（前 i-l 个字符可以分解）</li>
+<li>则 f[i] &#x3D; true</li>
+</ul>
+<h3 id="转移方程"><a href="#转移方程" class="headerlink" title="转移方程"></a>转移方程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[i] = OR(f[i - len(p)] &amp;&amp; s.substr(i-len(p), len(p)) == p)  对所有 p ∈ P</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💻-修正后的代码"><a href="#💻-修正后的代码" class="headerlink" title="💻 修正后的代码"></a>💻 修正后的代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;string&gt; p;</span><br><span class="line">    map&lt;string, <span class="type">bool</span>&gt; inP;</span><br><span class="line">    string temp;</span><br><span class="line">    string s;</span><br><span class="line">    inP[<span class="string">&quot;&quot;</span>] = <span class="literal">true</span>;  <span class="comment">// 空字符串可以分解</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        cin &gt;&gt; temp;</span><br><span class="line">        <span class="keyword">if</span> (temp == <span class="string">&quot;.&quot;</span>) <span class="keyword">break</span>;</span><br><span class="line">        p.<span class="built_in">push_back</span>(temp);</span><br><span class="line">        inP[temp] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; temp) &#123;</span><br><span class="line">        s += temp;  <span class="comment">// 拼接多行输入</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">f</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">    f[<span class="number">0</span>] = <span class="literal">true</span>;  <span class="comment">// 空串可以分解</span></span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; word : p) &#123;</span><br><span class="line">            <span class="type">int</span> len = word.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= len &amp;&amp; f[i - len] &amp;&amp; s.<span class="built_in">substr</span>(i - len, len) == word) &#123;</span><br><span class="line">                f[i] = <span class="literal">true</span>;</span><br><span class="line">                ans = i;  <span class="comment">// 更新最长可分解前缀长度</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📚-题型模板：字符串拼接DP"><a href="#📚-题型模板：字符串拼接DP" class="headerlink" title="📚 题型模板：字符串拼接DP"></a>📚 题型模板：字符串拼接DP</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板：判断字符串能否由字典中的单词拼接</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">f</span><span class="params">(n + <span class="number">1</span>, <span class="literal">false</span>)</span></span>;</span><br><span class="line">f[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; word : dictionary) &#123;</span><br><span class="line">        <span class="type">int</span> len = word.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= len &amp;&amp; f[i - len] &amp;&amp; s.<span class="built_in">substr</span>(i - len, len) == word) &#123;</span><br><span class="line">            f[i] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;  <span class="comment">// 找到一个可行的分解即可</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔑-关键点总结"><a href="#🔑-关键点总结" class="headerlink" title="🔑 关键点总结"></a>🔑 关键点总结</h2><ol>
+<li><strong>删除调试代码</strong>：提交前务必删除所有 cout 调试语句</li>
+<li><strong>DP状态设计</strong>：f[i] 表示前 i 个字符是否可分解</li>
+<li><strong>状态转移</strong>：枚举字典中的每个单词，检查能否作为结尾</li>
+<li><strong>初始化</strong>：f[0] &#x3D; true（空串可分解）</li>
+<li><strong>答案更新</strong>：实时记录最大的 i 使得 f[i] &#x3D; true</li>
+</ol>
+<hr>
+<p><strong>时间复杂度</strong>：O(|s| × |P| × L)，其中 L 为 P 中字符串的平均长度<br><strong>空间复杂度</strong>：O(|s| + |P|)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/04/luogu-mati-%E8%BF%9B%E9%98%B6%E5%A1%94/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260603" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -805,666 +1135,6 @@
 
 
   
-    <article id="post-cf-gametheory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/28/cf-gametheory/">Codeforces Game Theory</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/28/cf-gametheory/" class="archive-article-date">
-  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/problemset?order=BY_RATING_ASC&tags=games,1200-">Codeforces</a></p>
-<h1 id="📝-错题整理-Codeforces-1472D-Even-Odd-Game-博弈论-贪心"><a href="#📝-错题整理-Codeforces-1472D-Even-Odd-Game-博弈论-贪心" class="headerlink" title="📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)"></a>📝 错题整理 | Codeforces 1472D - Even-Odd Game (博弈论 + 贪心)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个包含 $n$ 个整数的数组，Alice 和 Bob 轮流从中取数（Alice 先手）。</p>
-<ul>
-<li>若 <strong>Alice</strong> 取到 <strong>偶数</strong>，则将该数加入自己的得分；取到奇数不得分。</li>
-<li>若 <strong>Bob</strong> 取到 <strong>奇数</strong>，则将该数加入自己的得分；取到偶数不得分。<br>每次取数后该元素从数组中删除，数组为空时游戏结束。两人均采取<strong>最优策略</strong>，求最终谁获胜或是否平局。</li>
-</ul>
-<h2 id="🔍-错因分析"><a href="#🔍-错因分析" class="headerlink" title="🔍 错因分析"></a>🔍 错因分析</h2><p>学生的代码将原数组按奇偶性拆分成了 <code>alice</code>（偶数）和 <code>bob</code>（奇数）两个独立数组，并假设两人会先在“对自己有利的数”中交替拿取。<br><strong>❌ 核心错误逻辑片段：</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误假设：两人只在各自的优势池子里轮流拿</span></span><br><span class="line"><span class="built_in">sort</span>(alice.<span class="built_in">begin</span>(),alice.<span class="built_in">end</span>(),<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line"><span class="built_in">sort</span>(bob.<span class="built_in">begin</span>(),bob.<span class="built_in">end</span>(),<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = minlen;i &lt; alice.<span class="built_in">size</span>();i+=<span class="number">2</span>) al += alice[i]; <span class="comment">// 仅在自己的剩余偶数里隔一个加一个</span></span><br></pre></td></tr></table></figure>
-<p><strong>💡 为什么错？</strong></p>
-<ol>
-<li><strong>池子是统一的</strong>：游戏规则并未限制只能拿特定奇偶性的数。两人每次面对的是<strong>全局剩余的所有数</strong>。</li>
-<li><strong>最优策略包含“干扰”</strong>：如果当前全局最大值是对方的得分牌（例如 Alice 面对一个巨大的奇数），最优解往往是<strong>直接拿走它</strong>（虽然自己不得分，但阻止了 Bob 得分）。拆分数组的做法完全抹除了“干扰&#x2F;抢夺”这一博弈核心，导致模拟顺序与实际回合严重脱节，必然 WA。</li>
-</ol>
-<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><ol>
-<li><strong>贪心正确性</strong>：无论当前轮到谁，拿走<strong>剩余数字中的最大值</strong>永远是最优选择。如果是自己的得分牌则直接获利；如果是对方的得分牌则等价于“让对方少得分”，收益绝对值相同。</li>
-<li><strong>模拟流程</strong>：<ul>
-<li>将所有数字<strong>从大到小排序</strong>。</li>
-<li>按顺序轮流取数：索引 <code>i</code> 为偶数时是 Alice 的回合，为奇数时是 Bob 的回合。</li>
-<li>维护差值 <code>ans = Alice得分 - Bob得分</code>。Alice 回合遇偶数 <code>ans += v[i]</code>；Bob 回合遇奇数 <code>ans -= v[i]</code>。</li>
-</ul>
-</li>
-<li><strong>结果判定</strong>：遍历结束后，根据 <code>ans</code> 的正负零直接输出 <code>Alice</code>&#x2F;<code>Bob</code>&#x2F;<code>Tie</code>。</li>
-</ol>
-<h2 id="🛠️-题型模板总结（最优策略轮流取数）"><a href="#🛠️-题型模板总结（最优策略轮流取数）" class="headerlink" title="🛠️ 题型模板总结（最优策略轮流取数）"></a>🛠️ 题型模板总结（最优策略轮流取数）</h2><p>此类题目（双方轮流从集合中取数，均采取最优策略）通常遵循固定套路：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 全局排序（通常降序，核心是证明“贪心取最大值”的合理性）</span></span><br><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">rbegin</span>(), a.<span class="built_in">rend</span>());</span><br><span class="line"><span class="comment">// 2. 差值法模拟回合</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> diff = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">0</span>)&#123; <span class="comment">// 先手回合</span></span><br><span class="line">        <span class="keyword">if</span>(满足先手得分条件) diff += a[i];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;        <span class="comment">// 后手回合</span></span><br><span class="line">        <span class="keyword">if</span>(满足后手得分条件) diff -= a[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3. 根据 diff 判定胜负</span></span><br><span class="line"><span class="keyword">if</span>(diff &gt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;First Wins&quot;</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(diff &lt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Second Wins&quot;</span>;</span><br><span class="line"><span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;Tie&quot;</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>🔑 避坑指南</strong>：绝对不要按属性拆分数组！保持全局顺序，回合严格交替，抓住“拿最大值”的博弈本质。</p>
-<h2 id="📜-完整注释代码（无多余空行版）"><a href="#📜-完整注释代码（无多余空行版）" class="headerlink" title="📜 完整注释代码（无多余空行版）"></a>📜 完整注释代码（无多余空行版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(n)</span></span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> &amp;e : v) cin &gt;&gt; e;</span><br><span class="line">  <span class="comment">// 贪心核心：全局从大到小排序，保证每次拿的都是当前最优决策</span></span><br><span class="line">  <span class="built_in">sort</span>(v.<span class="built_in">rbegin</span>(), v.<span class="built_in">rend</span>());</span><br><span class="line">  ll ans = <span class="number">0</span>; <span class="comment">// 记录 Alice得分 - Bob得分 的差值</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123; <span class="comment">// Alice 的回合</span></span><br><span class="line">      <span class="keyword">if</span> (v[i] % <span class="number">2</span> == <span class="number">0</span>) ans += v[i]; <span class="comment">// 偶数得分，奇数不得分(等价于不操作)</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// Bob 的回合</span></span><br><span class="line">      <span class="keyword">if</span> (v[i] % <span class="number">2</span> == <span class="number">1</span>) ans -= v[i]; <span class="comment">// 奇数得分，对差值贡献为负</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (ans == <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Tie\n&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (ans &gt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&quot;Alice\n&quot;</span>;</span><br><span class="line">  <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;Bob\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>), cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">  <span class="type">int</span> t;</span><br><span class="line">  cin &gt;&gt; t;</span><br><span class="line">  <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="⏱-复杂度分析"><a href="#⏱-复杂度分析" class="headerlink" title="⏱ 复杂度分析"></a>⏱ 复杂度分析</h2><ul>
-<li><strong>时间复杂度</strong>：$O(N \log N)$，主要耗时在排序。后续单次遍历为 $O(N)$，完美契合题目 $N \le 2 \cdot 10^5$ 的限制。</li>
-<li><strong>空间复杂度</strong>：$O(N)$，用于存储输入数组。排序可原地进行，无额外空间开销。</li>
-</ul>
-<h1 id="📝-算法错题整理-Codeforces-832-Div-2-C-Swap-Game"><a href="#📝-算法错题整理-Codeforces-832-Div-2-C-Swap-Game" class="headerlink" title="📝 算法错题整理 | Codeforces 832 Div.2 C. Swap Game"></a>📝 算法错题整理 | Codeforces 832 Div.2 C. Swap Game</h1><blockquote>
-<p>🏷️ 标签：<code>博弈论</code> <code>贪心</code> <code>思维题</code> <code>Codeforces</code><br>📊 难度：⭐⭐ (1200)<br>🔗 原题链接：<a target="_blank" rel="noopener" href="https://codeforces.com/contest/1754/problem/C">CF Round 832 C. Swap Game</a></p>
-</blockquote>
-<hr>
-<h2 id="📋-一、题意概括"><a href="#📋-一、题意概括" class="headerlink" title="📋 一、题意概括"></a>📋 一、题意概括</h2><p><strong>游戏设定：</strong></p>
-<ul>
-<li>给定长度为 <code>n</code> 的数组 <code>a</code>，元素均为<strong>正整数</strong></li>
-<li>Alice 先手，双方轮流操作，无法操作者输</li>
-</ul>
-<p><strong>操作规则（每回合）：</strong></p>
-<ol>
-<li>若 <code>a[0] == 0</code>，当前玩家<strong>立即输掉</strong></li>
-<li>否则，选择一个下标 <code>i</code>（<code>2 ≤ i ≤ n</code>，1-indexed）</li>
-<li>执行两步原子操作：<ul>
-<li><code>a[0] = a[0] - 1</code>（先减1）</li>
-<li><code>swap(a[0], a[i])</code>（再交换）</li>
-</ul>
-</li>
-</ol>
-<p><strong>目标：</strong> 双方都采用最优策略，判断最终胜者。</p>
-<p><strong>输入约束：</strong></p>
-<ul>
-<li><code>1 ≤ t ≤ 2×10⁴</code> 组测试</li>
-<li><code>2 ≤ n ≤ 10⁵</code>，<code>Σn ≤ 2×10⁵</code></li>
-<li><code>1 ≤ a[i] ≤ 10⁹</code></li>
-</ul>
-<hr>
-<h2 id="💡-二、核心思路分析"><a href="#💡-二、核心思路分析" class="headerlink" title="💡 二、核心思路分析"></a>💡 二、核心思路分析</h2><h3 id="🔑-关键观察"><a href="#🔑-关键观察" class="headerlink" title="🔑 关键观察"></a>🔑 关键观察</h3><ol>
-<li><strong>每次操作必然使 <code>a[0]</code> 先减1</strong>，这是不可逆的”消耗”</li>
-<li>玩家可以选择将<strong>任意一个其他位置的值</strong>换到 <code>a[0]</code></li>
-<li>最优策略下，玩家会尽量让对手面临”必败态”</li>
-</ol>
-<h3 id="🎯-胜负判定结论"><a href="#🎯-胜负判定结论" class="headerlink" title="🎯 胜负判定结论"></a>🎯 胜负判定结论</h3><blockquote>
-<p>令 <code>m = min(a[1], a[2], ..., a[n-1])</code>（0-indexed，即除首元素外的最小值）</p>
-<ul>
-<li>若 <code>a[0] &gt; m</code> → <strong>Alice 胜</strong></li>
-<li>若 <code>a[0] ≤ m</code> → <strong>Bob 胜</strong></li>
-</ul>
-</blockquote>
-<h3 id="📐-证明简述（反证法-策略模仿）"><a href="#📐-证明简述（反证法-策略模仿）" class="headerlink" title="📐 证明简述（反证法+策略模仿）"></a>📐 证明简述（反证法+策略模仿）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">情况1：a[0] ≤ m</span><br><span class="line">- Alice 操作：a[0]先减1 → 变成 a[0]-1 &lt; m</span><br><span class="line">- 无论换哪个 a[i]≥m 到位置0，新 a[0] ≥ m &gt; a[0]-1</span><br><span class="line">- Bob 面临的状态：新a[0] ≥ m，且其他元素仍≥m</span><br><span class="line">- Bob 可以&quot;模仿&quot;策略，始终保持&quot;首元素≤其他最小值&quot;的性质给Alice</span><br><span class="line">- 最终 Alice 会先遇到 a[0]=0 的局面 → Bob胜</span><br><span class="line"></span><br><span class="line">情况2：a[0] &gt; m  </span><br><span class="line">- Alice 第一步：选择值为 m 的位置，执行操作</span><br><span class="line">- a[0]减1后交换，新a[0] = m（或更大，取决于交换时机）</span><br><span class="line">- 此时局面转化为&quot;情况1&quot;，但轮到 Bob 面对 a[0]≤m 的必败态</span><br><span class="line">- 因此 Alice 胜</span><br></pre></td></tr></table></figure>
-
-<h3 id="🧩-题型模板提炼"><a href="#🧩-题型模板提炼" class="headerlink" title="🧩 题型模板提炼"></a>🧩 题型模板提炼</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 博弈论-最小值比较型模板</span></span><br><span class="line"><span class="comment">// 适用：轮流操作 + 首元素消耗 + 可交换其他元素</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> m = *<span class="built_in">min_element</span>(a.<span class="built_in">begin</span>()<span class="number">+1</span>, a.<span class="built_in">end</span>());  <span class="comment">// 找后缀最小值</span></span><br><span class="line">    <span class="keyword">return</span> a[<span class="number">0</span>] &gt; m ? <span class="number">1</span> : <span class="number">0</span>;  <span class="comment">// 1:Alice胜, 0:Bob胜</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="🔍-代码片段分析"><a href="#🔍-代码片段分析" class="headerlink" title="🔍 代码片段分析"></a>🔍 代码片段分析</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生代码关键部分 ✅</span></span><br><span class="line"><span class="built_in">sort</span>(a.<span class="built_in">begin</span>() + <span class="number">1</span>, a.<span class="built_in">end</span>());  <span class="comment">// [1, n) 排序，a[1]变为后缀最小值</span></span><br><span class="line"><span class="keyword">if</span> (a[<span class="number">0</span>] &gt; a[<span class="number">1</span>]) &#123;             <span class="comment">// 比较首元素与后缀最小值</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Alice\n&quot;</span>;         <span class="comment">// a[0]更大 → Alice胜</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Bob\n&quot;</span>;           <span class="comment">// a[0]≤最小值 → Bob胜</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>检查项</th>
-<th>结果</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>输入处理</td>
-<td>✅</td>
-<td>多组测试+快读优化</td>
-</tr>
-<tr>
-<td>核心逻辑</td>
-<td>✅</td>
-<td>正确实现 <code>a[0] &gt; min(rest)</code> 判断</td>
-</tr>
-<tr>
-<td>边界处理</td>
-<td>✅</td>
-<td><code>n≥2</code> 保证 <code>a[1]</code> 存在</td>
-</tr>
-<tr>
-<td>时间复杂度</td>
-<td>✅</td>
-<td><code>O(n log n)</code> 排序，<code>Σn≤2e5</code> 可过</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>💡 小优化：其实不需要完全排序，用 <code>min_element</code> 找最小值可优化到 <code>O(n)</code>，但本题数据范围下排序完全可过。</p>
-</blockquote>
-<hr>
-<h2 id="🧠-四、完整注释代码（原样-无多余空行）"><a href="#🧠-四、完整注释代码（原样-无多余空行）" class="headerlink" title="🧠 四、完整注释代码（原样+无多余空行）"></a>🧠 四、完整注释代码（原样+无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>); cin.<span class="built_in">tie</span>(<span class="number">0</span>); <span class="comment">// 关闭同步，加速输入输出</span></span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t; <span class="comment">// 读取测试用例数</span></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123; <span class="comment">// 处理每组测试</span></span><br><span class="line">        <span class="type">int</span> n; cin &gt;&gt; n; <span class="comment">// 读取数组长度</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>; <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cin &gt;&gt; a[i]; <span class="comment">// 读入数组</span></span><br><span class="line">        <span class="built_in">sort</span>(a.<span class="built_in">begin</span>() + <span class="number">1</span>, a.<span class="built_in">end</span>()); <span class="comment">// 对a[1]~a[n-1]排序，使a[1]为后缀最小值</span></span><br><span class="line">        <span class="keyword">if</span> (a[<span class="number">0</span>] &gt; a[<span class="number">1</span>]) cout &lt;&lt; <span class="string">&quot;Alice\n&quot;</span>; <span class="comment">// 首元素&gt;后缀最小值 → Alice有必胜策略</span></span><br><span class="line">        <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;Bob\n&quot;</span>; <span class="comment">// 否则 → Bob胜</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="💎-解题技巧总结"><a href="#💎-解题技巧总结" class="headerlink" title="💎 解题技巧总结"></a>💎 解题技巧总结</h3><ol>
-<li><strong>博弈题先找”必败态”</strong>：什么局面下当前玩家必输？</li>
-<li><strong>观察操作的”不变量”</strong>：本题中”每次a[0]必减1”是关键</li>
-<li><strong>最优策略往往是”极端选择”</strong>：选最小&#x2F;最大值往往是突破口</li>
-<li><strong>小数据手推，大数据找规律</strong>：先模拟小样例，归纳数学结论</li>
-</ol>
-<hr>
-<h1 id="📝-算法错题整理-Codeforces-1034-D-Binary-String-Battle"><a href="#📝-算法错题整理-Codeforces-1034-D-Binary-String-Battle" class="headerlink" title="📝 算法错题整理 | Codeforces 1034 D. Binary String Battle"></a>📝 算法错题整理 | Codeforces 1034 D. Binary String Battle</h1><h2 id="📖-题意概括-1"><a href="#📖-题意概括-1" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的 01 字符串 $s$ 和整数 $k$。Alice 先手，Bob 后手，轮流操作：</p>
-<ul>
-<li><strong>Alice</strong>：任选 $k$ 个位置的<strong>子序列</strong>（可不连续），将其全部置为 <code>0</code>。</li>
-<li><strong>Bob</strong>：任选长度为 $k$ 的<strong>连续子串</strong>，将其全部置为 <code>1</code>。</li>
-<li><strong>胜利条件</strong>：若任意时刻字符串全为 <code>0</code>，Alice 立即获胜；若游戏无法在有限步内结束（陷入循环），Bob 获胜。<br>问双方均采取最优策略时，谁能获胜。</li>
-</ul>
-<hr>
-<h2 id="🔍-代码检查与勘误"><a href="#🔍-代码检查与勘误" class="headerlink" title="🔍 代码检查与勘误"></a>🔍 代码检查与勘误</h2><p>✅ <strong>结论：代码逻辑完全正确，无语法或逻辑错误。</strong><br>代码直接抓住了本题的核心判定条件，实现简洁高效。若非要挑出“可优化点”，仅在于竞赛书写习惯上可将判断逻辑拆分为 <code>if-else</code> 提高可读性，但三元运算符在 CF 中完全合规且更紧凑。</p>
-<p>📌 <strong>关键片段分析</strong>：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统计 1 的个数</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">char</span> c : s) <span class="keyword">if</span>(c == <span class="string">&#x27;1&#x27;</span>) cnt++;</span><br><span class="line"><span class="comment">// 核心胜负判定</span></span><br><span class="line">cout &lt;&lt; (cnt &lt;= k || n &lt; <span class="number">2</span>*k ? <span class="string">&quot;Alice&quot;</span> : <span class="string">&quot;Bob&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>cnt &lt;= k</code>：覆盖了 Alice <strong>首回合直接秒杀</strong>的情况。</li>
-<li><code>n &lt; 2*k</code>：覆盖了 Alice <strong>利用区间相交性质打消耗战</strong>必胜的情况。</li>
-<li>逻辑或 <code>||</code> 的短路特性与条件优先级处理正确，时间复杂度 $O(n)$ 符合题目限制。</li>
-</ul>
-<hr>
-<h2 id="💡-解题思路梳理"><a href="#💡-解题思路梳理" class="headerlink" title="💡 解题思路梳理"></a>💡 解题思路梳理</h2><p>本题属于典型的<strong>博弈论+贪心&#x2F;构造</strong>，无需复杂数据结构，核心在于分析双方操作对“状态量（1的个数 <code>cnt</code>）”的影响趋势。</p>
-<ol>
-<li><p><strong>一步必胜态 (<code>cnt &lt;= k</code>)</strong><br>Alice 第一轮可直接选中所有 <code>1</code> 的位置（不足 $k$ 个则任意补 <code>0</code> 凑齐 $k$ 个），操作后字符串全为 <code>0</code>，Alice 直接获胜。</p>
-</li>
-<li><p><strong>区间受限必胜态 (<code>n &lt; 2*k</code>)</strong><br>当字符串长度 $n &lt; 2k$ 时，<strong>任意两个长度为 $k$ 的连续子串必然存在交集</strong>（鸽巢原理）。<br>Bob 的操作被严重限制：他无论选哪个子串翻 <code>1</code>，都会覆盖到 Alice 控制的关键区域。Alice 可采用“留一个关键 <code>1</code> 不翻”的策略，保证 Bob 最多只能翻 $k-1$ 个 <code>0</code>（因为子串必包含那个被保留的 <code>1</code> 或相邻位）。因此，每轮结束后 <code>1</code> 的总数严格递减，有限步内必归零，Alice 胜。</p>
-</li>
-<li><p><strong>Bob 的反击态 (<code>n &gt;= 2*k</code> 且 <code>cnt &gt; k</code>)</strong><br>此时 $n$ 足够大，Bob 总能找到与 Alice 操作区间<strong>完全不相交</strong>的长度为 $k$ 的子串。<br>Alice 每轮最多消掉 $k$ 个 <code>1</code>，Bob 紧随其后在不相交区域固定制造 $k$ 个 <code>1</code>。由于 Bob 后手且拥有独立操作区，<code>1</code> 的总数不会下降，游戏无限进行，Bob 胜。</p>
-</li>
-</ol>
-<p><strong>综上判定式</strong>：<code>cnt &lt;= k || n &lt; 2*k ? Alice : Bob</code></p>
-<hr>
-<h2 id="🛠️-题型模板与核心技巧"><a href="#🛠️-题型模板与核心技巧" class="headerlink" title="🛠️ 题型模板与核心技巧"></a>🛠️ 题型模板与核心技巧</h2><p><strong>📦 题型标签</strong>：<code>博弈论 (Games)</code> <code>构造/贪心 (Constructive/Greedy)</code> <code>区间性质</code></p>
-<p><strong>🧠 思维模板</strong>：</p>
-<ol>
-<li><strong>找终态&#x2F;秒杀条件</strong>：先手能否一步达成胜利条件？（如本题 <code>cnt &lt;= k</code>）</li>
-<li><strong>分析操作空间</strong>：后手是否拥有“独立操作区”？（检查 $n$ 与操作长度 $k$ 的倍数关系，如 $n &lt; 2k$ 必相交，$n \ge 2k$ 可分离）</li>
-<li><strong>寻找单调量&#x2F;不变量</strong>：跟踪核心状态（如 <code>cnt</code>）在双方最优操作下的变化趋势。若存在严格单调递减&#x2F;递增趋势，则游戏必在有限步结束。</li>
-<li><strong>推导临界条件</strong>：将上述分析合并为简洁的数学&#x2F;逻辑表达式，直接输出结果。</li>
-</ol>
-<p><strong>💻 通用代码骨架</strong>：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// 1. 读入基础数据</span></span><br><span class="line">    <span class="type">int</span> n, k; string s;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k &gt;&gt; s;</span><br><span class="line">    <span class="comment">// 2. 统计关键状态量</span></span><br><span class="line">    <span class="type">int</span> state = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> c : s) <span class="keyword">if</span>(c == <span class="string">&#x27;目标字符&#x27;</span>) state++;</span><br><span class="line">    <span class="comment">// 3. 套用推导出的临界条件</span></span><br><span class="line">    <span class="keyword">if</span>(state &lt;= 阈值<span class="number">1</span> || n &lt; 阈值<span class="number">2</span>) cout &lt;&lt; <span class="string">&quot;先手胜\n&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;后手胜\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="💻-完整注释代码"><a href="#💻-完整注释代码" class="headerlink" title="💻 完整注释代码"></a>💻 完整注释代码</h2><p><em>(严格按原代码结构添加注释，无多余空行)</em></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, k, cnt = <span class="number">0</span>;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k &gt;&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> c : s) <span class="keyword">if</span>(c == <span class="string">&#x27;1&#x27;</span>) cnt++; <span class="comment">// 统计初始&#x27;1&#x27;的个数</span></span><br><span class="line">    <span class="comment">// 判定逻辑：</span></span><br><span class="line">    <span class="comment">// ① cnt&lt;=k：Alice首轮可直接清零所有&#x27;1&#x27;，立即获胜。</span></span><br><span class="line">    <span class="comment">// ② n&lt;2*k：任意长为k的子串必相交，Bob操作受限，Alice可保证cnt每轮严格递减至0。</span></span><br><span class="line">    <span class="comment">// ③ 否则：Bob总能找到不相交子串固定制造k个&#x27;1&#x27;，抵消Alice消除，游戏无限进行。</span></span><br><span class="line">    cout &lt;&lt; (cnt &lt;= k || n &lt; <span class="number">2</span>*k ? <span class="string">&quot;Alice&quot;</span> : <span class="string">&quot;Bob&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="📝-算法错题整理-Codeforces-Good-Bye-2023-C-Training-Before-the-Olympiad"><a href="#📝-算法错题整理-Codeforces-Good-Bye-2023-C-Training-Before-the-Olympiad" class="headerlink" title="📝 算法错题整理 | Codeforces Good Bye 2023 C. Training Before the Olympiad"></a>📝 算法错题整理 | Codeforces Good Bye 2023 C. Training Before the Olympiad</h1><h2 id="📖-一、题意概括"><a href="#📖-一、题意概括" class="headerlink" title="📖 一、题意概括"></a>📖 一、题意概括</h2><p>给定一个长度为 $n$ 的数组 $a$。Masha（先手）与 Olya（后手）轮流操作，直到数组只剩 $1$ 个元素：</p>
-<ul>
-<li>每次任选两个不同位置的数 $a_i, a_j$，将其移除，并加入新数 $\lfloor \frac{a_i+a_j}{2} \rfloor \times 2$。</li>
-<li>Masha 希望最终值<strong>最大</strong>，Olya 希望最终值<strong>最小</strong>。<br><strong>要求</strong>：对每个前缀长度 $k&#x3D;1,2,\dots,n$，输出双方最优策略下的最终结果。</li>
-</ul>
-<h2 id="🧩-二、题型定位与核心考点"><a href="#🧩-二、题型定位与核心考点" class="headerlink" title="🧩 二、题型定位与核心考点"></a>🧩 二、题型定位与核心考点</h2><ul>
-<li><strong>题型</strong>：博弈论 + 数学思维 + 前缀维护</li>
-<li><strong>核心考点</strong>：操作本质分析、奇偶性对总和的影响、周期性规律提取、$O(1)$ 递推</li>
-<li><strong>模板框架</strong>：此类“博弈操作求极值”且数据范围达 $10^5$ 的题目，通常<strong>不能模拟&#x2F;DFS</strong>，必须寻找操作对全局变量（如总和、奇偶计数）的固定影响规律，转化为数学公式。</li>
-</ul>
-<h2 id="🚨-三、代码错误剖析（附典型片段）"><a href="#🚨-三、代码错误剖析（附典型片段）" class="headerlink" title="🚨 三、代码错误剖析（附典型片段）"></a>🚨 三、代码错误剖析（附典型片段）</h2><blockquote>
-<p>💡 注：您未提供个人提交代码。以下整理本题在训练中<strong>最高频的 3 类错误写法</strong>，请对照自查：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="left">错误类型</th>
-<th align="left">典型错误片段</th>
-<th align="left">错误原因与修正建议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>1. 未特判 $k&#x3D;1$</strong></td>
-<td align="left"><code>if (cnt % 3 == 1) ans = sum - cnt/3 - 1;</code></td>
-<td align="left">当 $k&#x3D;1$ 且 $a_1$ 为奇数时，公式会错误地 $-1$。<strong>修正</strong>：必须单独处理 <code>if (k == 1) { cout &lt;&lt; a[1]; continue; }</code></td>
-</tr>
-<tr>
-<td align="left"><strong>2. 前缀和未开 <code>long long</code></strong></td>
-<td align="left"><code>int sum = 0; sum += a[i];</code></td>
-<td align="left">$a_i \le 10^9$，累加后极易溢出 <code>int</code> 范围（最大约 $10^{14}$）。<strong>修正</strong>：统一使用 <code>long long</code> 存储和与答案。</td>
-</tr>
-<tr>
-<td align="left"><strong>3. 误用贪心模拟&#x2F;暴力配对</strong></td>
-<td align="left"><code>for(int i=0;i&lt;k;i++) for(int j=i+1;j&lt;k;j++) { ... }</code></td>
-<td align="left">每次操作后数组重组，模拟复杂度为 $O(k^2)$ 或指数级，直接 TLE。<strong>修正</strong>：抓住“每 3 个奇数必产生 1 次损失”的周期规律，$O(1)$ 计算。</td>
-</tr>
-</tbody></table>
-<h2 id="🧠-四、完整解题思路"><a href="#🧠-四、完整解题思路" class="headerlink" title="🧠 四、完整解题思路"></a>🧠 四、完整解题思路</h2><ol>
-<li><strong>操作本质转换</strong>：$\lfloor \frac{x+y}{2} \rfloor \times 2$ 等价于：若 $x,y$ 同奇偶，和不变；若一奇一偶，总和 $-1$。因此<strong>最终答案 &#x3D; 前缀和 - 损失次数</strong>。</li>
-<li><strong>博弈策略分析</strong>：<ul>
-<li>Masha（最大化）：优先配对<strong>两个奇数</strong>（消耗 2 个奇数，生成 1 个偶数，损失 $0$）。</li>
-<li>Olya（最小化）：优先配对<strong>一奇一偶</strong>（消耗 1 个奇数，生成 1 个偶数，损失 $1$）。</li>
-</ul>
-</li>
-<li><strong>周期规律提取</strong>：设前缀奇数个数为 $cnt$。Masha 先手消耗 2 个奇数 $\rightarrow$ Olya 后手消耗 1 个奇数。<strong>每两轮 $cnt$ 减少 3，总损失固定 $+1$</strong>。</li>
-<li><strong>分类讨论</strong>（$k&gt;1$ 时）：<ul>
-<li>$cnt \bmod 3 &#x3D; 0$：奇数刚好分完，损失 $&#x3D; cnt&#x2F;3$。答案 $&#x3D; sum - cnt&#x2F;3$。</li>
-<li>$cnt \bmod 3 &#x3D; 1$：剩 1 个奇数，Olya 必能再制造 1 次奇偶配对。损失 $&#x3D; cnt&#x2F;3 + 1$。答案 $&#x3D; sum - cnt&#x2F;3 - 1$。</li>
-<li>$cnt \bmod 3 &#x3D; 2$：剩 2 个奇数，Masha 将其配对成偶数（无损失），后续全偶数配对无损失。损失 $&#x3D; cnt&#x2F;3$。答案 $&#x3D; sum - cnt&#x2F;3$。</li>
-</ul>
-</li>
-<li><strong>统一公式</strong>：<code>loss = cnt / 3 + (cnt % 3 == 1 ? 1 : 0)</code>，直接输出 <code>sum - loss</code> 即可。</li>
-</ol>
-<h2 id="💻-五、AC-模板代码（C-已注释-无多余空行）"><a href="#💻-五、AC-模板代码（C-已注释-无多余空行）" class="headerlink" title="💻 五、AC 模板代码（C++ | 已注释 | 无多余空行）"></a>💻 五、AC 模板代码（C++ | 已注释 | 无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> sum = <span class="number">0</span>; <span class="type">int</span> cnt_odd = <span class="number">0</span>, x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        cin &gt;&gt; x; sum += x; <span class="keyword">if</span> (x % <span class="number">2</span> != <span class="number">0</span>) cnt_odd++;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">1</span>) &#123; cout &lt;&lt; x &lt;&lt; (i == n ? <span class="string">&quot;\n&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="keyword">continue</span>; &#125;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> loss = cnt_odd / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">if</span> (cnt_odd % <span class="number">3</span> == <span class="number">1</span>) loss += <span class="number">1</span>;</span><br><span class="line">        cout &lt;&lt; sum - loss &lt;&lt; (i == n ? <span class="string">&quot;\n&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t; <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="📊-六、复杂度与复习建议"><a href="#📊-六、复杂度与复习建议" class="headerlink" title="📊 六、复杂度与复习建议"></a>📊 六、复杂度与复习建议</h2><ul>
-<li><strong>时间复杂度</strong>：$O(n)$。单次遍历前缀，每次 $O(1)$ 公式计算，完美契合 $\sum n \le 10^5$。</li>
-<li><strong>空间复杂度</strong>：$O(1)$。仅需维护 <code>sum</code> 和 <code>cnt_odd</code>，无需额外数组。</li>
-<li><strong>💡 避坑总结</strong>：遇到“两数合并求最终值”的博弈题，<strong>第一时间分析操作对奇偶性&#x2F;总和的净影响</strong>。本题的核心突破点在于发现 <code>奇数数量每减3必伴随1次总和-1</code>，将复杂博弈降维成简单的取模分类。务必注意前缀和的数据类型与 $k&#x3D;1$ 的边界特判。</li>
-</ul>
-<h1 id="T766535-题解分析"><a href="#T766535-题解分析" class="headerlink" title="T766535 题解分析"></a>T766535 题解分析</h1><h2 id="题目核心"><a href="#题目核心" class="headerlink" title="题目核心"></a>题目核心</h2><ul>
-<li>奇数下标字符可任意重排，偶数下标字符可任意重排</li>
-<li>问能否重排后形成回文串</li>
-</ul>
-<h2 id="正确思路"><a href="#正确思路" class="headerlink" title="正确思路"></a>正确思路</h2><p><strong>关键观察</strong>：回文串中位置 <code>i</code> 和 <code>n+1-i</code> 字符必须相同</p>
-<table>
-<thead>
-<tr>
-<th>字符串长度</th>
-<th>配对位置奇偶性</th>
-<th>条件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>偶数</strong></td>
-<td>一奇一偶</td>
-<td>奇数位字符多重集 &#x3D; 偶数位字符多重集</td>
-</tr>
-<tr>
-<td><strong>奇数</strong></td>
-<td>同奇或同偶</td>
-<td>奇数位字符能自成回文 <strong>且</strong> 偶数位字符能自成回文</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>“能自成回文” &#x3D; 最多一个字符出现奇数次</p>
-</blockquote>
-<h2 id="代码问题"><a href="#代码问题" class="headerlink" title="代码问题"></a>代码问题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 中间位置判断错误（下标从0开始时）</span></span><br><span class="line"><span class="keyword">if</span>(s.<span class="built_in">size</span>() % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; i * <span class="number">2</span> == (s.<span class="built_in">size</span>() + <span class="number">1</span>)) <span class="comment">// 应为 i*2 == n-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 未区分 n 奇偶，统一比较 cnt1==cnt2</span></span><br><span class="line"><span class="comment">// n为奇数时应分别检查奇/偶位字符能否各自形成回文</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="参考代码（简洁版）"><a href="#参考代码（简洁版）" class="headerlink" title="参考代码（简洁版）"></a>参考代码（简洁版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">canPalindrome</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cnt)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> odd = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> x : cnt) <span class="keyword">if</span>(x % <span class="number">2</span>) odd++;</span><br><span class="line">    <span class="keyword">return</span> odd &lt;= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) &#123;</span><br><span class="line">        string s; cin &gt;&gt; s;</span><br><span class="line">        <span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt1</span><span class="params">(<span class="number">26</span>)</span>, <span class="title">cnt2</span><span class="params">(<span class="number">26</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) </span><br><span class="line">            (i % <span class="number">2</span> == <span class="number">0</span> ? cnt1 : cnt2)[s[i]-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; (cnt1 == cnt2 ? <span class="string">&quot;YES&quot;</span> : <span class="string">&quot;NO&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; (<span class="built_in">canPalindrome</span>(cnt1) &amp;&amp; <span class="built_in">canPalindrome</span>(cnt2) ? <span class="string">&quot;YES&quot;</span> : <span class="string">&quot;NO&quot;</span>) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>💡 你的代码能 AC 可能是样例较弱（如 <code>abcba</code> 本身已是回文，走了 <code>s2==s</code> 的捷径）。建议用 <code>acacb</code> 这类边界数据自测。</p>
-</blockquote>
-<h1 id="📘-算法错题整理-Codeforces-Game-with-Reversing-博弈-字符串奇偶性"><a href="#📘-算法错题整理-Codeforces-Game-with-Reversing-博弈-字符串奇偶性" class="headerlink" title="📘 算法错题整理 | Codeforces Game with Reversing (博弈&#x2F;字符串奇偶性)"></a>📘 算法错题整理 | Codeforces Game with Reversing (博弈&#x2F;字符串奇偶性)</h1><h2 id="📖-一、题意概括-1"><a href="#📖-一、题意概括-1" class="headerlink" title="📖 一、题意概括"></a>📖 一、题意概括</h2><ul>
-<li><strong>核心机制</strong>：Alice 和 Bob 面对两个等长字符串 $S$ 和 $T$。Alice 先手，每回合可修改 $S$ 或 $T$ 的任意一个字符；Bob 每回合可翻转 $S$ 或 $T$。当 $S &#x3D;&#x3D; T$ 时游戏<strong>立即结束</strong>。</li>
-<li><strong>目标</strong>：Alice 希望最小化总回合数，Bob 希望最大化总回合数。求双方最优策略下的游戏总时长。</li>
-<li><strong>考点</strong>：博弈论、字符串匹配、<strong>奇偶性分析</strong>、贪心构造。复杂度要求 $O(n)$。</li>
-</ul>
-<hr>
-<h2 id="🐛-二、原代码错误诊断"><a href="#🐛-二、原代码错误诊断" class="headerlink" title="🐛 二、原代码错误诊断"></a>🐛 二、原代码错误诊断</h2><p>你的代码尝试了特判和局部逻辑，但整体偏离了本题的奇偶性本质，主要问题如下：</p>
-<ol>
-<li><p><strong>未初始化赋值导致逻辑断层</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s1,s2;</span><br><span class="line">string yuan = s1; <span class="comment">// ❌ 此时 s1 尚未输入，yuan 为空串，后续未使用但属于隐患</span></span><br><span class="line">cin&gt;&gt;s1&gt;&gt;s2;</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>错误使用中心字符特判代替全局统计</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> found1 = <span class="number">0</span>,found2 = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == n / <span class="number">2</span> &amp;&amp; n % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; s1[i] != s2[i])&#123; found1 = <span class="number">1</span>; &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(i != n / <span class="number">2</span> &amp;&amp; n % <span class="number">2</span> == <span class="number">1</span>)&#123; <span class="keyword">if</span>(s1[i] != s2[i]) found2 = <span class="number">0</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(found1 &amp;&amp; found2) &#123;cout&lt;&lt;<span class="number">1</span>&lt;&lt;endl;<span class="keyword">return</span>;&#125; <span class="comment">// ❌ 仅凭中心字符和奇偶位差异无法推导全局最优步数</span></span><br></pre></td></tr></table></figure>
-<p><em>说明</em>：本题不依赖字符串长度的奇偶性特判，而是依赖<strong>差异字符数量的奇偶性</strong>。该逻辑会误判大量样例。</p>
-</li>
-<li><p><strong>翻转后丢失原始差异统计，公式覆盖不全</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">reverse</span>(s<span class="number">1.</span><span class="built_in">begin</span>(),s<span class="number">1.</span><span class="built_in">end</span>());</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++) <span class="keyword">if</span>(s1[i] != s2[i]) cnt++; <span class="comment">// ❌ 此时 cnt 记录的是 rev(S) 与 T 的差异，原 S 与 T 的差异已丢失</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">ans += cnt * <span class="number">2</span>;</span><br><span class="line">ans--; <span class="comment">// ❌ 仅使用了 2*cnt-1 的线性公式，未处理 cnt 为偶数时的奇偶补偿，也未取两种策略的最小值</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<hr>
-<h2 id="💡-三、解题思路与题型模版"><a href="#💡-三、解题思路与题型模版" class="headerlink" title="💡 三、解题思路与题型模版"></a>💡 三、解题思路与题型模版</h2><h3 id="🔑-核心洞察（奇偶性决定论）"><a href="#🔑-核心洞察（奇偶性决定论）" class="headerlink" title="🔑 核心洞察（奇偶性决定论）"></a>🔑 核心洞察（奇偶性决定论）</h3><ul>
-<li><strong>翻转的本质</strong>：字符串翻转两次等于没翻转。因此 Bob 的具体选择（翻 $S$ 还是 $T$）不影响最终字符配对，<strong>只影响 Bob 总步数的奇偶性</strong>。</li>
-<li><strong>配对状态仅有两种</strong>：<ol>
-<li><strong>Bob 偶数步</strong>：最终配对为 $(s_i, t_i)$。Alice 需修复 $cnt$ 个差异位。</li>
-<li><strong>Bob 奇数步</strong>：最终配对为 $(s_i, t_{n-1-i})$。Alice 需修复 $cnt_{rev}$ 个差异位。</li>
-</ol>
-</li>
-<li>Alice 作为先手且追求最小化，会<strong>提前选择</strong>对自己更有利的一种状态进行修复。Bob 作为后手且追求最大化，会在 Alice 每次修复后尽量翻转以拖延，但无法改变配对状态的奇偶本质。</li>
-</ul>
-<h3 id="📐-步数公式推导（贪心博弈）"><a href="#📐-步数公式推导（贪心博弈）" class="headerlink" title="📐 步数公式推导（贪心博弈）"></a>📐 步数公式推导（贪心博弈）</h3><p>设 Alice 需要修复 $k$ 个差异位：</p>
-<ul>
-<li>Alice 每回合修 1 个，Bob 每回合翻 1 次。</li>
-<li>游戏在 Alice 完成最后一次修改后<strong>瞬间结束</strong>，Bob 无法再行动。</li>
-<li>若 $k$ 为奇数：序列为 <code>A B A B ... A</code>（共 $k$ 次 A，$k-1$ 次 B），总步数 $&#x3D; 2k-1$。</li>
-<li>若 $k$ 为偶数：Bob 可在最后一次翻转后保持偶数步 parity，迫使 Alice 多走一步或调整节奏，总步数 $&#x3D; 2k$。</li>
-<li><strong>统一公式</strong>：<ul>
-<li>策略1（瞄准原串）：<code>ans1 = (cnt == 0) ? 0 : 2 * cnt - (cnt % 2)</code></li>
-<li>策略2（瞄准翻转串）：<code>ans2 = (cnt_rev == 0) ? 2 : 2 * cnt_rev - (1 - cnt_rev % 2)</code><br><em>(注：<code>cnt_rev == 0</code> 时初始已满足翻转态，Alice 必须先动 1 步打破，Bob 再翻 1 步匹配，故固定为 2)</em></li>
-</ul>
-</li>
-<li><strong>最终答案</strong>：<code>min(ans1, ans2)</code></li>
-</ul>
-<hr>
-<h2 id="💻-四、修正后完整代码"><a href="#💻-四、修正后完整代码" class="headerlink" title="💻 四、修正后完整代码"></a>💻 四、修正后完整代码</h2><blockquote>
-<p>✅ 已去除所有冗余逻辑，严格贴合 $O(n)$ 奇偶性公式，注释详尽，格式紧凑无多余空行。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">    string s, t; cin &gt;&gt; s &gt;&gt; t;</span><br><span class="line">    <span class="keyword">if</span> (s == t) &#123; cout &lt;&lt; <span class="string">&quot;0\n&quot;</span>; <span class="keyword">return</span>; &#125; <span class="comment">// 初始已相等直接结束</span></span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>, cnt_rev = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] != t[i]) cnt++;            <span class="comment">// 统计正序差异数</span></span><br><span class="line">        <span class="keyword">if</span> (s[i] != t[n - <span class="number">1</span> - i]) cnt_rev++; <span class="comment">// 统计逆序差异数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 策略1：瞄准正序配对 (s_i == t_i)。cnt为0时已匹配为0步，否则按奇偶性计算</span></span><br><span class="line">    <span class="type">int</span> ans1 = (cnt == <span class="number">0</span>) ? <span class="number">0</span> : <span class="number">2</span> * cnt - (cnt % <span class="number">2</span>);</span><br><span class="line">    <span class="comment">// 策略2：瞄准逆序配对 (s_i == t_rev_i)。cnt_rev为0时Alice需先动1步，Bob翻1步匹配，共2步</span></span><br><span class="line">    <span class="type">int</span> ans2 = (cnt_rev == <span class="number">0</span>) ? <span class="number">2</span> : <span class="number">2</span> * cnt_rev - (<span class="number">1</span> - cnt_rev % <span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; <span class="built_in">min</span>(ans1, ans2) &lt;&lt; <span class="string">&quot;\n&quot;</span>; <span class="comment">// 双方最优，取较小值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="📌-复习建议"><a href="#📌-复习建议" class="headerlink" title="📌 复习建议"></a>📌 复习建议</h3><ul>
-<li>遇到 <strong>“翻转&#x2F;对称操作”</strong> 的博弈题，优先思考 <strong>操作次数的奇偶性</strong>，往往能将无限状态压缩为 2 种固定终态。</li>
-<li>博弈步数计算中，注意 <strong>“游戏结束瞬间”</strong> 的边界条件：最后一步执行完后是否轮到对手？本题明确“相等即刻结束”，因此 Bob 永远少一步。</li>
-<li>代码实现时避免过度特判，先用 $O(n)$ 统计核心变量（如 <code>cnt</code>），再套用数学公式，能大幅降低出错率。</li>
-</ul>
-<p>这是一份为你量身定制的算法题错题整理博客模板。针对你提供的这份代码，我必须首先<strong>大力表扬</strong>你的解题思路！相比于复杂的贪心和回溯，你采用了 <strong>“预处理打表 + 二分查找”</strong> 的策略。在 $n&#x3D;2$ 这种状态空间极小的情况下，这是一种<strong>非常聪明、极其不易出错且代码简洁</strong>的考场策略！</p>
-<p>不过，代码中有一个关于<strong>数据范围（位数）</strong> 的致命疏忽，下面为你详细拆解。</p>
-<hr>
-<h1 id="错题整理：C1-Cirno-and-Number-Easy-Version-打表-二分法"><a href="#错题整理：C1-Cirno-and-Number-Easy-Version-打表-二分法" class="headerlink" title="错题整理：C1. Cirno and Number (Easy Version) - 打表+二分法"></a>错题整理：C1. Cirno and Number (Easy Version) - 打表+二分法</h1><h2 id="一、-题意概括"><a href="#一、-题意概括" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h2><p>给定一个非负整数 $a$ 和 $2$ 个严格递增的数字集合 $d$（本题 $n&#x3D;2$）。要求找到一个非负整数 $b$，使得 $b$ 的十进制表示<strong>只包含 $d$ 中的数字</strong>，并且 $|a - b|$ 的值最小。输出这个最小的差值。</p>
-<p>这是一个非常巧妙的预处理+二分的解法！让我详细解释：</p>
-<h2 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h2><p>因为 <code>n=2</code>（只有两个数字），所以所有可能的 <code>b</code> 都是由这两个数字 <code>x</code> 和 <code>y</code> 组成的数。通过 <strong>DFS 预先生成所有可能的数</strong>，然后对每个查询 <code>a</code> 进行<strong>二分查找</strong>找到最接近的值。</p>
-<h2 id="代码逐行分析"><a href="#代码逐行分析" class="headerlink" title="代码逐行分析"></a>代码逐行分析</h2><h3 id="1-全局变量和预处理结构"><a href="#1-全局变量和预处理结构" class="headerlink" title="1. 全局变量和预处理结构"></a>1. 全局变量和预处理结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; V[<span class="number">100</span>];  <span class="comment">// V[10*x+y] 存储所有由数字 x 和 y 组成的数</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>用 <code>10*x+y</code> 作为 key，因为 x 和 y 是 0-9 的数字</li>
-<li>例如：x&#x3D;1, y&#x3D;2 → key&#x3D;12；x&#x3D;6, y&#x3D;7 → key&#x3D;67</li>
-<li>每个 key 对应一个 vector，存储所有由这两个数字组成的数</li>
-</ul>
-<h3 id="2-DFS-生成函数"><a href="#2-DFS-生成函数" class="headerlink" title="2. DFS 生成函数"></a>2. DFS 生成函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> d, <span class="type">long</span> <span class="type">long</span> c)</span> </span>&#123;</span><br><span class="line">    V[<span class="number">10</span>*x+y].<span class="built_in">push_back</span>(c);  <span class="comment">// 存储当前生成的数</span></span><br><span class="line">    <span class="keyword">if</span>(d &lt; <span class="number">17</span>) &#123;               <span class="comment">// 最多生成 17 位数字</span></span><br><span class="line">        <span class="built_in">f</span>(d<span class="number">+1</span>, c*<span class="number">10</span> + x);      <span class="comment">// 在后面追加数字 x</span></span><br><span class="line">        <span class="built_in">f</span>(d<span class="number">+1</span>, c*<span class="number">10</span> + y);      <span class="comment">// 在后面追加数字 y</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键点：</strong></p>
-<ul>
-<li><code>d</code> 表示当前数字的位数（深度）</li>
-<li><code>c</code> 是当前构造的数</li>
-<li>递归地在末尾添加 <code>x</code> 或 <code>y</code></li>
-<li>最大深度 17，因为题目中 <code>a ≤ 10^17</code>（最多 18 位），但包含前导 0 的情况</li>
-</ul>
-<p><strong>生成示例</strong>（x&#x3D;3, y&#x3D;4）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">深度0: c=0 ？等等，初始调用时 c 是什么？</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-主函数中的调用"><a href="#3-主函数中的调用" class="headerlink" title="3. 主函数中的调用"></a>3. 主函数中的调用</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">    <span class="built_in">f</span>(<span class="number">0</span>, x);   <span class="comment">// 从数字 x 开始</span></span><br><span class="line">    <span class="built_in">f</span>(<span class="number">0</span>, y);   <span class="comment">// 从数字 y 开始</span></span><br><span class="line">    <span class="built_in">sort</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>这里有个隐藏的问题</strong>：初始调用 <code>f(0, x)</code> 时，<code>c=x</code> 是单个数字，但随后会生成：</p>
-<ul>
-<li>x (1位)</li>
-<li>xx, xy (2位)</li>
-<li>xxx, xxy, xyx, xyy (3位)</li>
-<li>… 直到 17 位</li>
-</ul>
-<h3 id="4-查询处理"><a href="#4-查询处理" class="headerlink" title="4. 查询处理"></a>4. 查询处理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> i = <span class="built_in">lower_bound</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), a);  <span class="comment">// 找到第一个 &gt;= a 的数</span></span><br><span class="line">m = <span class="number">3e18</span>;  <span class="comment">// 初始化为极大值</span></span><br><span class="line"><span class="keyword">if</span>(i != v.<span class="built_in">end</span>()) m = *i - a;                  <span class="comment">// 候选1：大于等于 a 的最小值</span></span><br><span class="line"><span class="keyword">if</span>(i != v.<span class="built_in">begin</span>()) m = <span class="built_in">min</span>(m, a - *--i);     <span class="comment">// 候选2：小于 a 的最大值</span></span><br><span class="line">cout &lt;&lt; m &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
-<h2 id="完整的工作原理"><a href="#完整的工作原理" class="headerlink" title="完整的工作原理"></a>完整的工作原理</h2><h3 id="预处理阶段（只执行一次）"><a href="#预处理阶段（只执行一次）" class="headerlink" title="预处理阶段（只执行一次）"></a>预处理阶段（只执行一次）</h3><p>对于每一对 <code>(x, y)</code>，生成所有由这两个数字组成的数：</p>
-<ul>
-<li>位数：1 到 17 位</li>
-<li>总数量：对于 17 位，最多 <code>2^1 + 2^2 + ... + 2^17 = 2^18 - 2 ≈ 262,142</code> 个数</li>
-<li>存储在一个 vector 中并排序</li>
-</ul>
-<h3 id="查询阶段"><a href="#查询阶段" class="headerlink" title="查询阶段"></a>查询阶段</h3><p>对于每个测试用例：</p>
-<ol>
-<li>使用 <code>key = 10*x + y</code> 找到对应的预生成数组</li>
-<li>二分查找找到 <code>a</code> 的位置</li>
-<li>检查大于等于 <code>a</code> 的最小值和小于 <code>a</code> 的最大值</li>
-<li>输出最小的差值</li>
-</ol>
-<h2 id="代码存在的问题"><a href="#代码存在的问题" class="headerlink" title="代码存在的问题"></a>代码存在的问题</h2><p>这个代码有一个<strong>严重错误</strong>：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span> d, <span class="type">long</span> <span class="type">long</span> c)</span> </span>&#123;</span><br><span class="line">    V[<span class="number">10</span>*x+y].<span class="built_in">push_back</span>(c);  <span class="comment">// ❌ 这里 c 可能是 0！</span></span><br><span class="line">    <span class="keyword">if</span>(d &lt; <span class="number">17</span>) &#123;</span><br><span class="line">        <span class="built_in">f</span>(d<span class="number">+1</span>, c*<span class="number">10</span> + x);</span><br><span class="line">        <span class="built_in">f</span>(d<span class="number">+1</span>, c*<span class="number">10</span> + y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>问题</strong>：初始调用 <code>f(0, x)</code> 时，会先 push 当前值，但此时 <code>c=x</code> 是单个数字。这没问题。</p>
-<p>但更严重的是：<strong>没有处理前导 0 的情况</strong>！如果 x&#x3D;0 或 y&#x3D;0，会生成像 “0”, “00”, “000” 这样的数，这些在实际中不是有效的整数表示。</p>
-<h2 id="正确的修正版本"><a href="#正确的修正版本" class="headerlink" title="正确的修正版本"></a>正确的修正版本</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; V[<span class="number">100</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> t, a, n, x, y;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> digit, <span class="type">long</span> <span class="type">long</span> num, <span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num != <span class="number">0</span>) &#123;  <span class="comment">// 不存储 0</span></span><br><span class="line">        V[key].<span class="built_in">push_back</span>(num);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(digit &lt; <span class="number">17</span>) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(digit + <span class="number">1</span>, num * <span class="number">10</span> + x, x, y, key);</span><br><span class="line">        <span class="built_in">dfs</span>(digit + <span class="number">1</span>, num * <span class="number">10</span> + y, x, y, key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--) &#123;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; n &gt;&gt; x &gt;&gt; y;</span><br><span class="line">        <span class="type">int</span> key = <span class="number">10</span> * x + y;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(V[key].<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="comment">// 从 1 位数字开始生成</span></span><br><span class="line">            <span class="keyword">if</span>(x != <span class="number">0</span>) <span class="built_in">dfs</span>(<span class="number">0</span>, x, x, y, key);  <span class="comment">// 不能从 0 开始</span></span><br><span class="line">            <span class="keyword">if</span>(y != <span class="number">0</span>) <span class="built_in">dfs</span>(<span class="number">0</span>, y, x, y, key);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 特殊处理 0 本身</span></span><br><span class="line">            <span class="keyword">if</span>(x == <span class="number">0</span> || y == <span class="number">0</span>) &#123;</span><br><span class="line">                V[key].<span class="built_in">push_back</span>(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">sort</span>(V[key].<span class="built_in">begin</span>(), V[key].<span class="built_in">end</span>());</span><br><span class="line">            V[key].<span class="built_in">erase</span>(<span class="built_in">unique</span>(V[key].<span class="built_in">begin</span>(), V[key].<span class="built_in">end</span>()), V[key].<span class="built_in">end</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">auto</span> &amp;v = V[key];</span><br><span class="line">        <span class="keyword">auto</span> it = <span class="built_in">lower_bound</span>(v.<span class="built_in">begin</span>(), v.<span class="built_in">end</span>(), a);</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = LLONG_MAX;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(it != v.<span class="built_in">end</span>()) ans = <span class="built_in">min</span>(ans, *it - a);</span><br><span class="line">        <span class="keyword">if</span>(it != v.<span class="built_in">begin</span>()) ans = <span class="built_in">min</span>(ans, a - *<span class="built_in">prev</span>(it));</span><br><span class="line">        </span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="时间和空间复杂度"><a href="#时间和空间复杂度" class="headerlink" title="时间和空间复杂度"></a>时间和空间复杂度</h2><ul>
-<li><strong>预处理</strong>：O(2^17) ≈ 262k 个数字，对每对 (x,y) 都执行一次</li>
-<li><strong>查询</strong>：O(log(262k)) ≈ O(18) 二分查找</li>
-<li><strong>空间</strong>：10×10×262k ≈ 2.6e7 个 long long，约 200MB，可能勉强通过</li>
-</ul>
-<p>这个解法非常聪明，将问题转化为<strong>离线预处理 + 在线二分查找</strong>，避免了每次查询都重新计算。</p>
-<p>这是一份为你量身定制的算法题笔记整理。由于你提供的代码是<strong>完全正确且已经 AC 的优秀代码</strong>，因此在“代码分析”部分，我没有去挑错，而是重点为你剖析了代码中<strong>非常巧妙（甚至有些“野”）的竞赛 Trick（技巧）</strong>，帮助你不仅“知其然”，更“知其所以然”。</p>
-<p>以下是 Markdown 格式的错题&#x2F;好题整理笔记：</p>
-<hr>
-<h1 id="Codeforces-1098-C2-Cirno-and-Number-Hard-Version"><a href="#Codeforces-1098-C2-Cirno-and-Number-Hard-Version" class="headerlink" title="Codeforces 1098 C2. Cirno and Number (Hard Version)"></a>Codeforces 1098 C2. Cirno and Number (Hard Version)</h1><h2 id="一、-题意概括-1"><a href="#一、-题意概括-1" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h2><p>给定一个非负整数 $a$（$a \le 10^{17}$）和一个长度为 $n$（$n \le 10$）的严格递增数字集合 $d$。<br>要求构造一个非负整数 $b$，使得 $b$ 的十进制表示<strong>仅包含</strong> $d$ 中的数字，并且使得差值的绝对值 $|a - b|$ 最小。输出这个最小的绝对值。</p>
-<h2 id="二、-题型总结与模板思路"><a href="#二、-题型总结与模板思路" class="headerlink" title="二、 题型总结与模板思路"></a>二、 题型总结与模板思路</h2><p><strong>题型</strong>：数字构造 &#x2F; 搜索 + 贪心剪枝 &#x2F; 数位 DP<br><strong>通用模板思路</strong>：<br>这类“构造数字使差值最小”的问题，核心在于<strong>确定目标数字的位数</strong>，然后<strong>从高位到低位逐位构造</strong>。</p>
-<ol>
-<li><strong>确定位数范围</strong>：最优的 $b$ 的位数，要么是 $a$ 的位数 $cnt$，要么是 $cnt-1$（全用最大数字），要么是 $cnt+1$（全用最小数字）。</li>
-<li><strong>DFS 逐位构造</strong>：在确定目标位数后，用 DFS 枚举每一位填 $d$ 中的哪个数字。</li>
-<li><strong>关键剪枝（上下界估计）</strong>：在 DFS 过程中，计算<strong>剩余位数全填最大数字</strong>能得到的最大值 <code>big</code>，以及<strong>全填最小数字</strong>能得到的最小值 <code>sml</code>。<ul>
-<li>如果 <code>big &lt;= a</code>，说明无论后面怎么填，构成的数都 $\le a$，且最大就是 <code>big</code>，直接返回 <code>a - big</code>。</li>
-<li>如果 <code>sml &gt;= a</code>，说明无论后面怎么填，构成的数都 $\ge a$，且最小就是 <code>sml</code>，直接返回 <code>sml - a</code>。</li>
-</ul>
-</li>
-</ol>
-<h2 id="三、-核心思路整理"><a href="#三、-核心思路整理" class="headerlink" title="三、 核心思路整理"></a>三、 核心思路整理</h2><ol>
-<li>预处理 $a$ 的十进制位数 <code>cnt</code>。</li>
-<li>因为最优解的位数只可能是 <code>cnt-1</code>、<code>cnt</code>、<code>cnt+1</code>，所以我们只需要对这三种位数分别进行 DFS 搜索，最后取最小值即可。</li>
-<li>在 DFS 函数 <code>dfs(res, dig)</code> 中，<code>res</code> 是已经构造好的前缀数值，<code>dig</code> 表示当前正在构造第几位。</li>
-<li>利用 <code>while</code> 循环快速计算出当前状态下，剩余位数能构成的最大值 <code>big</code> 和最小值 <code>sml</code>，进行 $O(1)$ 的极限剪枝，大幅减少搜索空间。</li>
-</ol>
-<h2 id="四、-代码分析与亮点探讨（附片段）"><a href="#四、-代码分析与亮点探讨（附片段）" class="headerlink" title="四、 代码分析与亮点探讨（附片段）"></a>四、 代码分析与亮点探讨（附片段）</h2><p><strong>【结论】代码逻辑完全正确，无语法或逻辑错误，是一份非常优秀的 AC 代码。</strong></p>
-<p>虽然代码没有错误，但其中有一处<strong>极其精简但容易让人迷惑的“竞赛奇技淫巧”</strong>，非常值得作为笔记记录下来：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 片段：solve 函数中的外层调用</span></span><br><span class="line">cnt = <span class="built_in">to_string</span>(a).<span class="built_in">length</span>();</span><br><span class="line">cout &lt;&lt; <span class="built_in">min</span>(&#123;<span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">1</span>), <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="built_in">min</span>(cnt, <span class="number">2LL</span>)), <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>)&#125;) &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>【深度剖析】</strong>：<br>常规思维中，我们可能会写 <code>dfs(0, cnt)</code>（搜 $cnt$ 位）、<code>dfs(0, cnt-1)</code>（搜 $cnt-1$ 位）等。但这里作者巧妙地利用了 <code>dig</code> 参数的含义：</p>
-<ul>
-<li><code>dig</code> 代表<strong>当前准备填第几位</strong>（从 1 开始）。</li>
-<li>剩余需要填的位数 &#x3D; <code>cnt - dig + 1</code>。</li>
-<li>因此，<strong>搜 $k$ 位数，只需要让初始的 <code>dig = cnt - k + 1</code></strong>。</li>
-</ul>
-<p>对应到代码中的三个调用：</p>
-<ol>
-<li><code>dfs(0, 1)</code>：<code>dig=1</code>，剩余位数为 <code>cnt</code>，即搜索 <strong>$cnt$ 位数</strong>。</li>
-<li><code>dfs(0, min(cnt, 2LL))</code>：当 $cnt \ge 2$ 时，<code>dig=2</code>，剩余位数为 <code>cnt-1</code>，即搜索 <strong>$cnt-1$ 位数</strong>。（当 $cnt&#x3D;1$ 时，<code>min(1,2)=1</code>，搜索 1 位数，与第一个调用重复但不影响正确性）。</li>
-<li><code>dfs(0, 0)</code>：<code>dig=0</code>，剩余位数为 <code>cnt+1</code>，即搜索 <strong>$cnt+1$ 位数</strong>。</li>
-</ol>
-<p><strong>总结</strong>：作者用 <code>1</code>、<code>2</code>（用 <code>min(cnt, 2LL)</code> 防越界）、<code>0</code> 作为 <code>dig</code> 的初始值，极其优雅地覆盖了 $cnt$、$cnt-1$、$cnt+1$ 三种位数。这种写法虽然牺牲了一点点可读性，但将代码长度压缩到了极致，是竞赛中非常高级的 Trick。</p>
-<h2 id="五、-详细注释代码（原模原样）"><a href="#五、-详细注释代码（原模原样）" class="headerlink" title="五、 详细注释代码（原模原样）"></a>五、 详细注释代码（原模原样）</h2><p><em>(注：以下代码保持了你原有的代码结构和空行，仅在行尾和关键位置添加了详细注释，无任何多余空行)</em></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long <span class="comment">// 使用 long long 防止溢出，因为 a 最大为 10^17</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a,n,cnt,d[<span class="number">15</span>]; <span class="comment">// a: 目标数, n: 可用数字个数, cnt: a的位数, d: 可用数字集合</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// dfs: res为当前已构造的前缀数值, dig为当前正在构造第几位(从1开始)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> res,<span class="type">int</span> dig)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(dig&gt;cnt) <span class="keyword">return</span> <span class="built_in">abs</span>(res-a); <span class="comment">// 所有cnt位都已构造完毕，返回差值绝对值</span></span><br><span class="line">    <span class="type">int</span> tmp=dig;</span><br><span class="line">    <span class="type">int</span> big=res,sml=res;</span><br><span class="line">    <span class="comment">// 计算剩余位数全填最大数字(d[n])和全填最小数字(d[1])得到的极值</span></span><br><span class="line">    <span class="keyword">while</span>(tmp&lt;=cnt) big=big*<span class="number">10</span>+d[n],sml=sml*<span class="number">10</span>+d[<span class="number">1</span>],tmp++;</span><br><span class="line">    <span class="keyword">if</span>(big&lt;=a) <span class="keyword">return</span> a-big; <span class="comment">// 剪枝：即使后面全填最大，也 &lt;= a，直接返回 a-big</span></span><br><span class="line">    <span class="keyword">if</span>(sml&gt;=a) <span class="keyword">return</span> sml-a; <span class="comment">// 剪枝：即使后面全填最小，也 &gt;= a，直接返回 sml-a</span></span><br><span class="line">    <span class="type">int</span> mn=<span class="number">1e18</span>;</span><br><span class="line">    <span class="comment">// 枚举当前位填 d 中的哪个数字，继续向下搜索</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        mn=<span class="built_in">min</span>(mn,<span class="built_in">dfs</span>(res*<span class="number">10</span>+d[i],dig<span class="number">+1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mn;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;a&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;d[i];</span><br><span class="line">    cnt=<span class="built_in">to_string</span>(a).<span class="built_in">length</span>(); <span class="comment">// 获取 a 的十进制位数</span></span><br><span class="line">    <span class="comment">// 巧妙调用：1代表搜cnt位，min(cnt,2)即2代表搜cnt-1位，0代表搜cnt+1位</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">min</span>(&#123;<span class="built_in">dfs</span>(<span class="number">0</span>,<span class="number">1</span>),<span class="built_in">dfs</span>(<span class="number">0</span>,<span class="built_in">min</span>(cnt,<span class="number">2LL</span>)),<span class="built_in">dfs</span>(<span class="number">0</span>,<span class="number">0</span>)&#125;)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t=<span class="number">1</span>;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>以下是为您整理的算法题错题（或经典题）博客笔记，采用 Markdown 格式，完全按照您的要求进行了结构化梳理。</p>
-<hr>
-<h1 id="📝-算法题整理：Game-with-a-Fraction-博弈论-数学推导"><a href="#📝-算法题整理：Game-with-a-Fraction-博弈论-数学推导" class="headerlink" title="📝 算法题整理：Game with a Fraction (博弈论 + 数学推导)"></a>📝 算法题整理：Game with a Fraction (博弈论 + 数学推导)</h1><h2 id="一、-题意概括-2"><a href="#一、-题意概括-2" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h2><p>给定两个整数 $p$ 和 $q$，Alice 和 Bob 轮流进行操作，Alice 先手。<br>每次操作，玩家可以选择：</p>
-<ol>
-<li>将 $p$ 减少 1（前提是 $p &gt; 0$）；</li>
-<li>将 $q$ 减少 1（前提是 $q &gt; 1$）。</li>
-</ol>
-<p>当 $p &#x3D; 0$ 且 $q &#x3D; 1$ 时，游戏强制结束。<br><strong>胜利条件</strong>：如果在游戏过程中的<strong>任何时刻</strong>，分数 $\frac{p}{q}$ 的值恰好等于 $\frac{2}{3}$，则 <strong>Bob 获胜</strong>。否则，<strong>Alice 获胜</strong>。<br>给定初始的 $p$ 和 $q$（$1 \le p, q \le 10^{18}$），假设双方都采取最优策略，判断最终的获胜者。</p>
-<hr>
-<h2 id="二、-解题思路"><a href="#二、-解题思路" class="headerlink" title="二、 解题思路"></a>二、 解题思路</h2><p>本题的核心在于分析 Bob 能否在 Alice 的“破坏”下，强行将状态引导至 $3p &#x3D; 2q$（即 $\frac{p}{q} &#x3D; \frac{2}{3}$）。通过数学推导，可以得出 Bob 获胜的<strong>两个充要条件</strong>：</p>
-<ol>
-<li><strong>条件一：$p &lt; q$</strong><ul>
-<li><strong>分析</strong>：如果初始 $p \ge q$，Alice 的最优策略是<strong>一直减小 $q$</strong>。这样分数 $\frac{p}{q}$ 会始终 $\ge 1$（或者最终变成 $0$），永远不可能等于 $\frac{2}{3}$。因此，若 $p \ge q$，Alice 必胜。</li>
-</ul>
-</li>
-<li><strong>条件二：$\min(\lfloor \frac{p}{2} \rfloor, \lfloor \frac{q}{3} \rfloor) \ge q - p$</strong><ul>
-<li><strong>分析</strong>：这个条件保证了 Bob 有足够的“缓冲空间”来追赶差值。在游戏过程中，Alice 无论减小 $p$ 还是 $q$，都会打破当前的平衡。Bob 需要通过减小另一个数来维持或达到 $3p &#x3D; 2q$。该不等式确保了在 $p$ 和 $q$ 递减到满足目标比例之前，不会因为 $p$ 先减到 $0$ 或 $q$ 先减到 $1$ 而导致游戏提前结束（即 Bob 有足够的步数来执行他的对称&#x2F;补偿策略）。</li>
-</ul>
-</li>
-</ol>
-<p><strong>结论</strong>：当且仅当 <strong>$p &lt; q$</strong> 且 <strong>$\min(p &#x2F; 2, q &#x2F; 3) \ge q - p$</strong> 同时满足时，Bob 获胜；否则 Alice 获胜。时间复杂度为 $O(1)$。</p>
-<hr>
-<h2 id="三、-题型模板总结"><a href="#三、-题型模板总结" class="headerlink" title="三、 题型模板总结"></a>三、 题型模板总结</h2><ul>
-<li><strong>题型分类</strong>：博弈论 (Games) + 数学推导 (Math) &#x2F; 不变量分析。</li>
-<li><strong>解题模板特征</strong>：<ol>
-<li><strong>寻找目标状态</strong>：明确胜利条件（本题为 $3p &#x3D; 2q$）。</li>
-<li><strong>分析先手破坏力</strong>：思考先手（Alice）如何能最快地远离目标状态（本题为疯狂减小 $q$ 使 $p \ge q$）。</li>
-<li><strong>推导后手维持条件</strong>：计算后手（Bob）需要满足什么初始数学条件，才能抵消先手的破坏并强制达到目标状态。</li>
-<li><strong>$O(1)$ 判定</strong>：这类题最终往往收敛为一个或几个简单的数学不等式，直接对初始状态进行 $O(1)$ 判断即可，无需模拟。</li>
-</ol>
-</li>
-</ul>
-<hr>
-<h2 id="四、-代码审查"><a href="#四、-代码审查" class="headerlink" title="四、 代码审查"></a>四、 代码审查</h2><p><strong>审查结论：代码完全正确，逻辑严密，无需修改。</strong></p>
-<ul>
-<li><strong>正确性分析</strong>：<br>代码精准地将推导出的两个数学条件转化为逻辑判断：<code>p &lt; q &amp;&amp; min(p / 2, q / 3) &gt;= q - p</code>。</li>
-<li><strong>细节亮点</strong>：<ol>
-<li>使用了 <code>#define int long long</code>，完美避免了 $10^{18}$ 级别数据在运算时可能发生的溢出问题。</li>
-<li>包含了标准的竞赛级 I&#x2F;O 优化 (<code>ios_base::sync_with_stdio(false); cin.tie(0);</code>)，确保在处理 $10^4$ 组测试用例时不会超时。</li>
-<li>包含了本地调试用的计时宏 (<code>#ifdef FELIX</code>)，工程习惯良好。</li>
-</ol>
-</li>
-</ul>
-<p><em>(注：既然代码已经完美，以下直接提供添加了解题注释的原版代码，未做任何逻辑和格式上的多余改动)</em></p>
-<hr>
-<h2 id="五、-注释版代码-原模原样，无多余空行"><a href="#五、-注释版代码-原模原样，无多余空行" class="headerlink" title="五、 注释版代码 (原模原样，无多余空行)"></a>五、 注释版代码 (原模原样，无多余空行)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long <span class="comment">// 防止 10^18 级别数据运算溢出</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> p, q;</span><br><span class="line">	cin &gt;&gt; p &gt;&gt; q;</span><br><span class="line">	<span class="comment">// Bob 获胜的两个充要条件：</span></span><br><span class="line">	<span class="comment">// 1. p &lt; q (否则 Alice 会一直减小 q，使分数始终 &gt;= 1)</span></span><br><span class="line">	<span class="comment">// 2. min(p/2, q/3) &gt;= q - p (保证 Bob 有足够的步数补偿差值，达到 3p = 2q)</span></span><br><span class="line">	<span class="keyword">if</span> (p &lt; q &amp;&amp; <span class="built_in">min</span>(p / <span class="number">2</span>, q / <span class="number">3</span>) &gt;= q - p)&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Bob\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Alice\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> FELIX</span></span><br><span class="line">	<span class="keyword">auto</span> _clock_start = chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="comment">// 竞赛标准输入输出优化</span></span><br><span class="line">	ios_base::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">	cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> t = <span class="number">1</span>;</span><br><span class="line">	cin &gt;&gt; t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		<span class="built_in">solve</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> FELIX</span></span><br><span class="line">	cerr &lt;&lt; <span class="string">&quot;Executed in &quot;</span> &lt;&lt; chrono::<span class="built_in">duration_cast</span>&lt;chrono::milliseconds&gt;(</span><br><span class="line">		chrono::high_resolution_clock::<span class="built_in">now</span>()</span><br><span class="line">			- _clock_start).<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot;ms.&quot;</span> &lt;&lt; endl;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><em>💡 学习建议：这道题是经典的“数学条件判定型”博弈论。遇到类似“达到某个特定比例&#x2F;数值”的题目时，优先尝试列出等式，并分析双方操作对该等式左右两边差值的影响，往往能直接得出 $O(1)$ 的结论。</em></p>
-<hr>
-<h3 id="🏃‍♂️-核心模型：差值-q-p-的赛跑"><a href="#🏃‍♂️-核心模型：差值-q-p-的赛跑" class="headerlink" title="🏃‍♂️ 核心模型：差值 $q - p$ 的赛跑"></a>🏃‍♂️ 核心模型：差值 $q - p$ 的赛跑</h3><p>Bob 获胜的唯一条件是达到 $\frac{p}{q} &#x3D; \frac{2}{3}$。<br>这意味着最终的数字必须长成这样：$p &#x3D; 2k$，$q &#x3D; 3k$（$k$ 是某个整数，比如 1, 2, 3, 4…）。</p>
-<p>在这些<strong>终点线</strong>上，$q$ 和 $p$ 的差值是多少？<br>$$ \text{目标差值} &#x3D; q - p &#x3D; 3k - 2k &#x3D; \mathbf{k} $$<br><strong>结论 1：Bob 想要赢，最终的差值必须恰好等于 $k$。</strong></p>
-<hr>
-<h3 id="🚧-第一步：计算“终点线”的最高限制（-min-的真相）"><a href="#🚧-第一步：计算“终点线”的最高限制（-min-的真相）" class="headerlink" title="🚧 第一步：计算“终点线”的最高限制（$\min$ 的真相）"></a>🚧 第一步：计算“终点线”的最高限制（$\min$ 的真相）</h3><p>因为游戏中数字<strong>只能减小，不能增加</strong>，所以最终的 $p$ 和 $q$ 不能超过初始值：</p>
-<ul>
-<li>最终 $p &#x3D; 2k \le$ 初始 $p$  $\Rightarrow$  $k \le \lfloor p&#x2F;2 \rfloor$</li>
-<li>最终 $q &#x3D; 3k \le$ 初始 $q$  $\Rightarrow$  $k \le \lfloor q&#x2F;3 \rfloor$</li>
-</ul>
-<p>所以，$k$ 最大只能是 $\min(\lfloor p&#x2F;2 \rfloor, \lfloor q&#x2F;3 \rfloor)$。<br><strong>结论 2：$\min$ 代表的是 Bob 理论上能到达的“终点线”中，差值 $k$ 的【最大可能值】。</strong></p>
-<blockquote>
-<p><strong>代入 $p&#x3D;9, q&#x3D;15$：</strong><br>$k$ 的最大值 $&#x3D; \min(9&#x2F;2, 15&#x2F;3) &#x3D; \min(4, 5) &#x3D; \mathbf{4}$。<br>这意味着，Bob 能赢的终点，<strong>差值最大只能是 4</strong>（比如终点是 $p&#x3D;8, q&#x3D;12$，差值是 4）。</p>
-</blockquote>
-<hr>
-<h3 id="📉-第二步：看当前的“起跑线”（初始差值）"><a href="#📉-第二步：看当前的“起跑线”（初始差值）" class="headerlink" title="📉 第二步：看当前的“起跑线”（初始差值）"></a>📉 第二步：看当前的“起跑线”（初始差值）</h3><p>当前的差值是多少？<br>$$ \text{当前差值} &#x3D; q - p &#x3D; 15 - 9 &#x3D; \mathbf{6} $$</p>
-<hr>
-<h3 id="💥-第三步：为什么“额度耗尽”（为什么永远追不上）？"><a href="#💥-第三步：为什么“额度耗尽”（为什么永远追不上）？" class="headerlink" title="💥 第三步：为什么“额度耗尽”（为什么永远追不上）？"></a>💥 第三步：为什么“额度耗尽”（为什么永远追不上）？</h3><p>现在矛盾出现了：</p>
-<ul>
-<li>Bob 需要把差值从 <strong>6</strong> 缩小到 <strong>4</strong>（或更小）才能赢。</li>
-<li>怎么缩小差值？只能靠 <strong>Bob 减小 $q$</strong>（这会让差值 $-1$）。</li>
-<li><strong>但是，Alice 会捣乱！</strong> Alice 的最优策略是 <strong>减小 $p$</strong>（这会让差值 $+1$）。</li>
-</ul>
-<p><strong>博弈推演：</strong><br>如果 Bob 努力减小 $q$（差值 $-1$），Alice 紧接着就会减小 $p$（差值 $+1$）。<br>一回合下来，<strong>差值根本没有变小！</strong>（甚至因为 Alice 先手，差值还会先 $+1$ 变得更大）。</p>
-<p>既然差值无法有效缩小，它会永远保持在 $\ge 6$。<br>而 Bob 需要的终点差值最大只有 4。<br><strong>6 永远不可能变成 4。</strong> </p>
-<p>这就是所谓“额度耗尽”的本质：<strong>当前的差距（6）已经大于了物理极限（4），且 Alice 拥有 1:1 抵消 Bob 努力的能力，Bob 的追赶在开始前就注定失败了。</strong></p>
-<hr>
-<h3 id="🌟-第四步：啥时候“没用尽”？（Bob-能赢的情况）"><a href="#🌟-第四步：啥时候“没用尽”？（Bob-能赢的情况）" class="headerlink" title="🌟 第四步：啥时候“没用尽”？（Bob 能赢的情况）"></a>🌟 第四步：啥时候“没用尽”？（Bob 能赢的情况）</h3><p>我们来看一个 Bob 能赢的例子：$p &#x3D; 10, q &#x3D; 14$（这是题目 Example 2 的数据）。</p>
-<ol>
-<li><strong>计算目标差值上限</strong>：$k &#x3D; \min(10&#x2F;2, 14&#x2F;3) &#x3D; \min(5, 4) &#x3D; \mathbf{4}$。</li>
-<li><strong>计算当前差值</strong>：$q - p &#x3D; 14 - 10 &#x3D; \mathbf{4}$。</li>
-<li><strong>判断</strong>：当前差值 (4) $\le$ 目标差值上限 (4)。<strong>条件满足，Bob 赢！</strong></li>
-</ol>
-<p><strong>为什么这次能赢？模拟一下：</strong></p>
-<ul>
-<li><strong>初始</strong>：$p&#x3D;10, q&#x3D;14$ (差值 4)</li>
-<li><strong>Alice</strong> (试图破坏，减小 $p$)：$p&#x3D;9, q&#x3D;14$ (差值变成 5)</li>
-<li><strong>Bob</strong> (补救，减小 $q$)：$p&#x3D;9, q&#x3D;13$ (差值变回 4)</li>
-<li><strong>Alice</strong> (只能减小 $q$，因为如果减小 $p$，差值会变成 6，Bob 下一步减小 $q$ 就能达到 $p&#x3D;8, q&#x3D;12$ 差值 4 的必胜态)：$p&#x3D;9, q&#x3D;12$ (差值变成 3)</li>
-<li><strong>Bob</strong> (绝杀，减小 $p$)：$p&#x3D;8, q&#x3D;12$ (差值变回 4，且 $8&#x2F;12 &#x3D; 2&#x2F;3$，<strong>Bob 获胜！</strong>)</li>
-</ul>
-<h3 id="📌-终极一句话总结"><a href="#📌-终极一句话总结" class="headerlink" title="📌 终极一句话总结"></a>📌 终极一句话总结</h3><p>公式 $\min(p&#x2F;2, q&#x2F;3) \ge q - p$ 的意思是：<br><strong>“当前实际的差值 ($q-p$)，必须小于等于理论上能达到的最大目标差值 ($\min$)。”</strong><br>如果实际差值已经超过了理论上限，无论 Bob 怎么努力，Alice 都能通过“你减 $q$ 我就减 $p$”的策略，让差值永远降不到目标线以下，Bob 必败。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/28/cf-gametheory/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260527" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/27/20260527/">2026-05-27 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/27/20260527/" class="archive-article-date">
-  	<time datetime="2026-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>英语（6h++）</li>
-<li>cf 3h 三题 + 两题看</li>
-</ol>
-<h1 id="cf刷题风格更新："><a href="#cf刷题风格更新：" class="headerlink" title="cf刷题风格更新："></a>cf刷题风格更新：</h1><ol>
-<li>博弈论 + 基础数论 + 组合数学</li>
-<li>KMP + AC自动机 + 字符串哈希 + 基础计算几何</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/27/20260527/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1623,7 +1293,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1631,15 +1301,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1651,10 +1321,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
@@ -1663,7 +1329,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1671,15 +1337,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1687,7 +1349,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1695,15 +1357,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1711,7 +1369,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1719,15 +1377,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1735,7 +1389,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1743,11 +1405,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
             
             <div class="clearfix"></div>
