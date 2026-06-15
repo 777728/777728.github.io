@@ -158,6 +158,185 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260528" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/28/20260528/">2026-05-28 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/28/20260528/" class="archive-article-date">
+  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语（6h++）</li>
+<li>cf 3h 博弈论 &amp; 动态规划 两题 + 两题看</li>
+<li>数学作业</li>
+<li>副部长竞选ppt</li>
+<li>数分讲题</li>
+<li>数据结构期中 做</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/28/20260528/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cf-datastructure" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/28/cf-datastructure/">Codeforces Data Structures</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/28/cf-datastructure/" class="archive-article-date">
+  	<time datetime="2026-05-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/problemset/page/1?tags=combine-tags-by-or,data+structures,dfs+and+similar,dp,graphs,1200-1600">Codeforces</a></p>
+<h1 id="📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks"><a href="#📘-算法错题整理-Codeforces-Round-1086-Div-2-C-Stamina-and-Tasks" class="headerlink" title="📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks"></a>📘 算法错题整理 | Codeforces Round 1086 (Div. 2) C. Stamina and Tasks</h1><h2 id="📂-题型模板"><a href="#📂-题型模板" class="headerlink" title="📂 题型模板"></a>📂 题型模板</h2><p><strong>逆序动态规划 &#x2F; 状态线性缩放模型</strong><br>适用于“当前操作会按固定比例影响后续所有收益&#x2F;状态”的问题。核心套路是<strong>剥离公共缩放因子</strong>，定义“单位初始状态”下的最优子结构，通过<strong>逆序递推</strong>或<strong>贪心决策</strong>求解。空间通常可优化至 $O(1)$。</p>
+<hr>
+<h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定 $n$ 个必须<strong>严格按顺序</strong>处理的任务。初始体力 $S&#x3D;1$。<br>对于任务 $i$（价值 $c_i$，难度衰减 $p_i%$）：</p>
+<ul>
+<li><strong>放弃</strong>：体力 $S$ 不变，不加分。</li>
+<li><strong>完成</strong>：获得 $S \cdot c_i$ 分，随后体力变为 $S \cdot (1 - \frac{p_i}{100})$。<br>求处理完所有任务后能获得的最大总分数。</li>
+</ul>
+<hr>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>核心性质（乘法分配律）</strong>：<br>体力 $S$ 对后续所有任务收益的影响是<strong>纯乘法</strong>的。若后续最优收益为 $K$，则当前体力为 $S$ 时实际收益必为 $S \times K$。因此，<strong>$S$ 的具体数值不改变“做&#x2F;不做”的相对优劣</strong>，仅作为全局乘数。</li>
+<li><strong>逆序 DP 设计</strong>：<br>定义 $f_i$：仅考虑任务 $[i, n]$，且<strong>进入该区间时体力恰好为 1</strong> 时的最大得分。</li>
+<li><strong>状态转移</strong>：  <ul>
+<li><strong>跳过</strong>：体力保持 1，后续收益为 $f_{i+1}$。</li>
+<li><strong>完成</strong>：当前得 $1 \cdot c_i$，体力变为 $1 - p_i&#x2F;100$，后续收益缩放为 $(1 - p_i&#x2F;100) \cdot f_{i+1}$。总收益 $c_i + (1 - \frac{p_i}{100})f_{i+1}$。<br>决策取优：$f_i &#x3D; \max(f_{i+1},\ c_i + (1 - \frac{p_i}{100})f_{i+1})$</li>
+</ul>
+</li>
+<li><strong>边界与滚动</strong>：$f_{n+1}&#x3D;0$。倒序迭代，用 <code>ans</code> 维护上一轮 $f_{i+1}$，更新后即为 $f_i$。</li>
+</ol>
+<hr>
+<h2 id="🛠️-注释后完整代码"><a href="#🛠️-注释后完整代码" class="headerlink" title="🛠️ 注释后完整代码"></a>🛠️ 注释后完整代码</h2><p><em>(已去除多余空行，保留原逻辑结构，添加关键注释，符合 CF 提交规范)</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1e5</span><span class="number">+5</span>;</span><br><span class="line"><span class="keyword">using</span> ld=<span class="type">long</span> <span class="type">double</span>;</span><br><span class="line">ld c[N],p[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="type">int</span> cv,pv;cin&gt;&gt;cv&gt;&gt;pv;</span><br><span class="line">        c[i]=cv,p[i]=pv/<span class="number">100.0</span>;<span class="comment">//必须浮点除，否则整型截断为0/1</span></span><br><span class="line">    &#125;</span><br><span class="line">    ld ans=<span class="number">0</span>;<span class="comment">//边界：f[n+1]=0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">        <span class="comment">//逆序DP滚动更新：ans当前为f[i+1]，计算后变为f[i]</span></span><br><span class="line">        <span class="comment">//跳过收益f[i+1] vs 完成收益c[i]+f[i+1]*(1-p[i])</span></span><br><span class="line">        ans=<span class="built_in">max</span>(ans,c[i]+ans*(<span class="number">1</span>-p[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;fixed&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> T;cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--) <span class="built_in">solve</span>();<span class="comment">//标准多测循环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/28/cf-datastructure/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-cf-gametheory" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -754,6 +933,87 @@
 <td>提交的代码是另一道题的，与本题无关</td>
 </tr>
 </tbody></table>
+<hr>
+<h1 id="Codeforces-错题整理：B-Hamiiid-Haaamid…-Hamid"><a href="#Codeforces-错题整理：B-Hamiiid-Haaamid…-Hamid" class="headerlink" title="Codeforces 错题整理：B. Hamiiid, Haaamid… Hamid?"></a>Codeforces 错题整理：B. Hamiiid, Haaamid… Hamid?</h1><h2 id="一、-题意概括-3"><a href="#一、-题意概括-3" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h2><p>在一个 $1 \times n$ 的网格中，部分格子是墙 (<code>#</code>)，部分是空地 (<code>.</code>)。Hamid 初始位于第 $x$ 个格子（保证是空地）。<br>每天按顺序发生两件事：</p>
+<ol>
+<li><strong>Mani（对手）</strong>：选择一个<strong>空地</strong>建一堵墙（不能在 Hamid 当前所在的格子建墙）。Mani 的目标是<strong>最大化</strong> Hamid 逃脱的天数。</li>
+<li><strong>Hamid（自己）</strong>：选择向左或向右移动。如果该方向没有墙，则直接逃脱；否则，移动到该方向<strong>最近</strong>的墙并将其摧毁，Hamid 的新位置变为被摧毁的墙的位置。Hamid 的目标是<strong>最小化</strong>逃脱的天数。</li>
+</ol>
+<p>求在双方都采取最优策略的情况下，Hamid 逃脱所需的天数。</p>
+<h2 id="二、-思路整理"><a href="#二、-思路整理" class="headerlink" title="二、 思路整理"></a>二、 思路整理</h2><p>这是一道典型的<strong>博弈论 + 贪心</strong>问题。我们需要站在 Mani 的角度，分析他第一步建墙的最佳位置，从而迫使 Hamid 花费最多的天数。</p>
+<ol>
+<li><p><strong>边界特判</strong>：</p>
+<ul>
+<li>如果 Hamid 初始就在边界（$x&#x3D;1$ 或 $x&#x3D;n$），他第一天直接向边界外走即可逃脱，答案为 <code>1</code>。</li>
+<li>如果 Hamid 左右两边都没有墙，他第一天也可以直接向任意一边走并逃脱，答案为 <code>1</code>。</li>
+</ul>
+</li>
+<li><p><strong>核心博弈分析</strong>：<br>设 Hamid 初始位置为 $x$（转为 0-indexed），左边最近的墙位置为 $lf$，右边最近的墙位置为 $rg$。<br>Mani 为了最大化天数，他的最优策略一定是在 Hamid 的紧邻左侧 ($x-1$) 或紧邻右侧 ($x+1$) 建墙，以此来“逼迫” Hamid 走向对他更不利的方向。</p>
+<p>我们分别计算 Mani 在这两个位置建墙时，Hamid 的最优应对天数：</p>
+<ul>
+<li><p><strong>情况 A：Mani 在 $x-1$ 建墙</strong></p>
+<ul>
+<li>若 Hamid <strong>向左</strong>：第 1 天摧毁 $x-1$ 处的墙，之后 Mani 会每天在他左侧紧邻处建墙阻碍他。从 $x-1$ 走到左边界外共需 $x$ 步。总天数 &#x3D; $1 + x &#x3D; x + 1$。</li>
+<li>若 Hamid <strong>向右</strong>：第 1 天直接走到并摧毁 $rg$ 处的墙，之后 Mani 会每天在他右侧紧邻处建墙阻碍他。从 $rg$ 走到右边界外共需 $n - rg$ 步。总天数 &#x3D; $1 + (n - rg) &#x3D; n - rg + 1$。</li>
+<li>Hamid 会选择两者中较小的：<code>min(x + 1, n - rg + 1)</code>。</li>
+</ul>
+</li>
+<li><p><strong>情况 B：Mani 在 $x+1$ 建墙</strong></p>
+<ul>
+<li>若 Hamid <strong>向左</strong>：第 1 天直接走到并摧毁 $lf$ 处的墙，之后 Mani 每天在左侧建墙阻碍。从 $lf$ 走到左边界外共需 $lf + 1$ 步。总天数 &#x3D; $1 + (lf + 1) &#x3D; lf + 2$。</li>
+<li>若 Hamid <strong>向右</strong>：第 1 天摧毁 $x+1$ 处的墙，之后 Mani 每天在右侧建墙阻碍。从 $x+1$ 走到右边界外共需 $n - 1 - (x + 1) + 1 &#x3D; n - x - 1$ 步。总天数 &#x3D; $1 + (n - x - 1) &#x3D; n - x$。</li>
+<li>Hamid 会选择两者中较小的：<code>min(lf + 2, n - x)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>最终答案</strong>：<br>Mani 会选择上述两种情况中让 Hamid 花费天数<strong>更多</strong>的一种，即：<br><code>ans = max( min(x + 1, n - rg + 1), min(lf + 2, n - x) )</code></p>
+</li>
+</ol>
+<h2 id="三、-常见错误分析"><a href="#三、-常见错误分析" class="headerlink" title="三、 常见错误分析"></a>三、 常见错误分析</h2><p>虽然提供的参考代码是正确的，但在实际做题时，初学者极易在以下几个地方出错：</p>
+<h3 id="错误-1：忽略-1-indexed-与-0-indexed-的转换"><a href="#错误-1：忽略-1-indexed-与-0-indexed-的转换" class="headerlink" title="错误 1：忽略 1-indexed 与 0-indexed 的转换"></a>错误 1：忽略 1-indexed 与 0-indexed 的转换</h3><p>题解中的公式通常是基于 1-indexed 推导的，直接照搬会导致 $\pm 1$ 的偏差。<br><strong>错误代码片段</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：未将 x 转为 0-indexed，直接套用公式导致计算错误</span></span><br><span class="line"><span class="type">int</span> lf = <span class="number">-1e9</span>, rg = <span class="number">1e9</span>;</span><br><span class="line"><span class="comment">// ... 查找 lf 和 rg ...</span></span><br><span class="line">cout &lt;&lt; <span class="built_in">max</span>(<span class="built_in">min</span>(x, n - rg + <span class="number">2</span>), <span class="built_in">min</span>(lf + <span class="number">1</span>, n - x + <span class="number">1</span>)) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; </span><br></pre></td></tr></table></figure>
+<p><strong>纠正</strong>：必须先执行 <code>x--</code>，并将公式严格映射为 0-indexed 下的 <code>max(min(x+1, n-rg+1), min(lf+2, n-x))</code>。</p>
+<h3 id="错误-2：遗漏“左右均无墙”的特判"><a href="#错误-2：遗漏“左右均无墙”的特判" class="headerlink" title="错误 2：遗漏“左右均无墙”的特判"></a>错误 2：遗漏“左右均无墙”的特判</h3><p>如果网格中除了 Hamid 之外全是空地，公式中的 <code>lf</code> 和 <code>rg</code> 会保持初始的极值，导致 <code>min</code> 函数取到极小值，虽然逻辑上可能碰巧被 <code>max</code> 掩盖，但缺乏严谨性且容易在极端数据下出错。<br><strong>错误代码片段</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：没有特判左右无墙的情况，直接进行公式计算</span></span><br><span class="line"><span class="type">int</span> lf = <span class="number">-1e9</span>, rg = <span class="number">1e9</span>;</span><br><span class="line"><span class="comment">// ... 查找 lf 和 rg ...</span></span><br><span class="line">cout &lt;&lt; <span class="built_in">max</span>(<span class="built_in">min</span>(x<span class="number">+1</span>, n-rg<span class="number">+1</span>), <span class="built_in">min</span>(lf<span class="number">+2</span>, n-x)) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>纠正</strong>：必须加上 <code>if (lf == -inf &amp;&amp; rg == inf) { cout &lt;&lt; &quot;1\n&quot;; continue; }</code>。</p>
+<h3 id="错误-3：误判-Mani-的建墙限制"><a href="#错误-3：误判-Mani-的建墙限制" class="headerlink" title="错误 3：误判 Mani 的建墙限制"></a>错误 3：误判 Mani 的建墙限制</h3><p>有人可能会想：“如果 $x+1$ 已经是墙了，Mani 就不能在那里建墙，公式是不是就失效了？”<br><strong>分析</strong>：实际上公式依然成立。如果 $x+1$ 已经是墙，说明 $rg &#x3D; x+1$。此时情况 A 中 Hamid 向右走的天数为 $n - (x+1) + 1 &#x3D; n - x$。这与情况 B 中 Hamid 向右走的天数下限完全一致。Mani 无论在哪建墙，都无法让 Hamid 向右走的天数少于 $n-x$ 天，因此公式具有鲁棒性。</p>
+<h2 id="四、-模板代码（带详细注释）"><a href="#四、-模板代码（带详细注释）" class="headerlink" title="四、 模板代码（带详细注释）"></a>四、 模板代码（带详细注释）</h2><p>以下是经过整理、无多余空行且包含详尽注释的正确代码，可直接作为该题型的模板参考。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n,x;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;x;</span><br><span class="line">    string s;</span><br><span class="line">    cin&gt;&gt;s;</span><br><span class="line">    <span class="keyword">if</span>(x == <span class="number">1</span> || x == n) &#123;cout&lt;&lt;<span class="number">1</span>&lt;&lt;endl;<span class="keyword">return</span>;&#125;</span><br><span class="line">    x--;</span><br><span class="line">    <span class="type">int</span> inf = <span class="number">1e9</span>;</span><br><span class="line">    <span class="type">int</span> l = -inf,r = inf;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = x - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] == <span class="string">&#x27;#&#x27;</span>)&#123;</span><br><span class="line">            l = i;<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = x + <span class="number">1</span>;i &lt; n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s[i] == <span class="string">&#x27;#&#x27;</span>)&#123;</span><br><span class="line">            r = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(l == -inf &amp;&amp; r == inf)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="number">1</span>&lt;&lt;endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">max</span>(<span class="built_in">min</span>(x + <span class="number">1</span>, n - r + <span class="number">1</span>), <span class="built_in">min</span>(l + <span class="number">2</span>, n - x))&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>以下是该题的<strong>极简版</strong>表述，方便你快速记忆和考前复习：</p>
+<h3 id="🎯-核心结论（一句话总结）"><a href="#🎯-核心结论（一句话总结）" class="headerlink" title="🎯 核心结论（一句话总结）"></a>🎯 核心结论（一句话总结）</h3><p>Krug 会向<strong>远离 Doran 的网格边界</strong>逃跑，Krug 能存活的回合数，等于 <strong>Doran 走到该边界所需的步数</strong>。取行、列两个方向所需步数的<strong>最大值</strong>即可。</p>
+<hr>
+<h3 id="📝-极简公式"><a href="#📝-极简公式" class="headerlink" title="📝 极简公式"></a>📝 极简公式</h3><p>设网格大小为 $n$，Krug 坐标 $(r_K, c_K)$，Doran 坐标 $(r_D, c_D)$。</p>
+<ol>
+<li><p><strong>行方向存活时间</strong>：</p>
+<ul>
+<li>若 $r_K &lt; r_D$（Krug 在上）：时间为 $r_D$</li>
+<li>若 $r_K &gt; r_D$（Krug 在下）：时间为 $n - r_D$</li>
+<li>若 $r_K &#x3D; r_D$（同行）：时间为 $0$</li>
+</ul>
+</li>
+<li><p><strong>列方向存活时间</strong>：</p>
+<ul>
+<li>若 $c_K &lt; c_D$（Krug 在左）：时间为 $c_D$</li>
+<li>若 $c_K &gt; c_D$（Krug 在右）：时间为 $n - c_D$</li>
+<li>若 $c_K &#x3D; c_D$（同列）：时间为 $0$</li>
+</ul>
+</li>
+<li><p><strong>最终答案</strong>：<code>ans = max(行方向时间, 列方向时间)</code></p>
+</li>
+</ol>
+<hr>
+<h3 id="💻-极简-AC-代码-背这个就行"><a href="#💻-极简-AC-代码-背这个就行" class="headerlink" title="💻 极简 AC 代码 (背这个就行)"></a>💻 极简 AC 代码 (背这个就行)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, rk, ck, rd, cd;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; rk &gt;&gt; ck &gt;&gt; rd &gt;&gt; cd;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 行方向：看 Doran 到上下边界的距离</span></span><br><span class="line">    <span class="keyword">if</span> (rd &gt; rk) ans = <span class="built_in">max</span>(ans, rd);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (rd &lt; rk) ans = <span class="built_in">max</span>(ans, n - rd);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 列方向：看 Doran 到左右边界的距离</span></span><br><span class="line">    <span class="keyword">if</span> (cd &gt; ck) ans = <span class="built_in">max</span>(ans, cd);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (cd &lt; ck) ans = <span class="built_in">max</span>(ans, n - cd);</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="💡-避坑指南"><a href="#💡-避坑指南" class="headerlink" title="💡 避坑指南"></a>💡 避坑指南</h3><ul>
+<li><strong>不要</strong>用 Krug 的坐标去算距离（这是最常见的错误）。</li>
+<li><strong>不要</strong>画蛇添足地加 <code>+1</code> 或绝对值，公式本身已经包含了边界情况的正确计算。</li>
+<li>数据范围 $n \le 10^9$，记得用 <code>long long</code>。</li>
+</ul>
 
       
 
@@ -1438,170 +1698,9 @@
 
 
   
-    <article id="post-20260523" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/23/20260523/">2026-05-23 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/23/20260523/" class="archive-article-date">
-  	<time datetime="2026-05-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>二份英语</li>
-<li>六级高频词八章</li>
-<li>网站上的算法笔记两小时</li>
-<li>算法导论第三部分</li>
-</ol>
-<h1 id="之后八周的任务"><a href="#之后八周的任务" class="headerlink" title="之后八周的任务"></a>之后八周的任务</h1><ol>
-<li>六级每天早一下一晚四个小时 单词和真题和作文翻译—6h 7:30 - 8:30 13:00 - 14:00 23:00-24:00 18:30-20:00 + 两节课</li>
-<li>算法题 + 回顾—1h 20:00 - 22:30</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/23/20260523/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260522" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/22/20260522/">2026-05-22 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/22/20260522/" class="archive-article-date">
-  	<time datetime="2026-05-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>补上昨天半分英语</li>
-<li>网站上的算法笔记部分</li>
-<li>吃 水活动</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/22/20260522/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1757,19 +1856,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1777,11 +1864,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1793,19 +1896,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1817,7 +1916,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1825,15 +1924,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1853,7 +1960,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1873,15 +1980,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
             
             <div class="clearfix"></div>
