@@ -158,6 +158,178 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Codeforces Round edu190 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/25/Codeforces%20Round%20edu190%20(Div.%202)/">Codeforces Round edu190 (Div. 2)</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/25/Codeforces%20Round%20edu190%20(Div.%202)/" class="archive-article-date">
+  	<time datetime="2026-05-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2230">Codeforces Round edu190 (Div. 2)</a></p>
+<h1 id="📘-算法题错题整理：Codeforces-190D-Good-Schedule"><a href="#📘-算法题错题整理：Codeforces-190D-Good-Schedule" class="headerlink" title="📘 算法题错题整理：Codeforces 190D - Good Schedule"></a>📘 算法题错题整理：Codeforces 190D - Good Schedule</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定两个长度为 $n$ 的序列 $a$ 和 $b$，分别表示 Alice 和 Bob 所在城市未来 $n$ 天每天播出的剧集编号（剧集按 $1 \sim n$ 顺序观看）。两人计划选择一个观看区间 $[L, R]$。区间内每天必须满足：<strong>要么两人看同一集，要么两人都不看</strong>。求满足条件的区间 $[L, R]$ 总数。</p>
+<h2 id="🛠-题型总结与模板思路"><a href="#🛠-题型总结与模板思路" class="headerlink" title="🛠 题型总结与模板思路"></a>🛠 题型总结与模板思路</h2><p><strong>题型标签</strong>：逆序枚举 &#x2F; 动态规划 &#x2F; 贪心性质 &#x2F; 贡献法<br><strong>核心模板思路</strong>：</p>
+<ol>
+<li><strong>区间单调性转化</strong>：若 $[L, R]$ 合法，则 $[L, R-1]$ 必然合法。因此对每个左端点 $L$，只需找到最大的合法右端点 $R_{max}$，该 $L$ 的贡献即为 $R_{max} - L + 1$。</li>
+<li><strong>逆序维护“下一次出现位置”</strong>：从后往前枚举 $L$，动态更新 $pa[k]$ &#x2F; $pb[k]$ 表示从当前 $L$ 开始，下一次看到第 $k$ 集的天数。</li>
+<li><strong>DP 状态复用</strong>：若当前天两人看同一集 $x$，则最大合法右端点取决于下一集 $x+1$ 的同步情况。利用已计算的 <code>dp[pa[x+1]]</code> 实现 $O(1)$ 转移，避免重复模拟。</li>
+</ol>
+<h2 id="💡-核心解题思路"><a href="#💡-核心解题思路" class="headerlink" title="💡 核心解题思路"></a>💡 核心解题思路</h2><p>请注意，如果片段 $[L, R]$ 是好的，那么 $[L, R - 1]$ 也是好的。因此，要解决这个问题，我们需要找出每个 $L$ 的最大值 $R$ 。</p>
+<p>我们先确定一些 $L$ ，然后看看爱丽丝和鲍勃观看第一集的日子（我们把它们分别称为 $x$ 和 $y$ ）。如果这两天的日期不同，那么 $R &#x3D; \min(x, y) - 1$ ，因为有人会破坏第二天的节目。如果是 $x &#x3D; y$ ，那么我们就应该查看 $x$ 之后最接近的 $2$ 的位置，并为它们解决类似的问题。这样一直进行下去，直到我们找到在不同日期播放的剧集，或者直到两个节目表中都没有该剧集。因此，我们需要使用动态编程。</p>
+<p>让我们考虑一下使用动态编程的一种可能解决方案。让我们遍历从 $n$ 到 $1$ 的天数 $L$ ，并维护几个数组： $pa_x$ 是下一集 $x$ 在爱丽丝日程表中的位置； $pb_x$ 是下一集 $x$ 在鲍勃日程表中的位置； $dp_i$ 是如果他们在 $i$ 这一天观看了这一集，上述算法停止的那一天。如果 $a_L &#x3D; b_L$ ，我们可以按以下方式计算 $dp_L$ ：如果 $pa_x &#x3D; pb_x$ ，则 $dp_L &#x3D; dp_{pa_x}$ ，否则 $dp_L &#x3D; \min(pa_x, pb_x) - 1$ ，其中 $x &#x3D; a_i + 1$ （即他们应该观看的下一集）。</p>
+<p>如果最近的 $1$ 的位置相同，则当前 $L$ 的最大 $R$ 为 $dp_{pa_1}$ ，否则为 $\min(pa_1, pb_1) - 1$ 。</p>
+<h2 id="💻-完整注释代码（原模原样无多余空行）"><a href="#💻-完整注释代码（原模原样无多余空行）" class="headerlink" title="💻 完整注释代码（原模原样无多余空行）"></a>💻 完整注释代码（原模原样无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>); cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt;t; <span class="comment">// 按题目特殊要求命名变量</span></span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        <span class="type">int</span> n; cin &gt;&gt; n;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span>, <span class="title">b</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        a[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; b[i];</span><br><span class="line">        b[i]--;  <span class="comment">// 转为 0-indexed</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// pa[k]/pb[k] 记录从当前位置起，下一次看第 k 集的天数；dp[i] 记录若第 i 天同步看剧，最大合法右端点 R</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">pa</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">pb</span><span class="params">(n + <span class="number">1</span>, n)</span>, <span class="title">dp</span><span class="params">(n + <span class="number">1</span>, n - <span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            pa[a[i]] = i; pb[b[i]] = i; <span class="comment">// 逆序更新：当前位置即为下一次出现位置</span></span><br><span class="line">            <span class="keyword">if</span> (a[i] == b[i]) &#123; <span class="comment">// 当天看同一集，可计算/继承 DP 状态</span></span><br><span class="line">                <span class="type">int</span> x = a[i] + <span class="number">1</span>; <span class="comment">// 需要关注的下一集</span></span><br><span class="line">                <span class="keyword">if</span> (pa[x] == pb[x]) dp[i] = dp[pa[x]]; <span class="comment">// 下一集也同天播出，直接继承</span></span><br><span class="line">                <span class="keyword">else</span> dp[i] = <span class="built_in">min</span>(pa[x], pb[x]) - <span class="number">1</span>; <span class="comment">// 下一集不同天，区间截止于较早出现的前一天</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 确定以 i 为左端点时，第 1 集的最大合法右端点 重要</span></span><br><span class="line">            <span class="type">int</span> maxR = (pa[<span class="number">0</span>] != pb[<span class="number">0</span>]) ? <span class="built_in">min</span>(pa[<span class="number">0</span>], pb[<span class="number">0</span>]) - <span class="number">1</span> : dp[pa[<span class="number">0</span>]];</span><br><span class="line">            <span class="comment">//无论第 i 天播出什么，只要区间从 i 开始，两人就处于 “等待第 1 集” 的初始状态。因此，必须检查第 1 集的同步情况来决定区间的生死：</span></span><br><span class="line">            <span class="comment">// 步骤 B: 无论当天播什么，都要计算“以 i 为起点”的最大合法范围</span></span><br><span class="line">            <span class="comment">// 因为起点意味着“从头开始等第 1 集”，必须检查第 1 集的同步性</span></span><br><span class="line">            <span class="keyword">if</span> (maxR &gt;= i) ans += maxR - i + <span class="number">1</span>; <span class="comment">// 合法区间 [i, i] ~ [i, maxR] 共 maxR-i+1 个</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/25/Codeforces%20Round%20edu190%20(Div.%202)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260524" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/24/20260524/">2026-05-24 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/24/20260524/" class="archive-article-date">
+  	<time datetime="2026-05-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语二份</li>
+<li>六级词汇</li>
+<li>网站上的算法笔记</li>
+<li>马蹄杯</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/24/20260524/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260523" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1243,164 +1415,6 @@
 
 
   
-    <article id="post-20260517" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/17/20260517/">2026-05-17 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/17/20260517/" class="archive-article-date">
-  	<time datetime="2026-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/img/20260517.jpg"></p>
-<ol>
-<li>PAT 40-60 图论和树和dp专题</li>
-<li>英语一份</li>
-<li>易班团建</li>
-<li>总结常见算法模型于小本子上，之后背诵</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/17/20260517/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260516" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/16/20260516/">2026-05-16 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/16/20260516/" class="archive-article-date">
-  	<time datetime="2026-05-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>PAT 01-40 图论和树和dp专题</li>
-<li>英语作文和翻译专题</li>
-<li>总结常见算法模型于小本子上，之后背诵</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/16/20260516/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
@@ -1563,19 +1577,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1591,11 +1601,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1607,31 +1625,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1639,7 +1637,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1647,7 +1653,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1655,7 +1669,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
