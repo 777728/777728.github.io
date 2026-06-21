@@ -158,6 +158,213 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-abc-462" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/12/abc-462/">AtCoder Beginner Contest 462</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/12/abc-462/" class="archive-article-date">
+  	<time datetime="2026-06-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="📝-算法错题整理-AtCoder-E-Alternating-Costs-官方题解深度剖析"><a href="#📝-算法错题整理-AtCoder-E-Alternating-Costs-官方题解深度剖析" class="headerlink" title="📝 算法错题整理 | AtCoder E - Alternating Costs (官方题解深度剖析)"></a>📝 算法错题整理 | AtCoder E - Alternating Costs (官方题解深度剖析)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>棋子从 <code>(0,0)</code> 移动到 <code>(X,Y)</code>，每次只能上下左右移动一格。第 $k$ 次移动的代价取决于 $k$ 的奇偶性：</p>
+<ul>
+<li><strong>奇数步</strong>：横向代价 $A$，纵向代价 $B$。</li>
+<li><strong>偶数步</strong>：横向代价 $B$，纵向代价 $A$。<br>求最小总代价。共 $T$ 组询问。</li>
+</ul>
+<hr>
+<h2 id="🧠-官方题解思路解析（核心推导）"><a href="#🧠-官方题解思路解析（核心推导）" class="headerlink" title="🧠 官方题解思路解析（核心推导）"></a>🧠 官方题解思路解析（核心推导）</h2><p>官方题解通过<strong>数学降维</strong>和<strong>线性函数极值</strong>，将问题完美简化为 $O(1)$ 求解。</p>
+<h3 id="步骤-1：奇偶降维（处理-X-Y-为奇数的情况）"><a href="#步骤-1：奇偶降维（处理-X-Y-为奇数的情况）" class="headerlink" title="步骤 1：奇偶降维（处理 $X+Y$ 为奇数的情况）"></a>步骤 1：奇偶降维（处理 $X+Y$ 为奇数的情况）</h3><p>由于总步数的奇偶性与 $|X|+|Y|$ 相同。如果 $|X|+|Y|$ 是<strong>奇数</strong>，那么最后一步必然是<strong>奇数步</strong>。</p>
+<ul>
+<li>如果最后一步是横向（代价 $A$），则前几步的代价为 $f(|X|-1, |Y|)$。</li>
+<li>如果最后一步是纵向（代价 $B$），则前几步的代价为 $f(|X|, |Y|-1)$。<br><strong>结论</strong>：$f(X,Y) &#x3D; \min(f(X-1, Y) + A, f(X, Y-1) + B)$。这样就把问题转化为了 $X+Y$ 为<strong>偶数</strong>的情况。</li>
+</ul>
+<h3 id="步骤-2：偶数情况下的对称性与贪心"><a href="#步骤-2：偶数情况下的对称性与贪心" class="headerlink" title="步骤 2：偶数情况下的对称性与贪心"></a>步骤 2：偶数情况下的对称性与贪心</h3><p>当 $X+Y$ 为偶数时，总步数 $2K$ 也是偶数（$2K \ge X+Y$）。</p>
+<ul>
+<li>奇数步和偶数步各 $K$ 次，代价具有对称性。</li>
+<li>交换 $X,Y$ 或 $A,B$ 不影响结果。因此，不妨假设 <strong>$A \le B$ 且 $X \le Y$</strong>。</li>
+</ul>
+<h3 id="步骤-3：构建代价函数-g-K-并求极值"><a href="#步骤-3：构建代价函数-g-K-并求极值" class="headerlink" title="步骤 3：构建代价函数 $g(K)$ 并求极值"></a>步骤 3：构建代价函数 $g(K)$ 并求极值</h3><p>在 $2K$ 步中，为了最小化代价（已知 $A \le B$），我们希望尽可能多用代价 $A$。<br>通过推导，最小总代价可以表示为关于 $K$ 的函数：<br>$$g(K) &#x3D; 2KA + (Y - K)(B - A)$$<br>其中 $K$ 的取值范围是 $\lceil \frac{X+Y}{2} \rceil \le K \le Y$。</p>
+<p><strong>核心数学性质</strong>：$g(K)$ 是一个关于 $K$ 的<strong>线性函数（仿射函数）</strong>！<br>线性函数的最小值<strong>一定在区间的端点取得</strong>。因此，我们只需要计算两个端点的值并取 <code>min</code>：</p>
+<ol>
+<li><strong>端点 1（最短路径）</strong>：$K &#x3D; \lceil \frac{X+Y}{2} \rceil$。</li>
+<li><strong>端点 2（全走对角线&#x2F;折返）</strong>：$K &#x3D; Y$。</li>
+</ol>
+<hr>
+<h2 id="⚠️-代码中的常见错误与修正"><a href="#⚠️-代码中的常见错误与修正" class="headerlink" title="⚠️ 代码中的常见错误与修正"></a>⚠️ 代码中的常见错误与修正</h2><h3 id="❌-错误-1：未处理-X-Y-为奇数的情况"><a href="#❌-错误-1：未处理-X-Y-为奇数的情况" class="headerlink" title="❌ 错误 1：未处理 $X+Y$ 为奇数的情况"></a>❌ 错误 1：未处理 $X+Y$ 为奇数的情况</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：直接套用偶数公式，导致奇数情况 WA</span></span><br><span class="line">ll ans = <span class="built_in">calc</span>(X, Y); </span><br></pre></td></tr></table></figure>
+<p><strong>修正</strong>：必须先判断奇偶，奇数时枚举最后一步，转化为偶数情况再计算。</p>
+<h3 id="❌-错误-2：未取绝对值"><a href="#❌-错误-2：未取绝对值" class="headerlink" title="❌ 错误 2：未取绝对值"></a>❌ 错误 2：未取绝对值</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：X, Y 可能为负数</span></span><br><span class="line">ll dx = X, dy = Y; </span><br></pre></td></tr></table></figure>
+<p><strong>修正</strong>：<code>X = abs(X); Y = abs(Y);</code></p>
+<h3 id="❌-错误-3：数据类型溢出"><a href="#❌-错误-3：数据类型溢出" class="headerlink" title="❌ 错误 3：数据类型溢出"></a>❌ 错误 3：数据类型溢出</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：中间结果超过 int 范围</span></span><br><span class="line"><span class="type">int</span> ans = <span class="number">2</span> * K * A; </span><br></pre></td></tr></table></figure>
+<p><strong>修正</strong>：全程使用 <code>long long</code>，常数使用 <code>2LL</code>。</p>
+<hr>
+<h2 id="💡-通俗版解题思路总结"><a href="#💡-通俗版解题思路总结" class="headerlink" title="💡 通俗版解题思路总结"></a>💡 通俗版解题思路总结</h2><ol>
+<li><strong>取绝对值</strong>：代价只与距离有关，先让 $X, Y \ge 0$。</li>
+<li><strong>奇数转偶数</strong>：如果 $X+Y$ 是奇数，枚举最后一步（横向加 $A$，纵向加 $B$），转化为 $X+Y$ 为偶数的子问题。</li>
+<li><strong>偶数情况贪心</strong>：<ul>
+<li>强制 $A \le B, X \le Y$（不满足就交换）。</li>
+<li>计算两个端点的代价：<ul>
+<li><strong>端点 1</strong>：$K &#x3D; (X+Y)&#x2F;2$（走最短路径）。</li>
+<li><strong>端点 2</strong>：$K &#x3D; Y$（走折返&#x2F;全对角线）。</li>
+</ul>
+</li>
+<li>代入公式 $g(K) &#x3D; 2KA + (Y-K)(B-A)$，取较小值。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="💻-完整代码（基于官方题解，无多余空行）"><a href="#💻-完整代码（基于官方题解，无多余空行）" class="headerlink" title="💻 完整代码（基于官方题解，无多余空行）"></a>💻 完整代码（基于官方题解，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算 X+Y 为偶数时的最小代价</span></span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(ll X, ll Y, ll A, ll B)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 保证 A &lt;= B, X &lt;= Y</span></span><br><span class="line">    <span class="keyword">if</span> (A &gt; B) <span class="built_in">swap</span>(A, B);</span><br><span class="line">    <span class="keyword">if</span> (X &gt; Y) <span class="built_in">swap</span>(X, Y);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 线性函数 g(K) = 2KA + (Y - K)(B - A)</span></span><br><span class="line">    <span class="keyword">auto</span> g = [&amp;](ll K) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2LL</span> * K * A + (Y - K) * (B - A);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 端点 1：最短路径 K = (X+Y)/2</span></span><br><span class="line">    ll K1 = (X + Y) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 端点 2：全走对角线/折返 K = Y</span></span><br><span class="line">    ll K2 = Y;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(<span class="built_in">g</span>(K1), <span class="built_in">g</span>(K2));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ll A, B, X, Y;</span><br><span class="line">    cin &gt;&gt; A &gt;&gt; B &gt;&gt; X &gt;&gt; Y;</span><br><span class="line">    X = <span class="built_in">abs</span>(X); Y = <span class="built_in">abs</span>(Y);</span><br><span class="line">    </span><br><span class="line">    ll ans = <span class="number">2e18</span>;</span><br><span class="line">    <span class="comment">// 步骤 1：如果 X+Y 是奇数，枚举最后一步转化为偶数情况</span></span><br><span class="line">    <span class="keyword">if</span> ((X + Y) % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (X &gt; <span class="number">0</span>) ans = <span class="built_in">min</span>(ans, <span class="built_in">calc</span>(X - <span class="number">1</span>, Y, A, B) + A);</span><br><span class="line">        <span class="keyword">if</span> (Y &gt; <span class="number">0</span>) ans = <span class="built_in">min</span>(ans, <span class="built_in">calc</span>(X, Y - <span class="number">1</span>, A, B) + B);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 步骤 2：如果 X+Y 是偶数，直接计算</span></span><br><span class="line">        ans = <span class="built_in">min</span>(ans, <span class="built_in">calc</span>(X, Y, A, B));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    cin &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📝-总结建议"><a href="#📝-总结建议" class="headerlink" title="📝 总结建议"></a>📝 总结建议</h2><ul>
+<li><strong>数学思维</strong>：遇到奇偶交替、路径规划问题，尝试构建<strong>代价函数</strong>，利用函数的单调性或凸性（如本题的线性函数）来避免复杂的分类讨论。</li>
+<li><strong>降维打击</strong>：当问题包含奇数和偶数两种情况时，优先思考能否通过<strong>枚举最后一步</strong>或<strong>添加虚拟步</strong>，将问题统一转化为同一种情况（如本题统一转化为偶数步）。</li>
+<li><strong>代码简洁性</strong>：官方题解的 <code>calc</code> 函数非常优雅，通过 <code>swap</code> 统一变量大小关系，避免了繁琐的 <code>if-else</code> 分支，值得在竞赛中模仿。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/12/abc-462/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260611" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/11/20260611/">2026-06-11 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/11/20260611/" class="archive-article-date">
+  	<time datetime="2026-06-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语 大半天</li>
+<li>cf 博弈论 一题</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/11/20260611/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260610" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1105,161 +1312,6 @@
 
 
   
-    <article id="post-20260603" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/06/03/20260603/">2026-06-03 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/06/03/20260603/" class="archive-article-date">
-  	<time datetime="2026-06-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>英语 两份听力和一份阅读+翻译20（70）+ 单词一章 + 复习</li>
-<li>cf 1h 博弈论 一题 &amp; 马蹄杯202603 订正（差两道题）</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/06/03/20260603/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260602" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/06/02/20260602/">2026-06-02 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/06/02/20260602/" class="archive-article-date">
-  	<time datetime="2026-06-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>英语 一份听力和一份阅读+翻译10（50）+ 单词一章（20） + 复习</li>
-<li>cf 4h 两题</li>
-<li>数学作业 + 水课作业</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/06/02/20260602/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1406,11 +1458,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1426,19 +1482,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">project</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1446,15 +1490,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1462,7 +1502,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1482,7 +1534,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1490,11 +1542,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1502,27 +1554,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1530,11 +1566,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1542,7 +1574,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
             
             <div class="clearfix"></div>
