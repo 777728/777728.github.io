@@ -1752,6 +1752,44 @@
 </li>
 </ol>
 <h2 id="💻-五、-注释后的代码（原模原样无多余空行）"><a href="#💻-五、-注释后的代码（原模原样无多余空行）" class="headerlink" title="💻 五、 注释后的代码（原模原样无多余空行）"></a>💻 五、 注释后的代码（原模原样无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> all(arr) arr.begin(), arr.end()</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">200200</span>;</span><br><span class="line"><span class="type">int</span> n, m;</span><br><span class="line">string arr[MAXN];</span><br><span class="line"><span class="type">int</span> len[MAXN], zrr[MAXN];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(zrr, <span class="number">0</span>, <span class="built_in">sizeof</span>(*zrr) * n); <span class="comment">// 初始化末尾0的个数数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        len[i] = arr[i].<span class="built_in">size</span>(); <span class="comment">// 记录每个数字的初始位数</span></span><br><span class="line">        <span class="comment">// 从后往前遍历，统计每个数字末尾0的个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = arr[i].<span class="built_in">rbegin</span>(); it != arr[i].<span class="built_in">rend</span>() &amp;&amp; *it == <span class="string">&#x27;0&#x27;</span>; ++it) &#123;</span><br><span class="line">            ++zrr[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">string <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 假设所有末尾0都被Anna反转删除，计算基础有效位数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        ans += len[i] - zrr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将末尾0的个数从小到大排序</span></span><br><span class="line">    <span class="built_in">sort</span>(zrr, zrr + n);</span><br><span class="line">    <span class="comment">// 反转为从大到小排序，便于贪心选取</span></span><br><span class="line">    <span class="built_in">reverse</span>(zrr, zrr + n);</span><br><span class="line">    <span class="comment">// 模拟博弈过程：偶数索引(0,2,4)为Anna操作，奇数索引(1,3,5)为Sasha操作</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; <span class="number">1</span>) ans += zrr[i]; <span class="comment">// Sasha操作的数字，其末尾0被保护，加回总位数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断最终总位数是否 &gt;= m + 1，即 ans - 1 &gt;= m</span></span><br><span class="line">    <span class="keyword">return</span> (ans - <span class="number">1</span> &gt;= m ? <span class="string">&quot;Sasha&quot;</span> : <span class="string">&quot;Anna&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) cin &gt;&gt; arr[i];</span><br><span class="line">        <span class="built_in">build</span>();</span><br><span class="line">        cout &lt;&lt; <span class="built_in">solve</span>() &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h1 id="CF-304-Div-2-C-Soldier-and-Cards-错题整理"><a href="#CF-304-Div-2-C-Soldier-and-Cards-错题整理" class="headerlink" title="CF 304 Div.2 C. Soldier and Cards 错题整理"></a>CF 304 Div.2 C. Soldier and Cards 错题整理</h1><h2 id="一、-题意概括-4"><a href="#一、-题意概括-4" class="headerlink" title="一、 题意概括"></a>一、 题意概括</h2><p>两个人玩纸牌游戏，初始共有 $n$ 张牌（$n \le 10$），两人分别持有若干张。<br>每回合两人各从牌顶出一张牌，点数大的人获胜。<br><strong>获胜者的收牌规则</strong>：先将<strong>输家的牌</strong>放入自己牌底，再将<strong>自己的牌</strong>放入自己牌底。<br>当某人的牌堆为空时，另一人获胜。<br>要求计算游戏结束的回合数及获胜者（1或2），如果游戏永远无法结束（陷入死循环），则输出 <code>-1</code>。</p>
+<h2 id="二、-解题思路-1"><a href="#二、-解题思路-1" class="headerlink" title="二、 解题思路"></a>二、 解题思路</h2><ol>
+<li><strong>数据结构选择</strong>：由于牌的操作都在“牌顶”和“牌底”进行，典型的先进先出（FIFO）模型，使用 <code>queue</code> 或 <code>deque</code>（双端队列）来模拟两人的牌堆。推荐使用 <code>deque</code>，因为方便遍历获取当前状态。</li>
+<li><strong>模拟过程</strong>：每次比较两个队列的队首元素，大的获胜。</li>
+<li><strong>关键细节（易错点）</strong>：赢家收牌时，<strong>必须先压入输家的牌，再压入自己的牌</strong>。</li>
+<li><strong>死循环判断（核心）</strong>：<ul>
+<li><strong>通用方法（状态判重）</strong>：由于 $n \le 10$，牌的排列组合状态数是有限的（最多 $(n+1)! &#x3D; 11! \approx 3.99 \times 10^7$ 种）。我们可以将每次回合前两人的牌堆状态拼接成字符串，存入 <code>set</code> 中。如果发现当前状态之前出现过，说明出现了环，直接输出 <code>-1</code>。</li>
+<li><strong>本题特殊性质（步数限制）</strong>：根据官方题解，当 $n&#x3D;10$ 时，状态图的最长路径仅为 <strong>106</strong> 步。因此，如果模拟超过一定次数（如 $10^6$ 次）仍未结束，必定是死循环。</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、-典型代码错误分析"><a href="#三、-典型代码错误分析" class="headerlink" title="三、 典型代码错误分析"></a>三、 典型代码错误分析</h2><h3 id="错误1：收牌顺序写反（导致-WA）"><a href="#错误1：收牌顺序写反（导致-WA）" class="headerlink" title="错误1：收牌顺序写反（导致 WA）"></a>错误1：收牌顺序写反（导致 WA）</h3><p><strong>错误描述</strong>：很多同学在模拟赢家收牌时，习惯性地先放自己的牌，再放对手的牌，这与题目要求的“先拿对手的牌，再拿自己的牌”不符，导致后续状态完全错乱。<br><strong>错误片段</strong>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误示范：先压自己的牌 c1，再压对手的牌 c2</span></span><br><span class="line"><span class="keyword">if</span> (c1 &gt; c2) &#123;</span><br><span class="line">    q<span class="number">1.</span><span class="built_in">push</span>(c1); </span><br><span class="line">    q<span class="number">1.</span><span class="built_in">push</span>(c2);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    q<span class="number">2.</span><span class="built_in">push</span>(c2);</span><br><span class="line">    q<span class="number">2.</span><span class="built_in">push</span>(c1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>修正</strong>：必须严格按照题意，先 <code>push</code> 输家的牌，再 <code>push</code> 赢家的牌。</p>
+<h3 id="错误2：死循环判断不当（导致-TLE-或-误判）"><a href="#错误2：死循环判断不当（导致-TLE-或-误判）" class="headerlink" title="错误2：死循环判断不当（导致 TLE 或 误判）"></a>错误2：死循环判断不当（导致 TLE 或 误判）</h3><p><strong>错误描述</strong>：</p>
+<ul>
+<li><strong>情况A</strong>：没有判重机制，直接 <code>while(true)</code>，导致死循环 TLE。</li>
+<li><strong>情况B</strong>：使用固定步数（如 <code>step &gt; 10000</code>）来判死循环，但字符串拼接状态时没有加分隔符（如把 <code>1, 23</code> 和 <code>12, 3</code> 拼成了相同的 <code>123</code>），导致状态冲突误判。<br><strong>错误片段</strong>：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误示范：状态拼接没有分隔符，会导致不同状态哈希冲突</span></span><br><span class="line">string state = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : q1) state += <span class="built_in">to_string</span>(x); </span><br><span class="line">state += <span class="string">&quot;|&quot;</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> x : q2) state += <span class="built_in">to_string</span>(x);</span><br></pre></td></tr></table></figure>
+<p><strong>修正</strong>：使用 <code>deque</code> 遍历，并在数字之间加上逗号 <code>,</code> 作为分隔符，确保状态字符串的唯一性。</p>
+<h2 id="四、-正确代码（带注释模板）"><a href="#四、-正确代码（带注释模板）" class="headerlink" title="四、 正确代码（带注释模板）"></a>四、 正确代码（带注释模板）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 优化输入输出速度</span></span><br><span class="line">    ios_base::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> (!(cin &gt;&gt; n)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用 deque 方便后续遍历生成状态字符串</span></span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; d1, d2;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> k1;</span><br><span class="line">    cin &gt;&gt; k1;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k1; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">        d<span class="number">1.</span><span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> k2;</span><br><span class="line">    cin &gt;&gt; k2;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k2; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">        d<span class="number">2.</span><span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    set&lt;string&gt; visited; <span class="comment">// 用于记录出现过的状态，判断死循环</span></span><br><span class="line">    <span class="type">int</span> steps = <span class="number">0</span>;       <span class="comment">// 记录回合数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!d<span class="number">1.</span><span class="built_in">empty</span>() &amp;&amp; !d<span class="number">2.</span><span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="comment">// 1. 记录当前状态</span></span><br><span class="line">        string state = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : d1) state += <span class="built_in">to_string</span>(x) + <span class="string">&quot;,&quot;</span>; <span class="comment">// 加逗号防止数字粘连误判</span></span><br><span class="line">        state += <span class="string">&quot;|&quot;</span>; <span class="comment">// 分隔两个人的牌堆</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : d2) state += <span class="built_in">to_string</span>(x) + <span class="string">&quot;,&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 判重：如果状态已存在，说明陷入死循环</span></span><br><span class="line">        <span class="keyword">if</span> (visited.<span class="built_in">count</span>(state)) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        visited.<span class="built_in">insert</span>(state);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 模拟出牌</span></span><br><span class="line">        <span class="type">int</span> c1 = d<span class="number">1.f</span>ront(); d<span class="number">1.</span><span class="built_in">pop_front</span>();</span><br><span class="line">        <span class="type">int</span> c2 = d<span class="number">2.f</span>ront(); d<span class="number">2.</span><span class="built_in">pop_front</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4. 赢家收牌（核心细节：先放对手的牌，再放自己的牌）</span></span><br><span class="line">        <span class="keyword">if</span> (c1 &gt; c2) &#123;</span><br><span class="line">            d<span class="number">1.</span><span class="built_in">push_back</span>(c2);</span><br><span class="line">            d<span class="number">1.</span><span class="built_in">push_back</span>(c1);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            d<span class="number">2.</span><span class="built_in">push_back</span>(c1);</span><br><span class="line">            d<span class="number">2.</span><span class="built_in">push_back</span>(c2);</span><br><span class="line">        &#125;</span><br><span class="line">        steps++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 5. 输出结果</span></span><br><span class="line">    <span class="keyword">if</span> (d<span class="number">1.</span><span class="built_in">empty</span>()) &#123;</span><br><span class="line">        cout &lt;&lt; steps &lt;&lt; <span class="string">&quot; 2\n&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; steps &lt;&lt; <span class="string">&quot; 1\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、-题型总结与模板提炼"><a href="#五、-题型总结与模板提炼" class="headerlink" title="五、 题型总结与模板提炼"></a>五、 题型总结与模板提炼</h2><p>本题属于 <strong>“有限状态模拟 + 环检测”</strong> 题型。<br><strong>通用解题模板</strong>：</p>
+<ol>
+<li>当题目要求模拟某个过程，且数据范围极小（如 $n \le 10$），但要求判断“是否无限循环”时，优先考虑<strong>状态压缩&#x2F;状态记录</strong>。</li>
+<li>将当前系统的核心变量（如本题的两个队列）序列化（转成 <code>string</code> 或 <code>vector</code>），利用 <code>set</code> 或 <code>unordered_set</code> 进行 $O(1)$ 或 $O(\log N)$ 的查重。</li>
+<li>如果状态空间极大无法记录，则寻找数学规律（如本题的最长路径仅为 106 步），退化为<strong>限制最大模拟次数</strong>（如 <code>if (steps &gt; 1000000) break;</code>）来近似判断死循环。</li>
+</ol>
+
       
 
       
@@ -2035,6 +2073,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">template</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">project</a>
               </li>
              
@@ -2043,11 +2089,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">template</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2059,7 +2105,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2067,11 +2113,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2079,15 +2125,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2095,11 +2133,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2111,31 +2149,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2147,19 +2169,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2167,11 +2197,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
             
             <div class="clearfix"></div>
