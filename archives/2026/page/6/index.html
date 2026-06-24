@@ -6,20 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://777728.github.io">
-  <title>C++项目导航 | Cai Haoran&#39;s Blog</title>
+  <title>Archives: 2026 | Cai Haoran&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="🚀 目标   阶段 核心目标 学习项目 关键产出&#x2F;重点    第一阶段 掌握现代C++并发与任务队列的内存模型 progschj&#x2F;ThreadPool 理解 std::future、任务包装、线程安全队列。建议手写简化版。   第二阶段 系统化理论知识与面试准备 Light-City&#x2F;CPlusPlusThings 作为主干知识库，通读基础、STL源码、现代特性、并发章节，构建完整知识">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C++项目导航">
-<meta property="og:url" content="https://777728.github.io/2026/05/13/project-C++-01/index.html">
+  <meta name="description" content="curiosity compete progress">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cai Haoran&#39;s Blog">
+<meta property="og:url" content="https://777728.github.io/archives/2026/page/6/index.html">
 <meta property="og:site_name" content="Cai Haoran&#39;s Blog">
-<meta property="og:description" content="🚀 目标   阶段 核心目标 学习项目 关键产出&#x2F;重点    第一阶段 掌握现代C++并发与任务队列的内存模型 progschj&#x2F;ThreadPool 理解 std::future、任务包装、线程安全队列。建议手写简化版。   第二阶段 系统化理论知识与面试准备 Light-City&#x2F;CPlusPlusThings 作为主干知识库，通读基础、STL源码、现代特性、并发章节，构建完整知识">
+<meta property="og:description" content="curiosity compete progress">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-18T04:57:00.604Z">
 <meta property="article:author" content="Cai Haoran">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="project">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Cai Haoran&#39;s Blog" type="application/atom+xml">
@@ -160,239 +156,147 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-project-C++-01" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      C++项目导航
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2026" class="archive-year">2026</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2026/04/05/template-zuiduanlu/" class="archive-article-date">
+  	<time datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-05</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2026/04/05/template-zuiduanlu/">最短路</a>
     </h1>
   
 
-        
-        <a href="/2026/05/13/project-C++-01/" class="archive-article-date">
-  	<time datetime="2026-05-12T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="🚀-目标"><a href="#🚀-目标" class="headerlink" title="🚀 目标"></a>🚀 目标</h2><table>
-<thead>
-<tr>
-<th align="left">阶段</th>
-<th align="left">核心目标</th>
-<th align="left">学习项目</th>
-<th align="left">关键产出&#x2F;重点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>第一阶段</strong></td>
-<td align="left">掌握现代C++并发与任务队列的内存模型</td>
-<td align="left"><strong><code>progschj/ThreadPool</code></strong></td>
-<td align="left">理解 <code>std::future</code>、任务包装、线程安全队列。建议手写简化版。</td>
-</tr>
-<tr>
-<td align="left"><strong>第二阶段</strong></td>
-<td align="left"><strong>系统化理论知识与面试准备</strong></td>
-<td align="left"><strong><code>Light-City/CPlusPlusThings</code></strong></td>
-<td align="left"><strong>作为主干知识库</strong>，通读基础、STL源码、现代特性、并发章节，构建完整知识体系。</td>
-</tr>
-<tr>
-<td align="left"><strong>第三阶段 (新)</strong></td>
-<td align="left"><strong>实践大型库的设计与高性能数据处理</strong></td>
-<td align="left"><strong><code>hosseinmoein/DataFrame</code></strong></td>
-<td align="left"><strong>承上启下</strong>：运用第二阶段的理论，分析其内存布局、类型系统、访问者模式，并对比其性能基准。<strong>产出：为它贡献一个自定义算法</strong>。</td>
-</tr>
-<tr>
-<td align="left"><strong>第四阶段</strong></td>
-<td align="left">挑战真实世界的极致性能优化</td>
-<td align="left"><strong><code>ggml-org/whisper.cpp</code></strong></td>
-<td align="left">在理解高性能设计原则后，深入分析其内存零分配、SIMD、GPU后端等终极优化技巧。</td>
-</tr>
-</tbody></table>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
-<li>YNU-tune 校园广播网站：<a target="_blank" rel="noopener" href="https://www.ynutune.com/">https://www.ynutune.com/</a> 待开发（动态网站）</li>
-<li>YNU-guild 校园社区：<a target="_blank" rel="noopener" href="https://guild.ynu.edu.cn/">https://guild.ynu.edu.cn/</a> 待开发(静态网站)</li>
-</ol>
-<h3 id="1-ThreadPool-h-线程池实现"><a href="#1-ThreadPool-h-线程池实现" class="headerlink" title="1. ThreadPool.h (线程池实现)"></a>1. ThreadPool.h (线程池实现)</h3><p>这是一个基于 C++11 标准的轻量级线程池实现，使用了 <code>std::thread</code>, <code>std::mutex</code>, <code>std::condition_variable</code> 和 <code>std::future</code>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> THREAD_POOL_H <span class="comment">// 头文件守卫，防止重复包含</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> THREAD_POOL_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入必要的标准库头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span>       <span class="comment">// 用于存储工作线程</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span>        <span class="comment">// 用于存储待执行的任务队列</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span>       <span class="comment">// 用于智能指针 std::shared_ptr</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span>       <span class="comment">// 用于 std::thread</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span>        <span class="comment">// 用于 std::mutex 互斥锁</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;condition_variable&gt;</span> <span class="comment">// 用于 std::condition_variable 条件变量</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span>       <span class="comment">// 用于 std::future 和 std::packaged_task</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span>   <span class="comment">// 用于 std::function 和 std::bind</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdexcept&gt;</span>    <span class="comment">// 用于异常处理</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ThreadPool</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 构造函数：初始化指定数量的工作线程</span></span><br><span class="line">    <span class="built_in">ThreadPool</span>(<span class="type">size_t</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// enqueue: 向线程池提交任务模板函数</span></span><br><span class="line">    <span class="comment">// F: 可调用对象类型 (函数、lambda、仿函数等)</span></span><br><span class="line">    <span class="comment">// Args: 参数包</span></span><br><span class="line">    <span class="comment">// 返回类型推导：自动推导函数 f 的返回值类型，并封装为 std::future</span></span><br><span class="line">    <span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> F, <span class="keyword">class</span>... Args&gt;</span></span><br><span class="line"><span class="function">    <span class="keyword">auto</span> <span class="title">enqueue</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span></span><br><span class="line"><span class="function">        -&gt; std::future&lt;<span class="keyword">typename</span> std::result_of&lt;<span class="title">F</span><span class="params">(Args...)</span>&gt;::type&gt;</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 析构函数：停止线程池并等待所有线程结束</span></span><br><span class="line">    ~<span class="built_in">ThreadPool</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 工作线程容器</span></span><br><span class="line">    std::vector&lt; std::thread &gt; workers;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 任务队列，存储打包好的无参函数对象</span></span><br><span class="line">    std::queue&lt; std::function&lt;<span class="type">void</span>()&gt; &gt; tasks;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// --- 同步机制 ---</span></span><br><span class="line">    std::mutex queue_mutex;           <span class="comment">// 保护任务队列和 stop 标志位的互斥锁</span></span><br><span class="line">    std::condition_variable condition; <span class="comment">// 用于通知空闲线程有新任务或需要停止</span></span><br><span class="line">    <span class="type">bool</span> stop;                        <span class="comment">// 线程池停止标志</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// --- 构造函数实现 ---</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">ThreadPool::ThreadPool</span><span class="params">(<span class="type">size_t</span> threads)</span></span></span><br><span class="line"><span class="function">    :   stop(false) // 初始化 stop 为 false</span></span><br><span class="line"><span class="function">&#123;</span></span><br><span class="line">    <span class="comment">// 创建指定数量的工作线程</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">size_t</span> i = <span class="number">0</span>;i&lt;threads;++i)</span><br><span class="line">        workers.<span class="built_in">emplace_back</span>(</span><br><span class="line">            [<span class="keyword">this</span>] <span class="comment">// 捕获当前 ThreadPool 实例的 this 指针</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(;;) <span class="comment">// 无限循环，直到线程池停止</span></span><br><span class="line">                &#123;</span><br><span class="line">                    std::function&lt;<span class="built_in">void</span>()&gt; task; <span class="comment">// 用于暂存从队列取出的任务</span></span><br><span class="line"></span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="comment">// 获取锁，保护共享数据</span></span><br><span class="line">                        std::unique_lock&lt;std::mutex&gt; <span class="built_in">lock</span>(<span class="keyword">this</span>-&gt;queue_mutex);</span><br><span class="line">                        </span><br><span class="line">                        <span class="comment">// 等待条件：</span></span><br><span class="line">                        <span class="comment">// 1. 线程池被标记为停止 (stop == true)</span></span><br><span class="line">                        <span class="comment">// 2. 或者任务队列不为空 (!tasks.empty())</span></span><br><span class="line">                        <span class="comment">// 如果条件不满足，线程在此处阻塞并释放锁</span></span><br><span class="line">                        <span class="keyword">this</span>-&gt;condition.<span class="built_in">wait</span>(lock,</span><br><span class="line">                            [<span class="keyword">this</span>]&#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;stop || !<span class="keyword">this</span>-&gt;tasks.<span class="built_in">empty</span>(); &#125;);</span><br><span class="line">                        </span><br><span class="line">                        <span class="comment">// 如果线程池已停止 且 任务队列为空，则退出线程函数</span></span><br><span class="line">                        <span class="keyword">if</span>(<span class="keyword">this</span>-&gt;stop &amp;&amp; <span class="keyword">this</span>-&gt;tasks.<span class="built_in">empty</span>())</span><br><span class="line">                            <span class="keyword">return</span>;</span><br><span class="line">                            </span><br><span class="line">                        <span class="comment">// 取出队列前端任务，并移动语义转移所有权</span></span><br><span class="line">                        task = std::<span class="built_in">move</span>(<span class="keyword">this</span>-&gt;tasks.<span class="built_in">front</span>());</span><br><span class="line">                        <span class="keyword">this</span>-&gt;tasks.<span class="built_in">pop</span>(); <span class="comment">// 移除已取出的任务</span></span><br><span class="line">                    &#125; <span class="comment">// 锁在此处自动释放，允许其他线程操作队列</span></span><br><span class="line"></span><br><span class="line">                    <span class="built_in">task</span>(); <span class="comment">// 执行任务（在锁之外执行，提高并发性能）</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// --- enqueue 方法实现 (添加新任务) ---</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> F, <span class="keyword">class</span>... Args&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ThreadPool::enqueue</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> </span></span><br><span class="line"><span class="function">    -&gt; std::future&lt;<span class="keyword">typename</span> std::result_of&lt;<span class="title">F</span><span class="params">(Args...)</span>&gt;::type&gt;</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 推导任务的返回类型</span></span><br><span class="line">    <span class="keyword">using</span> return_type = <span class="keyword">typename</span> std::result_of&lt;<span class="built_in">F</span>(Args...)&gt;::type;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个 packaged_task，它将函数 f 和参数 args 绑定</span></span><br><span class="line">    <span class="comment">// 使用 shared_ptr 包装，以便可以在队列中复制/移动，并在未来获取结果</span></span><br><span class="line">    <span class="keyword">auto</span> task = std::make_shared&lt; std::packaged_task&lt;<span class="built_in">return_type</span>()&gt; &gt;(</span><br><span class="line">            std::<span class="built_in">bind</span>(std::forward&lt;F&gt;(f), std::forward&lt;Args&gt;(args)...)</span><br><span class="line">        );</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 获取与该任务关联的 future 对象，用于后续获取返回值</span></span><br><span class="line">    std::future&lt;return_type&gt; res = task-&gt;<span class="built_in">get_future</span>();</span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 获取锁，保护任务队列</span></span><br><span class="line">        <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(queue_mutex)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果线程池已停止，禁止提交新任务，抛出异常</span></span><br><span class="line">        <span class="keyword">if</span>(stop)</span><br><span class="line">            <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;enqueue on stopped ThreadPool&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将任务包装成一个无参 lambda 并压入队列</span></span><br><span class="line">        <span class="comment">// lambda 捕获 task 共享指针，调用时执行 (*task)()</span></span><br><span class="line">        tasks.<span class="built_in">emplace</span>([task]()&#123; (*task)(); &#125;);</span><br><span class="line">    &#125; <span class="comment">// 锁释放</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 通知一个等待中的工作线程有新任务可用</span></span><br><span class="line">    condition.<span class="built_in">notify_one</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回 future 对象，调用者可以通过它获取异步执行的结果</span></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// --- 析构函数实现 ---</span></span><br><span class="line"><span class="keyword">inline</span> ThreadPool::~<span class="built_in">ThreadPool</span>()</span><br><span class="line">&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 获取锁，修改停止标志</span></span><br><span class="line">        <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(queue_mutex)</span></span>;</span><br><span class="line">        stop = <span class="literal">true</span>; <span class="comment">// 设置停止标志</span></span><br><span class="line">    &#125; <span class="comment">// 锁释放</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 唤醒所有正在等待条件变量的工作线程</span></span><br><span class="line">    <span class="comment">// 这样它们才能检测到 stop == true 并退出循环</span></span><br><span class="line">    condition.<span class="built_in">notify_all</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 等待所有工作线程执行完毕并加入主线程</span></span><br><span class="line">    <span class="keyword">for</span>(std::thread &amp;worker: workers)</span><br><span class="line">        worker.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-example-cpp-使用示例"><a href="#2-example-cpp-使用示例" class="headerlink" title="2. example.cpp (使用示例)"></a>2. example.cpp (使用示例)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span>   <span class="comment">// 用于标准输入输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span>     <span class="comment">// 用于存储 future 结果</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span>     <span class="comment">// 用于时间延迟</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ThreadPool.h&quot;</span> <span class="comment">// 包含线程池头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个包含 4 个工作线程的线程池</span></span><br><span class="line">    <span class="function">ThreadPool <span class="title">pool</span><span class="params">(<span class="number">4</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用于存储每个任务返回的 future 对象</span></span><br><span class="line">    std::vector&lt; std::future&lt;<span class="type">int</span>&gt; &gt; results;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环提交 8 个任务</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i) &#123;</span><br><span class="line">        <span class="comment">// emplace_back 直接在 vector 末尾构造元素</span></span><br><span class="line">        <span class="comment">// pool.enqueue 接受一个 lambda 表达式</span></span><br><span class="line">        results.<span class="built_in">emplace_back</span>(</span><br><span class="line">            pool.<span class="built_in">enqueue</span>([i] &#123; <span class="comment">// 按值捕获循环变量 i</span></span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;hello &quot;</span> &lt;&lt; i &lt;&lt; std::endl; <span class="comment">// 打印开始信息</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 模拟耗时操作，睡眠 1 秒</span></span><br><span class="line">                std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">seconds</span>(<span class="number">1</span>));</span><br><span class="line">                </span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;world &quot;</span> &lt;&lt; i &lt;&lt; std::endl; <span class="comment">// 打印结束信息</span></span><br><span class="line">                <span class="keyword">return</span> i*i; <span class="comment">// 返回 i 的平方作为任务结果</span></span><br><span class="line">            &#125;)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历所有 future 对象，获取并打印结果</span></span><br><span class="line">    <span class="comment">// result.get() 会阻塞当前线程，直到对应的任务执行完毕并返回结果</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;&amp; result: results)</span><br><span class="line">        std::cout &lt;&lt; result.<span class="built_in">get</span>() &lt;&lt; <span class="string">&#x27; &#x27;</span>; <span class="comment">// 输出计算结果，以空格分隔</span></span><br><span class="line">        </span><br><span class="line">    std::cout &lt;&lt; std::endl; <span class="comment">// 换行</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; <span class="comment">// main 函数结束，pool 对象销毁，触发析构函数，等待所有线程结束</span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/wechat-shoukuan.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">project</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">最短路</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://777728.github.io/2026/05/13/project-C++-01/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2026/05/13/20260513/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          2026-05-13 日记
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2026/05/13/template-201-%E5%89%8D%E7%BC%80%E5%92%8C%E5%B7%AE%E5%88%86/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">201-前缀和差分</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2026/04/05/template-xianduanshu/" class="archive-article-date">
+  	<time datetime="2026-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-05</time>
+</a>
         </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">🚀 目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ThreadPool-h-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1. ThreadPool.h (线程池实现)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-example-cpp-%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.2.</span> <span class="toc-text">2. example.cpp (使用示例)</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2026/04/05/template-xianduanshu/">线段树</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线段树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
         </div>
-        
-    </div>
-</aside>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2026/04/04/Here-is-a-place-recording-caihaoman-s-progress/" class="archive-article-date">
+  	<time datetime="2026-04-04T03:31:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2026/04/04/Here-is-a-place-recording-caihaoman-s-progress/">Here is a place recording caihaoman&#39;s progress</a>
+    </h1>
+  
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+          
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
   
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2026/page/5/">&laquo; Prev</a><a class="page-number" href="/archives/2026/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2026/page/4/">4</a><a class="page-number" href="/archives/2026/page/5/">5</a><span class="page-number current">6</span>
+    </nav>
   
 
 
@@ -416,8 +320,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
@@ -547,7 +451,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -555,19 +459,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +471,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,11 +487,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,7 +503,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,10 +520,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,11 +539,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,6 +555,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
@@ -659,11 +567,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +575,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
             
             <div class="clearfix"></div>
