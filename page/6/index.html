@@ -158,6 +158,327 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-template-212-dp引入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/">212-dp引入</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/" class="archive-article-date">
+  	<time datetime="2026-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h1><h1 id="🔍-01背包核心代码深度解析"><a href="#🔍-01背包核心代码深度解析" class="headerlink" title="🔍 01背包核心代码深度解析"></a>🔍 01背包核心代码深度解析</h1><blockquote>
+<p>📌 这是本题最关键的部分！理解了这个，01背包就通了！</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)            <span class="comment">// 枚举每个好友（物品）</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)   <span class="comment">// ⚠️ 逆序！从大到小枚举剩余药量</span></span><br><span class="line">      f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);  <span class="comment">// 选或不选取最大</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📊-代码逐行拆解"><a href="#📊-代码逐行拆解" class="headerlink" title="📊 代码逐行拆解"></a>📊 代码逐行拆解</h2><h3 id="第一层循环：枚举物品"><a href="#第一层循环：枚举物品" class="headerlink" title="第一层循环：枚举物品"></a>第一层循环：枚举物品</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code></td>
+<td>当前考虑第 <code>i</code> 个好友</td>
+<td>正在决定”要不要挑战这个好友”</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>好友总数</td>
+<td>一共有n个物品可选</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>✅ 外层循环控制”决策顺序”：一个一个好友地考虑</p>
+</blockquote>
+<hr>
+<h3 id="第二层循环：逆序枚举容量（❗核心难点）"><a href="#第二层循环：逆序枚举容量（❗核心难点）" class="headerlink" title="第二层循环：逆序枚举容量（❗核心难点）"></a>第二层循环：逆序枚举容量（❗核心难点）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = x; j &gt;= use[i]; j--)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+<th>为什么这样写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>j</code></td>
+<td>当前背包剩余容量（可用药量）</td>
+<td>从大到小枚举，保证每个物品只选一次</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>背包总容量（药物总数）</td>
+<td>初始最大药量</td>
+</tr>
+<tr>
+<td><code>use[i]</code></td>
+<td>第i个物品的”重量”（打赢最少用药）</td>
+<td>药量不够use[i]时无法挑战赢，循环终止</td>
+</tr>
+</tbody></table>
+<h3 id="🎯-为什么必须逆序？（金牌教练重点讲解）"><a href="#🎯-为什么必须逆序？（金牌教练重点讲解）" class="headerlink" title="🎯 为什么必须逆序？（金牌教练重点讲解）"></a>🎯 为什么必须<strong>逆序</strong>？（金牌教练重点讲解）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">假设正序枚举：j = use[i] → x</span><br><span class="line"></span><br><span class="line">❌ 问题：会重复选择同一个物品！</span><br><span class="line"></span><br><span class="line">举例：物品重量=2，价值=3，背包容量=4</span><br><span class="line">初始：f[0]=f[1]=f[2]=f[3]=f[4]=0</span><br><span class="line"></span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 选了一次</span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 6  ❌ f[2]刚被更新，相当于选了两次！</span><br><span class="line"></span><br><span class="line">✅ 逆序枚举：j = x → use[i]</span><br><span class="line"></span><br><span class="line">j=4: f[4] = max(f[4], f[2]+3) = 3  ✓ f[2]还是上一轮的值（没选当前物品）</span><br><span class="line">j=2: f[2] = max(f[2], f[0]+3) = 3  ✓ 正确只选一次</span><br><span class="line"></span><br><span class="line">📌 本质：逆序保证状态转移时，f[j-use[i]] 来自&quot;上一轮&quot;（没选当前物品）</span><br></pre></td></tr></table></figure>
+
+<h3 id="🧠-形象理解：一维数组的”时间魔法”"><a href="#🧠-形象理解：一维数组的”时间魔法”" class="headerlink" title="🧠 形象理解：一维数组的”时间魔法”"></a>🧠 形象理解：一维数组的”时间魔法”</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">一维数组 f[] 其实是&quot;滚动数组&quot;，隐含了时间维度：</span><br><span class="line"></span><br><span class="line">正序：  新状态 ← 新状态（同一轮）→ 物品被重复选 → 完全背包 ❌</span><br><span class="line">逆序：  新状态 ← 旧状态（上一轮）→ 物品只选一次 → 01背包  ✅</span><br><span class="line"></span><br><span class="line">🎮 类比游戏：</span><br><span class="line">   逆序 = 从背包&quot;右边&quot;开始装物品，不会污染&quot;左边&quot;还没决策的状态</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="状态转移方程：决策的核心"><a href="#状态转移方程：决策的核心" class="headerlink" title="状态转移方程：决策的核心"></a>状态转移方程：决策的核心</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[j] = <span class="built_in">max</span>(f[j], f[j - use[i]] + win[i]);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+<th>决策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>f[j]</code>（等号右边）</td>
+<td><strong>不选</strong>第i个好友：用j个药，但不挑战他</td>
+<td>保持原状</td>
+</tr>
+<tr>
+<td><code>f[j-use[i]] + win[i]</code></td>
+<td><strong>选</strong>第i个好友：花use[i]药打赢他，获得额外收益win[i]</td>
+<td>消耗资源换收益</td>
+</tr>
+<tr>
+<td><code>max(...)</code></td>
+<td>两种决策取最优</td>
+<td>贪心思想：局部最优→全局最优</td>
+</tr>
+</tbody></table>
+<h3 id="🎲-决策过程可视化（样例片段）"><a href="#🎲-决策过程可视化（样例片段）" class="headerlink" title="🎲 决策过程可视化（样例片段）"></a>🎲 决策过程可视化（样例片段）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">假设当前：i=1, use[1]=2, win[1]=30（额外收益）</span><br><span class="line">背包容量x=5，初始f=[0,0,0,0,0,0]</span><br><span class="line"></span><br><span class="line">j=5: f[5]=max(f[5], f[3]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩3药</span><br><span class="line">j=4: f[4]=max(f[4], f[2]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩2药</span><br><span class="line">j=3: f[3]=max(f[3], f[1]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩1药</span><br><span class="line">j=2: f[2]=max(f[2], f[0]+30)=max(0,0+30)=30  ✓ 挑战好友1，剩0药</span><br><span class="line"></span><br><span class="line">结果：f=[0,0,30,30,30,30] → 用≥2药就能获得30额外经验</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔄-完整流程图解"><a href="#🔄-完整流程图解" class="headerlink" title="🔄 完整流程图解"></a>🔄 完整流程图解</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">📦 初始状态：</span><br><span class="line">   f = [0, 0, 0, 0, ..., 0]  (长度x+1)</span><br><span class="line">   ohno = lose[1]+lose[2]+...+lose[n]</span><br><span class="line"></span><br><span class="line">🔄 逐个处理好友：</span><br><span class="line">   i=1: 考虑好友1，逆序更新f[] → f记录&quot;选/不选好友1&quot;的最优解</span><br><span class="line">   i=2: 考虑好友2，逆序更新f[] → f记录&quot;选/不选好友1,2&quot;的最优解</span><br><span class="line">   ...</span><br><span class="line">   i=n: 考虑好友n，逆序更新f[] → f[x]即为全局最优额外收益</span><br><span class="line"></span><br><span class="line">🎯 最终答案：</span><br><span class="line">   (f[x] + ohno) * 5</span><br><span class="line">   = (最大额外收益 + 保底经验) × 5倍活动</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧪-小测试：你能判断正误吗？"><a href="#🧪-小测试：你能判断正误吗？" class="headerlink" title="🧪 小测试：你能判断正误吗？"></a>🧪 小测试：你能判断正误吗？</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面哪种写法是正确的01背包？</span></span><br><span class="line"></span><br><span class="line">A. <span class="keyword">for</span>(j=use[i]; j&lt;=x; j++)     <span class="comment">// 正序</span></span><br><span class="line">B. <span class="keyword">for</span>(j=x; j&gt;=use[i]; j--)     <span class="comment">// 逆序 ✓</span></span><br><span class="line">C. <span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;=x-use[i]; j++)   <span class="comment">// 从0开始正序</span></span><br><span class="line">D. <span class="keyword">for</span>(j=x-use[i]; j&gt;=<span class="number">0</span>; j--)   <span class="comment">// 逆序但起点错</span></span><br><span class="line"></span><br><span class="line">✅ 答案：B</span><br><span class="line"></span><br><span class="line">💡 记忆口诀：</span><br><span class="line">   <span class="string">&quot;01背包要逆序，完全背包才正序&quot;</span></span><br><span class="line">   <span class="string">&quot;从大到小不重复，从小到大随便取&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎁-教练总结：三句话掌握核心"><a href="#🎁-教练总结：三句话掌握核心" class="headerlink" title="🎁 教练总结：三句话掌握核心"></a>🎁 教练总结：三句话掌握核心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ 外层枚举物品 → 一个一个做决策</span><br><span class="line">2️⃣ 内层逆序容量 → 保证每个物品只选一次（01背包灵魂！）</span><br><span class="line">3️⃣ 状态转移取max → 选或不选，哪个收益大要哪个</span><br><span class="line"></span><br><span class="line">🔑 本质：用一维数组+逆序，模拟二维数组的&quot;上一行&quot;状态</span><br></pre></td></tr></table></figure>
+
+<h1 id="📦-P1049-NOIP-2001-普及组-装箱问题-错题整理"><a href="#📦-P1049-NOIP-2001-普及组-装箱问题-错题整理" class="headerlink" title="📦 P1049 [NOIP 2001 普及组] 装箱问题 | 错题整理"></a>📦 P1049 [NOIP 2001 普及组] 装箱问题 | 错题整理</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个容量为 $V$ 的箱子和 $n$ 个物品（每个物品有特定体积）。要求从中挑选若干个物品放入箱子，使得<strong>箱子剩余空间最小</strong>。<br><strong>核心转化：</strong> 剩余空间最小 $\Leftrightarrow$ 装入物品的总体积最大。本题等价于求解在容量限制 $V$ 下，能获得的最大物品体积和。</p>
+<hr>
+<h2 id="🏷️-题型归类-模板代码"><a href="#🏷️-题型归类-模板代码" class="headerlink" title="🏷️ 题型归类 &amp; 模板代码"></a>🏷️ 题型归类 &amp; 模板代码</h2><p><strong>题型：</strong> 动态规划（01背包问题）<br><strong>适用场景：</strong> 每个物品只有“选”或“不选”两种状态，求不超过容量限制下的最大价值&#x2F;体积。<br><strong>一维 DP 核心模板：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dp[j] 表示容量为 j 时的最大价值/体积</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;          <span class="comment">// 枚举物品</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = V; j &gt;= w[i]; j--) &#123;  <span class="comment">// 逆序枚举容量（关键！）</span></span><br><span class="line">        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - w[i]] + v[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔍-错误定位与分析"><a href="#🔍-错误定位与分析" class="headerlink" title="🔍 错误定位与分析"></a>🔍 错误定位与分析</h2><p>你提供的初始代码存在以下关键问题：</p>
+<ol>
+<li><strong>循环方向错误（致命）</strong>：内层循环 <code>for(int j = v - a[i]; j &lt;= v; j++)</code> 是<strong>从小到大</strong>遍历。在一维数组优化 01背包 时，必须<strong>从大到小</strong>遍历，否则 <code>dp[j - a[i]]</code> 会引用到当前物品已经更新过的状态，导致同一物品被重复装入（退化为完全背包）。</li>
+<li><strong>状态转移缺失&#x2F;语法错误</strong>：<code>if()</code> 条件为空，且未定义 <code>dp</code> 数组。01背包的转移应为直接比较更新，无需额外 <code>if</code>。</li>
+<li><strong>答案逻辑错误</strong>：定义了 <code>int ans = v;</code> 但未参与状态更新。最终答案应为 <code>总容量 V - 最大已装体积 dp[V]</code>。</li>
+</ol>
+<p><strong>错误片段定位：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 原代码片段</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = v - a[i];j &lt;=v;j++)&#123;</span><br><span class="line">    <span class="keyword">if</span>() <span class="comment">// 条件为空，未定义dp数组，循环方向反了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💡-解题思路拆解"><a href="#💡-解题思路拆解" class="headerlink" title="💡 解题思路拆解"></a>💡 解题思路拆解</h2><ol>
+<li><strong>定义状态</strong>：设 <code>dp[j]</code> 表示当箱子容量为 <code>j</code> 时，能装入物品的<strong>最大总体积</strong>。</li>
+<li><strong>初始化</strong>：<code>dp</code> 数组初始化为 <code>0</code>。表示容量为 <code>0</code> 时最大体积为 <code>0</code>，其余状态由转移方程自然推导。</li>
+<li><strong>状态转移</strong>：对于第 <code>i</code> 个物品（体积为 <code>a[i]</code>），考虑容量 <code>j</code>：<ul>
+<li>不装：<code>dp[j]</code> 保持不变。</li>
+<li>装：前提是 <code>j &gt;= a[i]</code>，体积变为 <code>dp[j - a[i]] + a[i]</code>。</li>
+<li>取两者最大值：<code>dp[j] = max(dp[j], dp[j - a[i]] + a[i])</code>。</li>
+</ul>
+</li>
+<li><strong>空间优化（逆序枚举）</strong>：使用一维数组时，计算 <code>dp[j]</code> 需要依赖上一轮（未考虑当前物品）的 <code>dp[j - a[i]]</code>。若正序遍历，<code>dp[j - a[i]]</code> 会被当前物品提前更新，造成重复使用。<strong>逆序遍历可保证依赖的是上一轮数据。</strong></li>
+<li><strong>输出结果</strong>：<code>dp[V]</code> 即为最大可装体积，最小剩余空间 &#x3D; <code>V - dp[V]</code>。</li>
+</ol>
+<hr>
+<h2 id="💻-完整参考代码（已注释-无多余空行）"><a href="#💻-完整参考代码（已注释-无多余空行）" class="headerlink" title="💻 完整参考代码（已注释 &#x2F; 无多余空行）"></a>💻 完整参考代码（已注释 &#x2F; 无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> v,n;</span><br><span class="line">    cin&gt;&gt;v&gt;&gt;n;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">a</span>(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">dp</span>(v<span class="number">+1</span>,<span class="number">0</span>);<span class="comment">//dp[j]表示容量为j时能装的最大体积，初始化为0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;<span class="comment">//枚举每一个物品</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=v;j&gt;=a[i];j--)&#123;<span class="comment">//逆序枚举容量，保证每个物品只被考虑一次</span></span><br><span class="line">            dp[j]=<span class="built_in">max</span>(dp[j],dp[j-a[i]]+a[i]);<span class="comment">//状态转移：选或不选当前物品</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;v-dp[v]&lt;&lt;endl;<span class="comment">//总容量减去最大已装体积，即为最小剩余空间</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="📖-P1077-NOIP-2012-普及组-摆花-算法错题整理"><a href="#📖-P1077-NOIP-2012-普及组-摆花-算法错题整理" class="headerlink" title="📖 P1077 [NOIP 2012 普及组] 摆花 - 算法错题整理"></a>📖 P1077 [NOIP 2012 普及组] 摆花 - 算法错题整理</h1><h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><ul>
+<li><strong>核心任务</strong>：有 $n$ 种花，第 $i$ 种花最多只能摆 $a_i$ 盆。要求<strong>恰好</strong>摆出 $m$ 盆花，且同种花必须连续摆放，种类按编号从小到大排列。求不同的摆放方案数，结果对 $10^6+7$ 取模。</li>
+<li><strong>问题本质</strong>：带数量限制的<strong>计数型背包DP</strong>（可视为多重背包的变种，但这里求的是“恰好装满”的方案数而非最大价值）。</li>
+</ul>
+<hr>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>状态定义</strong>：<code>f[i][j]</code> 表示考虑前 <code>i</code> 种花，总共摆了 <code>j</code> 盆的方案数。</li>
+<li><strong>状态转移</strong>：对于第 <code>i</code> 种花，我们可以选择摆 <code>k</code> 盆（$0 \le k \le a_i$ 且 $k \le j$）。既然第 <code>i</code> 种花摆了 <code>k</code> 盆，那么前 <code>i-1</code> 种花就必须恰好摆 <code>j-k</code> 盆。因此：<br><code>f[i][j] = Σ f[i-1][j-k]</code> （$k$ 从 $0$ 枚举到 $\min(j, a_i)$）</li>
+<li><strong>边界初始化</strong>：<code>f[0][0] = 1</code>。表示“0种花摆0盆”本身就是一种合法方案（空方案）。其余状态默认为 0。</li>
+<li><strong>答案输出</strong>：<code>f[n][m]</code> 即为所求。</li>
+</ol>
+<hr>
+<h2 id="🔍-代码审查与纠错"><a href="#🔍-代码审查与纠错" class="headerlink" title="🔍 代码审查与纠错"></a>🔍 代码审查与纠错</h2><p>你提供的核心 DP 逻辑是<strong>完全正确</strong>的，状态定义、转移方程、取模位置均符合题意。但存在一处<strong>致命语法错误</strong>（复制粘贴残留）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 错误片段（原代码末尾）</span></span><br><span class="line">    cout&lt;&lt;f[n][m]&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;# P1077 [NOIP <span class="number">2012</span> 普及组] 摆花  <span class="comment">// ← 题目描述误粘到代码中，会导致编译报错</span></span><br></pre></td></tr></table></figure>
+<p><strong>修正建议</strong>：</p>
+<ol>
+<li>删除 <code>return 0;</code> 后的 <code># P1077...</code> 文本。</li>
+<li>全局数组 <code>f</code> 默认初始化为 0，符合题意，无需额外 <code>memset</code>。</li>
+<li><code>int</code> 类型在此题中不会溢出（<code>mod=1000007</code>，两数相加最大约 <code>2e6</code>，远小于 <code>INT_MAX</code>），但养成中间运算用 <code>long long</code> 或及时取模的习惯更佳。你的 <code>(a+b)%mod</code> 写法很规范。</li>
+</ol>
+<hr>
+<h2 id="📦-题型模板总结（计数型限制背包）"><a href="#📦-题型模板总结（计数型限制背包）" class="headerlink" title="📦 题型模板总结（计数型限制背包）"></a>📦 题型模板总结（计数型限制背包）</h2><p>此类“求恰好凑成某值&#x2F;容量 的方案数”问题，可直接套用以下模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// f[i][j]: 前i个物品，总重量/数量恰好为j的方案数</span></span><br><span class="line">f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 边界：0个物品凑0的方案数为1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)&#123;          <span class="comment">// 枚举物品阶段</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;=m; j++)&#123;      <span class="comment">// 枚举当前总容量/总数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>; k&lt;=上限 &amp;&amp; j&gt;=k; k++)&#123; <span class="comment">// 枚举当前物品选几个</span></span><br><span class="line">            f[i][j] = (f[i][j] + f[i<span class="number">-1</span>][j-k]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; f[n][m];</span><br></pre></td></tr></table></figure>
+<p><strong>💡 优化提示</strong>：观察转移方程 <code>f[i][j]</code> 仅依赖 <code>f[i-1][...]</code>，可滚动数组压缩空间至 <code>O(m)</code>。正序遍历 <code>j</code> 即可：<code>for(int j=m; j&gt;=0; j--)</code> 内嵌 <code>k</code> 循环累加（本题 $N,M \le 100$，二维已足够，掌握一维优化可应对更大范围数据）。</p>
+<hr>
+<h2 id="✅-完整注释代码（已修正、紧凑排版、无多余空行）"><a href="#✅-完整注释代码（已修正、紧凑排版、无多余空行）" class="headerlink" title="✅ 完整注释代码（已修正、紧凑排版、无多余空行）"></a>✅ 完整注释代码（已修正、紧凑排版、无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">105</span>, mod=<span class="number">1000007</span>;</span><br><span class="line"><span class="type">int</span> n,m,a[maxn],f[maxn][maxn];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;<span class="comment">//初始化：前0种花摆0盆的方案数为1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;<span class="comment">//枚举花的种类（阶段）</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;<span class="comment">//枚举当前总共摆放的花盆数（状态）</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;=<span class="built_in">min</span>(j,a[i]);k++)&#123;<span class="comment">//枚举第i种花摆放的数量k</span></span><br><span class="line">                f[i][j]=(f[i][j]+f[i<span class="number">-1</span>][j-k])%mod;<span class="comment">//状态转移累加方案数</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;f[n][m]&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn=<span class="number">105</span>, mod = <span class="number">1000007</span>;</span><br><span class="line"><span class="type">int</span> n, m, a[maxn], f[maxn];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) cin&gt;&gt;a[i];</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=m; j&gt;=<span class="number">0</span>; j--) <span class="comment">//注意，是01背包</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>; k&lt;=<span class="built_in">min</span>(a[i], j); k++)</span><br><span class="line">              f[j] = (f[j] + f[j-k])%mod;</span><br><span class="line">    cout&lt;&lt;f[m]&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📊-复杂度核对"><a href="#📊-复杂度核对" class="headerlink" title="📊 复杂度核对"></a>📊 复杂度核对</h2><ul>
+<li><strong>时间复杂度</strong>：$O(n \cdot m \cdot \max a_i)$，代入数据 $100 \times 100 \times 100 &#x3D; 10^6$ 次运算，稳过时限。</li>
+<li><strong>空间复杂度</strong>：$O(n \cdot m)$，约 $10^4$ 个 <code>int</code>，内存占用极小。</li>
+</ul>
+<blockquote>
+<p>📌 <strong>学习建议</strong>：本题是计数DP的入门经典。建议后续尝试自己将二维数组优化为一维 <code>f[j]</code>，并注意一维背包在计数问题中遍历顺序的细节，能显著提升DP功底。加油！</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">212-dp引入</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/21/template-212-dp%E5%BC%95%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260520" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/20/20260520/">2026-05-20 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/20/20260520/" class="archive-article-date">
+  	<time datetime="2026-05-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>提高篇总结常见算法模型于小本子上</li>
+<li>英语一份</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/20/20260520/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260519" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -840,6 +1161,193 @@
 
 
   
+    <article id="post-luogu-pat-2026-60" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/16/luogu-pat-2026-60/">pat甲级40-60</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/16/luogu-pat-2026-60/" class="archive-article-date">
+  	<time datetime="2026-05-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/exam/problems/type/7">pat</a></p>
+<h1 id="🌲-PAT-1043-Is-It-a-Binary-Search-Tree-错题整理-BST-遍历重建模板"><a href="#🌲-PAT-1043-Is-It-a-Binary-Search-Tree-错题整理-BST-遍历重建模板" class="headerlink" title="🌲 PAT 1043 Is It a Binary Search Tree | 错题整理 &amp; BST 遍历重建模板"></a>🌲 PAT 1043 Is It a Binary Search Tree | 错题整理 &amp; BST 遍历重建模板</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 <code>N</code> 的整数序列，判断它是否为某<strong>二叉搜索树（BST）<strong>或</strong>镜像 BST</strong> 的<strong>前序遍历</strong>序列。</p>
+<ul>
+<li>若是，首行输出 <code>YES</code>，第二行输出该树的<strong>后序遍历</strong>序列（空格分隔，行末无空格）。</li>
+<li>若否，输出 <code>NO</code>。</li>
+<li>BST 定义：左子树所有节点 <code>&lt;</code> 根，右子树所有节点 <code>&gt;=</code> 根。镜像 BST 恰好相反（左 <code>&gt;=</code> 根，右 <code>&lt;</code> 根）。</li>
+</ul>
+<hr>
+<h2 id="🧩-题型模板-核心考点"><a href="#🧩-题型模板-核心考点" class="headerlink" title="🧩 题型模板 &#x2F; 核心考点"></a>🧩 题型模板 &#x2F; 核心考点</h2><p>本题属于 <strong>二叉树遍历性质 + 递归区间划分</strong> 经典题型。核心考点可归纳为以下模板逻辑：</p>
+<ol>
+<li><strong>前序定根</strong>：前序序列的第一个元素永远是当前子树的根节点。</li>
+<li><strong>BST 性质划分</strong>：利用 BST 的单调性，可在剩余序列中明确切分出左子树区间和右子树区间。</li>
+<li><strong>合法性校验</strong>：划分后需验证右子树区间是否完全满足 BST 条件（镜像同理）。若不满足，说明该序列不是对应类型的前序。</li>
+<li><strong>后序收集</strong>：递归顺序为 <code>左子树 → 右子树 → 根节点</code>，在递归返回时将根节点压入结果数组，天然得到后序序列。</li>
+</ol>
+<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
+<li><strong>单次递归验证 + 后序生成</strong><br>定义函数 <code>bool getPost(int root, int end, bool isMirror)</code>：<ul>
+<li><code>root</code> 为当前子树在前序数组中的起始下标，<code>end</code> 为结束下标。</li>
+<li>从左向右扫描找右子树起点 <code>i</code>（第一个不满足左子树条件的元素），从右向左扫描找左子树终点 <code>j</code>。</li>
+<li><strong>关键校验</strong>：合法划分必须满足 <code>i == j + 1</code>。若不满足，说明存在元素既不属于左也不属于右，直接返回 <code>false</code>。</li>
+<li>递归处理左区间 <code>[root+1, i-1]</code> 和右区间 <code>[i, end]</code>。若均合法，则将 <code>pre[root]</code> 加入 <code>post</code> 数组，返回 <code>true</code>。</li>
+</ul>
+</li>
+<li><strong>双策略尝试</strong><br>先以 <code>isMirror = false</code>（普通 BST）调用。若失败，清空 <code>post</code> 数组，再以 <code>isMirror = true</code> 调用。两者皆失败则输出 <code>NO</code>。</li>
+<li><strong>复杂度</strong>：时间 <code>O(N)</code>，空间 <code>O(N)</code>（递归栈+结果数组），完美契合 <code>N ≤ 1000</code> 的限制。</li>
+</ol>
+<hr>
+<h2 id="💻-完整注释代码（已去多余空行）"><a href="#💻-完整注释代码（已去多余空行）" class="headerlink" title="💻 完整注释代码（已去多余空行）"></a>💻 完整注释代码（已去多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; pre, post;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">getPost</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> end, <span class="type">bool</span> isMirror)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root &gt; end) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="type">int</span> i = root + <span class="number">1</span>, j = end;</span><br><span class="line">    <span class="keyword">if</span> (!isMirror) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= end &amp;&amp; pre[i] &lt; pre[root]) i++;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; root &amp;&amp; pre[j] &gt;= pre[root]) j--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= end &amp;&amp; pre[i] &gt;= pre[root]) i++;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; root &amp;&amp; pre[j] &lt; pre[root]) j--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i != j + <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">getPost</span>(root + <span class="number">1</span>, i - <span class="number">1</span>, isMirror)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">getPost</span>(i, end, isMirror)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    post.<span class="built_in">push_back</span>(pre[root]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    pre.<span class="built_in">resize</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cin &gt;&gt; pre[i];</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">getPost</span>(<span class="number">0</span>, n - <span class="number">1</span>, <span class="literal">false</span>)) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cout &lt;&lt; post[i] &lt;&lt; (i == n - <span class="number">1</span> ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        post.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">getPost</span>(<span class="number">0</span>, n - <span class="number">1</span>, <span class="literal">true</span>)) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cout &lt;&lt; post[i] &lt;&lt; (i == n - <span class="number">1</span> ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-总结与避坑"><a href="#📝-总结与避坑" class="headerlink" title="📝 总结与避坑"></a>📝 总结与避坑</h2><table>
+<thead>
+<tr>
+<th align="left">考点</th>
+<th align="left">易错点</th>
+<th align="left">应对策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>前序转后序</strong></td>
+<td align="left">误用建树法导致 <code>MLE/TLE</code> 或逻辑混乱</td>
+<td align="left">直接利用前序数组下标递归，<strong>原地划分区间</strong>，无需显式建树</td>
+</tr>
+<tr>
+<td align="left"><strong>镜像判断</strong></td>
+<td align="left">忘记清空 <code>post</code> 数组或重复输出</td>
+<td align="left">第一次失败后必须 <code>post.clear()</code>，否则第二次会追加错误结果</td>
+</tr>
+<tr>
+<td align="left"><strong>输出格式</strong></td>
+<td align="left">行末多输出一个空格导致 <code>Presentation Error</code></td>
+<td align="left">使用 <code>(i == n-1 ? &quot;&quot; : &quot; &quot;)</code> 控制分隔符，或末尾退格删除</td>
+</tr>
+<tr>
+<td align="left"><strong>边界条件</strong></td>
+<td align="left"><code>N=1</code> 时递归下标越界</td>
+<td align="left">递归基 <code>root &gt; end</code> 必须写在最前，<code>i</code> 和 <code>j</code> 的扫描条件需带等号防越界</td>
+</tr>
+</tbody></table>
+<p>💡 <strong>同类题扩展</strong>：PAT 1020 Tree Traversals（后序+中序转层序）、PAT 1086 Tree Traversals Again（前序+中序模拟）。掌握“<strong>前序定根 + 性质划分 + 递归收集</strong>”即可通杀此类遍历重建题。</p>
+<h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; inorder;  <span class="comment">// 存放节点编号的中序序列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 记录当前节点</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 右子树</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="递归展开过程"><a href="#递归展开过程" class="headerlink" title="递归展开过程"></a>递归展开过程</h2><p><strong>初始</strong>：<code>in(1)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">in(1)</span><br><span class="line">├─ in(2)</span><br><span class="line">│  ├─ in(4)</span><br><span class="line">│  │  ├─ in(8)</span><br><span class="line">│  │  │  ├─ in(16) → 16&gt;10 返回</span><br><span class="line">│  │  │  ├─ push(8)</span><br><span class="line">│  │  │  └─ in(17) → 17&gt;10 返回</span><br><span class="line">│  │  ├─ push(4)</span><br><span class="line">│  │  └─ in(9)</span><br><span class="line">│  │     ├─ in(18) → 18&gt;10 返回</span><br><span class="line">│  │     ├─ push(9)</span><br><span class="line">│  │     └─ in(19) → 19&gt;10 返回</span><br><span class="line">│  ├─ push(2)</span><br><span class="line">│  └─ in(5)</span><br><span class="line">│     ├─ in(10)</span><br><span class="line">│     │  ├─ in(20) → 20&gt;10 返回</span><br><span class="line">│     │  ├─ push(10)</span><br><span class="line">│     │  └─ in(21) → 21&gt;10 返回</span><br><span class="line">│     ├─ push(5)</span><br><span class="line">│     └─ in(11) → 11&gt;10 返回</span><br><span class="line">├─ push(1)</span><br><span class="line">└─ in(3)</span><br><span class="line">   ├─ in(6)</span><br><span class="line">   │  ├─ in(12) → 12&gt;10 返回</span><br><span class="line">   │  ├─ push(6)</span><br><span class="line">   │  └─ in(13) → 13&gt;10 返回</span><br><span class="line">   ├─ push(3)</span><br><span class="line">   └─ in(7)</span><br><span class="line">      ├─ in(14) → 14&gt;10 返回</span><br><span class="line">      ├─ push(7)</span><br><span class="line">      └─ in(15) → 15&gt;10 返回</span><br></pre></td></tr></table></figure>
+
+<h2 id="最终-inorder-数组"><a href="#最终-inorder-数组" class="headerlink" title="最终 inorder 数组"></a>最终 <code>inorder</code> 数组</h2><p>按 push 顺序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[8, 4, 9, 2, 10, 5, 1, 6, 3, 7]</span><br></pre></td></tr></table></figure>
+
+<h2 id="这是完全二叉树的下标中序遍历"><a href="#这是完全二叉树的下标中序遍历" class="headerlink" title="这是完全二叉树的下标中序遍历"></a>这是完全二叉树的下标中序遍历</h2><p>对于 N&#x3D;10 的完全二叉树（根为 1，数组存储）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        1</span><br><span class="line">     /     \</span><br><span class="line">    2       3</span><br><span class="line">   / \     / \</span><br><span class="line">  4   5   6   7</span><br><span class="line"> / \   \</span><br><span class="line">8   9   10</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="在-1064-题中的应用"><a href="#在-1064-题中的应用" class="headerlink" title="在 1064 题中的应用"></a>在 1064 题中的应用</h2><ul>
+<li>把这个 <code>inorder</code> 数组（节点编号）和<strong>排序后的输入值</strong>对应起来</li>
+<li>排序后的值 <code>[0,1,2,3,4,5,6,7,8,9]</code></li>
+<li>按 <code>inorder</code> 的顺序填入：<ul>
+<li>节点 8 填 0</li>
+<li>节点 4 填 1</li>
+<li>节点 9 填 2</li>
+<li>…</li>
+</ul>
+</li>
+<li>最后按节点编号 1~10 顺序输出就是层序遍历</li>
+</ul>
+<h1 id="bst-cst"><a href="#bst-cst" class="headerlink" title="bst cst"></a>bst cst</h1><h1 id="📖-算法错题整理-PAT-1064-Complete-Binary-Search-Tree"><a href="#📖-算法错题整理-PAT-1064-Complete-Binary-Search-Tree" class="headerlink" title="📖 算法错题整理 | PAT 1064 Complete Binary Search Tree"></a>📖 算法错题整理 | PAT 1064 Complete Binary Search Tree</h1><h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定 <code>N</code> 个互不相同的非负整数，要求构造一棵<strong>既是二叉搜索树(BST)又是完全二叉树(CBT)<strong>的树，并输出该树的</strong>层序遍历</strong>序列。<br><strong>核心性质</strong>：</p>
+<ol>
+<li>BST 的中序遍历序列一定是<strong>严格递增</strong>的。</li>
+<li>完全二叉树可以用一维数组 <code>1~N</code> 完美存储，且数组下标 <code>1,2,...,N</code> 的天然顺序就是<strong>层序遍历</strong>顺序。</li>
+</ol>
+<h2 id="💡-题型与核心考点"><a href="#💡-题型与核心考点" class="headerlink" title="💡 题型与核心考点"></a>💡 题型与核心考点</h2><ul>
+<li><strong>题型分类</strong>：二叉树结构构造 &#x2F; 性质映射</li>
+<li><strong>核心考点</strong>：BST中序单调性、完全二叉树的数组表示法、遍历序列的转换关系。</li>
+<li><strong>解题套路</strong>：<strong>排序 + 中序遍历填坑</strong>。无需真正建树，利用完全二叉树的数组存储特性，模拟中序遍历将排序后的值填入对应下标，数组本身即为层序结果。</li>
+</ul>
+<h2 id="🧠-解题思路"><a href="#🧠-解题思路" class="headerlink" title="🧠 解题思路"></a>🧠 解题思路</h2><ol>
+<li>将输入的 <code>N</code> 个数从小到大排序，得到 BST 中序遍历的目标值序列。</li>
+<li>对虚拟的完全二叉树节点编号 <code>1~N</code> 进行<strong>中序遍历</strong>（递归顺序：左子节点 <code>2*i</code> → 根 <code>i</code> → 右子节点 <code>2*i+1</code>）。</li>
+<li>记录中序遍历访问的节点编号顺序，将排序后的数值依次填入数组 <code>a[编号]</code> 中。</li>
+<li>此时数组 <code>a[1] ~ a[N]</code> 已经按照层序排列好，直接顺序输出即可。</li>
+</ol>
+<h2 id="✅-修正后代码（含详细注释，无多余空行）"><a href="#✅-修正后代码（含详细注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含详细注释，无多余空行）"></a>✅ 修正后代码（含详细注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">1001</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; inorder; <span class="comment">// 记录中序遍历访问的节点编号</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vals;    <span class="comment">// 存储输入的原始数据（改名避免与std::data冲突）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 递归访问左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 中序位置记录当前根节点编号</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 递归访问右子树</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">in</span>(<span class="number">1</span>); <span class="comment">// 获取1~n号节点的中序访问顺序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x; i &lt; n; i++) &#123; cin &gt;&gt; x; vals.<span class="built_in">push_back</span>(x); &#125;</span><br><span class="line">    <span class="built_in">sort</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>()); <span class="comment">// BST的中序遍历必为升序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        a[inorder[i]] = vals[i]; <span class="comment">// 按中序顺序将排序后的值填入对应节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 完全二叉树的数组存储下标1~N即为层序遍历，无需队列模拟</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; (i == n ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="comment">// 控制空格格式，行末无多余空格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="📦-题型模版总结"><a href="#📦-题型模版总结" class="headerlink" title="📦 题型模版总结"></a>📦 题型模版总结</h2><p>遇到 <strong>“完全&#x2F;满二叉树 + BST + 求层序”</strong> 类题目，可直接套用以下模版：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1005</span>;</span><br><span class="line"><span class="type">int</span> tree[MAXN], val[MAXN], pos[MAXN]; <span class="comment">// tree存结果，val存排序后数据，pos辅助</span></span><br><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span>, n);</span><br><span class="line">    tree[root] = val[idx++]; <span class="comment">// 中序位置填入升序值</span></span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 主流程：</span></span><br><span class="line"><span class="comment">// 1. 读入数据到 val[] 并 sort</span></span><br><span class="line"><span class="comment">// 2. inorder(1, n)</span></span><br><span class="line"><span class="comment">// 3. 直接输出 tree[1]~tree[n] 即为层序</span></span><br></pre></td></tr></table></figure>
+<p><strong>📌 避坑指南</strong>：</p>
+<ol>
+<li>数组大小开 <code>N+1</code>，避免下标越界。</li>
+<li>完全二叉树的层序就是数组顺序，<strong>切忌画蛇添足用队列BFS</strong>。</li>
+<li>注意题目对输出空格的严格要求，推荐使用三元运算符或 <code>printf(&quot;%d%c&quot;, val, i==n?&#39;\n&#39;:&#39; &#39;)</code> 处理。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">luogu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/16/luogu-pat-2026-60/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-luogu-pat-2026-40" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1382,443 +1890,6 @@
 
 
   
-    <article id="post-luogu-pat-2026-60" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/16/luogu-pat-2026-60/">pat甲级40-60</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/16/luogu-pat-2026-60/" class="archive-article-date">
-  	<time datetime="2026-05-15T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/exam/problems/type/7">pat</a></p>
-<h1 id="🌲-PAT-1043-Is-It-a-Binary-Search-Tree-错题整理-BST-遍历重建模板"><a href="#🌲-PAT-1043-Is-It-a-Binary-Search-Tree-错题整理-BST-遍历重建模板" class="headerlink" title="🌲 PAT 1043 Is It a Binary Search Tree | 错题整理 &amp; BST 遍历重建模板"></a>🌲 PAT 1043 Is It a Binary Search Tree | 错题整理 &amp; BST 遍历重建模板</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 <code>N</code> 的整数序列，判断它是否为某<strong>二叉搜索树（BST）<strong>或</strong>镜像 BST</strong> 的<strong>前序遍历</strong>序列。</p>
-<ul>
-<li>若是，首行输出 <code>YES</code>，第二行输出该树的<strong>后序遍历</strong>序列（空格分隔，行末无空格）。</li>
-<li>若否，输出 <code>NO</code>。</li>
-<li>BST 定义：左子树所有节点 <code>&lt;</code> 根，右子树所有节点 <code>&gt;=</code> 根。镜像 BST 恰好相反（左 <code>&gt;=</code> 根，右 <code>&lt;</code> 根）。</li>
-</ul>
-<hr>
-<h2 id="🧩-题型模板-核心考点"><a href="#🧩-题型模板-核心考点" class="headerlink" title="🧩 题型模板 &#x2F; 核心考点"></a>🧩 题型模板 &#x2F; 核心考点</h2><p>本题属于 <strong>二叉树遍历性质 + 递归区间划分</strong> 经典题型。核心考点可归纳为以下模板逻辑：</p>
-<ol>
-<li><strong>前序定根</strong>：前序序列的第一个元素永远是当前子树的根节点。</li>
-<li><strong>BST 性质划分</strong>：利用 BST 的单调性，可在剩余序列中明确切分出左子树区间和右子树区间。</li>
-<li><strong>合法性校验</strong>：划分后需验证右子树区间是否完全满足 BST 条件（镜像同理）。若不满足，说明该序列不是对应类型的前序。</li>
-<li><strong>后序收集</strong>：递归顺序为 <code>左子树 → 右子树 → 根节点</code>，在递归返回时将根节点压入结果数组，天然得到后序序列。</li>
-</ol>
-<h2 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h2><ol>
-<li><strong>单次递归验证 + 后序生成</strong><br>定义函数 <code>bool getPost(int root, int end, bool isMirror)</code>：<ul>
-<li><code>root</code> 为当前子树在前序数组中的起始下标，<code>end</code> 为结束下标。</li>
-<li>从左向右扫描找右子树起点 <code>i</code>（第一个不满足左子树条件的元素），从右向左扫描找左子树终点 <code>j</code>。</li>
-<li><strong>关键校验</strong>：合法划分必须满足 <code>i == j + 1</code>。若不满足，说明存在元素既不属于左也不属于右，直接返回 <code>false</code>。</li>
-<li>递归处理左区间 <code>[root+1, i-1]</code> 和右区间 <code>[i, end]</code>。若均合法，则将 <code>pre[root]</code> 加入 <code>post</code> 数组，返回 <code>true</code>。</li>
-</ul>
-</li>
-<li><strong>双策略尝试</strong><br>先以 <code>isMirror = false</code>（普通 BST）调用。若失败，清空 <code>post</code> 数组，再以 <code>isMirror = true</code> 调用。两者皆失败则输出 <code>NO</code>。</li>
-<li><strong>复杂度</strong>：时间 <code>O(N)</code>，空间 <code>O(N)</code>（递归栈+结果数组），完美契合 <code>N ≤ 1000</code> 的限制。</li>
-</ol>
-<hr>
-<h2 id="💻-完整注释代码（已去多余空行）"><a href="#💻-完整注释代码（已去多余空行）" class="headerlink" title="💻 完整注释代码（已去多余空行）"></a>💻 完整注释代码（已去多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; pre, post;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">getPost</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> end, <span class="type">bool</span> isMirror)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root &gt; end) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="type">int</span> i = root + <span class="number">1</span>, j = end;</span><br><span class="line">    <span class="keyword">if</span> (!isMirror) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= end &amp;&amp; pre[i] &lt; pre[root]) i++;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; root &amp;&amp; pre[j] &gt;= pre[root]) j--;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= end &amp;&amp; pre[i] &gt;= pre[root]) i++;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; root &amp;&amp; pre[j] &lt; pre[root]) j--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i != j + <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">getPost</span>(root + <span class="number">1</span>, i - <span class="number">1</span>, isMirror)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">getPost</span>(i, end, isMirror)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    post.<span class="built_in">push_back</span>(pre[root]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    pre.<span class="built_in">resize</span>(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cin &gt;&gt; pre[i];</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">getPost</span>(<span class="number">0</span>, n - <span class="number">1</span>, <span class="literal">false</span>)) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cout &lt;&lt; post[i] &lt;&lt; (i == n - <span class="number">1</span> ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        post.<span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">getPost</span>(<span class="number">0</span>, n - <span class="number">1</span>, <span class="literal">true</span>)) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cout &lt;&lt; post[i] &lt;&lt; (i == n - <span class="number">1</span> ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="📝-总结与避坑"><a href="#📝-总结与避坑" class="headerlink" title="📝 总结与避坑"></a>📝 总结与避坑</h2><table>
-<thead>
-<tr>
-<th align="left">考点</th>
-<th align="left">易错点</th>
-<th align="left">应对策略</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>前序转后序</strong></td>
-<td align="left">误用建树法导致 <code>MLE/TLE</code> 或逻辑混乱</td>
-<td align="left">直接利用前序数组下标递归，<strong>原地划分区间</strong>，无需显式建树</td>
-</tr>
-<tr>
-<td align="left"><strong>镜像判断</strong></td>
-<td align="left">忘记清空 <code>post</code> 数组或重复输出</td>
-<td align="left">第一次失败后必须 <code>post.clear()</code>，否则第二次会追加错误结果</td>
-</tr>
-<tr>
-<td align="left"><strong>输出格式</strong></td>
-<td align="left">行末多输出一个空格导致 <code>Presentation Error</code></td>
-<td align="left">使用 <code>(i == n-1 ? &quot;&quot; : &quot; &quot;)</code> 控制分隔符，或末尾退格删除</td>
-</tr>
-<tr>
-<td align="left"><strong>边界条件</strong></td>
-<td align="left"><code>N=1</code> 时递归下标越界</td>
-<td align="left">递归基 <code>root &gt; end</code> 必须写在最前，<code>i</code> 和 <code>j</code> 的扫描条件需带等号防越界</td>
-</tr>
-</tbody></table>
-<p>💡 <strong>同类题扩展</strong>：PAT 1020 Tree Traversals（后序+中序转层序）、PAT 1086 Tree Traversals Again（前序+中序模拟）。掌握“<strong>前序定根 + 性质划分 + 递归收集</strong>”即可通杀此类遍历重建题。</p>
-<h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; inorder;  <span class="comment">// 存放节点编号的中序序列</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 记录当前节点</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 右子树</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="递归展开过程"><a href="#递归展开过程" class="headerlink" title="递归展开过程"></a>递归展开过程</h2><p><strong>初始</strong>：<code>in(1)</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">in(1)</span><br><span class="line">├─ in(2)</span><br><span class="line">│  ├─ in(4)</span><br><span class="line">│  │  ├─ in(8)</span><br><span class="line">│  │  │  ├─ in(16) → 16&gt;10 返回</span><br><span class="line">│  │  │  ├─ push(8)</span><br><span class="line">│  │  │  └─ in(17) → 17&gt;10 返回</span><br><span class="line">│  │  ├─ push(4)</span><br><span class="line">│  │  └─ in(9)</span><br><span class="line">│  │     ├─ in(18) → 18&gt;10 返回</span><br><span class="line">│  │     ├─ push(9)</span><br><span class="line">│  │     └─ in(19) → 19&gt;10 返回</span><br><span class="line">│  ├─ push(2)</span><br><span class="line">│  └─ in(5)</span><br><span class="line">│     ├─ in(10)</span><br><span class="line">│     │  ├─ in(20) → 20&gt;10 返回</span><br><span class="line">│     │  ├─ push(10)</span><br><span class="line">│     │  └─ in(21) → 21&gt;10 返回</span><br><span class="line">│     ├─ push(5)</span><br><span class="line">│     └─ in(11) → 11&gt;10 返回</span><br><span class="line">├─ push(1)</span><br><span class="line">└─ in(3)</span><br><span class="line">   ├─ in(6)</span><br><span class="line">   │  ├─ in(12) → 12&gt;10 返回</span><br><span class="line">   │  ├─ push(6)</span><br><span class="line">   │  └─ in(13) → 13&gt;10 返回</span><br><span class="line">   ├─ push(3)</span><br><span class="line">   └─ in(7)</span><br><span class="line">      ├─ in(14) → 14&gt;10 返回</span><br><span class="line">      ├─ push(7)</span><br><span class="line">      └─ in(15) → 15&gt;10 返回</span><br></pre></td></tr></table></figure>
-
-<h2 id="最终-inorder-数组"><a href="#最终-inorder-数组" class="headerlink" title="最终 inorder 数组"></a>最终 <code>inorder</code> 数组</h2><p>按 push 顺序：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[8, 4, 9, 2, 10, 5, 1, 6, 3, 7]</span><br></pre></td></tr></table></figure>
-
-<h2 id="这是完全二叉树的下标中序遍历"><a href="#这是完全二叉树的下标中序遍历" class="headerlink" title="这是完全二叉树的下标中序遍历"></a>这是完全二叉树的下标中序遍历</h2><p>对于 N&#x3D;10 的完全二叉树（根为 1，数组存储）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        1</span><br><span class="line">     /     \</span><br><span class="line">    2       3</span><br><span class="line">   / \     / \</span><br><span class="line">  4   5   6   7</span><br><span class="line"> / \   \</span><br><span class="line">8   9   10</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="在-1064-题中的应用"><a href="#在-1064-题中的应用" class="headerlink" title="在 1064 题中的应用"></a>在 1064 题中的应用</h2><ul>
-<li>把这个 <code>inorder</code> 数组（节点编号）和<strong>排序后的输入值</strong>对应起来</li>
-<li>排序后的值 <code>[0,1,2,3,4,5,6,7,8,9]</code></li>
-<li>按 <code>inorder</code> 的顺序填入：<ul>
-<li>节点 8 填 0</li>
-<li>节点 4 填 1</li>
-<li>节点 9 填 2</li>
-<li>…</li>
-</ul>
-</li>
-<li>最后按节点编号 1~10 顺序输出就是层序遍历</li>
-</ul>
-<h1 id="bst-cst"><a href="#bst-cst" class="headerlink" title="bst cst"></a>bst cst</h1><h1 id="📖-算法错题整理-PAT-1064-Complete-Binary-Search-Tree"><a href="#📖-算法错题整理-PAT-1064-Complete-Binary-Search-Tree" class="headerlink" title="📖 算法错题整理 | PAT 1064 Complete Binary Search Tree"></a>📖 算法错题整理 | PAT 1064 Complete Binary Search Tree</h1><h2 id="📝-题意概括"><a href="#📝-题意概括" class="headerlink" title="📝 题意概括"></a>📝 题意概括</h2><p>给定 <code>N</code> 个互不相同的非负整数，要求构造一棵<strong>既是二叉搜索树(BST)又是完全二叉树(CBT)<strong>的树，并输出该树的</strong>层序遍历</strong>序列。<br><strong>核心性质</strong>：</p>
-<ol>
-<li>BST 的中序遍历序列一定是<strong>严格递增</strong>的。</li>
-<li>完全二叉树可以用一维数组 <code>1~N</code> 完美存储，且数组下标 <code>1,2,...,N</code> 的天然顺序就是<strong>层序遍历</strong>顺序。</li>
-</ol>
-<h2 id="💡-题型与核心考点"><a href="#💡-题型与核心考点" class="headerlink" title="💡 题型与核心考点"></a>💡 题型与核心考点</h2><ul>
-<li><strong>题型分类</strong>：二叉树结构构造 &#x2F; 性质映射</li>
-<li><strong>核心考点</strong>：BST中序单调性、完全二叉树的数组表示法、遍历序列的转换关系。</li>
-<li><strong>解题套路</strong>：<strong>排序 + 中序遍历填坑</strong>。无需真正建树，利用完全二叉树的数组存储特性，模拟中序遍历将排序后的值填入对应下标，数组本身即为层序结果。</li>
-</ul>
-<h2 id="🧠-解题思路"><a href="#🧠-解题思路" class="headerlink" title="🧠 解题思路"></a>🧠 解题思路</h2><ol>
-<li>将输入的 <code>N</code> 个数从小到大排序，得到 BST 中序遍历的目标值序列。</li>
-<li>对虚拟的完全二叉树节点编号 <code>1~N</code> 进行<strong>中序遍历</strong>（递归顺序：左子节点 <code>2*i</code> → 根 <code>i</code> → 右子节点 <code>2*i+1</code>）。</li>
-<li>记录中序遍历访问的节点编号顺序，将排序后的数值依次填入数组 <code>a[编号]</code> 中。</li>
-<li>此时数组 <code>a[1] ~ a[N]</code> 已经按照层序排列好，直接顺序输出即可。</li>
-</ol>
-<h2 id="✅-修正后代码（含详细注释，无多余空行）"><a href="#✅-修正后代码（含详细注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含详细注释，无多余空行）"></a>✅ 修正后代码（含详细注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">1001</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; inorder; <span class="comment">// 记录中序遍历访问的节点编号</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; vals;    <span class="comment">// 存储输入的原始数据（改名避免与std::data冲突）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">in</span><span class="params">(<span class="type">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span>);               <span class="comment">// 递归访问左子树</span></span><br><span class="line">    inorder.<span class="built_in">push_back</span>(i);    <span class="comment">// 中序位置记录当前根节点编号</span></span><br><span class="line">    <span class="built_in">in</span>(i * <span class="number">2</span> + <span class="number">1</span>);           <span class="comment">// 递归访问右子树</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">in</span>(<span class="number">1</span>); <span class="comment">// 获取1~n号节点的中序访问顺序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, x; i &lt; n; i++) &#123; cin &gt;&gt; x; vals.<span class="built_in">push_back</span>(x); &#125;</span><br><span class="line">    <span class="built_in">sort</span>(vals.<span class="built_in">begin</span>(), vals.<span class="built_in">end</span>()); <span class="comment">// BST的中序遍历必为升序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        a[inorder[i]] = vals[i]; <span class="comment">// 按中序顺序将排序后的值填入对应节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 完全二叉树的数组存储下标1~N即为层序遍历，无需队列模拟</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; (i == n ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>); <span class="comment">// 控制空格格式，行末无多余空格</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="📦-题型模版总结"><a href="#📦-题型模版总结" class="headerlink" title="📦 题型模版总结"></a>📦 题型模版总结</h2><p>遇到 <strong>“完全&#x2F;满二叉树 + BST + 求层序”</strong> 类题目，可直接套用以下模版：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1005</span>;</span><br><span class="line"><span class="type">int</span> tree[MAXN], val[MAXN], pos[MAXN]; <span class="comment">// tree存结果，val存排序后数据，pos辅助</span></span><br><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(<span class="type">int</span> root, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root &gt; n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span>, n);</span><br><span class="line">    tree[root] = val[idx++]; <span class="comment">// 中序位置填入升序值</span></span><br><span class="line">    <span class="built_in">inorder</span>(root &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 主流程：</span></span><br><span class="line"><span class="comment">// 1. 读入数据到 val[] 并 sort</span></span><br><span class="line"><span class="comment">// 2. inorder(1, n)</span></span><br><span class="line"><span class="comment">// 3. 直接输出 tree[1]~tree[n] 即为层序</span></span><br></pre></td></tr></table></figure>
-<p><strong>📌 避坑指南</strong>：</p>
-<ol>
-<li>数组大小开 <code>N+1</code>，避免下标越界。</li>
-<li>完全二叉树的层序就是数组顺序，<strong>切忌画蛇添足用队列BFS</strong>。</li>
-<li>注意题目对输出空格的严格要求，推荐使用三元运算符或 <code>printf(&quot;%d%c&quot;, val, i==n?&#39;\n&#39;:&#39; &#39;)</code> 处理。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">luogu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/16/luogu-pat-2026-60/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260515" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/15/20260515/">2026-05-15 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/15/20260515/" class="archive-article-date">
-  	<time datetime="2026-05-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>看基础篇</li>
-<li>进阶篇两章</li>
-<li>英语半套</li>
-<li>pat干！</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/15/20260515/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-template-203-st倍增" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/15/template-203-st%E5%80%8D%E5%A2%9E/">203-ST表与倍增</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/15/template-203-st%E5%80%8D%E5%A2%9E/" class="archive-article-date">
-  	<time datetime="2026-05-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h1 id="📝-算法错题整理-P1816-忠诚（ST表-倍增）"><a href="#📝-算法错题整理-P1816-忠诚（ST表-倍增）" class="headerlink" title="📝 算法错题整理 | P1816 忠诚（ST表&#x2F;倍增）"></a>📝 算法错题整理 | P1816 忠诚（ST表&#x2F;倍增）</h1><blockquote>
-<p>📌 题型：静态区间最值查询（RMQ）<br>🔧 算法：ST表（Sparse Table）+ 倍增思想<br>⏱️ 复杂度：预处理 O(nlogn)，查询 O(1)</p>
-</blockquote>
-<hr>
-<h2 id="🎯-题意概括"><a href="#🎯-题意概括" class="headerlink" title="🎯 题意概括"></a>🎯 题意概括</h2><p>给定一个长度为 <code>m</code> 的静态数组，进行 <code>n</code> 次查询，每次询问区间 <code>[a, b]</code> 内的<strong>最小值</strong>。<br>数据范围：<code>1 ≤ m, n ≤ 10^5</code>，要求高效处理多次查询。</p>
-<hr>
-<h2 id="💡-算法思路（ST表倍增模板）"><a href="#💡-算法思路（ST表倍增模板）" class="headerlink" title="💡 算法思路（ST表倍增模板）"></a>💡 算法思路（ST表倍增模板）</h2><h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">倍增预处理 + 区间覆盖查询</span><br></pre></td></tr></table></figure>
-
-<h3 id="1️⃣-预处理阶段（打表）"><a href="#1️⃣-预处理阶段（打表）" class="headerlink" title="1️⃣ 预处理阶段（打表）"></a>1️⃣ 预处理阶段（打表）</h3><ul>
-<li><code>minn[i][j]</code> 表示：从位置 <code>i</code> 开始，长度为 <code>2^j</code> 的区间 <code>[i, i+2^j-1]</code> 的最小值</li>
-<li>状态转移（倍增合并）：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minn[i][j] = <span class="built_in">min</span>(minn[i][j<span class="number">-1</span>], minn[i + (<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>]);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>外层循环枚举 <code>j</code>（幂次），内层枚举起点 <code>i</code>，保证子区间已计算</li>
-</ul>
-<h3 id="2️⃣-查询阶段（区间覆盖）"><a href="#2️⃣-查询阶段（区间覆盖）" class="headerlink" title="2️⃣ 查询阶段（区间覆盖）"></a>2️⃣ 查询阶段（区间覆盖）</h3><ul>
-<li>对于查询 <code>[L, R]</code>，令 <code>k = log₂(R-L+1)</code>（向下取整）</li>
-<li>用两个长度为 <code>2^k</code> 的区间覆盖 <code>[L, R]</code>：<ul>
-<li>左段：<code>[L, L+2^k-1]</code> → <code>minn[L][k]</code></li>
-<li>右段：<code>[R-2^k+1, R]</code> → <code>minn[R-(1&lt;&lt;k)+1][k]</code></li>
-</ul>
-</li>
-<li>两段必有重叠，但<strong>不影响最小值结果</strong>，取 <code>min</code> 即可</li>
-</ul>
-<h3 id="📐-图示理解"><a href="#📐-图示理解" class="headerlink" title="📐 图示理解"></a>📐 图示理解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查询 [2, 7]，长度=6，k=⌊log₂6⌋=2，2^k=4</span><br><span class="line">[2, 7] = [2, 5] ∪ [4, 7]  ← 两个长度为4的区间覆盖</span><br><span class="line">         ↑      ↑</span><br><span class="line">    minn[2][2]  minn[4][2]</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❌-原代码错误分析"><a href="#❌-原代码错误分析" class="headerlink" title="❌ 原代码错误分析"></a>❌ 原代码错误分析</h2><table>
-<thead>
-<tr>
-<th>错误位置</th>
-<th>问题描述</th>
-<th>修复建议</th>
-<th>代码片段</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🔴 输入顺序</td>
-<td>题目：<code>m</code>笔账 <code>n</code>个问题；代码：<code>scanf(&quot;%d%d&quot;,&amp;n,&amp;m)</code> 顺序颠倒</td>
-<td>改为 <code>scanf(&quot;%d%d&quot;,&amp;m,&amp;n)</code></td>
-<td><code>scanf(&quot;%d%d&quot;,&amp;n,&amp;m);</code></td>
-</tr>
-<tr>
-<td>🔴 输出格式</td>
-<td>题目要求答案<strong>空格分隔</strong>，代码连续输出无空格</td>
-<td><code>printf(&quot;%d%c&quot;, ans[i], i==m?&#39;\n&#39;:&#39; &#39;)</code></td>
-<td><code>printf(&quot;%d&quot;,ans[i]);</code></td>
-</tr>
-<tr>
-<td>🟡 数组大小</td>
-<td><code>minn[2333333][30]</code> 第一维过大，可能MLE</td>
-<td>开 <code>100005+5</code> 足够（m≤10^5）</td>
-<td><code>int minn[2333333][30];</code></td>
-</tr>
-<tr>
-<td>🟡 log2精度</td>
-<td><code>log2()</code> 浮点运算可能有精度误差</td>
-<td>预处理 <code>Log[]</code> 数组或用 <code>__builtin_clz</code></td>
-<td><code>lg=log2(ri-le+1);</code></td>
-</tr>
-<tr>
-<td>🟢 代码规范</td>
-<td><code>return ~~(0-0)</code> 虽等价于0但不规范</td>
-<td>改为 <code>return 0</code></td>
-<td><code>return ~~(0-0)</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>⚠️ <strong>最致命错误</strong>：输入 <code>n</code> 和 <code>m</code> 颠倒，会导致预处理循环边界错误，直接 WA！</p>
-</blockquote>
-<hr>
-<h2 id="✅-修正后代码（注释版｜无多余空行｜保留原风格）"><a href="#✅-修正后代码（注释版｜无多余空行｜保留原风格）" class="headerlink" title="✅ 修正后代码（注释版｜无多余空行｜保留原风格）"></a>✅ 修正后代码（注释版｜无多余空行｜保留原风格）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="type">int</span> m, n;</span><br><span class="line"><span class="type">int</span> a, b; <span class="comment">// 修正：统一使用a,b作为查询变量</span></span><br><span class="line"><span class="type">int</span> minn[maxn][<span class="number">21</span>]; <span class="comment">// 第二维21：2^20 &gt; 1e5</span></span><br><span class="line"><span class="type">int</span> ans[maxn];</span><br><span class="line"><span class="type">int</span> Log[maxn]; <span class="comment">// 修正：大写Log，避免与cmath::log冲突</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initlog</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    Log[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++) Log[i] = Log[i / <span class="number">2</span>] + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lookit</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> lg = Log[r - l + <span class="number">1</span>]; <span class="comment">// 修正：数组用[]访问</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(minn[l][lg], minn[r - (<span class="number">1</span> &lt;&lt; lg) + <span class="number">1</span>][lg]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; m &gt;&gt; n;</span><br><span class="line">    <span class="built_in">initlog</span>(m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) cin &gt;&gt; minn[i][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">20</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= m; i++) &#123;</span><br><span class="line">            minn[i][j] = <span class="built_in">min</span>(minn[i][j - <span class="number">1</span>], minn[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b; <span class="comment">// 修正：变量名与定义一致</span></span><br><span class="line">        ans[i] = <span class="built_in">lookit</span>(a, b);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cout &lt;&lt; ans[i] &lt;&lt; (i == n ? <span class="string">&#x27;\n&#x27;</span> : <span class="string">&#x27; &#x27;</span>); <span class="comment">// 修正：&#x27;\n&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="🧰-ST表通用模板（最小值版｜可直接套用）"><a href="#🧰-ST表通用模板（最小值版｜可直接套用）" class="headerlink" title="🧰 ST表通用模板（最小值版｜可直接套用）"></a>🧰 ST表通用模板（最小值版｜可直接套用）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局变量</span></span><br><span class="line"><span class="type">int</span> a[N], st[N][<span class="number">21</span>], Log[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initLog</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123; Log[<span class="number">1</span>]=<span class="number">0</span>; <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++) Log[i]=Log[i/<span class="number">2</span>]<span class="number">+1</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123; <span class="comment">// 预处理</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++) st[i][<span class="number">0</span>]=a[i];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">20</span>;j++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i+(<span class="number">1</span>&lt;&lt;j)<span class="number">-1</span>&lt;=n;i++)</span><br><span class="line">            st[i][j]=<span class="built_in">min</span>(st[i][j<span class="number">-1</span>], st[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span> </span>&#123; <span class="comment">// 查询[l,r]最小值</span></span><br><span class="line">    <span class="type">int</span> k=Log[r-l<span class="number">+1</span>];</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(st[l][k], st[r-(<span class="number">1</span>&lt;&lt;k)<span class="number">+1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用：initLog(n); build(n); ans=query(L,R);</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>🔁 最大值查询：将 <code>min</code> 改为 <code>max</code> 即可，其他完全一致</p>
-</blockquote>
-<hr>
-<h2 id="📚-易错点总结"><a href="#📚-易错点总结" class="headerlink" title="📚 易错点总结"></a>📚 易错点总结</h2><ol>
-<li><strong>变量含义别搞混</strong>：题目中 <code>m</code> 是数组长度，<code>n</code> 是查询次数，读入顺序要看清</li>
-<li><strong>输出格式要审题</strong>：空格&#x2F;换行&#x2F;末尾空格，细节决定成败</li>
-<li><strong>数组开多大</strong>：<code>N = 1e5+5</code>，第二维 <code>21</code>（因 <code>2^20 &gt; 1e5</code>）</li>
-<li><strong>log预处理</strong>：避免 <code>log2()</code> 浮点误差，推荐 <code>Log[i] = Log[i&gt;&gt;1] + 1</code></li>
-<li><strong>区间覆盖原理</strong>：两段 <code>2^k</code> 区间一定覆盖 <code>[L,R]</code>，重叠不影响最值</li>
-</ol>
-<hr>
-<blockquote>
-<p>💬 <strong>学习建议</strong>：ST表是静态RMQ的利器，理解「倍增预处理 + 区间覆盖」的核心思想后，最大值&#x2F;最小值&#x2F;区间GCD等变种都能快速迁移。建议手写模板3遍，加深记忆！</p>
-</blockquote>
-<p><em>整理时间：2026年 | 适用：洛谷P1816 &#x2F; 静态区间最值查询</em></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">203-ST表与倍增</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/15/template-203-st%E5%80%8D%E5%A2%9E/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1977,15 +2048,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1997,11 +2064,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2009,11 +2076,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2029,11 +2100,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2049,11 +2120,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
