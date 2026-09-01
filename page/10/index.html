@@ -158,6 +158,757 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260512" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/12/20260512/">2026-05-12 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/12/20260512/" class="archive-article-date">
+  	<time datetime="2026-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>基础篇最后两章</li>
+<li>数学作业高代数分</li>
+<li>英语半份</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/12/20260512/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-template-112-基础数学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/12/template-112-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6/">112-基础数学</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/12/template-112-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6/" class="archive-article-date">
+  	<time datetime="2026-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="数学几何"><a href="#数学几何" class="headerlink" title="数学几何"></a>数学几何</h1><hr>
+<h3 id="📖-1-题意概括"><a href="#📖-1-题意概括" class="headerlink" title="📖 1. 题意概括"></a>📖 1. 题意概括</h3><p>给定 $N$ 条直线，满足<strong>任意三条直线不共点</strong>。通过调整直线之间的平行关系，求这些直线在平面上可能形成的<strong>不同交点总数</strong>的种类数（即有多少种可能的交点数量）。</p>
+<ul>
+<li>数据范围：$1 \le N \le 25$</li>
+<li>核心考点：平行线分组思想、递归状态枚举、布尔数组标记可达状态。</li>
+</ul>
+<hr>
+<h3 id="🧠-2-核心解题思路"><a href="#🧠-2-核心解题思路" class="headerlink" title="🧠 2. 核心解题思路"></a>🧠 2. 核心解题思路</h3><h4 id="①-数学模型转化"><a href="#①-数学模型转化" class="headerlink" title="① 数学模型转化"></a>① 数学模型转化</h4><p>交点数仅由直线的<strong>平行关系</strong>决定。若将 $N$ 条直线划分为若干组平行线，设各组大小为 $a_1, a_2, \dots, a_k$（$\sum a_i &#x3D; N$），则总交点数为：<br>$$ \text{交点数} &#x3D; \sum_{1 \le i &lt; j \le k} a_i \times a_j $$<br>因为不同组的直线必相交，同组内直线平行不相交。</p>
+<h4 id="②-递归状态定义"><a href="#②-递归状态定义" class="headerlink" title="② 递归状态定义"></a>② 递归状态定义</h4><p>直接枚举划分方案较繁琐，可采用<strong>增量递归</strong>思想：</p>
+<ul>
+<li>状态参数：<code>g(剩余直线数 n, 当前已累积交点数 k)</code></li>
+<li>转移策略：每次从剩余 <code>n</code> 条直线中拿出 <code>r</code> 条作为<strong>新的一组平行线</strong>（$1 \le r \le n$）。<ul>
+<li>这 <code>r</code> 条平行线必与剩下的 <code>n-r</code> 条直线各产生一个交点，贡献 <code>r * (n-r)</code> 个交点。</li>
+<li>剩下的 <code>n-r</code> 条直线继续递归处理。</li>
+</ul>
+</li>
+<li>边界条件：<code>n == 0</code> 时，说明所有直线已分配完毕，此时累积的交点数 <code>k</code> 是一种合法方案，标记为可达。</li>
+</ul>
+<h4 id="③-复杂度分析"><a href="#③-复杂度分析" class="headerlink" title="③ 复杂度分析"></a>③ 复杂度分析</h4><ul>
+<li>最大交点数：当所有直线两两相交时，交点数最大为 $\binom{25}{2} &#x3D; 300$，布尔数组开 <code>11000</code> 绝对安全。</li>
+<li>搜索树规模：等价于整数划分问题 $P(25)$，状态数极少，递归深度 $\le 25$，运行时间远低于 $1\text{ms}$。</li>
+</ul>
+<hr>
+<h3 id="🧩-3-题型通用模板"><a href="#🧩-3-题型通用模板" class="headerlink" title="🧩 3. 题型通用模板"></a>🧩 3. 题型通用模板</h3><p>此类“枚举所有可能结果值并统计种类数”的问题，可抽象为以下模板：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 定义可达性标记数组（或 dp 表）</span></span><br><span class="line"><span class="type">bool</span> reachable[MAX_VAL];</span><br><span class="line"><span class="type">int</span> max_val = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. DFS 枚举状态</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> state_param, <span class="type">int</span> current_val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (state_param == BASE_CASE) &#123; <span class="comment">// 边界</span></span><br><span class="line">        reachable[current_val] = <span class="literal">true</span>;</span><br><span class="line">        max_val = <span class="built_in">max</span>(max_val, current_val);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 枚举当前决策（如：分组大小、选择数量、状态转移等）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> choice = state_param; choice &gt;= MIN_CHOICE; --choice) &#123;</span><br><span class="line">        <span class="built_in">dfs</span>(state_param - choice, current_val + <span class="built_in">CALC</span>(choice, state_param));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 主函数调用 + 统计结果</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">dfs</span>(initial_state, <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= max_val; ++i) <span class="keyword">if</span> (reachable[i]) ans++;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>适用场景</strong>：求方案数&#x2F;可达值种类、状态空间较小、结果值域连续且范围可控的题目。</p>
+<hr>
+<h3 id="💻-4-原代码精注版（原模原样-逐行详解）"><a href="#💻-4-原代码精注版（原模原样-逐行详解）" class="headerlink" title="💻 4. 原代码精注版（原模原样+逐行详解）"></a>💻 4. 原代码精注版（原模原样+逐行详解）</h3><blockquote>
+<p>以下为保留你提供代码的完整逻辑与结构，仅添加专业注释，方便对照学习。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, a, b;</span><br><span class="line">__int128 dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];  <span class="comment">// 🔥 改为 __int128</span></span><br><span class="line"><span class="type">bool</span> vis[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br><span class="line"></span><br><span class="line"><span class="function">__int128 <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> ra, <span class="type">int</span> rb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ra &lt; <span class="number">0</span> || rb &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (ra == <span class="number">0</span> &amp;&amp; rb == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (u == n) <span class="keyword">return</span> (__int128)(ra + <span class="number">1</span>) * (rb + <span class="number">1</span>);  <span class="comment">// 🔥 强转</span></span><br><span class="line">    <span class="keyword">if</span> (vis[u][ra][rb]) <span class="keyword">return</span> dp[u][ra][rb];</span><br><span class="line">    </span><br><span class="line">    __int128 res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= ra; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= rb; ++j)</span><br><span class="line">            res += <span class="built_in">dfs</span>(u + <span class="number">1</span>, ra - i, rb - j);</span><br><span class="line">    </span><br><span class="line">    vis[u][ra][rb] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> dp[u][ra][rb] = res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 🔥 __int128 输出函数（必需！）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(__int128 x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x == <span class="number">0</span>) &#123; cout &lt;&lt; <span class="number">0</span>; <span class="keyword">return</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) &#123; cout &lt;&lt; <span class="string">&#x27;-&#x27;</span>; x = -x; &#125;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123; s += <span class="built_in">char</span>(<span class="string">&#x27;0&#x27;</span> + x % <span class="number">10</span>); x /= <span class="number">10</span>; &#125;</span><br><span class="line">    <span class="built_in">reverse</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">    cout &lt;&lt; s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="built_in">sizeof</span>(vis));</span><br><span class="line">    </span><br><span class="line">    __int128 ans = <span class="built_in">dfs</span>(<span class="number">1</span>, a, b);</span><br><span class="line">    <span class="built_in">print</span>(ans);  <span class="comment">// 🔥 用自定义函数输出</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🏆-5-教练进阶点拨（ACM-视角）"><a href="#🏆-5-教练进阶点拨（ACM-视角）" class="headerlink" title="🏆 5. 教练进阶点拨（ACM 视角）"></a>🏆 5. 教练进阶点拨（ACM 视角）</h3><ol>
+<li><strong>为什么能这么做？</strong><br>题目保证“无三线共点”，意味着只要直线不平行就必然相交且交点唯一。因此交点数完全由<strong>平行分组方案</strong>决定，几何问题成功降维为组合枚举问题。</li>
+<li><strong>多组查询如何优化？</strong><br>当前代码针对单次查询 $N$。若题目改为多组 $N$ 询问，可改为二维 DP：<code>dp[i][j]</code> 表示 <code>i</code> 条直线能否得到 <code>j</code> 个交点。预处理 $O(N^3)$，查询 $O(1)$。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> dp[<span class="number">30</span>][<span class="number">350</span>] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=N; ++i)</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> r=<span class="number">1</span>; r&lt;=i; ++r)</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;=r*(i-r); ++j) <span class="comment">// 注意实际应反向遍历或开临时数组</span></span><br><span class="line">      <span class="keyword">if</span>(dp[i-r][j]) dp[i][j + r*(i-r)] = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></li>
+<li><strong>避坑指南</strong>  <ul>
+<li>数组大小：务必估算最大值域 $\frac{N(N-1)}{2}$，开大一点防越界。</li>
+<li><code>MAX</code> 的作用：避免最后 <code>for</code> 循环遍历到未访问的内存区域，是常见的常数优化技巧。</li>
+<li>递归顺序 <code>r</code> 从大到小或从小到大不影响正确性，仅改变搜索树遍历顺序。</li>
+</ul>
+</li>
+</ol>
+<h2 id="另一种思路-📋-代码思路解析：高精度-递推DP"><a href="#另一种思路-📋-代码思路解析：高精度-递推DP" class="headerlink" title="另一种思路 📋 代码思路解析：高精度 + 递推DP"></a>另一种思路 📋 代码思路解析：高精度 + 递推DP</h2><p><strong>递推式动态规划 + 手写高精度</strong>：</p>
+<hr>
+<h2 id="🔧-一、核心数据结构：手写高精度"><a href="#🔧-一、核心数据结构：手写高精度" class="headerlink" title="🔧 一、核心数据结构：手写高精度"></a>🔧 一、核心数据结构：手写高精度</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Num</span>&#123;<span class="type">int</span> l,a[<span class="number">40</span>];&#125; ans,dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">成员</th>
+<th align="left">含义</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>l</code></td>
+<td align="left">数字的位数</td>
+<td align="left">如 123 的 <code>l=3</code></td>
+</tr>
+<tr>
+<td align="left"><code>a[40]</code></td>
+<td align="left">每一位数字</td>
+<td align="left"><strong>低位在前</strong>：<code>a[1]=3, a[2]=2, a[3]=1</code></td>
+</tr>
+<tr>
+<td align="left"><code>dp[i][j][k]</code></td>
+<td align="left">高精度DP数组</td>
+<td align="left">存储方案数（可能超大）</td>
+</tr>
+</tbody></table>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Num <span class="keyword">operator</span> + (Num x,Num y)  <span class="comment">// 重载加法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>按位相加 + 进位处理，实现大整数加法</li>
+<li>⚠️ 注释强调”一定要清零”：避免垃圾值影响计算</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>为什么不用 <code>__int128</code>？</strong><br>手写高精度是通用解法，不依赖编译器特性，移植性更强（虽然代码量稍大）。</p>
+</blockquote>
+<hr>
+<h2 id="🧠-二、DP状态设计"><a href="#🧠-二、DP状态设计" class="headerlink" title="🧠 二、DP状态设计"></a>🧠 二、DP状态设计</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j][k] = 前 i 个储存区，恰好使用 j 个 <span class="number">0</span> 和 k 个 <span class="number">1</span> 的方案数</span><br></pre></td></tr></table></figure>
+
+<h3 id="状态转移方程"><a href="#状态转移方程" class="headerlink" title="状态转移方程"></a>状态转移方程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,a,b;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Num</span>&#123;<span class="type">int</span> l,a[<span class="number">40</span>];&#125; ans,dp[<span class="number">55</span>][<span class="number">55</span>][<span class="number">55</span>];</span><br><span class="line">Num <span class="keyword">operator</span> + (Num x,Num y)</span><br><span class="line">&#123;</span><br><span class="line">	Num ret;</span><br><span class="line">	ret.l = <span class="built_in">max</span>(x.l,y.l);</span><br><span class="line">	<span class="built_in">memset</span>(ret.a,<span class="number">0</span>,<span class="built_in">sizeof</span>(ret.a));</span><br><span class="line">        <span class="comment">//一定要清零！！！</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= ret.l;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ret.a[i] += x.a[i] + y.a[i];</span><br><span class="line">		ret.a[i + <span class="number">1</span>] += ret.a[i] / <span class="number">10</span>;</span><br><span class="line">		ret.a[i] %= <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ret.a[ret.l + <span class="number">1</span>]) ret.l++;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(Num x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = x.l;i &gt;= <span class="number">1</span>;i--) <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,x.a[i]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;a,&amp;b);</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].l = dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= a;j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">0</span>;k &lt;= b;k++)</span><br><span class="line">				<span class="keyword">for</span>(<span class="type">int</span> s1 = <span class="number">0</span>;s1 &lt;= j;s1++)</span><br><span class="line">					<span class="keyword">for</span>(<span class="type">int</span> s2 = <span class="number">0</span>;s2 &lt;= k;s2++)</span><br><span class="line">						dp[i][j][k] = dp[i][j][k] + dp[i - <span class="number">1</span>][s1][s2];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= a;i++) <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= b;j++) ans = ans + dp[n][i][j];</span><br><span class="line">	<span class="built_in">print</span>(ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="🔄-转移逻辑图解"><a href="#🔄-转移逻辑图解" class="headerlink" title="🔄 转移逻辑图解"></a>🔄 转移逻辑图解</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前 i-1 个区用了 (s1个0, s2个1)  →  第 i 个区放 (j-s1个0, k-s2个1)</span><br><span class="line">                              ↓</span><br><span class="line">              所有合法的 (s1,s2) 累加 → dp[i][j][k]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>💡 本质：第 <code>i</code> 个区可以放任意数量的 <code>0</code> 和 <code>1</code>（只要不超过剩余量），枚举所有可能的前驱状态累加。</p>
+</blockquote>
+<hr>
+<h2 id="🎯-三、初始状态-答案统计"><a href="#🎯-三、初始状态-答案统计" class="headerlink" title="🎯 三、初始状态 &amp; 答案统计"></a>🎯 三、初始状态 &amp; 答案统计</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].l = dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>].a[<span class="number">1</span>] = <span class="number">1</span>;  <span class="comment">// 0个区，用0个信号，方案数=1（空方案）</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后累加所有&quot;不超过 a 个 0 且不超过 b 个 1&quot;的方案</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= a;i++) </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt;= b;j++) </span><br><span class="line">        ans = ans + dp[n][i][j];</span><br></pre></td></tr></table></figure>
+
+<h4 id="❓-为什么最后还要累加？"><a href="#❓-为什么最后还要累加？" class="headerlink" title="❓ 为什么最后还要累加？"></a>❓ 为什么最后还要累加？</h4><p>因为题目要求：<strong>信号可以不用全部储存</strong>  </p>
+<ul>
+<li><code>dp[n][i][j]</code> 是”恰好使用 <code>i</code> 个0 + <code>j</code> 个1”  </li>
+<li>答案需要累加所有 <code>0≤i≤a, 0≤j≤b</code> 的情况</li>
+</ul>
+<hr>
+<h2 id="📊-四、复杂度分析"><a href="#📊-四、复杂度分析" class="headerlink" title="📊 四、复杂度分析"></a>📊 四、复杂度分析</h2><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">复杂度</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">时间</td>
+<td align="left">$O(n \cdot a^2 \cdot b^2)$</td>
+<td align="left">5层循环，最坏 $50^5 &#x3D; 3.1 \times 10^8$</td>
+</tr>
+<tr>
+<td align="left">空间</td>
+<td align="left">$O(n \cdot a \cdot b)$</td>
+<td align="left"><code>dp[55][55][55]</code> × 高精度结构体</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 理论复杂度偏高，但实际能过因为：</p>
+<ol>
+<li>题目保证 <code>n+a≤50, n+b≤50</code>，有效状态远少于 $50^3$</li>
+<li>高精度加法常数小（最多40位）</li>
+<li>编译器优化 + 数据不强</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="🔄-五、与之前DFS解法的对比"><a href="#🔄-五、与之前DFS解法的对比" class="headerlink" title="🔄 五、与之前DFS解法的对比"></a>🔄 五、与之前DFS解法的对比</h2><table>
+<thead>
+<tr>
+<th align="left">对比项</th>
+<th align="left">本题代码（递推DP）</th>
+<th align="left">之前代码（记忆化搜索）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>实现方式</strong></td>
+<td align="left">自底向上递推</td>
+<td align="left">自顶向下递归+记忆化</td>
+</tr>
+<tr>
+<td align="left"><strong>状态定义</strong></td>
+<td align="left"><code>dp[i][j][k]</code> &#x3D; 恰好使用</td>
+<td align="left"><code>dfs(u,ra,rb)</code> &#x3D; 剩余可用</td>
+</tr>
+<tr>
+<td align="left"><strong>高精度处理</strong></td>
+<td align="left">手写 <code>Num</code> 结构体</td>
+<td align="left"><code>__int128</code>（依赖编译器）</td>
+</tr>
+<tr>
+<td align="left"><strong>答案统计</strong></td>
+<td align="left">最后累加所有 <code>≤a,≤b</code></td>
+<td align="left">递归中自然处理”可不用完”</td>
+</tr>
+<tr>
+<td align="left"><strong>代码长度</strong></td>
+<td align="left">较长（需重载运算符）</td>
+<td align="left">较短（逻辑更直观）</td>
+</tr>
+<tr>
+<td align="left"><strong>移植性</strong></td>
+<td align="left">⭐⭐⭐⭐⭐ 通用</td>
+<td align="left">⭐⭐⭐ 依赖 <code>__int128</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-六、优化建议（如果追求极致）"><a href="#💡-六、优化建议（如果追求极致）" class="headerlink" title="💡 六、优化建议（如果追求极致）"></a>💡 六、优化建议（如果追求极致）</h2><h3 id="1-降维优化：利用独立性拆分"><a href="#1-降维优化：利用独立性拆分" class="headerlink" title="1. 降维优化：利用独立性拆分"></a>1. 降维优化：利用独立性拆分</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 和 1 独立，分别计算后相乘</span></span><br><span class="line">Num calc0 = 计算_分配_0_的方案数(a, n);</span><br><span class="line">Num calc1 = 计算_分配_1_的方案数(b, n);</span><br><span class="line">ans = calc0 * calc1;  <span class="comment">// 需实现高精度乘法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>状态从三维 → 一维，复杂度降至 $O(n \cdot a + n \cdot b)$</li>
+</ul>
+<h3 id="2-滚动数组优化空间"><a href="#2-滚动数组优化空间" class="headerlink" title="2. 滚动数组优化空间"></a>2. 滚动数组优化空间</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Num dp[<span class="number">2</span>][<span class="number">55</span>][<span class="number">55</span>];  <span class="comment">// 只用两层，交替更新</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>空间从 $55^3$ → $2 \times 55^2$，节省96%内存</li>
+</ul>
+<h3 id="3-组合数公式-高精度（终极优化）"><a href="#3-组合数公式-高精度（终极优化）" class="headerlink" title="3. 组合数公式 + 高精度（终极优化）"></a>3. 组合数公式 + 高精度（终极优化）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 答案 = C(a+n, a) × C(b+n, b)</span></span><br><span class="line"><span class="comment">// 用高精度实现组合数计算和乘法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间 $O(a+b)$，空间 $O(1)$，代码最简</li>
+</ul>
+<hr>
+<h2 id="🏆-教练点评"><a href="#🏆-教练点评" class="headerlink" title="🏆 教练点评"></a>🏆 教练点评</h2><p>✅ <strong>优点</strong>：</p>
+<ol>
+<li>手写高精度，彻底避免溢出问题，稳健可靠</li>
+<li>递推逻辑清晰，状态转移无歧义</li>
+<li>边界处理严谨（初始状态 + 最后累加）</li>
+</ol>
+<p>⚠️ <strong>注意点</strong>：</p>
+<ol>
+<li>高精度加法必须清零 <code>ret.a</code>，否则会有垃圾值</li>
+<li>5层循环理论复杂度高，依赖题目数据范围才能过</li>
+<li>如果 <code>a,b</code> 更大（如100+），需要改用组合数公式</li>
+</ol>
+<blockquote>
+<p>🎯 <strong>学习建议</strong>：<br>这位同学的代码是<strong>工程思维</strong>的体现：宁可代码长一点，也要保证正确性和通用性。在正式比赛&#x2F;工程中，这种”稳”比”快”更重要！</p>
+</blockquote>
+<h1 id="厉害的DFS"><a href="#厉害的DFS" class="headerlink" title="厉害的DFS"></a>厉害的DFS</h1><p>你好！作为ACM竞赛教练，我将严格按照你的要求，为你梳理该题的题意、思路、模板代码，并给出金牌级别的实战建议。</p>
+<h3 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h3><p>将所有由小写字母组成、<strong>字符严格递增</strong>（如 <code>ab</code> 合法，<code>ba</code> 不合法）且<strong>长度不超过 $6$</strong> 的单词，按字典序从小到大排列成一个序列。给定一个单词，求它在该序列中的 <strong>1-based 排名</strong>。若单词不满足严格递增规则或长度 $&gt;6$，则输出 $0$。</p>
+<hr>
+<h3 id="💡-解题思路"><a href="#💡-解题思路" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h3><p>本题属于典型的 <strong>字典序计数 &#x2F; 枚举映射</strong> 题型。数据规模极小，所有合法单词总数仅为 $\sum_{k&#x3D;1}^{6} \binom{26}{k} &#x3D; 313,511$，因此预处理完全可行。</p>
+<h4 id="1-预处理-map-法（你提供的思路）"><a href="#1-预处理-map-法（你提供的思路）" class="headerlink" title="1. 预处理 + map 法（你提供的思路）"></a>1. 预处理 + <code>map</code> 法（你提供的思路）</h4><ul>
+<li><strong>生成策略</strong>：利用 DFS 按长度 $1 \sim 6$ 枚举。内层循环从 <code>上一位字符 + 1</code> 开始到 <code>&#39;z&#39;</code>，天然满足 <strong>严格递增</strong> 且按 <strong>字典序</strong> 生成。</li>
+<li><strong>映射策略</strong>：使用全局计数器 <code>cnt</code>，每生成一个合法单词就 <code>++cnt</code> 并存入 <code>map</code>。</li>
+<li><strong>查询策略</strong>：<code>std::map</code> 的 <code>[]</code> 运算符具有“访问不存在的键时会自动插入并返回默认值 <code>0</code>”的特性，完美契合题目“非法单词输出 $0$”的要求，无需额外判错。</li>
+</ul>
+<h4 id="2-组合数学法（金牌推荐进阶）"><a href="#2-组合数学法（金牌推荐进阶）" class="headerlink" title="2. 组合数学法（金牌推荐进阶）"></a>2. 组合数学法（金牌推荐进阶）</h4><p>若题目改为多组查询，<code>map</code> 的 $O(\log N)$ 查询和较大常数可能成为瓶颈。可直接用组合数公式 $O(L)$ 计算：</p>
+<ul>
+<li>先累加所有长度小于当前串的合法词总数：$\sum_{i&#x3D;1}^{len-1} \binom{26}{i}$</li>
+<li>逐位计算：对于第 $i$ 位字符 $c$，枚举所有可填的更小合法字符 $x$（范围：<code>上一位+1</code> ~ <code>c-1</code>），累加剩余位数的组合数 $\binom{26 - (x-‘a’+1)}{剩余长度}$</li>
+<li>最后结果 $+1$ 即为答案。空间 $O(1)$，无需存储。</li>
+</ul>
+<hr>
+<h3 id="💻-注释后的原模原样代码"><a href="#💻-注释后的原模原样代码" class="headerlink" title="💻 注释后的原模原样代码"></a>💻 注释后的原模原样代码</h3><p>严格保持你提供的代码结构，仅补充必要头文件与逐行注释，方便复习与直接提交。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span>   <span class="comment">// 标准规范建议补充此头文件</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;                <span class="comment">// 全局计数器，记录当前生成到第几个合法单词</span></span><br><span class="line">map&lt;string, <span class="type">int</span>&gt; M;         <span class="comment">// 映射表：单词 -&gt; 字典序排名</span></span><br><span class="line">string now, ask;            <span class="comment">// now用于DFS拼接当前单词，ask用于读入查询</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS 生成严格递增的单词</span></span><br><span class="line"><span class="comment">// l : 目标单词长度</span></span><br><span class="line"><span class="comment">// k : 当前正在填充第几位 (1-based)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(<span class="type">const</span> <span class="type">int</span> l, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 递归边界：已填完 l 位，说明 now 是一个合法单词</span></span><br><span class="line">    <span class="keyword">if</span> (k &gt; l) &#123; </span><br><span class="line">        M[now] = ++cnt;     <span class="comment">// 记录排名（++cnt保证从1开始）</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 枚举当前位可填的字符</span></span><br><span class="line">    <span class="comment">// 若为第1位，从 &#x27;a&#x27; 开始；否则必须大于前一位字符(now[k-2])</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> i = (k == <span class="number">1</span> ? <span class="string">&#x27;a&#x27;</span> : now[k - <span class="number">2</span>] + <span class="number">1</span>); i &lt;= <span class="string">&#x27;z&#x27;</span>; i++) &#123;</span><br><span class="line">        now[k - <span class="number">1</span>] = i;     <span class="comment">// 填入当前字符</span></span><br><span class="line">        <span class="built_in">DFS</span>(l, k + <span class="number">1</span>);      <span class="comment">// 递归填充下一位</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 预处理所有长度 1~6 的合法单词</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> len = <span class="number">1</span>; len &lt;= <span class="number">6</span>; len++) &#123;</span><br><span class="line">        now.<span class="built_in">clear</span>();        <span class="comment">// 清空上一长度的残留</span></span><br><span class="line">        now.<span class="built_in">resize</span>(len);    <span class="comment">// 预分配长度，避免DFS中频繁realloc</span></span><br><span class="line">        <span class="built_in">DFS</span>(len, <span class="number">1</span>);        <span class="comment">// 从第1位开始生成</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; ask;</span><br><span class="line">    <span class="comment">// map的[]运算符特性：若ask不存在，会自动插入&#123;ask, 0&#125;并返回0</span></span><br><span class="line">    <span class="comment">// 恰好满足“非法单词输出0”的题目要求，代码极简</span></span><br><span class="line">    cout &lt;&lt; M[ask] &lt;&lt; endl; </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🏆-金牌教练点拨"><a href="#🏆-金牌教练点拨" class="headerlink" title="🏆 金牌教练点拨"></a>🏆 金牌教练点拨</h3><table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心考点</strong></td>
+<td align="left">字典序生成技巧、DFS状态设计、STL容器默认行为、组合计数思想</td>
+</tr>
+<tr>
+<td align="left"><strong>时间复杂度</strong></td>
+<td align="left">预处理 $O(\sum \binom{26}{k}) \approx 3.1 \times 10^5$，查询 $O(L \log N)$，总运行时间 $&lt; 50\text{ms}$，远低于 $1\text{s}$ 限制</td>
+</tr>
+<tr>
+<td align="left"><strong>空间复杂度</strong></td>
+<td align="left">$O(\text{合法词总数} \times L) \approx 2\text{MB}$，内存安全</td>
+</tr>
+<tr>
+<td align="left"><strong>易错陷阱</strong></td>
+<td align="left">1. 忘记 <code>now.resize()</code> 导致越界<br>2. 误用 <code>now[k-1]</code> 比较上一位（应为 <code>now[k-2]</code>）<br>3. 未处理非法输入（本题借 <code>map</code> 特性巧妙避开）</td>
+</tr>
+</tbody></table>
+<h1 id="埃氏筛"><a href="#埃氏筛" class="headerlink" title="埃氏筛"></a>埃氏筛</h1><h3 id="📖-题意概括-1"><a href="#📖-题意概括-1" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h3><p>给定上界 $N$，预处理 $1 \sim N$ 范围内的所有素数。随后进行 $Q$ 次询问，每次给出 $k$，要求输出<strong>第 $k$ 个素数</strong>。</p>
+<hr>
+<h3 id="💡-解题思路-1"><a href="#💡-解题思路-1" class="headerlink" title="💡 解题思路"></a>💡 解题思路</h3><ol>
+<li><strong>预处理筛法</strong>：使用<strong>埃氏筛法</strong>，遍历 $2 \sim \sqrt{N}$，将每个素数的倍数标记为合数。</li>
+<li><strong>顺序存储</strong>：遍历 $1 \sim N$，将未被标记的数（即素数）按从小到大的顺序存入数组 <code>b[]</code>，下标从 <code>1</code> 开始。</li>
+<li><strong>快速查询</strong>：因素数已有序存储，每次询问直接 $O(1)$ 输出 <code>b[k]</code>。</li>
+<li><strong>复杂度</strong>：预处理 $O(N \log \log N)$，单次查询 $O(1)$，完美适配 $N&#x3D;10^7$ 级别数据。</li>
+</ol>
+<hr>
+<h3 id="🧩-题型模板（素数预处理-第K素数查询）"><a href="#🧩-题型模板（素数预处理-第K素数查询）" class="headerlink" title="🧩 题型模板（素数预处理 + 第K素数查询）"></a>🧩 题型模板（素数预处理 + 第K素数查询）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">1e7</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> primes[MAXN], p_cnt;</span><br><span class="line"><span class="type">bool</span> is_prime[MAXN]; <span class="comment">// 0表示素数，1表示合数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sieve</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(is_prime, <span class="number">0</span>, <span class="built_in">sizeof</span>(is_prime));</span><br><span class="line">    is_prime[<span class="number">0</span>] = is_prime[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i * i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (!is_prime[i])</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i * <span class="number">2</span>; j &lt;= n; j += i)</span><br><span class="line">                is_prime[j] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (!is_prime[i]) primes[++p_cnt] = i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 查询第k个素数直接输出：cout &lt;&lt; primes[k] &lt;&lt; &#x27;\n&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="📝-注释后的原代码（原模原样）"><a href="#📝-注释后的原代码（原模原样）" class="headerlink" title="📝 注释后的原代码（原模原样）"></a>📝 注释后的原代码（原模原样）</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxn 10000010</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> qq;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long <span class="comment">// 全局替换int为long long，本题非必须但可防潜在溢出</span></span></span><br><span class="line"><span class="type">int</span> n,q;</span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>; <span class="comment">// 记录已找到的素数个数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;<span class="built_in">a</span>(n + <span class="number">10</span>,<span class="number">0</span>); <span class="comment">// a[i]=0表示素数，1表示合数</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">b</span>(maxn,<span class="number">0</span>);    <span class="comment">// 存储素数序列，下标从1开始</span></span><br><span class="line">    a[<span class="number">1</span>] = a[<span class="number">0</span>] = <span class="number">1</span>;         <span class="comment">// 0和1不是素数</span></span><br><span class="line">    <span class="comment">// 埃氏筛核心：只需枚举到 sqrt(n)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>;i * i &lt;= n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] == <span class="number">0</span>)        <span class="comment">// 若i未被标记，则为素数</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = i * <span class="number">2</span>;j &lt;= n;j += i)&#123; <span class="comment">// 标记i的所有倍数为合数</span></span><br><span class="line">                a[j] = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将1~n内的素数按顺序存入b数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] == <span class="number">0</span>)&#123;</span><br><span class="line">            b[++cnt] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cin&gt;&gt;qq; <span class="comment">// 读入询问次数</span></span><br><span class="line">    <span class="keyword">while</span>(qq--)&#123;</span><br><span class="line">       cin&gt;&gt;q;</span><br><span class="line">       cout&lt;&lt;b[q]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>; <span class="comment">// O(1)直接输出第q个素数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🎯-教练点拨"><a href="#🎯-教练点拨" class="headerlink" title="🎯 教练点拨"></a>🎯 教练点拨</h3><ul>
+<li><code>#define int long long</code> 在本题中非必需（$10^7$ 以内最大素数仍可用 <code>int</code> 存储），日常建议仅在数据超 $2\times10^9$ 或涉及乘积时开启，以节省内存与常数时间。</li>
+<li>若题目时限极紧或 $N$ 升级至 $10^8$，建议将埃氏筛替换为<strong>线性筛（欧拉筛）</strong>，预处理复杂度可优化至严格 $O(N)$。</li>
+</ul>
+<h1 id="分式加法"><a href="#分式加法" class="headerlink" title="分式加法"></a>分式加法</h1><h1 id="📚-P1572-计算分数-ACM金牌教练精讲"><a href="#📚-P1572-计算分数-ACM金牌教练精讲" class="headerlink" title="📚 P1572 计算分数 - ACM金牌教练精讲"></a>📚 P1572 计算分数 - ACM金牌教练精讲</h1><blockquote>
+<p>👨‍🏫 同学你好！这道题是<strong>分数表达式求值</strong>的经典入门题，考察字符串解析 + 分数运算 + 约分技巧。下面我带你系统梳理！</p>
+</blockquote>
+<hr>
+<h2 id="🎯-一、题意概括"><a href="#🎯-一、题意概括" class="headerlink" title="🎯 一、题意概括"></a>🎯 一、题意概括</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：一个只含数字、+、-、/ 的分数表达式（/是分数线）</span><br><span class="line">      例如：2/1+1/3-1/4</span><br><span class="line">      </span><br><span class="line">输出：计算结果，要求：</span><br><span class="line">      • 结果为整数 → 输出整数（如 2）</span><br><span class="line">      • 结果为分数 → 输出最简分数（如 25/12）</span><br><span class="line">      • 负数符号统一放在分子前（如 -3/4）</span><br><span class="line">      </span><br><span class="line">约束：</span><br><span class="line">      • 所有数都是分数形式出现（2 写成 2/1）</span><br><span class="line">      • 中间结果和最终结果都在 32 位 int 范围内</span><br><span class="line">      • 输入分数不一定是最简形式</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="💡-二、解题思路（三步法）"><a href="#💡-二、解题思路（三步法）" class="headerlink" title="💡 二、解题思路（三步法）"></a>💡 二、解题思路（三步法）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────┐</span><br><span class="line">│  ① 解析表达式 → 逐个读取分数和运算符  │</span><br><span class="line">│  ② 分数运算   → 通分→加减→约分       │</span><br><span class="line">│  ③ 格式化输出 → 整数/最简分数/负号处理│</span><br><span class="line">└─────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="🔑-核心知识点"><a href="#🔑-核心知识点" class="headerlink" title="🔑 核心知识点"></a>🔑 核心知识点</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>公式&#x2F;方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最大公约数</td>
+<td><code>gcd(a,b) = gcd(b, a%b)</code></td>
+<td>约分用</td>
+</tr>
+<tr>
+<td>最小公倍数</td>
+<td><code>lcm(a,b) = a/gcd(a,b)*b</code></td>
+<td>通分用</td>
+</tr>
+<tr>
+<td>分数加法</td>
+<td><code>a/b + c/d = (a*d + c*b)/(b*d)</code></td>
+<td>基础运算</td>
+</tr>
+<tr>
+<td>约分</td>
+<td>分子分母同除以 <code>gcd(分子,分母)</code></td>
+<td>保持最简</td>
+</tr>
+</tbody></table>
+<h3 id="⚠️-易错点提醒"><a href="#⚠️-易错点提醒" class="headerlink" title="⚠️ 易错点提醒"></a>⚠️ 易错点提醒</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❌ 错误：先乘后除可能溢出</span></span><br><span class="line">lcm = a * b / <span class="built_in">gcd</span>(a, b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ 正确：先除后乘避免溢出  </span></span><br><span class="line">lcm = a / <span class="built_in">gcd</span>(a, b) * b;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 错误：负号处理混乱</span></span><br><span class="line"><span class="comment">// ✅ 正确：统一让分母为正，负号只出现在分子</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ❌ 错误：忘记每次运算后约分（中间结果可能很大）</span></span><br><span class="line"><span class="comment">// ✅ 正确：每次加减后立即 gcd 约分</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧩-三、通用模板代码（分数表达式求值）"><a href="#🧩-三、通用模板代码（分数表达式求值）" class="headerlink" title="🧩 三、通用模板代码（分数表达式求值）"></a>🧩 三、通用模板代码（分数表达式求值）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ============ 分数运算模板 ============</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span>  <span class="comment">// for abs</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long  <span class="comment">// 防止中间结果溢出</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求最大公约数（辗转相除法）</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> b ? <span class="built_in">gcd</span>(b, a % b) : a; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求最小公倍数（先除后乘防溢出）</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lcm</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> a / <span class="built_in">gcd</span>(a, b) * b; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符号函数：正数返回1，负数返回-1</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sgn</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 补充0的情况</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// fz/fm 维护当前累计结果（初始为0/1）</span></span><br><span class="line">    <span class="type">int</span> fz = <span class="number">0</span>, fm = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> a, b;  <span class="comment">// 当前读入的分数 a/b</span></span><br><span class="line">    <span class="type">char</span> op, slash;  <span class="comment">// op: +或-, slash: 分数线&#x27;/&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 读入第一个分数（可能带负号）</span></span><br><span class="line">    cin &gt;&gt; a &gt;&gt; slash &gt;&gt; b;</span><br><span class="line">    fz = a, fm = b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 循环处理后续：运算符 + 分数</span></span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; op &gt;&gt; a &gt;&gt; slash &gt;&gt; b) &#123;</span><br><span class="line">        <span class="comment">// ① 通分：求当前分母与新分母的最小公倍数</span></span><br><span class="line">        <span class="type">int</span> common = <span class="built_in">lcm</span>(fm, b);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ② 分子按通分比例放大</span></span><br><span class="line">        fz = fz * (common / fm);</span><br><span class="line">        <span class="type">int</span> new_a = a * (common / b);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ③ 根据运算符执行加减</span></span><br><span class="line">        <span class="keyword">if</span> (op == <span class="string">&#x27;+&#x27;</span>) fz += new_a;</span><br><span class="line">        <span class="keyword">else</span> fz -= new_a;  <span class="comment">// op == &#x27;-&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ④ 更新分母并立即约分（关键！防溢出+保最简）</span></span><br><span class="line">        fm = common;</span><br><span class="line">        <span class="type">int</span> g = <span class="built_in">gcd</span>(<span class="built_in">abs</span>(fz), <span class="built_in">abs</span>(fm));  <span class="comment">// 注意用abs</span></span><br><span class="line">        fz /= g, fm /= g;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 最终再约分一次（保险）</span></span><br><span class="line">    <span class="type">int</span> g = <span class="built_in">gcd</span>(<span class="built_in">abs</span>(fz), <span class="built_in">abs</span>(fm));</span><br><span class="line">    fz /= g, fm /= g;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ============ 格式化输出 ============</span></span><br><span class="line">    <span class="comment">// 情况1：结果为0</span></span><br><span class="line">    <span class="keyword">if</span> (fz == <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 情况2：结果为整数（分母为1或分子能被分母整除）</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (fm == <span class="number">1</span> || fz % fm == <span class="number">0</span>) &#123;</span><br><span class="line">        cout &lt;&lt; fz / fm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 情况3：结果为分数</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 统一让分母为正，负号放分子</span></span><br><span class="line">        <span class="keyword">if</span> (fm &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            fz = -fz;</span><br><span class="line">            fm = -fm;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果结果为负，输出负号+正分数</span></span><br><span class="line">        <span class="keyword">if</span> (fz &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt; <span class="built_in">abs</span>(fz) &lt;&lt; <span class="string">&quot;/&quot;</span> &lt;&lt; fm;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; fz &lt;&lt; <span class="string">&quot;/&quot;</span> &lt;&lt; fm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-四、原题代码（带详细注释版）"><a href="#📝-四、原题代码（带详细注释版）" class="headerlink" title="📝 四、原题代码（带详细注释版）"></a>📝 四、原题代码（带详细注释版）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long  <span class="comment">// 【关键】防止中间计算溢出32位</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> b ? <span class="built_in">gcd</span>(b, a % b) : a; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求最小公倍数：先除后乘避免溢出！</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lcm</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> a / <span class="built_in">gcd</span>(a, b) * b; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 符号函数：判断正负</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sgn</span><span class="params">(<span class="type">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">// 原题漏了return 0，建议补上</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// fz/fm: 当前累计结果的分子/分母</span></span><br><span class="line">    <span class="type">int</span> fz = <span class="number">0</span>, fm = <span class="number">0</span>; </span><br><span class="line">    <span class="type">int</span> a, b;      <span class="comment">// 临时存储读入的分数 a/b</span></span><br><span class="line">    <span class="type">char</span> ch;       <span class="comment">// 存储分数线 &#x27;/&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 【技巧】cin自动跳过空白，按格式读入 &quot;数字/数字&quot;</span></span><br><span class="line">    cin &gt;&gt; a &gt;&gt; ch &gt;&gt; b, fz = a, fm = b;  <span class="comment">// 初始化第一个分数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 循环读入：运算符(隐含在cin中) + 分数</span></span><br><span class="line">    <span class="comment">// cin &gt;&gt; a 会先读入 + 或 - 作为a的符号！这是本题关键技巧</span></span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; a &gt;&gt; ch &gt;&gt; b) &#123;</span><br><span class="line">        <span class="comment">// ① 通分：求当前分母fm和新分母b的最小公倍数</span></span><br><span class="line">        <span class="type">int</span> nowb = <span class="built_in">lcm</span>(fm, b);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ② 新分数分子按通分比例放大</span></span><br><span class="line">        a = a * (nowb / b);</span><br><span class="line">        b = nowb;  <span class="comment">// 新分数分母变为公分母</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ③ 当前结果分子也按相同比例放大</span></span><br><span class="line">        fz = fz * (nowb / fm);</span><br><span class="line">        fm = nowb;  <span class="comment">// 当前结果分母更新为公分母</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ④ 分子相加（注意：a已带符号，cin读入-1/3时a=-1）</span></span><br><span class="line">        fz += a;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ⑤ 立即约分！防止中间结果爆炸（题目保证不超int）</span></span><br><span class="line">        <span class="type">int</span> t = <span class="built_in">gcd</span>(fz, fm);</span><br><span class="line">        fz /= t, fm /= t;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 最终再约分一次（保险措施）</span></span><br><span class="line">    <span class="type">int</span> t = <span class="built_in">gcd</span>(fz, fm);</span><br><span class="line">    fz /= t, fm /= t;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ============ 输出处理 ============</span></span><br><span class="line">    <span class="comment">// 情况1：结果是整数（分母为1 或 分子能被分母整除）</span></span><br><span class="line">    <span class="keyword">if</span> (fz % fm == <span class="number">0</span>) &#123;  <span class="comment">// 也可写 if(fm == 1)</span></span><br><span class="line">        cout &lt;&lt; fz / fm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 情况2：结果为0（其实上面已处理，但保留更健壮）</span></span><br><span class="line">        <span class="keyword">if</span> (fz == <span class="number">0</span>) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 情况3：分数，处理负号：异号时手动输出负号</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">sgn</span>(fz) == -<span class="built_in">sgn</span>(fm)) &#123;</span><br><span class="line">                cout &lt;&lt; <span class="string">&quot;-&quot;</span> &lt;&lt; <span class="built_in">abs</span>(fz) &lt;&lt; <span class="string">&quot;/&quot;</span> &lt;&lt; <span class="built_in">abs</span>(fm);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 同号直接输出（保证都是正或都是负）</span></span><br><span class="line">                cout &lt;&lt; fz &lt;&lt; <span class="string">&quot;/&quot;</span> &lt;&lt; fm;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="数论-质因数视角看整除"><a href="#数论-质因数视角看整除" class="headerlink" title="数论+质因数视角看整除"></a>数论+质因数视角看整除</h1><h1 id="🎯-P1069-NOIP-2009-普及组-细胞分裂-题解精讲"><a href="#🎯-P1069-NOIP-2009-普及组-细胞分裂-题解精讲" class="headerlink" title="🎯 P1069 [NOIP 2009 普及组] 细胞分裂 - 题解精讲"></a>🎯 P1069 [NOIP 2009 普及组] 细胞分裂 - 题解精讲</h1><blockquote>
+<p>🏆 ACM金牌教练带你系统掌握本题核心思路与模板</p>
+</blockquote>
+<hr>
+<h2 id="📋-一、题意概括"><a href="#📋-一、题意概括" class="headerlink" title="📋 一、题意概括"></a>📋 一、题意概括</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">🔹 有 N 种细胞，第 i 种每秒分裂成 Si 个（即 t 秒后有 Si^t 个）</span><br><span class="line">🔹 需要将细胞总数平均分入 M 个试管，M = m1^m2（M可能极大）</span><br><span class="line">🔹 求：选择哪种细胞，能让「细胞总数首次能被M整除」的时刻最早？</span><br><span class="line">🔹 若都无法满足，输出 -1</span><br></pre></td></tr></table></figure>
+
+<p><strong>核心转化</strong>：求最小 t，使得 <code>Si^t % (m1^m2) == 0</code></p>
+<hr>
+<h2 id="💡-二、解题思路（数论-质因数分解）"><a href="#💡-二、解题思路（数论-质因数分解）" class="headerlink" title="💡 二、解题思路（数论+质因数分解）"></a>💡 二、解题思路（数论+质因数分解）</h2><h3 id="🧩-关键观察"><a href="#🧩-关键观察" class="headerlink" title="🧩 关键观察"></a>🧩 关键观察</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">若 M = m1^m2 = (p1^a1 × p2^a2 × ... × pk^ak)^m2 </span><br><span class="line">            = p1^(a1×m2) × p2^(a2×m2) × ... × pk^(ak×m2)</span><br><span class="line"></span><br><span class="line">要使 Si^t 能被 M 整除，必须满足：</span><br><span class="line">对 M 的每个质因数 pj，Si^t 中 pj 的指数 ≥ aj×m2</span><br><span class="line"></span><br><span class="line">设 Si 中 pj 的指数为 bj，则需：t × bj ≥ aj×m2</span><br><span class="line">→ t ≥ ceil(aj×m2 / bj)</span><br></pre></td></tr></table></figure>
+
+<h3 id="🔄-算法流程"><a href="#🔄-算法流程" class="headerlink" title="🔄 算法流程"></a>🔄 算法流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1️⃣ 特判：m1==1 → M=1，任何数都能整除，直接输出0</span><br><span class="line"></span><br><span class="line">2️⃣ 分解 m1 的质因数，记录每个质因数 pj 及其指数 aj×m2</span><br><span class="line"></span><br><span class="line">3️⃣ 枚举每种细胞 Si：</span><br><span class="line">   ├─ 用 m1 的质因数去&quot;部分分解&quot; Si（无需完全分解！）</span><br><span class="line">   ├─ 若某个 pj 在 Si 中指数为0 → 该细胞永远不合法，跳过</span><br><span class="line">   ├─ 否则计算该质因数所需时间：ceil(aj×m2 / bj)</span><br><span class="line">   ├─ 取所有质因数所需时间的最大值，作为该细胞的答案</span><br><span class="line">   └─ 用所有细胞的最小答案更新全局答案</span><br><span class="line"></span><br><span class="line">4️⃣ 输出答案（无解则输出-1）</span><br></pre></td></tr></table></figure>
+
+<h3 id="⚡-优化技巧"><a href="#⚡-优化技巧" class="headerlink" title="⚡ 优化技巧"></a>⚡ 优化技巧</h3><table>
+<thead>
+<tr>
+<th>技巧</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🔹 部分分解</td>
+<td>只需用 m1 的质因数去分解 Si，其他质因数无关紧要</td>
+</tr>
+<tr>
+<td>🔹 向上取整</td>
+<td><code>ceil(a/b) = (a+b-1)/b</code> 或 <code>ceil(a*1.0/b)</code></td>
+</tr>
+<tr>
+<td>🔹 提前剪枝</td>
+<td>发现某个质因数缺失立即跳过该细胞</td>
+</tr>
+<tr>
+<td>🔹 特殊处理</td>
+<td>m1为素数时可直接记录，避免重复分解</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧱-三、题型模板总结"><a href="#🧱-三、题型模板总结" class="headerlink" title="🧱 三、题型模板总结"></a>🧱 三、题型模板总结</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 【质因数分解 + 指数匹配 + 最小时间计算】通用模板框架</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 分解目标数 M 的质因数（带指数）</span></span><br><span class="line">map&lt;LL, LL&gt; factor_M;  <span class="comment">// 质因数 → 所需总指数</span></span><br><span class="line">vector&lt;LL&gt; primes;      <span class="comment">// 质因数列表</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">decompose</span><span class="params">(LL x, LL power)</span> </span>&#123;  <span class="comment">// power 是 m2</span></span><br><span class="line">    <span class="keyword">for</span>(LL i = <span class="number">2</span>; i * i &lt;= x; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x % i) <span class="keyword">continue</span>;</span><br><span class="line">        primes.<span class="built_in">push_back</span>(i);</span><br><span class="line">        LL cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x % i == <span class="number">0</span>) &#123; cnt++; x /= i; &#125;</span><br><span class="line">        factor_M[i] = cnt * power;  <span class="comment">// 关键：指数要乘 m2！</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">1</span>) &#123;  <span class="comment">// 剩余一个大质数</span></span><br><span class="line">        primes.<span class="built_in">push_back</span>(x);</span><br><span class="line">        factor_M[x] = <span class="number">1</span> * power;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 对每个候选数 S，计算满足条件的最小时间</span></span><br><span class="line"><span class="function">LL <span class="title">calc_time</span><span class="params">(LL S, <span class="type">const</span> map&lt;LL,LL&gt;&amp; need, <span class="type">const</span> vector&lt;LL&gt;&amp; primes)</span> </span>&#123;</span><br><span class="line">    LL max_time = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(LL p : primes) &#123;</span><br><span class="line">        LL cnt_S = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(S % p == <span class="number">0</span>) &#123; cnt_S++; S /= p; &#125;</span><br><span class="line">        <span class="keyword">if</span>(cnt_S == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;  <span class="comment">// 缺失关键质因数，无解</span></span><br><span class="line">        <span class="comment">// 向上取整：(need + cnt_S - 1) / cnt_S</span></span><br><span class="line">        LL t = (need.<span class="built_in">at</span>(p) + cnt_S - <span class="number">1</span>) / cnt_S;</span><br><span class="line">        max_time = <span class="built_in">max</span>(max_time, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max_time;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-四、注释版原代码（保持原结构）"><a href="#📝-四、注释版原代码（保持原结构）" class="headerlink" title="📝 四、注释版原代码（保持原结构）"></a>📝 四、注释版原代码（保持原结构）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span>      <span class="comment">// map库：质因数→指数映射</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span>   <span class="comment">// vector库：存储质因数列表</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> maxx 0x7fffffff  <span class="comment">// int最大值，作为初始答案</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">map&lt;<span class="type">long</span> <span class="type">long</span>,<span class="type">long</span> <span class="type">long</span>&gt; a1;  <span class="comment">// m1的质因数 → (指数×m2)</span></span><br><span class="line">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; x1;          <span class="comment">// 存储m1的所有质因数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 素数判断函数（用于m1是素数时的特判优化）</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">su</span><span class="params">(<span class="type">long</span> <span class="type">long</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=k; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(k%i==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 有因子，不是素数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;  <span class="comment">// 是素数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> n, m1, m2, ans=maxx, t1, t2, time, l2, l1, cnt1;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> s;</span><br><span class="line">    <span class="type">bool</span> flag2 = <span class="number">0</span>;  <span class="comment">// 标记是否存在合法解</span></span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m1 &gt;&gt; m2;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 🔥 特判：m1=1 → M=1，任何细胞0秒就满足</span></span><br><span class="line">    <span class="keyword">if</span>(m1 == <span class="number">1</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 📦 分解 m1 的质因数，并记录指数×m2</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">su</span>(m1))&#123;  <span class="comment">// m1本身是素数，无需循环分解</span></span><br><span class="line">        a1[m1] = m2;</span><br><span class="line">        x<span class="number">1.</span><span class="built_in">push_back</span>(m1);</span><br><span class="line">        l1 = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;  <span class="comment">// m1是合数，常规分解</span></span><br><span class="line">        t1 = m1;  <span class="comment">// 用替身变量，避免修改原值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=t1; ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(m1 % i != <span class="number">0</span>) <span class="keyword">continue</span>;  <span class="comment">// 不是因子，跳过</span></span><br><span class="line">            <span class="comment">// ✅ 找到m1的一个质因数i</span></span><br><span class="line">            x<span class="number">1.</span><span class="built_in">push_back</span>(i);  <span class="comment">// 存入质因数列表</span></span><br><span class="line">            <span class="keyword">while</span>(m1 % i == <span class="number">0</span>)&#123;  <span class="comment">// 统计i的指数</span></span><br><span class="line">                a1[i]++;   <span class="comment">// 指数+1</span></span><br><span class="line">                m1 /= i;   <span class="comment">// 除掉这个因子</span></span><br><span class="line">            &#125;</span><br><span class="line">            a1[i] *= m2;  <span class="comment">// 🔑 关键：指数要乘m2，因为M=m1^m2</span></span><br><span class="line">        &#125;</span><br><span class="line">        l1 = x<span class="number">1.</span><span class="built_in">size</span>();  <span class="comment">// 质因数个数</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 🔍 枚举每种细胞，计算最早满足时间</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;s);</span><br><span class="line">        time = <span class="number">0</span>;   <span class="comment">// 当前细胞所需时间</span></span><br><span class="line">        t2 = s;     <span class="comment">// 替身变量用于分解</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 用m1的质因数去&quot;部分分解&quot;当前细胞数s</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;l1; ++j)&#123;</span><br><span class="line">            <span class="comment">// ❌ 如果s不包含当前质因数，永远无法满足，跳过该细胞</span></span><br><span class="line">            <span class="keyword">if</span>(t2 % x1[j] != <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">goto</span> here;  <span class="comment">// goto快速跳出（竞赛常用技巧）</span></span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            cnt1 = <span class="number">0</span>;  <span class="comment">// 统计s中质因数x1[j]的指数</span></span><br><span class="line">            <span class="keyword">while</span>(t2 % x1[j] == <span class="number">0</span>)&#123;</span><br><span class="line">                t2 /= x1[j];</span><br><span class="line">                cnt1++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 📐 计算该质因数所需的最小时间：向上取整</span></span><br><span class="line">            <span class="comment">// ceil(a1[x1[j]] / cnt1) = ceil(所需指数 / 每秒获得指数)</span></span><br><span class="line">            <span class="type">int</span> tt = <span class="built_in">ceil</span>(a1[x1[j]] * <span class="number">1.0</span> / cnt1);</span><br><span class="line">            <span class="keyword">if</span>(tt &gt; time) time = tt;  <span class="comment">// 取最大值（所有质因数都要满足）</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ✅ 能执行到这里，说明该细胞合法</span></span><br><span class="line">        flag2 = <span class="number">1</span>;  <span class="comment">// 标记有解</span></span><br><span class="line">        <span class="keyword">if</span>(time &lt; ans) ans = time;  <span class="comment">// 更新全局最小时间</span></span><br><span class="line">        </span><br><span class="line">        here: <span class="keyword">continue</span>;  <span class="comment">// goto目标位置，继续下一个细胞</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 📤 输出结果</span></span><br><span class="line">    <span class="keyword">if</span>(flag2) cout &lt;&lt; ans;  <span class="comment">// 有解输出最小时间</span></span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="number">-1</span>;         <span class="comment">// 无解输出-1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎓-五、教练点睛"><a href="#🎓-五、教练点睛" class="headerlink" title="🎓 五、教练点睛"></a>🎓 五、教练点睛</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">✅ 本题核心：将「整除问题」转化为「质因数指数比较问题」</span><br><span class="line">✅ 关键技巧：只需部分分解，避免对大数Si做完全质因数分解</span><br><span class="line">✅ 易错点：</span><br><span class="line">   • 忘记指数要乘m2（M = m1^m2）</span><br><span class="line">   • 向上取整写错（推荐用 (a+b-1)/b 避免浮点误差）</span><br><span class="line">   • m1=1 的特判（任何数^0=1，0秒即可）</span><br><span class="line">✅ 复杂度：O(N × √m1)，完全可过10000数据规模</span><br><span class="line"></span><br><span class="line">💡 举一反三：类似「最小幂次使A^k被B整除」的问题，</span><br><span class="line">   都可套用「质因数分解+指数匹配+向上取整」模板！</span><br></pre></td></tr></table></figure>
+
+<h1 id="区间欧拉函数-因数处理"><a href="#区间欧拉函数-因数处理" class="headerlink" title="区间欧拉函数&#x2F;因数处理"></a>区间欧拉函数&#x2F;因数处理</h1><h1 id="📋-P3601-签到题-题解精讲"><a href="#📋-P3601-签到题-题解精讲" class="headerlink" title="📋 P3601 签到题 - 题解精讲"></a>📋 P3601 签到题 - 题解精讲</h1><blockquote>
+<p>🎯 <strong>ACM金牌教练带你拆解区间欧拉函数求和问题</strong></p>
+</blockquote>
+<hr>
+<h2 id="🔍-一、题意概括"><a href="#🔍-一、题意概括" class="headerlink" title="🔍 一、题意概括"></a>🔍 一、题意概括</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">定义：qiandao(x) = [1, x] 中与 x 不互质的数的个数</span><br><span class="line"></span><br><span class="line">求：∑(i=l→r) qiandao(i)  mod 666623333</span><br><span class="line"></span><br><span class="line">关键转化：</span><br><span class="line">  • 与x互质的数个数 = φ(x)（欧拉函数）</span><br><span class="line">  • 与x不互质的数个数 = x - φ(x)</span><br><span class="line">  • 答案 = ∑(i=l→r) (i - φ(i))</span><br></pre></td></tr></table></figure>
+
+<h3 id="📊-数据范围分析"><a href="#📊-数据范围分析" class="headerlink" title="📊 数据范围分析"></a>📊 数据范围分析</h3><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>含义</th>
+<th>算法启示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>r ≤ 10^12</code></td>
+<td>数值极大</td>
+<td>不能暴力分解每个数</td>
+</tr>
+<tr>
+<td><code>r-l ≤ 10^6</code></td>
+<td>区间长度小</td>
+<td>可以枚举区间内每个数</td>
+</tr>
+<tr>
+<td>✅ 结合</td>
+<td><strong>区间筛法</strong>求欧拉函数</td>
+<td>核心突破口</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="💡-二、解题思路"><a href="#💡-二、解题思路" class="headerlink" title="💡 二、解题思路"></a>💡 二、解题思路</h2><h3 id="🧠-核心思想：区间筛法求-φ"><a href="#🧠-核心思想：区间筛法求-φ" class="headerlink" title="🧠 核心思想：区间筛法求 φ"></a>🧠 核心思想：区间筛法求 φ</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">欧拉函数公式：φ(n) = n × ∏(1 - 1/p)，p为n的质因子</span><br><span class="line"></span><br><span class="line">关键性质：任意数n最多只有1个 &gt; √n 的质因子！</span><br><span class="line"></span><br><span class="line">算法步骤：</span><br><span class="line">1️⃣ 筛出 [2, √r] 内所有素数（线性筛）</span><br><span class="line">2️⃣ 初始化区间 [l,r] 每个位置：phi[i]=val[i]=l+i</span><br><span class="line">3️⃣ 用每个素数p去&quot;筛&quot;区间：</span><br><span class="line">   • 找到区间内第一个p的倍数</span><br><span class="line">   • 对该位置执行：phi = phi/p*(p-1)，并除尽p因子</span><br><span class="line">4️⃣ 特判：若val[i]&gt;1，说明剩一个大质因子，再更新一次phi</span><br><span class="line">5️⃣ 累加答案：ans += (原数 - phi值)</span><br></pre></td></tr></table></figure>
+
+<h3 id="🔄-流程图解"><a href="#🔄-流程图解" class="headerlink" title="🔄 流程图解"></a>🔄 流程图解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">输入 [l, r]</span><br><span class="line">    ↓</span><br><span class="line">s = √r，线性筛出 [2,s] 素数表</span><br><span class="line">    ↓</span><br><span class="line">初始化：对 i∈[l,r]，phi[i-l]=val[i-l]=i</span><br><span class="line">    ↓</span><br><span class="line">对每个素数 p：</span><br><span class="line">    ├─ 计算区间内第一个p的倍数：start = ((l-1)/p+1)*p</span><br><span class="line">    ├─ 对 j = start, start+p, start+2p, ... ≤ r：</span><br><span class="line">    │   ├─ 若 val[j-l] 能被 p 整除：</span><br><span class="line">    │   │   ├─ phi[j-l] = phi[j-l] / p * (p-1)  ← 欧拉函数更新</span><br><span class="line">    │   │   └─ while(val[j-l]%p==0) val[j-l]/=p ← 除尽该因子</span><br><span class="line">    │   └─ 继续下一个倍数</span><br><span class="line">    ↓</span><br><span class="line">特判大质因子：若 val[i-l] &gt; 1，说明剩一个 &gt;√r 的质因子</span><br><span class="line">    ↓</span><br><span class="line">统计答案：ans = Σ(i - phi[i-l]) mod 666623333</span><br><span class="line">    ↓</span><br><span class="line">输出 ans</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🧩-三、题型模板：区间欧拉函数-因数处理"><a href="#🧩-三、题型模板：区间欧拉函数-因数处理" class="headerlink" title="🧩 三、题型模板：区间欧拉函数&#x2F;因数处理"></a>🧩 三、题型模板：区间欧拉函数&#x2F;因数处理</h2><blockquote>
+<p>✨ 适用于：区间长度 ≤ 10^6，但数值 ≤ 10^12 的数论问题</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ========== 模板开始 ==========</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_LEN = <span class="number">1000010</span>;      <span class="comment">// 区间最大长度</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_PRIME = <span class="number">1000000</span>;    <span class="comment">// √(10^12) ≈ 10^6</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> l, r;                         <span class="comment">// 查询区间</span></span><br><span class="line"><span class="type">int</span> phi[MAX_LEN], val[MAX_LEN];   <span class="comment">// phi:欧拉函数值, val:剩余未分解部分</span></span><br><span class="line"><span class="type">bool</span> isp[MAX_PRIME];</span><br><span class="line"><span class="type">int</span> prime[MAX_PRIME], pcnt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线性筛素数 [2, limit]</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">sieve</span><span class="params">(<span class="type">int</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(isp, <span class="number">1</span>, <span class="built_in">sizeof</span>(isp));</span><br><span class="line">    isp[<span class="number">1</span>] = <span class="number">0</span>; pcnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= limit; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isp[i]) prime[++pcnt] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= pcnt &amp;&amp; i * prime[j] &lt;= limit; j++) &#123;</span><br><span class="line">            isp[i * prime[j]] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 区间求欧拉函数核心函数</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">solve_interval_phi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> len = r - l + <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) </span><br><span class="line">        phi[i] = val[i] = l + i;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用小素数筛区间</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= pcnt; i++) &#123;</span><br><span class="line">        <span class="type">int</span> p = prime[i];</span><br><span class="line">        <span class="comment">// 找区间内第一个p的倍数（向上取整技巧）</span></span><br><span class="line">        <span class="type">int</span> start = ((l - <span class="number">1</span>) / p + <span class="number">1</span>) * p;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = start; j &lt;= r; j += p) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val[j - l] % p == <span class="number">0</span>) &#123;</span><br><span class="line">                phi[j - l] = phi[j - l] / p * (p - <span class="number">1</span>);  <span class="comment">// 欧拉函数更新</span></span><br><span class="line">                <span class="keyword">while</span> (val[j - l] % p == <span class="number">0</span>) </span><br><span class="line">                    val[j - l] /= p;                     <span class="comment">// 除尽该质因子</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 处理剩余的大质因子（&gt;√r 的最多一个）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) </span><br><span class="line">        <span class="keyword">if</span> (val[i] &gt; <span class="number">1</span>) </span><br><span class="line">            phi[i] = phi[i] / val[i] * (val[i] - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据题目要求统计答案（此处为求和 i - phi[i]）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) </span><br><span class="line">        ans = (ans + (l + i) - phi[i]) % MOD;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ========== 模板结束 ==========</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📝-四、原题代码-详细注释"><a href="#📝-四、原题代码-详细注释" class="headerlink" title="📝 四、原题代码 + 详细注释"></a>📝 四、原题代码 + 详细注释</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long           <span class="comment">// 防止溢出，全部用long long</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _ 1000010               <span class="comment">// 区间最大长度 10^6+10</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __ 80000                <span class="comment">// √(10^12)≈10^6，实际80000够用（题目√r）</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> l, r;                       <span class="comment">// 输入区间</span></span><br><span class="line"><span class="type">signed</span> s, k;                    <span class="comment">// s=√r, k=素数个数</span></span><br><span class="line"><span class="type">signed</span> prime[__];               <span class="comment">// 素数表</span></span><br><span class="line"><span class="type">int</span> phi[_], val[_];             <span class="comment">// phi:欧拉函数, val:剩余未分解值</span></span><br><span class="line"><span class="type">bool</span> isp[_];                    <span class="comment">// 线性筛标记</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 线性筛法求 [2, s] 内所有素数</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">euler</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(isp, <span class="number">1</span>, <span class="built_in">sizeof</span>(isp));  <span class="comment">// 初始假设全是素数</span></span><br><span class="line">    isp[<span class="number">1</span>] = <span class="number">0</span>;                    <span class="comment">// 1不是素数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">signed</span> i = <span class="number">2</span>; i &lt;= s; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isp[i]) prime[++k] = i;  <span class="comment">// i是素数，加入表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">signed</span> j = <span class="number">1</span>; j &lt;= k &amp;&amp; i*prime[j] &lt;= s; j++) &#123;</span><br><span class="line">            isp[i*prime[j]] = <span class="number">0</span>;     <span class="comment">// 标记合数</span></span><br><span class="line">            <span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>) <span class="keyword">break</span>;  <span class="comment">// 关键：保证每个数只被最小质因子筛</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 核心：区间筛法求欧拉函数并计算答案</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">qiandao</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化：区间每个位置的phi和val都设为原数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = l; i &lt;= r; i++) &#123;</span><br><span class="line">        phi[i-l] = val[i-l] = i;   <span class="comment">// 下标偏移：i-l 映射到 [0, r-l]</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用每个小素数去筛区间 [l, r]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">signed</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">        <span class="comment">// 找区间内第一个能被prime[i]整除的数（向上取整技巧）</span></span><br><span class="line">        <span class="comment">// ((l-1)/p+1)*p = ceil(l/p)*p</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = ((l<span class="number">-1</span>)/prime[i]<span class="number">+1</span>)*prime[i]; j &lt;= r; j += prime[i]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (val[j-l] % prime[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 欧拉函数更新：φ(n) = φ(n)/p*(p-1)</span></span><br><span class="line">                phi[j-l] = phi[j-l] / prime[i] * (prime[i]<span class="number">-1</span>);</span><br><span class="line">                <span class="comment">// 除尽该质因子，避免重复计算</span></span><br><span class="line">                <span class="keyword">while</span> (val[j-l] % prime[i] == <span class="number">0</span>) </span><br><span class="line">                    val[j-l] /= prime[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 特判：处理 &gt;√r 的质因子（每个数最多剩1个）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = l; i &lt;= r; i++) </span><br><span class="line">        <span class="keyword">if</span> (val[i-l] != <span class="number">1</span>)  <span class="comment">// 还有剩余因子，必为质数</span></span><br><span class="line">            phi[i-l] = phi[i-l] / val[i-l] * (val[i-l] - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 统计答案：qiandao(i) = i - φ(i)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = l; i &lt;= r; i++) </span><br><span class="line">        ans = (ans + i - phi[i-l]) % <span class="number">666623333</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">    s = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(r));    <span class="comment">// 只需筛到√r</span></span><br><span class="line">    <span class="built_in">euler</span>();              <span class="comment">// 预处理素数</span></span><br><span class="line">    cout &lt;&lt; <span class="built_in">qiandao</span>() &lt;&lt; endl;  <span class="comment">// 计算并输出</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="⚠️-五、易错点-技巧总结"><a href="#⚠️-五、易错点-技巧总结" class="headerlink" title="⚠️ 五、易错点 &amp; 技巧总结"></a>⚠️ 五、易错点 &amp; 技巧总结</h2><table>
+<thead>
+<tr>
+<th>易错点</th>
+<th>正确做法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>❌ 直接分解每个数</td>
+<td>✅ 区间筛法</td>
+<td>10^12 分解太慢</td>
+</tr>
+<tr>
+<td>❌ 忘记处理大质因子</td>
+<td>✅ 最后特判 val[i]&gt;1</td>
+<td>可能剩一个 &gt;√r 的质因子</td>
+</tr>
+<tr>
+<td>❌ 数组下标越界</td>
+<td>✅ 用 <code>i-l</code> 偏移映射</td>
+<td>区间从l开始，数组从0开始</td>
+</tr>
+<tr>
+<td>❌ 向上取整写错</td>
+<td>✅ <code>((l-1)/p+1)*p</code></td>
+<td>找区间内第一个p的倍数</td>
+</tr>
+<tr>
+<td>❌ 忘记取模</td>
+<td>✅ 累加时 <code>% MOD</code></td>
+<td>防止答案溢出</td>
+</tr>
+</tbody></table>
+<h3 id="🔑-核心技巧"><a href="#🔑-核心技巧" class="headerlink" title="🔑 核心技巧"></a>🔑 核心技巧</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 向上取整找第一个倍数（避免浮点误差）</span></span><br><span class="line"><span class="type">int</span> start = ((l - <span class="number">1</span>) / p + <span class="number">1</span>) * p;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 欧拉函数增量更新（避免重复计算）</span></span><br><span class="line">phi = phi / p * (p - <span class="number">1</span>);  <span class="comment">// 先除后乘防溢出</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 区间偏移映射</span></span><br><span class="line">phi[i - l]  <span class="comment">// 将 [l,r] 映射到 [0, r-l]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎯-六、举一反三"><a href="#🎯-六、举一反三" class="headerlink" title="🎯 六、举一反三"></a>🎯 六、举一反三</h2><p>类似题目推荐：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2398">P2398 GCD SUM</a> - 欧拉函数前缀和</li>
+<li><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2568">P2568 GCD</a> - 欧拉函数+枚举</li>
+<li>[区间求μ函数&#x2F;因数个数] - 同样可用区间筛法</li>
+</ul>
+<blockquote>
+<p>💡 <strong>记住</strong>：看到「区间长度小但数值大」的数论题，优先考虑<strong>区间筛法</strong>！</p>
+</blockquote>
+<hr>
+<h1 id="因数统计"><a href="#因数统计" class="headerlink" title="因数统计"></a>因数统计</h1><h1 id="🎓-P1414-又是毕业季II-ACM金牌教练题解"><a href="#🎓-P1414-又是毕业季II-ACM金牌教练题解" class="headerlink" title="🎓 P1414 又是毕业季II - ACM金牌教练题解"></a>🎓 P1414 又是毕业季II - ACM金牌教练题解</h1><blockquote>
+<p>📌 <strong>题型分类</strong>：数论 + 因数统计 + 单调性优化<br>📌 <strong>难度评级</strong>：⭐⭐⭐（蓝题）<br>📌 <strong>核心思想</strong>：逆向思维 + 因数贡献统计 + 答案单调性</p>
+</blockquote>
+<hr>
+<h2 id="📋-题意概括"><a href="#📋-题意概括" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 n 个正整数 a[1..n]</span><br><span class="line">对于每个 k ∈ [1, n]，求：</span><br><span class="line">    从 n 个数中选 k 个数，使得这 k 个数的 GCD 最大</span><br><span class="line">输出 n 行，第 i 行表示选 i 个人时的最大 GCD</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键转化</strong>：  </p>
+<blockquote>
+<p>「k 个数的公约数」⇔「这 k 个数都含有某个公共因数」<br>因此：统计每个因数在多少个数中出现，出现 ≥k 次的因数中最大的那个，就是选 k 个数时能达到的最大 GCD</p>
+</blockquote>
+<hr>
+<h2 id="💡-解题思路详解"><a href="#💡-解题思路详解" class="headerlink" title="💡 解题思路详解"></a>💡 解题思路详解</h2><h3 id="❌-暴力思路（不可行）"><a href="#❌-暴力思路（不可行）" class="headerlink" title="❌ 暴力思路（不可行）"></a>❌ 暴力思路（不可行）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">枚举 C(n,k) 种组合 → 对每种组合求 GCD → 取最大值</span><br><span class="line">复杂度：O(2^n × log(max(a))) → 直接超时</span><br></pre></td></tr></table></figure>
+
+<h3 id="✅-正解思路（因数贡献法）"><a href="#✅-正解思路（因数贡献法）" class="headerlink" title="✅ 正解思路（因数贡献法）"></a>✅ 正解思路（因数贡献法）</h3><h4 id="第一步：统计每个因数的出现次数"><a href="#第一步：统计每个因数的出现次数" class="headerlink" title="第一步：统计每个因数的出现次数"></a>第一步：统计每个因数的出现次数</h4><ul>
+<li>对每个数 x，枚举 [1, √x] 的所有因数 i</li>
+<li>若 i | x，则 i 和 x&#x2F;i 都是 x 的因数，对应计数器 +1</li>
+<li>注意：当 x 是完全平方数时，√x 只计一次</li>
+</ul>
+<h4 id="第二步：利用答案的单调性"><a href="#第二步：利用答案的单调性" class="headerlink" title="第二步：利用答案的单调性"></a>第二步：利用答案的单调性</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">重要性质：ans[k] ≥ ans[k+1]</span><br><span class="line">解释：选 k+1 个数比选 k 个数限制更严，最大 GCD 不会更大</span><br><span class="line"></span><br><span class="line">因此可以：</span><br><span class="line">  从大到小枚举因数 d</span><br><span class="line">  若 c[d] = t，说明有 t 个数含因数 d</span><br><span class="line">  那么对于所有 k ≤ t，d 都可以作为候选答案</span><br><span class="line">  用单调性从后往前递推：ans[k] = max(ans[k], ans[k+1])</span><br></pre></td></tr></table></figure>
+
+<h4 id="第三步：输出答案"><a href="#第三步：输出答案" class="headerlink" title="第三步：输出答案"></a>第三步：输出答案</h4><ul>
+<li>对于每个 k ∈ [1,n]，找到最大的 d 满足 c[d] ≥ k</li>
+<li>利用单调性优化查找过程</li>
+</ul>
+<hr>
+<h2 id="🧩-模版代码（带详细注释）"><a href="#🧩-模版代码（带详细注释）" class="headerlink" title="🧩 模版代码（带详细注释）"></a>🧩 模版代码（带详细注释）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAX_INF = <span class="number">1000010</span>;  <span class="comment">// 能力值最大值 + 10</span></span><br><span class="line"><span class="type">int</span> n, max_val = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> cnt[MAX_INF];             <span class="comment">// cnt[d]：因数 d 在多少个数中出现过</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ===== 第一步：统计每个因数的出现次数 =====</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> x; </span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">        max_val = <span class="built_in">max</span>(max_val, x);  <span class="comment">// 记录最大值，用于后续枚举范围</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> limit = <span class="built_in">sqrt</span>(x);        <span class="comment">// 只需枚举到 √x</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> d = <span class="number">1</span>; d &lt;= limit; d++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(x % d == <span class="number">0</span>) &#123;        <span class="comment">// d 是 x 的因数</span></span><br><span class="line">                cnt[d]++;           <span class="comment">// 小因数计数 +1</span></span><br><span class="line">                <span class="keyword">if</span>(d != x / d) &#123;    <span class="comment">// 避免完全平方数重复计数</span></span><br><span class="line">                    cnt[x / d]++;   <span class="comment">// 大因数计数 +1</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ===== 第二步：利用单调性输出答案 =====</span></span><br><span class="line">    <span class="comment">// 性质：选的人数越多，最大 GCD 不会更大 → ans[k] &gt;= ans[k+1]</span></span><br><span class="line">    <span class="type">int</span> cur = max_val;  <span class="comment">// 从最大可能的因数开始枚举</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">        <span class="comment">// 找到最大的 d，使得 cnt[d] &gt;= k</span></span><br><span class="line">        <span class="comment">// 即：至少有 k 个数含有因数 d</span></span><br><span class="line">        <span class="keyword">while</span>(cnt[cur] &lt; k) &#123;</span><br><span class="line">            cur--;  <span class="comment">// 不满足就减小因数</span></span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; cur &lt;&lt; endl;  <span class="comment">// 输出选 k 个人时的最大 GCD</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔑-核心技巧总结"><a href="#🔑-核心技巧总结" class="headerlink" title="🔑 核心技巧总结"></a>🔑 核心技巧总结</h2><table>
+<thead>
+<tr>
+<th>技巧</th>
+<th>说明</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>因数枚举优化</strong></td>
+<td>枚举 [1,√x] 同时获得两个因数</td>
+<td>所有因数统计类问题</td>
+</tr>
+<tr>
+<td><strong>贡献法思维</strong></td>
+<td>不直接求答案，而是统计每个因数的”贡献范围”</td>
+<td>公约数&#x2F;公倍数最值问题</td>
+</tr>
+<tr>
+<td><strong>单调性优化</strong></td>
+<td>ans[k] ≥ ans[k+1]，避免重复查找</td>
+<td>多查询最值问题</td>
+</tr>
+<tr>
+<td><strong>空间换时间</strong></td>
+<td>用 cnt 数组预处理，查询 O(1)</td>
+<td>多次查询同一类问题</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="⏱️-复杂度分析"><a href="#⏱️-复杂度分析" class="headerlink" title="⏱️ 复杂度分析"></a>⏱️ 复杂度分析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">时间复杂度：O(n × √max(a))</span><br><span class="line">  - 每个数分解因数：O(√max(a))</span><br><span class="line">  - n 个数总共：O(n√max(a)) ≈ 10^4 × 10^3 = 10^7 ✓</span><br><span class="line"></span><br><span class="line">空间复杂度：O(max(a))</span><br><span class="line">  - cnt 数组大小：10^6 级别，可接受 ✓</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🎯-举一反三（同类题型）"><a href="#🎯-举一反三（同类题型）" class="headerlink" title="🎯 举一反三（同类题型）"></a>🎯 举一反三（同类题型）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模版：因数贡献统计框架</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve_factor_contribution</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> max_val = *<span class="built_in">max_element</span>(a.<span class="built_in">begin</span>(), a.<span class="built_in">end</span>());</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(max_val + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 统计每个因数的出现次数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> x : a) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> d = <span class="number">1</span>; d * d &lt;= x; d++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(x % d == <span class="number">0</span>) &#123;</span><br><span class="line">                cnt[d]++;</span><br><span class="line">                <span class="keyword">if</span>(d != x / d) cnt[x / d]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 根据题目要求利用单调性/递推求解</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>相似题目推荐</strong>：</p>
+<ul>
+<li>[洛谷 P1072] Hankson 的趣味题（因数枚举）</li>
+<li>[洛谷 P3901] 数列找不同（贡献法思维）</li>
+<li>[Codeforces 1034A] Enlarge GCD（逆向删数求最大GCD）</li>
+</ul>
+<hr>
+<blockquote>
+<p>💬 <strong>教练寄语</strong>：<br>这道题的精髓在于「思维转换」——不从「选数求GCD」出发，而是从「因数贡献」角度逆向思考。<br>记住：<strong>当直接求解困难时，尝试统计每个元素的”影响力范围”</strong>，往往能打开新思路！  </p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">112-基础数学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/12/template-112-%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260511" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/11/20260511/">2026-05-11 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/11/20260511/" class="archive-article-date">
+  	<time datetime="2026-05-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/img/2026051002.png"></p>
+<ol>
+<li>基础篇两章</li>
+<li>pat5题</li>
+<li>前天剩下的英语卷子</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/11/20260511/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-template-111-图论基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1523,343 +2274,9 @@
 
 
   
-    <article id="post-template-108-stl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/08/template-108-stl/">108-STL</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/08/template-108-stl/" class="archive-article-date">
-  	<time datetime="2026-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h2 id="P1160-队列安排-（STL-list）"><a href="#P1160-队列安排-（STL-list）" class="headerlink" title="P1160 队列安排 （STL list）"></a>P1160 队列安排 （STL list）</h2><p><strong>核心操作：</strong></p>
-<ol>
-<li>初始队列只有 <code>1</code></li>
-<li>依次插入 <code>2~N</code>：每个同学 <code>i</code> 插到已存在的同学 <code>k</code> 的<strong>左边(p&#x3D;0)</strong> 或<strong>右边(p&#x3D;1)</strong></li>
-<li>删除 M 个同学（若已删除则忽略）</li>
-<li>输出最终从左到右的编号</li>
-</ol>
-<p><strong>数据范围：</strong> N, M ≤ 1e5，需要 O(N) 或 O(N log N) 解法</p>
-<hr>
-<h2 id="关键语法回顾（刚才讲的）"><a href="#关键语法回顾（刚才讲的）" class="headerlink" title="关键语法回顾（刚才讲的）"></a>关键语法回顾（刚才讲的）</h2><h3 id="std-list-迭代器特性"><a href="#std-list-迭代器特性" class="headerlink" title="std::list 迭代器特性"></a><code>std::list</code> 迭代器特性</h3><ul>
-<li><strong>插入&#x2F;删除不会使其他迭代器失效</strong>（除了被删除的）</li>
-<li><code>insert(pos, val)</code> 在 <code>pos</code> <strong>之前</strong>插入，返回新元素的迭代器</li>
-<li><code>erase(pos)</code> 删除 <code>pos</code> 指向的元素</li>
-</ul>
-<h3 id="代码核心技巧"><a href="#代码核心技巧" class="headerlink" title="代码核心技巧"></a>代码核心技巧</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;list&lt;<span class="type">int</span>&gt;::iterator&gt; <span class="built_in">pos</span>(n + <span class="number">1</span>);  <span class="comment">// 存储每个编号对应的迭代器</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>通过数组保存迭代器，实现 O(1) 定位元素</li>
-<li>删除时直接 <code>a.erase(pos[x])</code>，无需查找</li>
-</ul>
-<h3 id="插入逻辑解析"><a href="#插入逻辑解析" class="headerlink" title="插入逻辑解析"></a>插入逻辑解析</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p == <span class="number">0</span>) </span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(pos[k], i);   <span class="comment">// 插到 k 左边</span></span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">auto</span> next = pos[k];</span><br><span class="line">    ++next;                          <span class="comment">// 指向 k 的下一个位置</span></span><br><span class="line">    pos[i] = a.<span class="built_in">insert</span>(next, i);      <span class="comment">// 插到 k 右边（即 next 左边）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键理解：</strong> </p>
-<ul>
-<li>插右边 &#x3D; 插到 <code>k</code> 的下一个元素<strong>之前</strong></li>
-<li>因为 <code>insert</code> 是在指定位置<strong>之前</strong>插入</li>
-</ul>
-<hr>
-<h2 id="代码执行示例（N-4）"><a href="#代码执行示例（N-4）" class="headerlink" title="代码执行示例（N&#x3D;4）"></a>代码执行示例（N&#x3D;4）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">初始: a = [1], pos[1]→1</span><br><span class="line"></span><br><span class="line">i=2, k=1, p=0: 插到1左边 → a=[2,1], pos[2]→2</span><br><span class="line"></span><br><span class="line">i=3, k=2, p=1: 插到2右边</span><br><span class="line">  next = pos[2]→2, ++next→指向1</span><br><span class="line">  insert(1之前,3) → a=[2,3,1], pos[3]→3</span><br><span class="line"></span><br><span class="line">i=4, k=1, p=0: 插到1左边</span><br><span class="line">  insert(pos[1]→1之前,4) → a=[2,3,4,1], pos[4]→4</span><br><span class="line"></span><br><span class="line">删除: m=2, 删3 → a=[2,4,1]; 再删3(已删除,忽略)</span><br><span class="line">输出: 2 4 1 ✓</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="代码的正确性保证"><a href="#代码的正确性保证" class="headerlink" title="代码的正确性保证"></a>代码的正确性保证</h2><p>✅ <strong>迭代器永不失效</strong> - list 的特性，即使插入删除，已有迭代器仍指向原元素<br>✅ <strong>删除标记</strong> - <code>removed[]</code> 防止重复删除导致的未定义行为<br>✅ <strong>O(N) 时间复杂度</strong> - 每个操作都是 O(1)<br>✅ <strong>空间 O(N)</strong> - 存储 N 个迭代器</p>
-<p>这段代码是这道题的标准高效解法！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">108-STL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/08/template-108-stl/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260507" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/07/20260507/">期中考试</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/07/20260507/" class="archive-article-date">
-  	<time datetime="2026-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>数分期中考试 较为顺利</li>
-<li>复习高代</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/07/20260507/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-template-107-搜素" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/07/template-107-%E6%90%9C%E7%B4%A0/">107-搜素</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/07/template-107-%E6%90%9C%E7%B4%A0/" class="archive-article-date">
-  	<time datetime="2026-05-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
-<h1 id="斜对角"><a href="#斜对角" class="headerlink" title="斜对角"></a>斜对角</h1><h2 id="P1219-USACO1-5-八皇后-Checker-Challenge"><a href="#P1219-USACO1-5-八皇后-Checker-Challenge" class="headerlink" title="P1219 [USACO1.5] 八皇后 Checker Challenge"></a>P1219 [USACO1.5] 八皇后 Checker Challenge</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>一个如下的 $6 \times 6$ 的跳棋棋盘，有六个棋子被放置在棋盘上，使得每行、每列有且只有一个，每条对角线（包括两条主对角线的所有平行线）上至多有一个棋子。</p>
-<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/3h71x0yf.png"></p>
-<p>上面的布局可以用序列 $2\ 4\ 6\ 1\ 3\ 5$ 来描述，第 $i$ 个数字表示在第 $i$ 行的相应位置有一个棋子，如下：</p>
-<p>行号 $1\ 2\ 3\ 4\ 5\ 6$</p>
-<p>列号 $2\ 4\ 6\ 1\ 3\ 5$</p>
-<p>这只是棋子放置的一个解。请编一个程序找出所有棋子放置的解。<br>并把它们以上面的序列方法输出，解按字典顺序排列。<br>请输出前 $3$ 个解。最后一行是解的总个数。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> vis[<span class="number">4</span>][<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(num &gt; n)&#123;</span><br><span class="line">        ans++;</span><br><span class="line">        <span class="keyword">if</span>(ans &lt;= <span class="number">3</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;++i)&#123;</span><br><span class="line">                cout&lt;&lt;a[i]&lt;&lt;(i==n?<span class="string">&quot;&quot;</span>:<span class="string">&quot; &quot;</span>); <span class="comment">// 修复：行末无空格</span></span><br><span class="line">            &#125;</span><br><span class="line">            cout&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;++i )&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[<span class="number">1</span>][i]&amp;&amp;!vis[<span class="number">2</span>][num+i]&amp;&amp;!vis[<span class="number">3</span>][num - i + n])&#123;</span><br><span class="line">            a[num] = i; </span><br><span class="line">            vis[<span class="number">1</span>][i] = <span class="number">1</span>;</span><br><span class="line">            vis[<span class="number">2</span>][num+i] = <span class="number">1</span>;</span><br><span class="line">            vis[<span class="number">3</span>][num - i + n] = <span class="number">1</span>; <span class="comment">// 修复：与判断条件保持一致</span></span><br><span class="line">            <span class="built_in">dfs</span>(num + <span class="number">1</span>);</span><br><span class="line">            vis[<span class="number">1</span>][i] = <span class="number">0</span>;</span><br><span class="line">            vis[<span class="number">2</span>][num+i] = <span class="number">0</span>;</span><br><span class="line">            vis[<span class="number">3</span>][num - i + n] = <span class="number">0</span>; <span class="comment">// 修复：与判断条件保持一致</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    cout&lt;&lt;ans&lt;&lt;endl; <span class="comment">// 修复：补充换行</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h1 id="接龙"><a href="#接龙" class="headerlink" title="接龙"></a>接龙</h1><h2 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h2><p>给定 n 个单词和一个起始字母，要求构造最长的“单词接龙”，规则如下：</p>
-<ol>
-<li>每个单词最多使用两次</li>
-<li>相邻单词必须有重叠部分（重叠部分长度至少为1）</li>
-<li>不能存在包含关系（即一个单词不能完全包含另一个单词）</li>
-<li>重叠部分合为一部分</li>
-</ol>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><h3 id="核心数据结构"><a href="#核心数据结构" class="headerlink" title="核心数据结构"></a>核心数据结构</h3><ul>
-<li><code>g[i][j]</code>：记录单词 i 连接单词 j 时的重叠长度</li>
-<li><code>pd[i]</code>：记录单词 i 的使用次数</li>
-<li>DFS搜索所有可能的接龙路径</li>
-</ul>
-<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ol>
-<li><p><strong>预处理重叠关系</strong></p>
-<ul>
-<li>遍历所有单词对 (i, j)</li>
-<li>计算 i 的后缀和 j 的前缀的最大重叠长度</li>
-<li>重叠长度不能等于较短单词的长度（避免包含关系）</li>
-</ul>
-</li>
-<li><p><strong>DFS搜索</strong></p>
-<ul>
-<li>从每个以指定字母开头的单词开始</li>
-<li>每次尝试连接一个使用次数 &lt; 2 且有重叠关系的单词</li>
-<li>回溯时恢复单词使用状态</li>
-</ul>
-</li>
-<li><p><strong>更新答案</strong></p>
-<ul>
-<li>每次递归都更新最大长度</li>
-</ul>
-</li>
-</ol>
-<h3 id="关键细节"><a href="#关键细节" class="headerlink" title="关键细节"></a>关键细节</h3><ul>
-<li><code>substr(len_i - k, k)</code>：获取单词 i 的后 k 个字符</li>
-<li><code>substr(0, k)</code>：获取单词 j 的前 k 个字符</li>
-<li>重叠长度为 k 时，接龙的新增部分是 <code>a[j].substr(k)</code></li>
-</ul>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string a[<span class="number">25</span>];        <span class="comment">// 存储单词</span></span><br><span class="line"><span class="type">int</span> n, maxx;         <span class="comment">// n:单词数, maxx:最长龙的长度</span></span><br><span class="line"><span class="type">int</span> pd[<span class="number">25</span>];          <span class="comment">// pd[i]:单词i的使用次数</span></span><br><span class="line"><span class="type">int</span> g[<span class="number">25</span>][<span class="number">25</span>];       <span class="comment">// g[i][j]:单词i接单词j时的重叠长度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(string s, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 更新最大长度</span></span><br><span class="line">    maxx = <span class="built_in">max</span>(maxx, (<span class="type">int</span>)s.<span class="built_in">size</span>());</span><br><span class="line">    pd[k]++;  <span class="comment">// 标记当前单词已使用</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 尝试连接下一个单词</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(g[k][i] &amp;&amp; pd[i] &lt; <span class="number">2</span>) &#123;  <span class="comment">// 有重叠关系且使用次数&lt;2</span></span><br><span class="line">            <span class="comment">// 连接单词i，新增部分是a[i]去掉重叠部分</span></span><br><span class="line">            <span class="built_in">dfs</span>(s + a[i].<span class="built_in">substr</span>(g[k][i]), i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    pd[k]--;  <span class="comment">// 回溯：恢复单词使用状态</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 输入</span></span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) cin &gt;&gt; a[i];</span><br><span class="line">    <span class="type">char</span> start; </span><br><span class="line">    cin &gt;&gt; start;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 预处理单词间的重叠关系</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            <span class="type">int</span> len_i = a[i].<span class="built_in">size</span>(), len_j = a[j].<span class="built_in">size</span>();</span><br><span class="line">            <span class="comment">// 最大重叠长度不能等于任一单词长度（避免包含关系）</span></span><br><span class="line">            <span class="type">int</span> max_overlap = <span class="built_in">min</span>(len_i, len_j) - <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> k = <span class="number">1</span>; k &lt;= max_overlap; k++) &#123;</span><br><span class="line">                <span class="comment">// 检查i的后k个字符是否等于j的前k个字符</span></span><br><span class="line">                <span class="keyword">if</span>(a[i].<span class="built_in">substr</span>(len_i - k, k) == a[j].<span class="built_in">substr</span>(<span class="number">0</span>, k)) &#123;</span><br><span class="line">                    g[i][j] = k;  <span class="comment">// 记录重叠长度</span></span><br><span class="line">                    <span class="keyword">break</span>;        <span class="comment">// 找到最小重叠就停止</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从所有以指定字母开头的单词开始搜索</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i][<span class="number">0</span>] == start) &#123;</span><br><span class="line">            <span class="built_in">dfs</span>(a[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; maxx &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="示例分析"><a href="#示例分析" class="headerlink" title="示例分析"></a>示例分析</h2><p>输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">at</span><br><span class="line">touch</span><br><span class="line">cheat</span><br><span class="line">choose</span><br><span class="line">tact</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
-<p>输出：<code>23</code></p>
-<p>形成的龙：<code>atoucheatactactouchoose</code></p>
-<ul>
-<li>at → touch（重叠t）→ atoucheat（重叠ch）→ atoucheatact（重叠t）→ atoucheatactact（重叠act）→ atoucheatactactouchoose（重叠ou）</li>
-</ul>
-<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><ul>
-<li>预处理：O(n² × L)，L为单词平均长度</li>
-<li>DFS：最坏情况下每个单词用2次，复杂度较高但有剪枝</li>
-<li>n ≤ 20，在可接受范围内</li>
-</ul>
-<p>这个解法能够正确地找出最长的单词接龙。</p>
-<h1 id="自然数拆分"><a href="#自然数拆分" class="headerlink" title="自然数拆分"></a>自然数拆分</h1><h3 id="题意概括-1"><a href="#题意概括-1" class="headerlink" title="题意概括"></a>题意概括</h3><p>给定一个自然数 ( n )（( 2 \leq n \leq 8 )），将其拆分为若干个<strong>小于 n</strong> 的自然数之和。输出所有拆分方案，每个方案中的数字按<strong>非递减顺序</strong>排列，且方案按<strong>字典序从小到大</strong>输出。</p>
-<h3 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h3><ul>
-<li>使用深度优先搜索（DFS）枚举所有可能的拆分。</li>
-<li>为了保证序列<strong>非递减</strong>（即从小到大），每次选择的数字<strong>不小于</strong>上一个选择的数字。</li>
-<li>用数组 <code>a[]</code> 记录当前拆分序列，<code>a[0]</code> 初始设为 1（因为第一个数至少为 1）。</li>
-<li>当剩余值 <code>s == 0</code> 时，输出当前拆分序列（最后一个数后无 <code>+</code>）。</li>
-<li>注意：拆分数必须<strong>小于 n</strong>，因此当选择数字 <code>i == n</code> 时直接跳过（避免输出 <code>n</code> 本身）。</li>
-<li>最终按字典序输出（由于搜索过程本身就是按顺序枚举，天然满足字典序要求）。</li>
-</ul>
-<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>] = &#123;<span class="number">1</span>&#125;;  <span class="comment">// a[0]=1，保证第一次枚举从1开始</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出当前拆分序列，t 表示当前长度（a[1]~a[t-1] 是有效数字）</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; t - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        cout &lt;&lt; a[i] &lt;&lt; <span class="string">&quot;+&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; a[t - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// s: 剩余需要拆分的数值</span></span><br><span class="line"><span class="comment">// t: 下一个要填的位置索引</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="number">0</span>) &#123;      <span class="comment">// 拆分完成</span></span><br><span class="line">        <span class="built_in">print</span>(t);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s &lt; <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 超过，回溯</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从上一个数开始枚举，保证非递减</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = a[t - <span class="number">1</span>]; i &lt;= s; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == n) <span class="keyword">break</span>;  <span class="comment">// 不能拆出 n 本身</span></span><br><span class="line">        a[t] = i;</span><br><span class="line">        <span class="built_in">dfs</span>(s - i, t + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">dfs</span>(n, <span class="number">1</span>);  <span class="comment">// 初始剩余 n，从位置 1 开始填</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">107-搜素</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/07/template-107-%E6%90%9C%E7%B4%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
     </nav>
   
 
@@ -2015,7 +2432,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2023,7 +2440,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2035,23 +2452,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2067,11 +2476,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2083,6 +2492,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
@@ -2091,7 +2508,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2099,15 +2516,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2115,7 +2524,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2123,15 +2536,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2139,7 +2548,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
