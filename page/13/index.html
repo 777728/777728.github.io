@@ -158,6 +158,290 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-abc-455" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/29/abc-455/">AtCoder Beginner Contest 455</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/29/abc-455/" class="archive-article-date">
+  	<time datetime="2026-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc455/tasks">传送门</a></p>
+<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><h2 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h2><p>有 <strong>N 张牌</strong>和 <strong>N 个牌堆</strong>，初始时牌堆 i 里只有牌 i。</p>
+<p>进行 <strong>Q 次操作</strong>，每次操作：</p>
+<ul>
+<li>把牌 <strong>Cᵢ</strong> 及其上面的所有牌（保持顺序）移动到牌 <strong>Pᵢ</strong> 的上面。</li>
+<li>保证操作前 Cᵢ 和 Pᵢ 在不同堆，且 Pᵢ 在所在堆的顶部。</li>
+</ul>
+<p>最后输出每个牌堆的<strong>牌数</strong>。</p>
+<hr>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>这是一个<strong>链式结构模拟</strong>问题，不能用数组直接模拟移动（会超时）。</p>
+<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><ul>
+<li>每个牌堆其实是一个<strong>单向链表</strong>。</li>
+<li>移动操作：将一整段链表接到另一个链表的尾部。</li>
+<li>每个牌只关心：<ul>
+<li><code>nxt[x]</code>：牌 x 下方的牌（若无则为 -1）</li>
+<li><code>pre[x]</code>：牌 x 上方的牌（若无则为 -1）</li>
+<li><code>head[pile]</code>：牌堆 pile 的<strong>顶部牌</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="操作细节"><a href="#操作细节" class="headerlink" title="操作细节"></a>操作细节</h3><p>对于 <code>(C, P)</code>：</p>
+<ol>
+<li>移动牌 C 及其上方整段到 P 的上方。</li>
+<li>由于 P 在当前堆的顶部，移动后 C 段会放在 P 的上方，因此：<ul>
+<li>原来 C 上方的牌（pre[C]）与 C 断开 → 更新 <code>nxt[pre[C]] = -1</code></li>
+<li>P 的下方牌变成 C 段的顶部 <code>nxt[P] = C</code></li>
+<li>C 的上方牌变成 P <code>pre[C] = P</code></li>
+</ul>
+</li>
+<li>如果 C 原来是所在堆的顶部（head[pile] &#x3D;&#x3D; C），则 head 需要更新为 -1（因为整段移走）</li>
+</ol>
+<hr>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">3e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> head[N], nxt[N], p[N], pre[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, q;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; q;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化：每个牌单独一堆</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        p[i] = i;       <span class="comment">// 牌 i 所属的堆编号</span></span><br><span class="line">        head[i] = i;    <span class="comment">// 堆 i 的顶部牌</span></span><br><span class="line">        pre[i] = <span class="number">-1</span>;    <span class="comment">// 上方无牌</span></span><br><span class="line">        nxt[i] = <span class="number">-1</span>;    <span class="comment">// 下方无牌</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= q; i++) &#123;</span><br><span class="line">        <span class="type">int</span> card, poscard;</span><br><span class="line">        cin &gt;&gt; card &gt;&gt; poscard;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 记录原堆信息</span></span><br><span class="line">        <span class="type">int</span> oldPile = p[card];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 连接: poscard 下面放 card</span></span><br><span class="line">        nxt[poscard] = card;</span><br><span class="line">        <span class="comment">// 断开 card 原来的上方连接</span></span><br><span class="line">        <span class="keyword">if</span> (pre[card] != <span class="number">-1</span>) &#123;</span><br><span class="line">            nxt[pre[card]] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        pre[card] = poscard;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 更新所属堆</span></span><br><span class="line">        <span class="comment">// 整段移动: card 及其上方所有牌都属于 poscard 的堆</span></span><br><span class="line">        <span class="comment">// 注意这里只要更新 card 的堆，因为其他牌在遍历时会跟随 card</span></span><br><span class="line">        p[card] = p[poscard];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 如果 card 原来是所在堆的顶部，则原堆顶部变为空</span></span><br><span class="line">        <span class="keyword">if</span> (head[oldPile] == card) &#123;</span><br><span class="line">            head[oldPile] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 统计每个堆的牌数</span></span><br><span class="line">    <span class="comment">// 注意：需要更新所有牌的 p[]，因为移动后只有 card 被更新了</span></span><br><span class="line">    <span class="comment">// 正确做法：遍历每个堆，根据链表统计</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">cnt</span><span class="params">(n + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="comment">// 找每个牌当前属于哪个堆</span></span><br><span class="line">        <span class="comment">// 由于我们没维护所有牌的 p[]，在输出前需要重新计算</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 实际上，更好的做法是在移动时更新整段的 p[]</span></span><br><span class="line">    <span class="comment">// 但复杂度会高。正确解法是维护每个堆的顶部和链表，</span></span><br><span class="line">    <span class="comment">// 并记录每个牌所在的堆，移动时遍历整段更新 p[]。</span></span><br><span class="line">    <span class="comment">// 但这里保证的总移动复杂度 O(N+Q) 可以用并查集或链表合并。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">atcoder</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/29/abc-455/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-20260428" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/28/20260428/">今日满课</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/28/20260428/" class="archive-article-date">
+  	<time datetime="2026-04-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>数分期中考试复习（做题）</li>
+<li>补cf1094</li>
+<li>codeforce round 1095</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/28/20260428/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Codeforces Round 1094 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/">Codeforces Round 1094 (Div. 2)</a>
+    </h1>
+  
+
+        
+        <a href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/" class="archive-article-date">
+  	<time datetime="2026-04-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2222">Codeforces Round 1094 (Div. 2)</a></p>
+<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><h3 id="题意解释"><a href="#题意解释" class="headerlink" title="题意解释"></a>题意解释</h3><ul>
+<li><strong>操作本质</strong>：每次操作可先任意翻转一个对称区间 $[u-y, u+y]$，再标记位置 $x_i$ 的<strong>元素</strong>（标记绑定元素，不随索引移动）。</li>
+<li><strong>核心性质</strong>：对称翻转严格保持索引奇偶性（$u-i$ 与 $u+i$ 奇偶相同）。因此数组天然分裂为 <code>奇数位</code> 和 <code>偶数位</code> 两个独立集合，元素<strong>无法跨奇偶交换</strong>。</li>
+<li><strong>目标</strong>：$m$ 次操作后，使<strong>未标记元素总和最小</strong> $\iff$ <strong>已标记元素总和最大</strong>。</li>
+</ul>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ol>
+<li><strong>标记自由度</strong>：第 $i$ 次操作查询位置 $x_i$（奇偶性 $p &#x3D; x_i \bmod 2$）。因可提前任意翻转，等价于从奇偶集合 $p$ 中<strong>任选一个元素标记</strong>。若元素已标记，则无事发生。</li>
+<li><strong>贪心策略</strong>（奇偶独立）：<ul>
+<li><strong>优先标记正数</strong>：正数加入已标记集合会直接减小答案，值越大越优。</li>
+<li><strong>负数处理</strong>：标记负数会增大答案。若该奇偶集合<strong>已标记过元素</strong>，后续操作可重复标记已标记元素，<strong>绝不主动标负数</strong>。</li>
+<li><strong>被迫标记</strong>：若该集合<strong>从未标记过</strong>且查询过至少一次，则必须标记一个。为减损，选<strong>最大值</strong>（最接近 $0$ 的负数），且仅标记一次。</li>
+</ul>
+</li>
+<li><strong>实现</strong>：用两个优先队列维护奇&#x2F;偶元素。遍历 $m$ 次查询，按 <code>正数必拿 || 首次必拿</code> 规则弹出，最终输出 <code>总和 - 已标记和</code>。</li>
+<li><strong>复杂度</strong>：$O(N \log N + M)$，空间 $O(N)$，完全满足 $10^5$ 限制。</li>
+</ol>
+<h3 id="代码展示-C"><a href="#代码展示-C" class="headerlink" title="代码展示 (C++)"></a>代码展示 (C++)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    priority_queue&lt;ll&gt; pq[<span class="number">2</span>]; <span class="comment">// pq[0]偶数位, pq[1]奇数位</span></span><br><span class="line">    ll total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        ll a; cin &gt;&gt; a;</span><br><span class="line">        pq[i &amp; <span class="number">1</span>].<span class="built_in">push</span>(a);</span><br><span class="line">        total += a;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> marked[<span class="number">2</span>] = &#123;<span class="number">0</span>, <span class="number">0</span>&#125;; <span class="comment">// 记录奇/偶集合是否已标记过</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> x; cin &gt;&gt; x;</span><br><span class="line">        <span class="type">int</span> p = x &amp; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (pq[p].<span class="built_in">empty</span>()) <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 贪心：有正数必取；若无正数且该集合尚未标记过，则取最大负数(仅一次)</span></span><br><span class="line">        <span class="keyword">if</span> (pq[p].<span class="built_in">top</span>() &gt;= <span class="number">0</span> || !marked[p]) &#123;</span><br><span class="line">            total -= pq[p].<span class="built_in">top</span>(); <span class="comment">// 直接从未标记和中扣除</span></span><br><span class="line">            pq[p].<span class="built_in">pop</span>();</span><br><span class="line">            marked[p] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; total &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    <span class="type">int</span> t; cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/04/28/Codeforces%20Round%201094%20(Div.%202)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260427" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -886,242 +1170,6 @@
 
 
   
-    <article id="post-luogu-mati-2023" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/25/luogu-mati-2023/">2023马蹄杯</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/25/luogu-mati-2023/" class="archive-article-date">
-  	<time datetime="2026-04-24T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://www.matiji.net/exam/oj-questionbank/16A92C42378232DEB56179D9C70DC45C">2023马蹄杯</a></p>
-<h1 id="最小表示法"><a href="#最小表示法" class="headerlink" title="最小表示法"></a>最小表示法</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span><span class="params">(string a)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n = a.<span class="built_in">length</span>();</span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>, i = <span class="number">0</span>, j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (k &lt; n &amp;&amp; i &lt; n &amp;&amp; j &lt; n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[(i + k) % n] == a[(j + k) % n]) &#123;</span><br><span class="line">            k++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            a[(i + k) % n] &gt; a[(j + k) % n] ? i = i + k + <span class="number">1</span> : j = j + k;</span><br><span class="line">            <span class="keyword">if</span> (i == j)</span><br><span class="line">                i++;</span><br><span class="line">            k = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(i, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">洛谷</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/25/luogu-mati-2023/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260424" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/24/20260424/">今天开始复习 + 专题训练</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/24/20260424/" class="archive-article-date">
-  	<time datetime="2026-04-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>深入浅出复习</li>
-<li>网站复习(没复习完)</li>
-<li>manim下载</li>
-<li>明天专题训练： 图和树的遍历 + 位运算 + 动态规划 + 前缀和单调队列 + 二分答案 + 字符串</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/24/20260424/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260423" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/23/20260423/">这周日比赛</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/23/20260423/" class="archive-article-date">
-  	<time datetime="2026-04-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>2024马蹄杯第一场</li>
-<li>2023马蹄杯第一场</li>
-<li>深入浅出基础篇（部分）</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/23/20260423/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
@@ -1284,6 +1332,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
@@ -1292,19 +1348,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1312,23 +1356,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1336,11 +1368,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1352,7 +1400,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1360,11 +1408,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1372,7 +1416,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1380,19 +1424,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1400,11 +1436,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">

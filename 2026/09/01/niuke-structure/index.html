@@ -16,7 +16,7 @@
 <meta property="og:description" content="快速幂数据结构 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;bits&#x2F;stdc++.h&gt;using namespace std;#define int long longusing ll &#x3D; long long; const int maxn &#x3D; 10">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-09-01T13:05:39.190Z">
+<meta property="article:modified_time" content="2026-09-02T03:18:26.516Z">
 <meta property="article:author" content="Cai Haoran">
 <meta property="article:tag" content="niuke">
 <meta property="article:tag" content="xcpc">
@@ -182,6 +182,8 @@
       
         <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/225632">快速幂</a><br><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/19246">数据结构</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">10100</span>;</span><br><span class="line">ll a[maxn];</span><br><span class="line">ll tree1[<span class="number">4</span> * maxn],tree2[<span class="number">4</span> * maxn],lazymul[<span class="number">4</span> * maxn],lazyadd[<span class="number">4</span> * maxn];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build1</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tree1[p] = a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tree1[p] = tree1[p * <span class="number">2</span>] + tree1[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build2</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tree2[p] = a[l] * a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tree2[p] = tree2[p * <span class="number">2</span>] + tree2[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    lazmul[p * <span class="number">2</span>] *= lazmul[p];</span><br><span class="line">    lazmul[p * <span class="number">2</span> + <span class="number">1</span>] *= lazmul[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span>] = lazadd[p * <span class="number">2</span>] * lazmul[p] + lazadd[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span> + <span class="number">1</span>] = lazadd[p * <span class="number">2</span> + <span class="number">1</span>] * lazmul[p] + lazadd[p]; <span class="comment">// 留在父亲节点的是一整个做了标记后留在原地</span></span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    tree2[p * <span class="number">2</span>] = tree2[p * <span class="number">2</span>] * lazmul[p] * lazmul[p] </span><br><span class="line">        + <span class="number">2</span> * lazmul[p] * lazadd[p] * tree1[p * <span class="number">2</span>]</span><br><span class="line">        + laz_add[p] * laz_add[p] * (mid-l<span class="number">+1</span>); </span><br><span class="line">    tree2[p*<span class="number">2</span><span class="number">+1</span>] = tree2[p*<span class="number">2</span><span class="number">+1</span>] * lazmul[p] * lazmul[p] </span><br><span class="line">                + <span class="number">2</span> * lazmul[p] * lazadd[p] * tree1[p*<span class="number">2</span><span class="number">+1</span>] </span><br><span class="line">                + lazadd[p] * lazadd[p] * (r-mid);</span><br><span class="line">    tree1[p*<span class="number">2</span>] = tree1[p*<span class="number">2</span>] * lazmul[p] + lazadd[p] * (mid-l<span class="number">+1</span>);</span><br><span class="line">    tree1[p*<span class="number">2</span><span class="number">+1</span>] = tree1[p*<span class="number">2</span><span class="number">+1</span>] * lazmul[p] + lazadd[p] * (r-mid);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/212880">线段树</a><br>&#96;&#96;&#96;cpp</p>
+
       
 
       
@@ -509,6 +511,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
@@ -517,19 +527,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -537,23 +535,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,11 +547,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">201-前缀和差分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -577,7 +579,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,11 +587,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,7 +595,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,19 +603,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,11 +615,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
