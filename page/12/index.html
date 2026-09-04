@@ -158,6 +158,324 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260505" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/05/20260505/">假期</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/05/20260505/" class="archive-article-date">
+  	<time datetime="2026-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>回家九小时</li>
+<li>数分期中复习</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/05/20260505/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-template-105-贪心" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/05/05/template-105-%E8%B4%AA%E5%BF%83/">105-贪心</a>
+    </h1>
+  
+
+        
+        <a href="/2026/05/05/template-105-%E8%B4%AA%E5%BF%83/" class="archive-article-date">
+  	<time datetime="2026-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[]<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/training/list">template</a></p>
+<h1 id="不明显的贪心-P1106-删数问题"><a href="#不明显的贪心-P1106-删数问题" class="headerlink" title="不明显的贪心 P1106 删数问题"></a>不明显的贪心 P1106 删数问题</h1><h2 id="📋-题意概括"><a href="#📋-题意概括" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><p>给定一个不超过250位的高精度正整数 <code>n</code> 和整数 <code>k</code>，删除其中 <strong>k 个数字</strong>，使剩余数字按<strong>原顺序</strong>组成的新数<strong>最小</strong>。输出时需<strong>去掉前导零</strong>（若结果为空则输出 <code>0</code>）。</p>
+<hr>
+<h2 id="💡-解题思路（贪心-单调栈）"><a href="#💡-解题思路（贪心-单调栈）" class="headerlink" title="💡 解题思路（贪心 + 单调栈）"></a>💡 解题思路（贪心 + 单调栈）</h2><h3 id="核心贪心策略"><a href="#核心贪心策略" class="headerlink" title="核心贪心策略"></a>核心贪心策略</h3><blockquote>
+<p><strong>高位数字越小，整体数值越小</strong>。从左到右扫描，若当前数字 <code>&gt; </code>下一个数字，则删除当前数字（消除”峰值”）。</p>
+</blockquote>
+<h3 id="为什么贪心正确？"><a href="#为什么贪心正确？" class="headerlink" title="为什么贪心正确？"></a>为什么贪心正确？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例：175438, k=4</span><br><span class="line">第1轮: 1[7&gt;5]438 → 删7 → 15438</span><br><span class="line">第2轮: 1[5&gt;4]38  → 删5 → 1438  </span><br><span class="line">第3轮: 1[4&gt;3]8   → 删4 → 138</span><br><span class="line">第4轮: 1[3&gt;8]?   → 3&lt;8不删，删末尾8 → 13</span><br><span class="line">结果: 13 ✓</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ol>
+<li>用<strong>栈&#x2F;字符串模拟</strong>：遍历每一位数字</li>
+<li>当 <code>栈顶 &gt; 当前数字</code> 且 <code>还能删(k&gt;0)</code> 时，弹出栈顶（删除）</li>
+<li>当前数字入栈</li>
+<li>若遍历完 <code>k&gt;0</code>，从末尾继续删（剩余单调递增）</li>
+<li>去除前导零，处理空串情况</li>
+</ol>
+<hr>
+<h2 id="✅-优化代码（单调栈实现）"><a href="#✅-优化代码（单调栈实现）" class="headerlink" title="✅ 优化代码（单调栈实现）"></a>✅ 优化代码（单调栈实现）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string n, stk;  <span class="comment">// stk模拟栈</span></span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : n) &#123;</span><br><span class="line">        <span class="comment">// 贪心：栈顶大且还能删，就弹出</span></span><br><span class="line">        <span class="keyword">while</span> (k &gt; <span class="number">0</span> &amp;&amp; !stk.<span class="built_in">empty</span>() &amp;&amp; stk.<span class="built_in">back</span>() &gt; c) &#123;</span><br><span class="line">            stk.<span class="built_in">pop_back</span>();</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">        stk.<span class="built_in">push_back</span>(c);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 若还有剩余删除次数，删末尾（此时栈单调递增）</span></span><br><span class="line">    <span class="keyword">while</span> (k--) stk.<span class="built_in">pop_back</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 去除前导零</span></span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; stk.<span class="built_in">size</span>() &amp;&amp; stk[i] == <span class="string">&#x27;0&#x27;</span>) i++;</span><br><span class="line">    string ans = stk.<span class="built_in">substr</span>(i);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 空串输出0</span></span><br><span class="line">    cout &lt;&lt; (ans.<span class="built_in">empty</span>() ? <span class="string">&quot;0&quot;</span> : ans) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="🔑-关键总结"><a href="#🔑-关键总结" class="headerlink" title="🔑 关键总结"></a>🔑 关键总结</h2><ol>
+<li><strong>贪心本质</strong>：优先让高位变小，局部最优→全局最优</li>
+<li><strong>单调栈</strong>：天然适合”找左侧第一个更小元素”类问题</li>
+<li><strong>边界处理</strong>：前导零、空串、剩余删除次数</li>
+<li><strong>复杂度</strong>：$O(n)$，每位最多入栈出栈1次</li>
+</ol>
+<blockquote>
+<p>💡 记忆口诀：<strong>“见峰就削，高位优先，末尾补刀，去零输出”</strong></p>
+</blockquote>
+<h1 id="交替从数组两端向中间取元素"><a href="#交替从数组两端向中间取元素" class="headerlink" title="交替从数组两端向中间取元素"></a>交替从数组两端向中间取元素</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> sum = <span class="number">0</span>;        <span class="comment">// 初始 false</span></span><br><span class="line"><span class="type">int</span> j = <span class="number">0</span>, hpast = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    j = n - j + sum;    <span class="comment">// 关键：sum 影响 j 的计算</span></span><br><span class="line">    sum = !sum;         <span class="comment">// 每次循环后翻转</span></span><br><span class="line">    ans += (h[j] - hpast) * (h[j] - hpast);</span><br><span class="line">    hpast = h[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="P4447-AHOI2018初中组-分组（难在模拟）"><a href="#P4447-AHOI2018初中组-分组（难在模拟）" class="headerlink" title="P4447 [AHOI2018初中组] 分组（难在模拟）"></a>P4447 [AHOI2018初中组] 分组（难在模拟）</h1><h2 id="📋-题意概括-1"><a href="#📋-题意概括-1" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><p><code>n</code> 个队员，每人有实力值 <code>a_i</code>。需将所有队员分成若干组，满足：</p>
+<ul>
+<li>每组内实力值<strong>连续</strong>（如 <code>[2,3,4]</code>）且<strong>无重复</strong></li>
+<li>每人恰好属于一组</li>
+</ul>
+<p><strong>目标</strong>：使<strong>人数最少的组</strong>的人数<strong>尽可能大</strong>，输出该最大值。</p>
+<hr>
+<h2 id="💡-解题思路（贪心-模拟）"><a href="#💡-解题思路（贪心-模拟）" class="headerlink" title="💡 解题思路（贪心 + 模拟）"></a>💡 解题思路（贪心 + 模拟）</h2><h3 id="核心转化"><a href="#核心转化" class="headerlink" title="核心转化"></a>核心转化</h3><blockquote>
+<p>将实力值映射到数轴，统计每个值的出现次数 → 变成”条形图”。<br>分组 &#x3D; 从左到右画”连续线段”，每次从最底层开始，线段长度 &#x3D; 组人数。</p>
+</blockquote>
+<h3 id="贪心策略"><a href="#贪心策略" class="headerlink" title="贪心策略"></a>贪心策略</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">每次从当前最小实力值开始向右延伸：</span><br><span class="line">- 若 右边值 = 当前值+1 且 右边高度 &gt; 当前高度 → 继续延伸</span><br><span class="line">- 否则 → 停止当前组</span><br><span class="line"></span><br><span class="line">原因：若右边高度≤当前高度还强行延伸，会导致右边&quot;低谷&quot;被提前耗尽，</span><br><span class="line">      剩下高处的孤立点无法组队，使最小组变小。</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法步骤-1"><a href="#算法步骤-1" class="headerlink" title="算法步骤"></a>算法步骤</h3><ol>
+<li>用 <code>map</code> 统计每个实力值的出现次数（自动按实力值排序）</li>
+<li>循环直到所有队员分完：<ul>
+<li>从最小实力值开始，按贪心规则向右画线（每组）</li>
+<li>记录当前组长度，更新答案 <code>ans = min(ans, 长度)</code></li>
+<li>删除高度归零的实力值</li>
+</ul>
+</li>
+<li>输出 <code>ans</code></li>
+</ol>
+<h3 id="正确性直观理解"><a href="#正确性直观理解" class="headerlink" title="正确性直观理解"></a>正确性直观理解</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">实力值:  1  2  3  4</span><br><span class="line">高度:    2  3  2  1</span><br><span class="line"></span><br><span class="line">错误贪心(画到底):</span><br><span class="line">组1: [1,2,3,4] → 剩 [1,2,1,0] → 组2: [1,2] → 剩 [0,1,1,0] → 组3: [2,3]</span><br><span class="line">最小组 = 2</span><br><span class="line"></span><br><span class="line">正确贪心(高度限制):</span><br><span class="line">组1: [1,2] (3&gt;2停止) → 剩 [1,2,2,1]</span><br><span class="line">组2: [1,2,3] (2=2继续, 1&lt;2停止) → 剩 [0,1,1,1]</span><br><span class="line">组3: [2,3,4] → 剩 [0,0,0,0]</span><br><span class="line">最小组 = 2 ✓ (此例相同，但复杂数据能避免孤立点)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="✅-代码实现（带详细注释）"><a href="#✅-代码实现（带详细注释）" class="headerlink" title="✅ 代码实现（带详细注释）"></a>✅ 代码实现（带详细注释）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; cnt;  <span class="comment">// 实力值 → 出现次数（自动按key升序）</span></span><br><span class="line"><span class="keyword">typedef</span> map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;::iterator it;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1. 统计每个实力值的出现次数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="type">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        ++cnt[x];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0x3f3f3f3f</span>;  <span class="comment">// 初始化答案为极大值</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2. 循环分组，直到所有队员分配完毕</span></span><br><span class="line">    <span class="keyword">while</span> (!cnt.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        it cur = cnt.<span class="built_in">begin</span>(), nxt = cnt.<span class="built_in">begin</span>();</span><br><span class="line">        ++nxt;  <span class="comment">// nxt 指向 cur 的下一个实力值</span></span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> len = <span class="number">1</span>;  <span class="comment">// 当前组的长度（人数）</span></span><br><span class="line">        --(cur-&gt;second);  <span class="comment">// 当前实力值用掉1个</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 3. 贪心向右延伸：连续 + 右边高度 &gt; 当前高度</span></span><br><span class="line">        <span class="keyword">while</span> (nxt != cnt.<span class="built_in">end</span>() </span><br><span class="line">               &amp;&amp; nxt-&gt;first == cur-&gt;first + <span class="number">1</span>   <span class="comment">// 实力值连续</span></span><br><span class="line">               &amp;&amp; nxt-&gt;second &gt; cur-&gt;second) &#123;    <span class="comment">// 右边高度更高（关键！）</span></span><br><span class="line">            ++len;</span><br><span class="line">            --(nxt-&gt;second);  <span class="comment">// 用掉右边一个</span></span><br><span class="line">            ++cur; ++nxt;     <span class="comment">// 双指针右移</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 4. 清理高度归零的实力值（从map头部开始删）</span></span><br><span class="line">        it it_tmp = cnt.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">while</span> (it_tmp != cnt.<span class="built_in">end</span>() &amp;&amp; it_tmp-&gt;second == <span class="number">0</span>) &#123;</span><br><span class="line">            it_tmp = cnt.<span class="built_in">erase</span>(it_tmp);  <span class="comment">// erase返回下一个有效迭代器</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 5. 更新最小组的最大可能值</span></span><br><span class="line">        <span class="keyword">if</span> (len &lt; ans) ans = len;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔑-关键点总结"><a href="#🔑-关键点总结" class="headerlink" title="🔑 关键点总结"></a>🔑 关键点总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>贪心核心</strong></td>
+<td>右边高度 &gt; 当前高度才延伸，避免”高峰”孤立</td>
+</tr>
+<tr>
+<td><strong>数据结构</strong></td>
+<td><code>map</code> 自动排序 + <code>O(log n)</code> 删除，适合离散大值域</td>
+</tr>
+<tr>
+<td><strong>迭代器删除</strong></td>
+<td><code>erase(it)</code> 返回下一个迭代器，避免失效</td>
+</tr>
+<tr>
+<td><strong>复杂度</strong></td>
+<td>每个元素最多被访问1次，总复杂度 <code>O(n log n)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 记忆口诀：<strong>“从左开始，遇高才走，削峰填谷，记录最短”</strong></p>
+</blockquote>
+<h1 id="P1080-NOIP-2012-提高组-国王游戏"><a href="#P1080-NOIP-2012-提高组-国王游戏" class="headerlink" title="P1080 [NOIP 2012 提高组] 国王游戏"></a>P1080 [NOIP 2012 提高组] 国王游戏</h1><h2 id="📋-题意概括-2"><a href="#📋-题意概括-2" class="headerlink" title="📋 题意概括"></a>📋 题意概括</h2><ul>
+<li>国王 + <code>n</code> 位大臣，每人左右手各写一个整数</li>
+<li>大臣排成一排（国王固定最前），每位大臣获得金币 &#x3D; <strong>前面所有人左手数乘积 ÷ 自己右手数</strong>（向下取整）</li>
+<li><strong>目标</strong>：重新排列大臣顺序，使<strong>获得金币最多的大臣</strong>所获金币<strong>尽可能少</strong>，输出该最小值</li>
+</ul>
+<hr>
+<h2 id="💡-解题思路（贪心-高精度）"><a href="#💡-解题思路（贪心-高精度）" class="headerlink" title="💡 解题思路（贪心 + 高精度）"></a>💡 解题思路（贪心 + 高精度）</h2><h3 id="🔑-贪心策略"><a href="#🔑-贪心策略" class="headerlink" title="🔑 贪心策略"></a>🔑 贪心策略</h3><blockquote>
+<p><strong>按 <code>左手 × 右手</code> 的乘积从小到大排序</strong></p>
+</blockquote>
+<h3 id="📐-证明（交换论证法）"><a href="#📐-证明（交换论证法）" class="headerlink" title="📐 证明（交换论证法）"></a>📐 证明（交换论证法）</h3><p>考虑相邻两位大臣 <code>i</code> 和 <code>j</code>（<code>i</code> 在前），设前面左手乘积为 <code>S</code>：</p>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>大臣 i 获得</th>
+<th>大臣 j 获得</th>
+<th>最大值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i→j</td>
+<td><code>S / b[i]</code></td>
+<td><code>S×a[i] / b[j]</code></td>
+<td><code>max(S/b[i], S×a[i]/b[j])</code></td>
+</tr>
+<tr>
+<td>j→i</td>
+<td><code>S / b[j]</code></td>
+<td><code>S×a[j] / b[i]</code></td>
+<td><code>max(S/b[j], S×a[j]/b[i])</code></td>
+</tr>
+</tbody></table>
+<p>要使 <code>i→j</code> 更优，需满足：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">S×a[i]/b[j] ≤ S×a[j]/b[i]</span><br><span class="line">→ a[i]×b[i] ≤ a[j]×b[j]</span><br></pre></td></tr></table></figure>
+<p><strong>结论</strong>：按 <code>a×b</code> 升序排列可使相邻任意两人局部最优，从而全局最优。</p>
+<h3 id="⚠️-高精度必要性"><a href="#⚠️-高精度必要性" class="headerlink" title="⚠️ 高精度必要性"></a>⚠️ 高精度必要性</h3><ul>
+<li><code>n ≤ 1000</code>，每个 <code>a ≤ 10000</code>，乘积可达 <code>10000^1000</code>，远超 <code>long long</code></li>
+<li>需实现<strong>高精度乘法</strong>（乘左手）和<strong>高精度除法</strong>（除右手）</li>
+</ul>
+<hr>
+<h2 id="✅-代码实现（带详细注释）-1"><a href="#✅-代码实现（带详细注释）-1" class="headerlink" title="✅ 代码实现（带详细注释）"></a>✅ 代码实现（带详细注释）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> MAXN = <span class="number">4010</span>;  <span class="comment">// 高精度数组最大长度（十进制，最多4000位）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 高精度类（十进制，低位在前）==========</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BigInt</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> d[MAXN];  <span class="comment">// d[0]存储位数，d[1]~d[len]存储数字（d[1]是个位）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造函数：初始化为0</span></span><br><span class="line">    <span class="built_in">BigInt</span>() &#123; <span class="built_in">clear</span>(); &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 清空函数</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        <span class="built_in">memset</span>(d, <span class="number">0</span>, <span class="built_in">sizeof</span>(d)); </span><br><span class="line">        d[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 构造函数：int → BigInt</span></span><br><span class="line">    <span class="built_in">BigInt</span>(<span class="type">int</span> x) &#123;</span><br><span class="line">        <span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;</span><br><span class="line">            d[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            d[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (x) &#123;</span><br><span class="line">            d[++d[<span class="number">0</span>]] = x % <span class="number">10</span>;  <span class="comment">// 低位在前存储</span></span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 赋值运算符：int → BigInt</span></span><br><span class="line">    BigInt&amp; <span class="keyword">operator</span>=(<span class="type">int</span> x) &#123;</span><br><span class="line">        <span class="built_in">clear</span>();</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;</span><br><span class="line">            d[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            d[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (x) &#123;</span><br><span class="line">            d[++d[<span class="number">0</span>]] = x % <span class="number">10</span>;</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 比较函数：返回 1(&gt;), 0(=), -1(&lt;)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">compare</span><span class="params">(<span class="type">const</span> BigInt&amp; x)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (d[<span class="number">0</span>] != x.d[<span class="number">0</span>]) <span class="keyword">return</span> d[<span class="number">0</span>] &gt; x.d[<span class="number">0</span>] ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = d[<span class="number">0</span>]; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">            <span class="keyword">if</span> (d[i] != x.d[i]) <span class="keyword">return</span> d[i] &gt; x.d[i] ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 比较运算符重载</span></span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&gt;(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span>  &#123; <span class="keyword">return</span> <span class="built_in">compare</span>(x) &gt; <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt;(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span>  &#123; <span class="keyword">return</span> <span class="built_in">compare</span>(x) &lt; <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span> &#123; <span class="keyword">return</span> <span class="built_in">compare</span>(x) == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&gt;=(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span> &#123; <span class="keyword">return</span> !(*<span class="keyword">this</span> &lt; x); &#125;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>&lt;=(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span> &#123; <span class="keyword">return</span> !(*<span class="keyword">this</span> &gt; x); &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 高精度减法：*this - x（保证 *this &gt;= x）</span></span><br><span class="line">    BigInt <span class="keyword">operator</span>-(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span> &#123;</span><br><span class="line">        BigInt res;</span><br><span class="line">        res.d[<span class="number">0</span>] = <span class="built_in">max</span>(d[<span class="number">0</span>], x.d[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= res.d[<span class="number">0</span>]; ++i) &#123;</span><br><span class="line">            res.d[i] += d[i] - x.d[i];</span><br><span class="line">            <span class="keyword">if</span> (res.d[i] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                res.d[i] += <span class="number">10</span>;</span><br><span class="line">                res.d[i<span class="number">+1</span>]--;  <span class="comment">// 借位</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (res.d[<span class="number">0</span>] &gt; <span class="number">1</span> &amp;&amp; res.d[res.d[<span class="number">0</span>]] == <span class="number">0</span>) --res.d[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 高精度乘法：*this × x</span></span><br><span class="line">    BigInt <span class="keyword">operator</span>*(<span class="type">const</span> BigInt&amp; x) <span class="type">const</span> &#123;</span><br><span class="line">        BigInt res;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= d[<span class="number">0</span>]; ++i)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= x.d[<span class="number">0</span>]; ++j)</span><br><span class="line">                res.d[i+j<span class="number">-1</span>] += d[i] * x.d[j];  <span class="comment">// 卷积累加</span></span><br><span class="line">        </span><br><span class="line">        res.d[<span class="number">0</span>] = d[<span class="number">0</span>] + x.d[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= res.d[<span class="number">0</span>]; ++i) &#123;  <span class="comment">// 统一进位</span></span><br><span class="line">            res.d[i<span class="number">+1</span>] += res.d[i] / <span class="number">10</span>;</span><br><span class="line">            res.d[i] %= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (res.d[<span class="number">0</span>] &gt; <span class="number">1</span> &amp;&amp; res.d[res.d[<span class="number">0</span>]] == <span class="number">0</span>) --res.d[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 高精度除以低精度：*this / x</span></span><br><span class="line">    BigInt <span class="keyword">operator</span>/(<span class="type">int</span> x) <span class="type">const</span> &#123;</span><br><span class="line">        BigInt res;</span><br><span class="line">        <span class="type">int</span> remainder = <span class="number">0</span>;  <span class="comment">// 余数</span></span><br><span class="line">        <span class="type">bool</span> leadingZero = <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 从高位到低位做除法（模拟竖式）</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = d[<span class="number">0</span>]; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">            remainder = remainder * <span class="number">10</span> + d[i];</span><br><span class="line">            <span class="type">int</span> q = remainder / x;</span><br><span class="line">            <span class="keyword">if</span> (q != <span class="number">0</span> || !leadingZero) &#123;</span><br><span class="line">                res.d[++res.d[<span class="number">0</span>]] = q;</span><br><span class="line">                leadingZero = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            remainder %= x;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理结果为0的情况</span></span><br><span class="line">        <span class="keyword">if</span> (leadingZero) &#123;</span><br><span class="line">            res.d[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            res.d[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 转为低位在前</span></span><br><span class="line">            <span class="built_in">reverse</span>(res.d + <span class="number">1</span>, res.d + res.d[<span class="number">0</span>] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 大臣结构体 ==========</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Minister</span> &#123;</span><br><span class="line">    <span class="type">int</span> l, r;  <span class="comment">// 左手、右手数字</span></span><br><span class="line">&#125; a[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 贪心比较函数：按 l*r 升序排列（核心结论）</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(<span class="type">const</span> Minister&amp; x, <span class="type">const</span> Minister&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.l * x.r &lt; y.l * y.r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新最大值：ans = max(ans, val)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">updateMax</span><span class="params">(BigInt&amp; ans, <span class="type">const</span> BigInt&amp; val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ans &lt; val) ans = val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== 主函数 ==========</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);  <span class="comment">// 读取大臣人数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 读入国王（下标0）和大臣（下标1~n）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;a[i].l, &amp;a[i].r);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 贪心排序：大臣按 l*r 升序，国王固定在最前</span></span><br><span class="line">    <span class="built_in">sort</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>, cmp);</span><br><span class="line">    </span><br><span class="line">    <span class="function">BigInt <span class="title">ans</span><span class="params">(<span class="number">0</span>)</span></span>;           <span class="comment">// 答案：最大金币数</span></span><br><span class="line">    <span class="function">BigInt <span class="title">prod</span><span class="params">(a[<span class="number">0</span>].l)</span></span>;     <span class="comment">// 当前左手乘积，初始为国王左手</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 遍历每个大臣（已按最优顺序排列）</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="comment">// 当前大臣金币 = 前面所有人左手乘积 / 当前大臣右手</span></span><br><span class="line">        BigInt reward = prod / a[i].r;</span><br><span class="line">        <span class="built_in">updateMax</span>(ans, reward);  <span class="comment">// 更新历史最大值</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 更新乘积：乘以当前大臣左手（供后面大臣使用）</span></span><br><span class="line">        prod = prod * <span class="built_in">BigInt</span>(a[i].l);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出答案（高位在前输出）</span></span><br><span class="line">    <span class="keyword">if</span> (ans.d[<span class="number">0</span>] == <span class="number">1</span> &amp;&amp; ans.d[<span class="number">1</span>] == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = ans.d[<span class="number">0</span>]; i &gt;= <span class="number">1</span>; --i)</span><br><span class="line">            <span class="built_in">putchar</span>(ans.d[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔑-关键点总结-1"><a href="#🔑-关键点总结-1" class="headerlink" title="🔑 关键点总结"></a>🔑 关键点总结</h2><table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>贪心核心</strong></td>
+<td>相邻交换论证：<code>a[i]*b[i] ≤ a[j]*b[j]</code> 时 i 应在前</td>
+</tr>
+<tr>
+<td><strong>高精度存储</strong></td>
+<td>万进制（<code>%10000</code>），平衡效率与实现复杂度</td>
+</tr>
+<tr>
+<td><strong>除法细节</strong></td>
+<td>余数用 <code>long long</code> 避免溢出；结果需反转便于比较</td>
+</tr>
+<tr>
+<td><strong>输出格式</strong></td>
+<td>最高位直接输出，其余位 <code>%04d</code> 补零</td>
+</tr>
+<tr>
+<td><strong>复杂度</strong></td>
+<td>排序 <code>O(n log n)</code> + 高精度 <code>O(n × L)</code>，<code>L≈500</code> 位</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 记忆口诀：<strong>“乘积排序，高精乘除，逐位比较，补零输出”</strong></p>
+</blockquote>
+<h3 id="🎯-易错点提醒"><a href="#🎯-易错点提醒" class="headerlink" title="🎯 易错点提醒"></a>🎯 易错点提醒</h3><ol>
+<li><strong>排序关键字</strong>：必须是 <code>l*r</code>，不是单独 <code>l</code> 或 <code>r</code></li>
+<li><strong>高精度初始化</strong>：<code>prod</code> 初始为国王左手，不是 1</li>
+<li><strong>除法方向</strong>：从高位向低位模拟竖式</li>
+<li><strong>万进制输出</strong>：除最高位外，其他位必须补前导 0（如 <code>0023</code>）</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">template</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">105-贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/05/05/template-105-%E8%B4%AA%E5%BF%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260504" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1256,197 +1574,6 @@
 
 
   
-    <article id="post-20260429" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/29/20260429/">收尾</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/29/20260429/" class="archive-article-date">
-  	<time datetime="2026-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>高等代数期中考试复习</li>
-<li>补abc455</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/29/20260429/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Codeforces Round 1095 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/04/29/Codeforces%20Round%201095%20(Div.%202)/">Codeforces Round 1095 (Div. 2)</a>
-    </h1>
-  
-
-        
-        <a href="/2026/04/29/Codeforces%20Round%201095%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-04-28T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2226/problem/C">Codeforces Round 1095 (Div. 2)</a></p>
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><h3 id="题意概括"><a href="#题意概括" class="headerlink" title="题意概括"></a>题意概括</h3><p>给定一个长度为 $n$ 的非负整数数组 $a$。你可以对数组中的每个元素 $a_i$ 进行一次操作：选择一个整数 $b_i \ge 1$，将 $a_i$ 变为 $a_i \pmod{b_i}$。<br>目标是使得操作后的数组的 <strong>MEX</strong>（最小未出现的非负整数）最大。请输出这个最大的 MEX 值。</p>
-<hr>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>对于固定的 $x$ 值和变化的 $y$ ，让我们分析一下 $x , \bmod , y$ 可以达到什么值。</p>
-<p>首先，如果 $y \gt x$ ， $x , \bmod , y &#x3D; x$ 。否则，如果 $y \le x$ ， $x , \bmod , y$ 总是小于 $\frac{x}{2}$ 。我们可以把条件 $y \le x$ 分解成两种情况来证明这一点：</p>
-<ul>
-<li>$y \le \frac{x}{2}$ :由于余数必须小于除数，所以有 $x , \bmod , y \lt y \le \frac{x}{2}$ 。因此， $x , \bmod , y \lt \frac{x}{2}$ .</li>
-<li>$\frac{x}{2} \lt y \le x$ :在这种情况下，注意是 $x , \bmod , y &#x3D; x - y \lt x - \frac{x}{2} &#x3D; \frac{x}{2}$ 。因此，得 $x , \bmod , y \lt \frac{x}{2}$ 。</li>
-</ul>
-<p>最后，我们注意到 $x , \bmod , y$ 可以等于 $x$ （选择大于 $x$ 的任意 $y$ ），也可以达到任意值 $z \lt \frac{x}{2}$ （选择 $y &#x3D; x - z$ ）。</p>
-<p>现在，让我们试着解决给定的问题。如果在进行运算后，数组 $a$ 中的所有值 $0, 1, 2, \ldots, k-1$ 都能达到，那么我们就把整数 $k$ 称为好数组。注意，这个问题的答案是最大整数 $k$ ，也就是好值。此外，如果特定值 $k$ 是好值，那么 $k-1$ 也一定是好值。这种单调行为自然导致使用<strong>二元搜索</strong>来确定最大值 $k$ 。</p>
-<p>现在唯一剩下的问题就是 “给定一个整数值 $k$ ，我们如何检查它是否是好值？”要检查 $k$ 是否良好，我们需要检查是否可以通过执行操作获得数组中的所有值 $0, 1, 2, \ldots, k-1$ 。要获得值 $x$ （ $0 \le x \lt k$ ），我们至少需要一个满足 $a_i &#x3D; x$ 或 $a_i \gt 2x$ 的索引 $i$ （因为 $a_i , \bmod , b_i$ 可以是 $a_i$ 或 $ \lt \frac{a_i}{2}$ ）。我们还必须确保每个值最多分配到一个位置。</p>
-<p>为此，我们按递减顺序处理所需的值，即从 $k-1$ 到 $0$ 。我们维护一个包含所有未使用数组元素的多集合。对于当前值 $x$ ，我们会执行以下操作：</p>
-<ul>
-<li><p>如果多集合中存在 $x$ ，则删除 $x$ 的一次出现。</p>
-</li>
-<li><p>否则，我们需要一些未使用的值 $a_i$ ，如 $a_i \gt 2x$ 。在所有这些值中，我们可以选择一个。</p>
-</li>
-</ul>
-<p>如果在某一步中上述两个值都不可能出现，那么当前值 $x$ 就无法形成，因此 $k$ 也不好。</p>
-<p>上述策略之所以有效，是因为任何大于 $2x$ 的值总是可以还原成 $x$ ，而当 $x$ 和某个值 $ \gt 2x$ 都可用时，选择最小的可行值是最优的，因为较大的元素更灵活，以后可能还需要构建较小的值。</p>
-<h2 id="时间复杂度：-mathcal-O-n-cdot-log-2-n-。"><a href="#时间复杂度：-mathcal-O-n-cdot-log-2-n-。" class="headerlink" title="时间复杂度： $\mathcal{O}(n \cdot \log^2 n)$ 。"></a>时间复杂度： $\mathcal{O}(n \cdot \log^2 n)$ 。</h2><h3 id="完整代码展示"><a href="#完整代码展示" class="headerlink" title="完整代码展示"></a>完整代码展示</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line"> </span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cin &gt;&gt; a[i];</span><br><span class="line"> </span><br><span class="line">        <span class="function">multiset&lt;<span class="type">int</span>&gt; <span class="title">ms</span><span class="params">(a.begin(), a.end())</span></span>;</span><br><span class="line"> </span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = n + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">            <span class="type">int</span> md = (l + r) / <span class="number">2</span>;</span><br><span class="line"> </span><br><span class="line">            <span class="built_in">assert</span>((<span class="type">int</span>)ms.<span class="built_in">size</span>() == n);</span><br><span class="line">            </span><br><span class="line">            <span class="type">bool</span> is = <span class="number">1</span>;</span><br><span class="line">            vector&lt;<span class="type">int</span>&gt; removed;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = md - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(ms.<span class="built_in">count</span>(i))&#123;</span><br><span class="line">                    removed.<span class="built_in">push_back</span>(i);</span><br><span class="line">                    ms.<span class="built_in">erase</span>(ms.<span class="built_in">find</span>(i));</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="type">int</span> x = *ms.<span class="built_in">rbegin</span>();</span><br><span class="line">                    <span class="keyword">if</span>(x &lt; <span class="number">2</span>*i + <span class="number">1</span>)&#123;</span><br><span class="line">                        is = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    removed.<span class="built_in">push_back</span>(x);</span><br><span class="line">                    ms.<span class="built_in">erase</span>(ms.<span class="built_in">find</span>(x));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; z : removed) ms.<span class="built_in">insert</span>(z);</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">if</span>(is) l = md + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> r = md;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">assert</span>(l &gt; <span class="number">0</span>);</span><br><span class="line">        --l;</span><br><span class="line"> </span><br><span class="line">        cout &lt;&lt; l &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><h3 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h3><p>给定数组 $a$，可无限次操作：选区间 $[l,r]$，若区间最小值与最大值之和为奇数（即最值奇偶不同），则反转该区间。问能否使数组非递减。</p>
-<h3 id="💡-核心思路"><a href="#💡-核心思路" class="headerlink" title="💡 核心思路"></a>💡 核心思路</h3><p>让我们分别考虑奇数值和偶数值。如果奇数值可以在自身内部排序，而偶数值可以在自身内部排序，那么很容易看出整个数组最终是可以排序的（我们只需选择长度为 $2$ 的线段，其中一个是偶数，一个是奇数，就可以应用相邻反转）。</p>
-<p>现在，让我们分别考虑偶数值。假设偶数值的子序列为 $[e_1, e_2, \ldots, e_m]$ 。对于从 $1$ 到 $m$ 的每个 $i$ ，我们的目标是对索引 $i$ 之前的前缀进行排序。也就是说，假设索引 $i-1$ 之前的前缀已经排序，我们会尝试将 $e_i$ 放在排序顺序中的正确位置。</p>
-<p>假设索引 $i-1$ 之前的前缀排序为 $[E_1, E_2, \ldots, E_{i-1}]$ ，其中 $E_1 \le E_2 \le \cdots \le E_{i-1}$ 。如果是 $e_i \ge E_{i-1}$ ，我们可以直接扩展前缀并继续索引 $i+1$ 。否则，如果是 $e_i \lt E_{i-1}$ ，我们必须改变 $e_i$ 和 $E_{i-1}$ 的相对顺序。因此，我们必须进行涉及这两个索引的操作（否则，相对顺序不会改变）。为了进行这样的运算，我们至少需要一个奇数整数 $z$ ，即 $z \gt E_{i-1}$ 或 $z \lt e_i$ 。如果我们找不到这样的 $z$ ，我们可以立即得出结论：数组 $a$ 无法排序。</p>
-<p>如果我们能找到这样的 $z$ ，那就足够了，我们可以用它来改变 $e_i$ 和 $E_{i-1}$ 的相对顺序，而不改变数组 $a$ 中其他任何一对具有相同奇偶性元素的相对顺序。证明如下</p>
-<p>让值 $e_i$ , $E_{i-1}$ , $z$ 以如下方式出现在数组 $a$ 中： $[\ldots, E_{i-1}, \ldots, e_i, \ldots, z, \ldots]$ .请注意，在 $E_{i-1}$ 和 $e_i$ 之间不会有任何偶数值。因此，我们将它们之间的所有奇数值通过相邻的反转移动到 $E_{i-1}$ 的左边。在 $e_i$ 和 $z$ 之间可能既有偶数值也有奇数值；我们通过相邻的反转将所有偶数值移动到 $z$ 的右边，将所有奇数值移动到 $E_{i-1}$ 的左边。现在，数组 $a$ 看起来就像 $[\ldots, E_{i-1}, e_i, z, \ldots]$ .最后，选择包含所有三个元素的数段并反转，我们就得到了所需的顺序： $[\ldots, z, e_i, E_{i-1}, \ldots]$ .</p>
-<p>我们按照同样的思路来处理 $E_{i-2}, E_{i-3} \ldots$ 。最后，我们将 $e_i$ 放在排序顺序中的正确位置。因此，我们在每次反转时都要检查是否存在这样的 $z$ （可以通过存储前缀最大值轻松实现）。</p>
-<p>对于奇数值，我们遵循相同的流程。总之，如果我们在一个奇偶校验中找到了任何反转，却找不到相反奇偶校验的有效 $z$ ，那么答案就是 “否”。否则，答案就是 “是”。</p>
-<p>时间复杂度： $\mathcal{O(n)}$ 。</p>
-<h3 id="📦-代码展示"><a href="#📦-代码展示" class="headerlink" title="📦 代码展示"></a>📦 代码展示</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line"> </span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">a</span><span class="params">(n)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) cin &gt;&gt; a[i];</span><br><span class="line"> </span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; even, odd;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; z : a)&#123;</span><br><span class="line">            <span class="keyword">if</span>(z % <span class="number">2</span>) odd.<span class="built_in">push_back</span>(z);</span><br><span class="line">            <span class="keyword">else</span> even.<span class="built_in">push_back</span>(z);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="type">int</span> even_min = <span class="number">1e9</span>;</span><br><span class="line">        <span class="type">int</span> even_max = <span class="number">-1e9</span>;</span><br><span class="line">        <span class="type">int</span> odd_min = <span class="number">1e9</span>;</span><br><span class="line">        <span class="type">int</span> odd_max = <span class="number">-1e9</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(!even.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; z : even)&#123;</span><br><span class="line">                even_min = <span class="built_in">min</span>(even_min, z);</span><br><span class="line">                even_max = <span class="built_in">max</span>(even_max, z);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(!odd.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; z : odd)&#123;</span><br><span class="line">                odd_min = <span class="built_in">min</span>(odd_min, z);</span><br><span class="line">                odd_max = <span class="built_in">max</span>(odd_max, z);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="type">bool</span> is = <span class="number">1</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(even.<span class="built_in">size</span>() &gt; <span class="number">1</span>)&#123;</span><br><span class="line"> </span><br><span class="line">            <span class="type">int</span> mx = even[<span class="number">0</span>];</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; even.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mx &gt; even[i])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(odd_min &gt; even[i] &amp;&amp; odd_max &lt; mx)&#123;</span><br><span class="line">                        is = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    mx = even[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(odd.<span class="built_in">size</span>() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="type">int</span> mx = odd[<span class="number">0</span>];</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; odd.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(mx &gt; odd[i])&#123;</span><br><span class="line">                    <span class="keyword">if</span>(even_min &gt; odd[i] &amp;&amp; even_max &lt; mx)&#123;</span><br><span class="line">                        is = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    mx = odd[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span>(is) cout &lt;&lt; <span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">        <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="⚡-复杂度"><a href="#⚡-复杂度" class="headerlink" title="⚡ 复杂度"></a>⚡ 复杂度</h3><ul>
-<li><strong>时间</strong>：$O(n)$。单次遍历分离奇偶 + 线性求最值 + 线性检查逆序对，严格满足 $\sum n \le 2\cdot10^5$。</li>
-<li><strong>空间</strong>：$O(n)$ 存储子序列，可原地优化但当前结构最清晰。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/04/29/Codeforces%20Round%201095%20(Div.%202)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
@@ -1609,10 +1736,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
               </li>
              
@@ -1629,11 +1752,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1641,15 +1764,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1657,7 +1776,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1669,15 +1792,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1689,15 +1812,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1709,7 +1832,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1717,7 +1840,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1725,11 +1848,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color4">线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
