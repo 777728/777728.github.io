@@ -158,6 +158,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260603" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/03/20260603/">2026-06-03 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/03/20260603/" class="archive-article-date">
+  	<time datetime="2026-06-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>英语 两份听力和一份阅读+翻译20（70）+ 单词一章 + 复习</li>
+<li>cf 1h 博弈论 一题 &amp; 马蹄杯202603 订正（差两道题）</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/03/20260603/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260602" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1881,95 +1958,6 @@
 
 
   
-    <article id="post-Codeforces Round 1100 (Div. 2)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/">Codeforces Round 1100 (Div. 2)</a>
-    </h1>
-  
-
-        
-        <a href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/" class="archive-article-date">
-  	<time datetime="2026-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[]<a target="_blank" rel="noopener" href="https://codeforces.com/contest/2232/problem/c">Codeforces Round 1100 (Div. 2)</a></p>
-<h1 id="📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version"><a href="#📝-算法题错题整理：C2-We-Be-Flipping-Hard-Version" class="headerlink" title="📝 算法题错题整理：C2. We Be Flipping (Hard Version)"></a>📝 算法题错题整理：C2. We Be Flipping (Hard Version)</h1><h2 id="📖-题意概括"><a href="#📖-题意概括" class="headerlink" title="📖 题意概括"></a>📖 题意概括</h2><p>给定一个长度为 $n$ 的非零整数数组 $a$。你可以执行最多 $n$ 次操作：选择一个索引 $i$（$1 \le i \le n$），<strong>必须满足当前 $a_i &gt; 0$</strong>，然后将前缀 $a[1 \dots i]$ 的所有元素取反。要求构造一个操作序列，使得最终数组的元素之和最大。</p>
-<h2 id="🧩-题型模板与核心思想"><a href="#🧩-题型模板与核心思想" class="headerlink" title="🧩 题型模板与核心思想"></a>🧩 题型模板与核心思想</h2><p><strong>题型标签</strong>：构造 &#x2F; 贪心 &#x2F; 前缀翻转 &#x2F; 逆向思维<br><strong>核心模板思想</strong>：</p>
-<ol>
-<li><strong>逆向处理</strong>：前缀翻转类问题通常从右向左（$n \to 1$）考虑。因为操作 $i$ 只影响 $1 \dots i$，不会影响 $i+1 \dots n$。逆序决策可以保证后面的元素状态已经固定，不会影响前面的决策。</li>
-<li><strong>状态维护</strong>：用变量记录当前累积的翻转奇偶性（或直接维护当前符号），避免每次模拟 $O(n^2)$ 的翻转过程。</li>
-<li><strong>贪心条件</strong>：只有当当前操作能<strong>改善整体收益</strong>且<strong>满足前置条件</strong>（$a_i &gt; 0$）时才执行。对于本题，当当前位置有效值为正，且包含该位置的前缀和为负时，翻转该前缀能显著增大总和。</li>
-</ol>
-<h2 id="💡-正确解题思路"><a href="#💡-正确解题思路" class="headerlink" title="💡 正确解题思路"></a>💡 正确解题思路</h2><p>请阅读提示。事实上，我们总是有可能将 $\mathrm{idx}$ 之前的所有元素都变为正数。因此，最终得到的要么是原始数组（如果不进行任何运算），要么是某个 $\mathrm{idx}$ 的 $[|a_1|, …, |a_{\mathrm{idx}-1}|, -a_{\mathrm{idx}}, a_{\mathrm{idx}+1}, …, a_n]$ 形式的数组，其中 $a_{\mathrm{idx}}$ 最初为正数。你可以使用前缀和后缀数组找到 $\mathrm{idx}$ 的最佳选择。</p>
-<p>要使 $\mathrm{idx}$ 之前的所有元素都为正数，可以先应用简单版本中的方法使它们都为负数。最后对 $\mathrm{idx}$ 进行运算，得到最优数组。</p>
-<h2 id="✅-修正后代码（含注释，无多余空行）"><a href="#✅-修正后代码（含注释，无多余空行）" class="headerlink" title="✅ 修正后代码（含注释，无多余空行）"></a>✅ 修正后代码（含注释，无多余空行）</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">a</span>(n);</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++) cin&gt;&gt;a[i];</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;<span class="built_in">pre</span>(n),<span class="built_in">suf</span>(n + <span class="number">1</span>);</span><br><span class="line">    pre[<span class="number">0</span>] = <span class="built_in">abs</span>(a[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n;i++) pre[i] = pre[i - <span class="number">1</span>] + <span class="built_in">abs</span>(a[i]);</span><br><span class="line">    suf[n - <span class="number">1</span>] = a[n - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = n - <span class="number">2</span>;i &gt;= <span class="number">0</span>;i--) suf[i] = suf[i + <span class="number">1</span>] + a[i];</span><br><span class="line">    <span class="type">int</span> best = suf[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> idx = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">int</span> score = pre[i - <span class="number">1</span>] + suf[i + <span class="number">1</span>] - a[i];</span><br><span class="line">            <span class="keyword">if</span>(score &gt; best) best = score,idx = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(idx == <span class="number">-1</span>)&#123;</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;0&quot;</span>&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = idx - <span class="number">1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">        <span class="keyword">if</span>(ans.<span class="built_in">size</span>() &amp; <span class="number">1</span>) a[i] = -a[i];</span><br><span class="line">        <span class="keyword">if</span>(a[i] &gt; <span class="number">0</span>) ans.<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">    ans.<span class="built_in">push_back</span>(idx);</span><br><span class="line">    cout&lt;&lt;ans.<span class="built_in">size</span>()&lt;&lt;endl;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; ans.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">        cout&lt;&lt;ans[i] + <span class="number">1</span>&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">xcpc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">codeforces</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/05/27/Codeforces%20Round%201100%20(Div.%202)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -2128,7 +2116,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2140,11 +2128,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2152,11 +2140,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color4">103-暴力枚举</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">109-二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2172,23 +2164,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2204,6 +2192,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
@@ -2212,15 +2204,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2236,7 +2228,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2244,15 +2236,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线段树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
               </li>
              
               <li class="article-tag-list-item">
