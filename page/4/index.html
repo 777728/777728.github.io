@@ -158,6 +158,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260630" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/30/20260630/">2026-06-30 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/30/20260630/" class="archive-article-date">
+  	<time datetime="2026-06-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>cf 博弈论 一题 </li>
+<li>高代第六章 + 第九章第五章背背背题</li>
+<li>线性代数网课</li>
+<li>m满课</li>
+</ol>
+<p>检查</p>
+<ol>
+<li>数分         课后习题 + 书ppt例题</li>
+<li>高代         课后习题 + 书ppt例题 + 国外网课</li>
+<li>数据结构      课后习题 + 书ppt例题</li>
+<li>数据科学导论   课后习题 + 书ppt例题</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/30/20260630/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260629" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -558,6 +644,532 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/06/24/20260624/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-project-DataFrameTypes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/06/24/project-DataFrameTypes/">DataFrameTypes</a>
+    </h1>
+  
+
+        
+        <a href="/2026/06/24/project-DataFrameTypes/" class="archive-article-date">
+  	<time datetime="2026-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="DataFrameTypes"><a href="#DataFrameTypes" class="headerlink" title="DataFrameTypes"></a>DataFrameTypes</h1><h2 id="一、头文件用途简述"><a href="#一、头文件用途简述" class="headerlink" title="一、头文件用途简述"></a>一、头文件用途简述</h2><p>是整个 DataFrame 库的<strong>类型定义中枢</strong>，相当于项目的”类型字典”。它集中定义了：</p>
+<ul>
+<li>所有错误异常类</li>
+<li>所有枚举类型（控制各种操作的行为）</li>
+<li>所有参数结构体（配置各种算法和操作）</li>
+<li>类型别名和模板元编程工具</li>
+<li>DataFrame 的便捷 typedef</li>
+</ul>
+<p><strong>作用</strong>：统一管理全局类型，避免循环依赖，让其他文件只需包含这一个头文件就能使用所有常用类型。</p>
+<hr>
+<h2 id="二、功能分类汇总（共-7-大类，40-枚举-结构体）"><a href="#二、功能分类汇总（共-7-大类，40-枚举-结构体）" class="headerlink" title="二、功能分类汇总（共 7 大类，40+ 枚举&#x2F;结构体）"></a>二、功能分类汇总（共 7 大类，40+ 枚举&#x2F;结构体）</h2><h3 id="1-错误异常类（7个）"><a href="#1-错误异常类（7个）" class="headerlink" title="1. 错误异常类（7个）"></a>1. 错误异常类（7个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>类型名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L69</td>
+<td><code>DataFrameError</code></td>
+<td>通用错误基类</td>
+</tr>
+<tr>
+<td>L78</td>
+<td><code>ColNotFound</code></td>
+<td>列不存在错误</td>
+</tr>
+<tr>
+<td>L87</td>
+<td><code>InconsistentData</code></td>
+<td>数据不一致错误</td>
+</tr>
+<tr>
+<td>L95</td>
+<td><code>BadRange</code></td>
+<td>无效数据范围错误</td>
+</tr>
+<tr>
+<td>L104</td>
+<td><code>NotFeasible</code></td>
+<td>操作不可行错误</td>
+</tr>
+<tr>
+<td>L113</td>
+<td><code>BadIO</code></td>
+<td>IO操作失败错误</td>
+</tr>
+<tr>
+<td>L121</td>
+<td><code>NotImplemented</code></td>
+<td>功能未实现错误</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-数据操作策略枚举（12个）"><a href="#2-数据操作策略枚举（12个）" class="headerlink" title="2. 数据操作策略枚举（12个）"></a>2. 数据操作策略枚举（12个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>枚举名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L137</td>
+<td><code>nan_policy</code></td>
+<td>NaN填充策略（填充&#x2F;不填充）</td>
+</tr>
+<tr>
+<td>L148</td>
+<td><code>sort_state</code></td>
+<td>排序状态（已排序&#x2F;未排序）</td>
+</tr>
+<tr>
+<td>L159</td>
+<td><code>sort_spec</code></td>
+<td>排序方向（升序&#x2F;降序&#x2F;绝对值升&#x2F;绝对值降）</td>
+</tr>
+<tr>
+<td>L174</td>
+<td><code>join_policy</code></td>
+<td>表连接策略（内连接&#x2F;左连接&#x2F;右连接&#x2F;全外连接）</td>
+</tr>
+<tr>
+<td>L189</td>
+<td><code>gen_join_type</code></td>
+<td>通用连接类型</td>
+</tr>
+<tr>
+<td>L204</td>
+<td><code>concat_policy</code></td>
+<td>拼接策略（公共列&#x2F;所有列&#x2F;左表+公共列）</td>
+</tr>
+<tr>
+<td>L219</td>
+<td><code>shift_policy</code></td>
+<td>移位策略（上下左右）</td>
+</tr>
+<tr>
+<td>L237</td>
+<td><code>fill_policy</code></td>
+<td>缺失值填充（值&#x2F;前向&#x2F;后向&#x2F;线性插值&#x2F;中点&#x2F;拉格朗日）</td>
+</tr>
+<tr>
+<td>L270</td>
+<td><code>roll_policy</code></td>
+<td>滚动窗口策略（块滚动&#x2F;连续滚动）</td>
+</tr>
+<tr>
+<td>L286</td>
+<td><code>quantile_policy</code></td>
+<td>分位数计算策略（低值&#x2F;高值&#x2F;中点&#x2F;线性）</td>
+</tr>
+<tr>
+<td>L297</td>
+<td><code>drop_policy</code></td>
+<td>缺失值删除策略（全部&#x2F;任意&#x2F;阈值）</td>
+</tr>
+<tr>
+<td>L341</td>
+<td><code>remove_dup_spec</code></td>
+<td>重复行删除（保留首&#x2F;保留尾&#x2F;全删除）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-统计与数学计算枚举（12个）"><a href="#3-统计与数学计算枚举（12个）" class="headerlink" title="3. 统计与数学计算枚举（12个）"></a>3. 统计与数学计算枚举（12个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>枚举名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L307</td>
+<td><code>mean_type</code></td>
+<td>均值类型（算术&#x2F;加权&#x2F;几何&#x2F;调和&#x2F;二次）</td>
+</tr>
+<tr>
+<td>L319</td>
+<td><code>correlation_type</code></td>
+<td>相关系数（Pearson&#x2F;Spearman&#x2F;Kendall Tau）</td>
+</tr>
+<tr>
+<td>L332</td>
+<td><code>hampel_type</code></td>
+<td>Hampel滤波器类型（均值&#x2F;中位数）</td>
+</tr>
+<tr>
+<td>L351</td>
+<td><code>exponential_decay_spec</code></td>
+<td>指数衰减规范（重心&#x2F;跨度&#x2F;半衰期&#x2F;固定）</td>
+</tr>
+<tr>
+<td>L365</td>
+<td><code>mad_type</code></td>
+<td>均值绝对偏差类型（4种组合）</td>
+</tr>
+<tr>
+<td>L547</td>
+<td><code>prob_dist_type</code></td>
+<td>概率分布类型（算术&#x2F;对数&#x2F;Softmax&#x2F;2^x&#x2F;10^x）</td>
+</tr>
+<tr>
+<td>L559</td>
+<td><code>normalization_type</code></td>
+<td>归一化类型（10种，含Z-score、Min-Max等）</td>
+</tr>
+<tr>
+<td>L583</td>
+<td><code>loss_function_type</code></td>
+<td>损失函数（KL散度&#x2F;MAE&#x2F;MSE&#x2F;MSLE&#x2F;交叉熵等）</td>
+</tr>
+<tr>
+<td>L608</td>
+<td><code>vector_sim_type</code></td>
+<td>向量相似度&#x2F;距离（欧氏&#x2F;曼哈顿&#x2F;点积&#x2F;余弦等）</td>
+</tr>
+<tr>
+<td>L622</td>
+<td><code>mean_shift_kernel</code></td>
+<td>Mean Shift核函数（11种核）</td>
+</tr>
+<tr>
+<td>L640</td>
+<td><code>stationary_method</code></td>
+<td>时间序列平稳化方法（6种）</td>
+</tr>
+<tr>
+<td>L683</td>
+<td><code>stationary_test</code></td>
+<td>平稳性检验（KPSS&#x2F;ADF）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-机器学习与算法枚举（7个）"><a href="#4-机器学习与算法枚举（7个）" class="headerlink" title="4. 机器学习与算法枚举（7个）"></a>4. 机器学习与算法枚举（7个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>枚举名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L425</td>
+<td><code>random_policy</code></td>
+<td>随机获取数据策略</td>
+</tr>
+<tr>
+<td>L435</td>
+<td><code>pattern_spec</code></td>
+<td>模式检测（单调性&#x2F;正态分布等）</td>
+</tr>
+<tr>
+<td>L451</td>
+<td><code>rank_policy</code></td>
+<td>排名分配方式（平均&#x2F;首次&#x2F;最后&#x2F;实际）</td>
+</tr>
+<tr>
+<td>L463</td>
+<td><code>sigmoid_type</code></td>
+<td>Sigmoid函数类型（7种）</td>
+</tr>
+<tr>
+<td>L476</td>
+<td><code>rectify_type</code></td>
+<td>整流&#x2F;激活函数（ReLU&#x2F;GELU&#x2F;SiLU&#x2F;Mish等）</td>
+</tr>
+<tr>
+<td>L536</td>
+<td><code>impurity_type</code></td>
+<td>不纯度指标（基尼指数&#x2F;信息熵）</td>
+</tr>
+<tr>
+<td>L772</td>
+<td><code>policy_loss_baseline</code></td>
+<td>策略梯度损失基线（4种）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="5-IO与文件格式枚举（4个）"><a href="#5-IO与文件格式枚举（4个）" class="headerlink" title="5. IO与文件格式枚举（4个）"></a>5. IO与文件格式枚举（4个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>枚举名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L379</td>
+<td><code>io_format</code></td>
+<td>IO格式（csv&#x2F;csv2&#x2F;json&#x2F;binary&#x2F;markdown&#x2F;html等）</td>
+</tr>
+<tr>
+<td>L396</td>
+<td><code>time_frequency</code></td>
+<td>时间频率（年&#x2F;月&#x2F;周&#x2F;日&#x2F;时&#x2F;分&#x2F;秒&#x2F;毫秒）</td>
+</tr>
+<tr>
+<td>L713</td>
+<td><code>file_dtypes</code></td>
+<td>文件数据类型（35种类型，含数值&#x2F;字符串&#x2F;日期时间等）</td>
+</tr>
+<tr>
+<td>L759</td>
+<td><code>inclusiveness</code></td>
+<td>范围包含性（左闭右开&#x2F;左开右闭&#x2F;闭区间&#x2F;开区间）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="6-金融与时间序列枚举（3个）"><a href="#6-金融与时间序列枚举（3个）" class="headerlink" title="6. 金融与时间序列枚举（3个）"></a>6. 金融与时间序列枚举（3个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>枚举名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L412</td>
+<td><code>return_policy</code></td>
+<td>收益计算（对数&#x2F;百分比&#x2F;货币&#x2F;三元）</td>
+</tr>
+<tr>
+<td>L506</td>
+<td><code>decompose_type</code></td>
+<td>时间序列分解（加法&#x2F;乘法）</td>
+</tr>
+<tr>
+<td>L514</td>
+<td><code>box_cox_type</code></td>
+<td>Box-Cox变换类型（4种）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7-参数结构体（15-个）"><a href="#7-参数结构体（15-个）" class="headerlink" title="7. 参数结构体（15+个）"></a>7. 参数结构体（15+个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>结构体名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L651</td>
+<td><code>StationaryParams</code></td>
+<td>时间序列平稳化参数</td>
+</tr>
+<tr>
+<td>L697</td>
+<td><code>StationaryTestParams</code></td>
+<td>平稳性检验参数</td>
+</tr>
+<tr>
+<td>L799</td>
+<td><code>DetectAndChangeParams</code></td>
+<td>异常检测与填充参数</td>
+</tr>
+<tr>
+<td>L843</td>
+<td><code>ReadSchema</code></td>
+<td>读取列模式定义</td>
+</tr>
+<tr>
+<td>L867</td>
+<td><code>ReadParams</code></td>
+<td>读取操作参数</td>
+</tr>
+<tr>
+<td>L914</td>
+<td><code>WriteParams</code></td>
+<td>写入操作参数</td>
+</tr>
+<tr>
+<td>L945</td>
+<td><code>PCAParams</code></td>
+<td>PCA主成分分析参数</td>
+</tr>
+<tr>
+<td>L961</td>
+<td><code>ICAParams</code></td>
+<td>ICA独立成分分析参数</td>
+</tr>
+<tr>
+<td>L991</td>
+<td><code>CanonCorrResult</code></td>
+<td>典型相关分析结果</td>
+</tr>
+<tr>
+<td>L1012</td>
+<td><code>SeasonalityParams</code></td>
+<td>季节性周期检测参数</td>
+</tr>
+<tr>
+<td>L1037</td>
+<td><code>KShapeParams</code></td>
+<td>K-Shape时序聚类参数</td>
+</tr>
+<tr>
+<td>L1065</td>
+<td><code>RandGenParams</code></td>
+<td>随机数生成参数</td>
+</tr>
+<tr>
+<td>L1112</td>
+<td><code>Index2D</code></td>
+<td>二维索引范围</td>
+</tr>
+<tr>
+<td>L1253</td>
+<td><code>MemUsage</code></td>
+<td>内存使用统计</td>
+</tr>
+<tr>
+<td>L1278</td>
+<td><code>StringStats</code></td>
+<td>字符串统计信息</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="8-类型别名与模板工具（10-个）"><a href="#8-类型别名与模板工具（10-个）" class="headerlink" title="8. 类型别名与模板工具（10+个）"></a>8. 类型别名与模板工具（10+个）</h3><table>
+<thead>
+<tr>
+<th>行号</th>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L1219</td>
+<td><code>DataFrame&lt;I, H&gt;</code></td>
+<td>DataFrame主类模板声明</td>
+</tr>
+<tr>
+<td>L1222</td>
+<td><code>StdDataFrame&lt;I&gt;</code></td>
+<td>默认对齐的DataFrame</td>
+</tr>
+<tr>
+<td>L1227</td>
+<td><code>StdDataFrame64&lt;I&gt;</code></td>
+<td>64字节对齐的DataFrame</td>
+</tr>
+<tr>
+<td>L1121</td>
+<td><code>KNNPair&lt;T&gt;</code></td>
+<td>K近邻结果对</td>
+</tr>
+<tr>
+<td>L1133</td>
+<td><code>GroupBySpec&lt;V&gt;</code></td>
+<td>GroupBy规范</td>
+</tr>
+<tr>
+<td>L1140</td>
+<td><code>template_switch</code></td>
+<td>模板切换元函数</td>
+</tr>
+<tr>
+<td>L1146</td>
+<td><code>type_declare</code></td>
+<td>类型声明元函数（5种特化）</td>
+</tr>
+<tr>
+<td>L1174</td>
+<td><code>is_complex</code></td>
+<td>判断是否为复数类型</td>
+</tr>
+<tr>
+<td>L1186</td>
+<td><code>COND_DECL</code></td>
+<td>条件成员声明宏</td>
+</tr>
+<tr>
+<td>L1310</td>
+<td><code>DECL_COL</code></td>
+<td>列声明宏（构建DataFrame Schema）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、架构设计特点"><a href="#三、架构设计特点" class="headerlink" title="三、架构设计特点"></a>三、架构设计特点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                ┌──────────────────────────┐</span><br><span class="line">                │    DataFrameTypes.h      │</span><br><span class="line">                │   (类型定义中枢)          │</span><br><span class="line">                └────────────┬─────────────┘</span><br><span class="line">                             │</span><br><span class="line">     ┌───────────┬───────────┼───────────┬───────────┐</span><br><span class="line">     ▼           ▼           ▼           ▼           ▼</span><br><span class="line"> 异常类      枚举类型     参数结构体    类型别名     模板工具</span><br><span class="line">(7个)       (40+个)      (15+个)     (10+个)     (5+个)</span><br></pre></td></tr></table></figure>
+
+<p><strong>核心设计思想</strong>：</p>
+<ol>
+<li><strong>集中管理</strong>：所有公共类型统一在一个头文件中，便于查找和维护</li>
+<li><strong>策略模式</strong>：大量使用 enum class 控制算法行为，符合开闭原则</li>
+<li><strong>参数对象</strong>：复杂操作使用结构体封装参数，提高可读性</li>
+<li><strong>元编程支持</strong>：提供 type_declare 等模板工具，支持异构容器的类型推导</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">project</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/06/24/project-DataFrameTypes/">展开全文 >></a>
         </p>
       
 
@@ -1151,532 +1763,6 @@
 
 
   
-    <article id="post-project-DataFrameTypes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/06/24/project-DataFrameTypes/">DataFrameTypes</a>
-    </h1>
-  
-
-        
-        <a href="/2026/06/24/project-DataFrameTypes/" class="archive-article-date">
-  	<time datetime="2026-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="DataFrameTypes"><a href="#DataFrameTypes" class="headerlink" title="DataFrameTypes"></a>DataFrameTypes</h1><h2 id="一、头文件用途简述"><a href="#一、头文件用途简述" class="headerlink" title="一、头文件用途简述"></a>一、头文件用途简述</h2><p>是整个 DataFrame 库的<strong>类型定义中枢</strong>，相当于项目的”类型字典”。它集中定义了：</p>
-<ul>
-<li>所有错误异常类</li>
-<li>所有枚举类型（控制各种操作的行为）</li>
-<li>所有参数结构体（配置各种算法和操作）</li>
-<li>类型别名和模板元编程工具</li>
-<li>DataFrame 的便捷 typedef</li>
-</ul>
-<p><strong>作用</strong>：统一管理全局类型，避免循环依赖，让其他文件只需包含这一个头文件就能使用所有常用类型。</p>
-<hr>
-<h2 id="二、功能分类汇总（共-7-大类，40-枚举-结构体）"><a href="#二、功能分类汇总（共-7-大类，40-枚举-结构体）" class="headerlink" title="二、功能分类汇总（共 7 大类，40+ 枚举&#x2F;结构体）"></a>二、功能分类汇总（共 7 大类，40+ 枚举&#x2F;结构体）</h2><h3 id="1-错误异常类（7个）"><a href="#1-错误异常类（7个）" class="headerlink" title="1. 错误异常类（7个）"></a>1. 错误异常类（7个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>类型名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L69</td>
-<td><code>DataFrameError</code></td>
-<td>通用错误基类</td>
-</tr>
-<tr>
-<td>L78</td>
-<td><code>ColNotFound</code></td>
-<td>列不存在错误</td>
-</tr>
-<tr>
-<td>L87</td>
-<td><code>InconsistentData</code></td>
-<td>数据不一致错误</td>
-</tr>
-<tr>
-<td>L95</td>
-<td><code>BadRange</code></td>
-<td>无效数据范围错误</td>
-</tr>
-<tr>
-<td>L104</td>
-<td><code>NotFeasible</code></td>
-<td>操作不可行错误</td>
-</tr>
-<tr>
-<td>L113</td>
-<td><code>BadIO</code></td>
-<td>IO操作失败错误</td>
-</tr>
-<tr>
-<td>L121</td>
-<td><code>NotImplemented</code></td>
-<td>功能未实现错误</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="2-数据操作策略枚举（12个）"><a href="#2-数据操作策略枚举（12个）" class="headerlink" title="2. 数据操作策略枚举（12个）"></a>2. 数据操作策略枚举（12个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>枚举名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L137</td>
-<td><code>nan_policy</code></td>
-<td>NaN填充策略（填充&#x2F;不填充）</td>
-</tr>
-<tr>
-<td>L148</td>
-<td><code>sort_state</code></td>
-<td>排序状态（已排序&#x2F;未排序）</td>
-</tr>
-<tr>
-<td>L159</td>
-<td><code>sort_spec</code></td>
-<td>排序方向（升序&#x2F;降序&#x2F;绝对值升&#x2F;绝对值降）</td>
-</tr>
-<tr>
-<td>L174</td>
-<td><code>join_policy</code></td>
-<td>表连接策略（内连接&#x2F;左连接&#x2F;右连接&#x2F;全外连接）</td>
-</tr>
-<tr>
-<td>L189</td>
-<td><code>gen_join_type</code></td>
-<td>通用连接类型</td>
-</tr>
-<tr>
-<td>L204</td>
-<td><code>concat_policy</code></td>
-<td>拼接策略（公共列&#x2F;所有列&#x2F;左表+公共列）</td>
-</tr>
-<tr>
-<td>L219</td>
-<td><code>shift_policy</code></td>
-<td>移位策略（上下左右）</td>
-</tr>
-<tr>
-<td>L237</td>
-<td><code>fill_policy</code></td>
-<td>缺失值填充（值&#x2F;前向&#x2F;后向&#x2F;线性插值&#x2F;中点&#x2F;拉格朗日）</td>
-</tr>
-<tr>
-<td>L270</td>
-<td><code>roll_policy</code></td>
-<td>滚动窗口策略（块滚动&#x2F;连续滚动）</td>
-</tr>
-<tr>
-<td>L286</td>
-<td><code>quantile_policy</code></td>
-<td>分位数计算策略（低值&#x2F;高值&#x2F;中点&#x2F;线性）</td>
-</tr>
-<tr>
-<td>L297</td>
-<td><code>drop_policy</code></td>
-<td>缺失值删除策略（全部&#x2F;任意&#x2F;阈值）</td>
-</tr>
-<tr>
-<td>L341</td>
-<td><code>remove_dup_spec</code></td>
-<td>重复行删除（保留首&#x2F;保留尾&#x2F;全删除）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="3-统计与数学计算枚举（12个）"><a href="#3-统计与数学计算枚举（12个）" class="headerlink" title="3. 统计与数学计算枚举（12个）"></a>3. 统计与数学计算枚举（12个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>枚举名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L307</td>
-<td><code>mean_type</code></td>
-<td>均值类型（算术&#x2F;加权&#x2F;几何&#x2F;调和&#x2F;二次）</td>
-</tr>
-<tr>
-<td>L319</td>
-<td><code>correlation_type</code></td>
-<td>相关系数（Pearson&#x2F;Spearman&#x2F;Kendall Tau）</td>
-</tr>
-<tr>
-<td>L332</td>
-<td><code>hampel_type</code></td>
-<td>Hampel滤波器类型（均值&#x2F;中位数）</td>
-</tr>
-<tr>
-<td>L351</td>
-<td><code>exponential_decay_spec</code></td>
-<td>指数衰减规范（重心&#x2F;跨度&#x2F;半衰期&#x2F;固定）</td>
-</tr>
-<tr>
-<td>L365</td>
-<td><code>mad_type</code></td>
-<td>均值绝对偏差类型（4种组合）</td>
-</tr>
-<tr>
-<td>L547</td>
-<td><code>prob_dist_type</code></td>
-<td>概率分布类型（算术&#x2F;对数&#x2F;Softmax&#x2F;2^x&#x2F;10^x）</td>
-</tr>
-<tr>
-<td>L559</td>
-<td><code>normalization_type</code></td>
-<td>归一化类型（10种，含Z-score、Min-Max等）</td>
-</tr>
-<tr>
-<td>L583</td>
-<td><code>loss_function_type</code></td>
-<td>损失函数（KL散度&#x2F;MAE&#x2F;MSE&#x2F;MSLE&#x2F;交叉熵等）</td>
-</tr>
-<tr>
-<td>L608</td>
-<td><code>vector_sim_type</code></td>
-<td>向量相似度&#x2F;距离（欧氏&#x2F;曼哈顿&#x2F;点积&#x2F;余弦等）</td>
-</tr>
-<tr>
-<td>L622</td>
-<td><code>mean_shift_kernel</code></td>
-<td>Mean Shift核函数（11种核）</td>
-</tr>
-<tr>
-<td>L640</td>
-<td><code>stationary_method</code></td>
-<td>时间序列平稳化方法（6种）</td>
-</tr>
-<tr>
-<td>L683</td>
-<td><code>stationary_test</code></td>
-<td>平稳性检验（KPSS&#x2F;ADF）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="4-机器学习与算法枚举（7个）"><a href="#4-机器学习与算法枚举（7个）" class="headerlink" title="4. 机器学习与算法枚举（7个）"></a>4. 机器学习与算法枚举（7个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>枚举名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L425</td>
-<td><code>random_policy</code></td>
-<td>随机获取数据策略</td>
-</tr>
-<tr>
-<td>L435</td>
-<td><code>pattern_spec</code></td>
-<td>模式检测（单调性&#x2F;正态分布等）</td>
-</tr>
-<tr>
-<td>L451</td>
-<td><code>rank_policy</code></td>
-<td>排名分配方式（平均&#x2F;首次&#x2F;最后&#x2F;实际）</td>
-</tr>
-<tr>
-<td>L463</td>
-<td><code>sigmoid_type</code></td>
-<td>Sigmoid函数类型（7种）</td>
-</tr>
-<tr>
-<td>L476</td>
-<td><code>rectify_type</code></td>
-<td>整流&#x2F;激活函数（ReLU&#x2F;GELU&#x2F;SiLU&#x2F;Mish等）</td>
-</tr>
-<tr>
-<td>L536</td>
-<td><code>impurity_type</code></td>
-<td>不纯度指标（基尼指数&#x2F;信息熵）</td>
-</tr>
-<tr>
-<td>L772</td>
-<td><code>policy_loss_baseline</code></td>
-<td>策略梯度损失基线（4种）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="5-IO与文件格式枚举（4个）"><a href="#5-IO与文件格式枚举（4个）" class="headerlink" title="5. IO与文件格式枚举（4个）"></a>5. IO与文件格式枚举（4个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>枚举名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L379</td>
-<td><code>io_format</code></td>
-<td>IO格式（csv&#x2F;csv2&#x2F;json&#x2F;binary&#x2F;markdown&#x2F;html等）</td>
-</tr>
-<tr>
-<td>L396</td>
-<td><code>time_frequency</code></td>
-<td>时间频率（年&#x2F;月&#x2F;周&#x2F;日&#x2F;时&#x2F;分&#x2F;秒&#x2F;毫秒）</td>
-</tr>
-<tr>
-<td>L713</td>
-<td><code>file_dtypes</code></td>
-<td>文件数据类型（35种类型，含数值&#x2F;字符串&#x2F;日期时间等）</td>
-</tr>
-<tr>
-<td>L759</td>
-<td><code>inclusiveness</code></td>
-<td>范围包含性（左闭右开&#x2F;左开右闭&#x2F;闭区间&#x2F;开区间）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="6-金融与时间序列枚举（3个）"><a href="#6-金融与时间序列枚举（3个）" class="headerlink" title="6. 金融与时间序列枚举（3个）"></a>6. 金融与时间序列枚举（3个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>枚举名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L412</td>
-<td><code>return_policy</code></td>
-<td>收益计算（对数&#x2F;百分比&#x2F;货币&#x2F;三元）</td>
-</tr>
-<tr>
-<td>L506</td>
-<td><code>decompose_type</code></td>
-<td>时间序列分解（加法&#x2F;乘法）</td>
-</tr>
-<tr>
-<td>L514</td>
-<td><code>box_cox_type</code></td>
-<td>Box-Cox变换类型（4种）</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="7-参数结构体（15-个）"><a href="#7-参数结构体（15-个）" class="headerlink" title="7. 参数结构体（15+个）"></a>7. 参数结构体（15+个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>结构体名</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L651</td>
-<td><code>StationaryParams</code></td>
-<td>时间序列平稳化参数</td>
-</tr>
-<tr>
-<td>L697</td>
-<td><code>StationaryTestParams</code></td>
-<td>平稳性检验参数</td>
-</tr>
-<tr>
-<td>L799</td>
-<td><code>DetectAndChangeParams</code></td>
-<td>异常检测与填充参数</td>
-</tr>
-<tr>
-<td>L843</td>
-<td><code>ReadSchema</code></td>
-<td>读取列模式定义</td>
-</tr>
-<tr>
-<td>L867</td>
-<td><code>ReadParams</code></td>
-<td>读取操作参数</td>
-</tr>
-<tr>
-<td>L914</td>
-<td><code>WriteParams</code></td>
-<td>写入操作参数</td>
-</tr>
-<tr>
-<td>L945</td>
-<td><code>PCAParams</code></td>
-<td>PCA主成分分析参数</td>
-</tr>
-<tr>
-<td>L961</td>
-<td><code>ICAParams</code></td>
-<td>ICA独立成分分析参数</td>
-</tr>
-<tr>
-<td>L991</td>
-<td><code>CanonCorrResult</code></td>
-<td>典型相关分析结果</td>
-</tr>
-<tr>
-<td>L1012</td>
-<td><code>SeasonalityParams</code></td>
-<td>季节性周期检测参数</td>
-</tr>
-<tr>
-<td>L1037</td>
-<td><code>KShapeParams</code></td>
-<td>K-Shape时序聚类参数</td>
-</tr>
-<tr>
-<td>L1065</td>
-<td><code>RandGenParams</code></td>
-<td>随机数生成参数</td>
-</tr>
-<tr>
-<td>L1112</td>
-<td><code>Index2D</code></td>
-<td>二维索引范围</td>
-</tr>
-<tr>
-<td>L1253</td>
-<td><code>MemUsage</code></td>
-<td>内存使用统计</td>
-</tr>
-<tr>
-<td>L1278</td>
-<td><code>StringStats</code></td>
-<td>字符串统计信息</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="8-类型别名与模板工具（10-个）"><a href="#8-类型别名与模板工具（10-个）" class="headerlink" title="8. 类型别名与模板工具（10+个）"></a>8. 类型别名与模板工具（10+个）</h3><table>
-<thead>
-<tr>
-<th>行号</th>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L1219</td>
-<td><code>DataFrame&lt;I, H&gt;</code></td>
-<td>DataFrame主类模板声明</td>
-</tr>
-<tr>
-<td>L1222</td>
-<td><code>StdDataFrame&lt;I&gt;</code></td>
-<td>默认对齐的DataFrame</td>
-</tr>
-<tr>
-<td>L1227</td>
-<td><code>StdDataFrame64&lt;I&gt;</code></td>
-<td>64字节对齐的DataFrame</td>
-</tr>
-<tr>
-<td>L1121</td>
-<td><code>KNNPair&lt;T&gt;</code></td>
-<td>K近邻结果对</td>
-</tr>
-<tr>
-<td>L1133</td>
-<td><code>GroupBySpec&lt;V&gt;</code></td>
-<td>GroupBy规范</td>
-</tr>
-<tr>
-<td>L1140</td>
-<td><code>template_switch</code></td>
-<td>模板切换元函数</td>
-</tr>
-<tr>
-<td>L1146</td>
-<td><code>type_declare</code></td>
-<td>类型声明元函数（5种特化）</td>
-</tr>
-<tr>
-<td>L1174</td>
-<td><code>is_complex</code></td>
-<td>判断是否为复数类型</td>
-</tr>
-<tr>
-<td>L1186</td>
-<td><code>COND_DECL</code></td>
-<td>条件成员声明宏</td>
-</tr>
-<tr>
-<td>L1310</td>
-<td><code>DECL_COL</code></td>
-<td>列声明宏（构建DataFrame Schema）</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="三、架构设计特点"><a href="#三、架构设计特点" class="headerlink" title="三、架构设计特点"></a>三、架构设计特点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                ┌──────────────────────────┐</span><br><span class="line">                │    DataFrameTypes.h      │</span><br><span class="line">                │   (类型定义中枢)          │</span><br><span class="line">                └────────────┬─────────────┘</span><br><span class="line">                             │</span><br><span class="line">     ┌───────────┬───────────┼───────────┬───────────┐</span><br><span class="line">     ▼           ▼           ▼           ▼           ▼</span><br><span class="line"> 异常类      枚举类型     参数结构体    类型别名     模板工具</span><br><span class="line">(7个)       (40+个)      (15+个)     (10+个)     (5+个)</span><br></pre></td></tr></table></figure>
-
-<p><strong>核心设计思想</strong>：</p>
-<ol>
-<li><strong>集中管理</strong>：所有公共类型统一在一个头文件中，便于查找和维护</li>
-<li><strong>策略模式</strong>：大量使用 enum class 控制算法行为，符合开闭原则</li>
-<li><strong>参数对象</strong>：复杂操作使用结构体封装参数，提高可读性</li>
-<li><strong>元编程支持</strong>：提供 type_declare 等模板工具，支持异构容器的类型推导</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">project</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/06/24/project-DataFrameTypes/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-20260623" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1733,92 +1819,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/06/23/20260623/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260622" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/06/22/20260622/">2026-06-22 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/06/22/20260622/" class="archive-article-date">
-  	<time datetime="2026-06-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-06-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>cf 博弈论 一题 </li>
-<li>高代期中后的概念和小部分习题</li>
-<li>机器学习粗略总结 + 斯坦福网课第一部分</li>
-<li>数据结构过书</li>
-</ol>
-<p>检查</p>
-<ol>
-<li>数分         课后习题 + 书ppt例题 + 国外网课</li>
-<li>高代         课后习题 + 书ppt例题 + 国外网课</li>
-<li>数据结构      课后习题 + 书ppt例题 + 国外网课</li>
-<li>数据科学导论   课后习题 + 书ppt例题 + 国外网课 4d</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/06/22/20260622/">展开全文 >></a>
         </p>
       
 
@@ -2006,27 +2006,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">模拟高精度</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2034,7 +2014,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">106-二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">107-搜素</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">108-STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2042,11 +2038,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2058,14 +2058,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
               </li>
              
@@ -2074,7 +2066,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">KMP和字典树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2082,27 +2082,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">树上与图dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">广搜</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2114,11 +2102,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+                <a href="javascript:void(0)" class="js-tag color5">进阶搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2134,7 +2126,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">板子</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
             
             <div class="clearfix"></div>
