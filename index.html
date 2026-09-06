@@ -158,6 +158,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20260906" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2026/09/06/20260906/">2026-09-06 日记</a>
+    </h1>
+  
+
+        
+        <a href="/2026/09/06/20260906/" class="archive-article-date">
+  	<time datetime="2026-09-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-09-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/20325">HH的项链</a></li>
+<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/19684/C">采花</a></li>
+<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/19684/A">借教室</a></li>
+<li>基础语法再复习</li>
+<li>英语一套 csapp </li>
+<li><img src="/img/260906.jpg"></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2026/09/06/20260906/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20260905" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -182,7 +263,6 @@
 <li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/28259/E">状态压缩</a></li>
 <li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/16544">简单环</a></li>
 <li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/212880">线段树</a></li>
-<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/20325">HH的项链</a></li>
 <li>图论基础相关的题再复习</li>
 <li>英语一套 csapp </li>
 <li><img src="/img/260905.jpg"></li>
@@ -851,6 +931,50 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>; </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">10100</span>;</span><br><span class="line">ll a[maxn];</span><br><span class="line">ll tree1[<span class="number">4</span> * maxn],tree2[<span class="number">4</span> * maxn],lazymul[<span class="number">4</span> * maxn],lazyadd[<span class="number">4</span> * maxn];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build1</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tree1[p] = a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tree1[p] = tree1[p * <span class="number">2</span>] + tree1[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build2</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tree2[p] = a[l] * a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tree2[p] = tree2[p * <span class="number">2</span>] + tree2[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    lazmul[p * <span class="number">2</span>] *= lazmul[p];</span><br><span class="line">    lazmul[p * <span class="number">2</span> + <span class="number">1</span>] *= lazmul[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span>] = lazadd[p * <span class="number">2</span>] * lazmul[p] + lazadd[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span> + <span class="number">1</span>] = lazadd[p * <span class="number">2</span> + <span class="number">1</span>] * lazmul[p] + lazadd[p]; <span class="comment">// 留在父亲节点的是一整个做了标记后留在原地</span></span><br><span class="line">    <span class="type">int</span> mid =</span><br><span class="line"></span><br><span class="line">    tree2[p * <span class="number">2</span>] = tree2[p * <span class="number">2</span>] * lazmul[p] * lazmul[p] </span><br><span class="line">        + <span class="number">2</span> * lazmul[p] * lazadd[p] * tree1[p * <span class="number">2</span>]</span><br><span class="line">        + laz_add[p] * laz_add[p] * (mid-l<span class="number">+1</span>); </span><br><span class="line">    tree2[p*<span class="number">2</span><span class="number">+1</span>] = tree2[p*<span class="number">2</span><span class="number">+1</span>] * lazmul[p] * lazmul[p] </span><br><span class="line">                + <span class="number">2</span> * lazmul[p] * lazadd[p] * tree1[p*<span class="number">2</span><span class="number">+1</span>] </span><br><span class="line">                + lazadd[p] * lazadd[p] * (r-mid);</span><br><span class="line">    tree1[p*<span class="number">2</span>] = tree1[p*<span class="number">2</span>] * lazmul[p] + lazadd[p] * (mid-l<span class="number">+1</span>);</span><br><span class="line">    tree1[p*<span class="number">2</span><span class="number">+1</span>] = tree1[p*<span class="number">2</span><span class="number">+1</span>] * lazmul[p] + lazadd[p] * (r-mid);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/212880">线段树</a></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一个自己写的线段树</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span> <span class="comment">// 包含所有标准库</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">100010</span>;</span><br><span class="line"><span class="type">int</span> t,opt,ans,l,r,v,n,m,p;</span><br><span class="line"><span class="type">int</span> a[maxn],tre1[maxn * <span class="number">4</span>],tre2[maxn * <span class="number">4</span>],lazyadd[maxn * <span class="number">4</span>],lazymul[maxn * <span class="number">4</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build1</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tre1[l] = a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tre1[p] = tre1[p * <span class="number">2</span>] + tre1[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build2</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123;</span><br><span class="line">        tre2[l] = a[l] * a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span>,l,mid);</span><br><span class="line">    <span class="built_in">build2</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tre2[p] = tre2[p * <span class="number">2</span>] + tre2[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pushdown</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    lazmul[p * <span class="number">2</span>] *= lazmul[p];</span><br><span class="line">    lazmul[p * <span class="number">2</span> + <span class="number">1</span>] *= lazmul[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span>] = lazadd[p * <span class="number">2</span>] * lazmul[p] + lazadd[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span> + <span class="number">1</span>] = lazadd[p * <span class="number">2</span> + <span class="number">1</span>] * lazmul[p] + lazadd[p];</span><br><span class="line">    <span class="type">int</span> mid = ( l + r ) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    tre2[p * <span class="number">2</span>] = tre2[p * <span class="number">2</span>] * lazmul[p] * lazmul[p] +</span><br><span class="line">                    <span class="number">2</span> * lazmul[p] * lazadd[p] * tre1[p * <span class="number">2</span>] +</span><br><span class="line">                    lazadd[p] * lazadd[p] * (mid - l + <span class="number">1</span>);</span><br><span class="line">    tre2[p * <span class="number">2</span> + <span class="number">1</span>] = tre2[p * <span class="number">2</span> + <span class="number">1</span>] * lazmul[p] * lazmul[p] +</span><br><span class="line">                    <span class="number">2</span> * lazmul[p] * lazadd[p] * tre1[p * <span class="number">2</span> + <span class="number">1</span>] +</span><br><span class="line">                    lazadd[p] * lazadd[p] * (r - mid);</span><br><span class="line">    tre1[p * <span class="number">2</span>] = tre1[p * <span class="number">2</span>] * lazmul[p] + lazadd[p] * (mid - l + <span class="number">1</span>);</span><br><span class="line">    tre1[p * <span class="number">2</span> + <span class="number">1</span>] = tre1[p * <span class="number">2</span> + <span class="number">1</span>] * lazmul[p] + lazadd[p] * (r - mid);</span><br><span class="line">    lazadd[p] = <span class="number">0</span>,lazmul[p] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cal1</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y) <span class="keyword">return</span> tre1[p];</span><br><span class="line">    <span class="keyword">if</span>(lazadd[p] == <span class="number">0</span> || lazmul[p] == <span class="number">1</span>) <span class="built_in">pushdown</span>(p,l,r);</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; mid) <span class="keyword">return</span> <span class="built_in">cal1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y);</span><br><span class="line">    <span class="keyword">if</span>(y &lt;= mid) <span class="keyword">return</span> <span class="built_in">cal1</span>(p * <span class="number">2</span>,l,mid,x,y);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">cal1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y) + <span class="built_in">cal1</span>(p * <span class="number">2</span>,l,mid,x,y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cal2</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y) <span class="keyword">return</span> tre2[p];</span><br><span class="line">    <span class="keyword">if</span>(lazadd[p] == <span class="number">0</span> || lazmul[p] == <span class="number">1</span>) <span class="built_in">pushdown</span>(p,l,r);</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &gt; mid) <span class="keyword">return</span> <span class="built_in">cal2</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y);</span><br><span class="line">    <span class="keyword">if</span>(y &lt;= mid) <span class="keyword">return</span> <span class="built_in">cal2</span>(p * <span class="number">2</span>,l,mid,x,y);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">cal2</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y) + <span class="built_in">cal2</span>(p * <span class="number">2</span>,l,mid,x,y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mul</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)&#123;</span><br><span class="line">        tre1[p] *= num;</span><br><span class="line">        tre2[p] *= num * num;</span><br><span class="line">        lazadd[p] *= num;</span><br><span class="line">        lazmul[p] *= num;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(lazadd[p] == <span class="number">0</span> || lazmul[p] == <span class="number">1</span>) <span class="built_in">pushdown</span>(p,l,r);</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid) <span class="keyword">return</span> <span class="built_in">mul</span>(p * <span class="number">2</span>,l,mid,x,y,num);</span><br><span class="line">    <span class="keyword">if</span>(y &gt; mid) <span class="keyword">return</span> <span class="built_in">mul</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y,num);</span><br><span class="line">    tre1[p] = tre1[p * <span class="number">2</span>] + tre1[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">    tre2[p] = tre2[p * <span class="number">2</span>] + tre2[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y)&#123;</span><br><span class="line">        tre1[p] += (r - l + <span class="number">1</span>) * num;</span><br><span class="line">        tre2[p] += <span class="number">2</span> * num * tre1[p] + num * num * (r - l + <span class="number">1</span>);</span><br><span class="line">        lazadd[p] += num;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(lazadd[p] == <span class="number">0</span> || lazmul[p] == <span class="number">1</span>) <span class="built_in">pushdown</span>(p,l,r);</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= mid) <span class="built_in">add</span>(p * <span class="number">2</span>,l,mid,x,y,num);</span><br><span class="line">    <span class="keyword">if</span>(y &gt; mid) <span class="built_in">add</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r,x,y,num);</span><br><span class="line">    tre1[p] = tre1[p * <span class="number">2</span>] + tre1[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">    tre2[p] = tre2[p * <span class="number">2</span>] + tre2[p * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="built_in">sizeof</span>(a));</span><br><span class="line">        <span class="built_in">memset</span>(tre1,<span class="number">0</span>,<span class="built_in">sizeof</span>(tre1));</span><br><span class="line">        <span class="built_in">memset</span>(tre2,<span class="number">0</span>,<span class="built_in">sizeof</span>(tre2)); <span class="comment">// 不要每次都遍历清空数组！！！！！！！！！！！！！！</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= <span class="number">4</span> * n;i++)&#123;</span><br><span class="line">            lazyadd[i] = <span class="number">0</span>;</span><br><span class="line">            lazymul[i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m&gt;&gt;p;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++) cin&gt;&gt;a[i];</span><br><span class="line">        <span class="built_in">build1</span>(<span class="number">1</span>,<span class="number">1</span>,n),<span class="built_in">build2</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)&#123;</span><br><span class="line">            cin&gt;&gt;opt;</span><br><span class="line">            <span class="keyword">if</span>(opt == <span class="number">1</span>)&#123;</span><br><span class="line">                cin&gt;&gt;l&gt;&gt;r&gt;&gt;v;</span><br><span class="line">                <span class="built_in">add</span>(<span class="number">1</span>,l,r,<span class="number">1</span>,n,v);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">2</span>)&#123;</span><br><span class="line">                cin&gt;&gt;l&gt;&gt;r&gt;&gt;v;</span><br><span class="line">                <span class="built_in">mul</span>(<span class="number">1</span>,l,r,<span class="number">1</span>,n,v);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="type">int</span> ans = <span class="built_in">cal1</span>(<span class="number">1</span>,l,r,<span class="number">1</span>,n) * <span class="built_in">cal1</span>(<span class="number">1</span>,l,r,<span class="number">1</span>,n) % p - <span class="built_in">cal2</span>(<span class="number">1</span>,l,r,<span class="number">1</span>,n);</span><br><span class="line">                cout&lt;&lt;ans / <span class="number">2</span>&lt;&lt;endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/20325">HH的项链</a><br> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1e6</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,m,l,r;</span><br><span class="line"><span class="type">int</span> w[maxn],tr[maxn],last[maxn],ans[maxn];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">    <span class="type">int</span> l,r,id;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp;a) <span class="type">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> r &lt; a.r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;p[maxn];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lowbit</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;<span class="keyword">return</span> num &amp; -num;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = x;i &lt;= n;i += <span class="built_in">lowbit</span>(i))&#123;</span><br><span class="line">        tr[i] += v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = x;i;i -= <span class="built_in">lowbit</span>(i))&#123;</span><br><span class="line">        res += tr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)&#123;</span><br><span class="line">        cin&gt;&gt;w[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cin&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)&#123;</span><br><span class="line">        cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">        p[i] = &#123;l,r,i&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">sort</span>(p + <span class="number">1</span>,p + <span class="number">1</span> + m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)&#123;</span><br><span class="line">        node tmp = p[i];</span><br><span class="line">        <span class="type">int</span> l = tmp.l,r = tmp.r,id = tmp.id;</span><br><span class="line">        <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(j &lt;= r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(last[w[j]]) <span class="built_in">add</span>(last[w[j]],<span class="number">-1</span>);</span><br><span class="line">            <span class="built_in">add</span>(j,<span class="number">1</span>);</span><br><span class="line">            last[w[j]] = j;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans[id] = <span class="built_in">sum</span>(r) - <span class="built_in">sum</span>(l - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++) cout&lt;&lt;ans[i]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/19684/C">采花</a></p>
+<h2 id="输入输出太慢"><a href="#输入输出太慢" class="headerlink" title="输入输出太慢"></a>输入输出太慢</h2><p>核心区别仅在于<strong>树状数组中 <code>1</code> 标记的位置不同</strong>：</p>
+<ul>
+<li><strong>HH的项链</strong>：标记在每种颜色<strong>最后一次</strong>出现的位置。（求区间内不同颜色的个数）</li>
+<li><strong>采花（本题）</strong>：标记在每种颜色<strong>倒数第二次</strong>出现的位置。（求区间内出现至少两次的颜色个数）</li>
+</ul>
+<p>其余的离线按右端点排序、树状数组维护前缀和、指针移动更新逻辑完全一致。</p>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/19684/A">借教室</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1000010</span>;</span><br><span class="line"><span class="type">int</span> t,ans,l,r,n,m;</span><br><span class="line"><span class="type">int</span> a[maxn],tre1[maxn * <span class="number">4</span> + <span class="number">10</span>],lazadd[maxn * <span class="number">4</span> + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build1</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r)&#123; tre1[p] = a[l] % mod; <span class="keyword">return</span>; &#125;</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">build1</span>(p * <span class="number">2</span>,l,mid); <span class="built_in">build1</span>(p * <span class="number">2</span> + <span class="number">1</span>,mid + <span class="number">1</span>,r);</span><br><span class="line">    tre1[p] = (tre1[p * <span class="number">2</span>] + tre1[p * <span class="number">2</span> + <span class="number">1</span>]) % mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_down</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    lazadd[p * <span class="number">2</span>] *= lazadd[p];</span><br><span class="line">    lazadd[p * <span class="number">2</span> + <span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">jian</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x &lt;= l &amp;&amp; r &lt;= y) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[p] &gt;= tre1[p])&#123;</span><br><span class="line">            a[p] -= tre1[p];</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(lazadd[p]) <span class="built_in">push_down</span>(p,l,r);</span><br><span class="line">    <span class="type">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= mid) jian</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    t = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= <span class="number">4</span> * n;i++)&#123; lazadd[i] = <span class="number">0</span>; lazmul[i] = <span class="number">1</span>; &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++) cin&gt;&gt;a[i];</span><br><span class="line">        <span class="built_in">build1</span>(<span class="number">1</span>,<span class="number">1</span>,n); <span class="built_in">build2</span>(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">        <span class="type">int</span> ss,tt,dd;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= m;i++)&#123;</span><br><span class="line">            cin&gt;&gt;dd&gt;&gt;ss&gt;&gt;tt;</span><br><span class="line">            <span class="built_in">jian</span>(<span class="number">1</span>,<span class="number">1</span>,n,ss,tt,dd);</span><br><span class="line">            </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>行</th>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a[p]</code></td>
+<td>概念混淆</td>
+<td><code>a[]</code> 是原始数组，下标应该是天数（1~n），而不是线段树节点编号 <code>p</code>。节点 <code>p</code> 对应的不是一个单独的 <code>a</code> 值，而是一个区间的聚合信息。</td>
+</tr>
+<tr>
+<td><code>tre1[p]</code></td>
+<td>语义错误</td>
+<td><code>tre1[p]</code> 存的是区间和（或你之前写的平方和），它代表的是”这个区间所有天数的教室总和&#x2F;平方和”，而不是”这个区间每天需要借的教室数”。拿它跟 <code>a[p]</code> 比较没有意义。</td>
+</tr>
+<tr>
+<td><code>a[p] -= tre1[p]</code></td>
+<td>操作对象错误</td>
+<td>即使你想表达”剩余教室减去需求”，也不应该在节点上用原始数组做减法。线段树的区间修改应该通过懒标记传递，而不是直接改叶子节点的值。</td>
+</tr>
+<tr>
+<td><code>return</code></td>
+<td>缺失关键步骤</td>
+<td>即使条件满足直接返回，你也没有更新 <code>tre1[p]</code> 的值，也没有打懒标记。上层节点 push_up 时会用到错误的子节点值。</td>
+</tr>
+<tr>
+<td>整体思路</td>
+<td>方向性错误</td>
+<td>“借教室”问题的核心是判断区间最小值是否 &lt; 0，而不是在节点上做条件扣减。你无法在一个聚合节点上判断”这个区间内每一天是否都够减”，因为区间和 ≥ 0 不代表每一天都 ≥ 0。</td>
+</tr>
+</tbody></table>
+
       
 
       
@@ -878,85 +1002,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2026/09/01/niuke-structure/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20260831" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2026/08/31/20260831/">2026-08-31 日记</a>
-    </h1>
-  
-
-        
-        <a href="/2026/08/31/20260831/" class="archive-article-date">
-  	<time datetime="2026-08-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2026-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>上午两节课</li>
-<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/28258/D">USACO 2008 Jan G Cell Phone Network</a></li>
-<li><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/problem/blogs/16122">郊区春游</a></li>
-<li><img src="/img/260831.jpg"></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">diary</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2026/08/31/20260831/">展开全文 >></a>
         </p>
       
 
@@ -1152,11 +1197,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
+                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">105-贪心</a>
+                <a href="javascript:void(0)" class="js-tag color2">104-递推</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1176,15 +1221,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">111-图论基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+                <a href="javascript:void(0)" class="js-tag color2">110-集合</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1192,15 +1233,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">203-ST表与倍增</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1208,15 +1245,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">212-dp引入</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">202-单调栈与优化技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">单调栈和并查集</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">112-基础数学</a>
+                <a href="javascript:void(0)" class="js-tag color2">最近公共祖先和重链剖分</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
+                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,23 +1269,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">广搜</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">二叉堆与树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
+                <a href="javascript:void(0)" class="js-tag color2">线性动态规划</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1248,11 +1285,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
+                <a href="javascript:void(0)" class="js-tag color3">平衡树和红黑树</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
+                <a href="javascript:void(0)" class="js-tag color2">前缀和与拆分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">连通性问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1260,7 +1301,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+                <a href="javascript:void(0)" class="js-tag color1">分治和递增</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1268,11 +1309,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">板子</a>
+                <a href="javascript:void(0)" class="js-tag color3">区间和环形dp</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">动态规划引入</a>
+                <a href="javascript:void(0)" class="js-tag color1">最小生成树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">板子</a>
               </li>
             
             <div class="clearfix"></div>
