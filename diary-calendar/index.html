@@ -63,7 +63,8 @@
   .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
   .modal-overlay.show{display:flex}
   .modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-  .modal h3{margin-bottom:18px;font-size:18px;font-weight:700}
+  .modal h3{margin-bottom:6px;font-size:18px;font-weight:700}
+  .modal .sub{font-size:12px;color:var(--muted);margin-bottom:16px}
   .form-group{margin-bottom:16px}
   .form-group label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
   .form-group input,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;transition:border-color .2s}
@@ -73,8 +74,6 @@
   .mod-row button{width:32px;height:32px;border:1px solid var(--border);background:#fff;border-radius:8px;cursor:pointer;font-size:18px;color:var(--muted)}
   .mod-row button:hover{color:#ef4444;border-color:#ef4444}
   .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
-  .hint{font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.6;background:var(--accent-light);padding:12px 16px;border-radius:10px}
-  .hint code{background:#fff;padding:1px 6px;border-radius:4px;font-size:12px}
   @media(max-width:640px){
     .day{min-height:110px;padding:5px}
     .day-tag{font-size:9px;padding:1px 5px}
@@ -101,9 +100,9 @@
     <div class="actions">
       <button class="btn" onclick="goToday()">今天</button>
       <button class="btn" onclick="openModuleModal()">管理模块</button>
-      <button class="btn" onclick="exportData()">导出 JSON</button>
-      <button class="btn" onclick="document.getElementById('importFile').click()">导入 JSON</button>
-      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn" onclick="exportData()">导出</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">导入</button>
+      <input type="file" id="importFile" accept=".js,.json" style="display:none" onchange="importData(event)">
       <button class="btn" onclick="resetToFile()">重置</button>
     </div>
   </div>
@@ -114,16 +113,14 @@
     </div>
     <div class="days" id="days"></div>
   </div>
-
-  <p class="hint">💡 点击模块右侧小方格可直接打勾/取消。点「管理模块」可增删改模块。要同步到网站：点「导出」下载 <code>data.js</code> → 覆盖 <code>source/diary-calendar/data.js</code> → <code>hexo deploy</code>。</p>
 </div>
 
 <!-- 模块管理弹窗 -->
 <div class="modal-overlay" id="moduleModal">
   <div class="modal">
     <h3>管理模块</h3>
+    <p class="sub">修改只影响今天及以后的日期，历史日期保留原模块。</p>
     <div class="form-group">
-      <label>模块列表（修改名称会同步更新所有日期记录）</label>
       <div id="moduleList"></div>
       <button class="btn" onclick="addModule()" style="margin-top:6px">+ 添加模块</button>
     </div>
@@ -137,7 +134,7 @@
 <!-- 日期详情弹窗（编辑标签） -->
 <div class="modal-overlay" id="dayModal">
   <div class="modal">
-    <h3 id="dayModalTitle">编辑日记</h3>
+    <h3 id="dayModalTitle">编辑标签</h3>
     <div class="form-group">
       <label>标签（逗号分隔）</label>
       <input type="text" id="editTags" placeholder="例如：比赛, 学习, 运动">
@@ -156,6 +153,11 @@ let data = loadData();
 let modules = loadModules();
 let currentYear, currentMonth;
 let editingDate = null;
+
+function todayStr(){
+  const t = new Date();
+  return fmt(t.getFullYear(), t.getMonth(), t.getDate());
+}
 
 function loadData(){
   try{
@@ -199,17 +201,29 @@ function goToday(){
   render();
 }
 
+// 获取某天应该显示的模块列表：优先用该天自己的快照，否则用全局模块
+function getDayModules(dateStr){
+  const entry = data[dateStr];
+  if(entry && Array.isArray(entry.moduleList) && entry.moduleList.length){
+    return entry.moduleList;
+  }
+  return modules;
+}
 function isModuleDone(dateStr, modName){
   const entry = data[dateStr] || {};
   const mods = entry.modules || {};
   return !!mods[modName];
 }
 function toggleModule(dateStr, modName){
-  if(!data[dateStr]) data[dateStr] = { tags:[], modules:{} };
+  if(!data[dateStr]) data[dateStr] = { tags:[], moduleList: modules.slice(), modules:{} };
+  if(!Array.isArray(data[dateStr].moduleList) || !data[dateStr].moduleList.length){
+    data[dateStr].moduleList = modules.slice();
+  }
   if(!data[dateStr].modules) data[dateStr].modules = {};
   data[dateStr].modules[modName] = !data[dateStr].modules[modName];
-  // 若所有模块都是 false 且无标签，删除该日期记录以保持数据干净
-  const allFalse = modules.every(m => !data[dateStr].modules[m]);
+  // 清理：若该天所有模块都未完成且无标签，删除记录
+  const dayMods = data[dateStr].moduleList;
+  const allFalse = dayMods.every(m => !data[dateStr].modules[m]);
   const noTags = !data[dateStr].tags || data[dateStr].tags.length === 0;
   if(allFalse && noTags) delete data[dateStr];
   saveData();
@@ -221,8 +235,7 @@ function render(){
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
   const prevDays = new Date(currentYear, currentMonth, 0).getDate();
-  const today = new Date();
-  const todayStr = fmt(today.getFullYear(), today.getMonth(), today.getDate());
+  const today = todayStr();
 
   let html = "";
   for(let i=firstDay-1;i>=0;i--){
@@ -232,13 +245,14 @@ function render(){
     const dateStr = fmt(currentYear, currentMonth, d);
     const entry = data[dateStr] || {};
     const tags = entry.tags || [];
-    const isToday = dateStr === todayStr;
+    const dayModules = getDayModules(dateStr);
+    const isToday = dateStr === today;
     let inner = `<div class="date-num">${d}</div>`;
     if(tags.length){
       inner += `<div class="day-tags">${tags.slice(0,3).map(t=>`<span class="day-tag">${t}</span>`).join("")}</div>`;
     }
     inner += `<div class="day-modules">`;
-    modules.forEach(mod => {
+    dayModules.forEach(mod => {
       const done = isModuleDone(dateStr, mod);
       inner += `<div class="day-module ${done?'done':''}">
         <span class="m-name">${mod}</span>
@@ -268,21 +282,25 @@ function closeDayModal(){ document.getElementById("dayModal").classList.remove("
 function saveDayTags(){
   const tags = document.getElementById("editTags").value.split(",").map(s=>s.trim()).filter(Boolean);
   const entry = data[editingDate] || {};
-  if(tags.length === 0 && (!entry.modules || modules.every(m=>!entry.modules[m]))){
+  const dayModules = getDayModules(editingDate);
+  const allFalse = dayModules.every(m => !entry.modules || !entry.modules[m]);
+  if(tags.length === 0 && allFalse){
     delete data[editingDate];
   } else {
-    data[editingDate] = { tags, modules: entry.modules || {} };
+    data[editingDate] = {
+      tags,
+      moduleList: entry.moduleList || modules.slice(),
+      modules: entry.modules || {}
+    };
   }
   saveData();
   closeDayModal();
   render();
 }
 
-/* ===== 模块管理 ===== */
+/* ===== 模块管理（只影响今天及以后） ===== */
 let _editingModules = [];
 function openModuleModal(){
-  _editingModules = modules.map(m=>({...m}));
-  // modules 是字符串数组
   _editingModules = modules.slice();
   renderModuleList();
   document.getElementById("moduleModal").classList.add("show");
@@ -298,40 +316,45 @@ function renderModuleList(){
 }
 function addModule(){ _editingModules.push(""); renderModuleList(); }
 function removeModuleItem(i){
-  const removed = _editingModules[i];
   _editingModules.splice(i,1);
-  // 同步删除所有日期中该模块的记录
-  Object.keys(data).forEach(dateStr => {
-    if(data[dateStr].modules && data[dateStr].modules[removed] !== undefined){
-      delete data[dateStr].modules[removed];
-    }
-  });
   renderModuleList();
 }
 function saveModules(){
   const oldModules = modules.slice();
   const newModules = _editingModules.map(s=>s.trim()).filter(Boolean);
-  // 处理重命名：对比新旧列表
-  const minLen = Math.min(oldModules.length, newModules.length);
+
+  // 按位置构建重命名映射
   const renameMap = {};
+  const minLen = Math.min(oldModules.length, newModules.length);
   for(let i=0;i<minLen;i++){
     if(oldModules[i] !== newModules[i]){
       renameMap[oldModules[i]] = newModules[i];
     }
   }
-  // 应用重命名到所有日期数据
-  if(Object.keys(renameMap).length > 0){
-    Object.keys(data).forEach(dateStr => {
-      const mods = data[dateStr].modules;
-      if(!mods) return;
+  const deleted = oldModules.filter(m => !newModules.includes(m) && !(m in renameMap));
+
+  const today = todayStr();
+
+  // 只更新今天及以后的日期
+  Object.keys(data).forEach(dateStr => {
+    if(dateStr < today) return; // 历史日期不动
+    const entry = data[dateStr];
+    // 更新该天的模块快照为新模块列表
+    entry.moduleList = newModules.slice();
+    // 应用重命名和删除到完成状态
+    if(entry.modules){
       Object.keys(renameMap).forEach(oldName => {
-        if(mods[oldName] !== undefined){
-          mods[renameMap[oldName]] = mods[oldName];
-          delete mods[oldName];
+        if(entry.modules[oldName] !== undefined){
+          entry.modules[renameMap[oldName]] = entry.modules[oldName];
+          delete entry.modules[oldName];
         }
       });
-    });
-  }
+      deleted.forEach(d => {
+        if(entry.modules[d] !== undefined) delete entry.modules[d];
+      });
+    }
+  });
+
   modules = newModules;
   saveModules();
   saveData();
@@ -340,13 +363,12 @@ function saveModules(){
 }
 
 /* ===== 导入导出 ===== */
-// 导出为 data.js 格式，可直接覆盖 source/diary-calendar/data.js
 function exportData(){
   const content =
 `/* ============================================================
    日记数据 - 由网页导出，直接覆盖此文件即可
-   MODULES: 全局模块列表
-   DIARY_DATA: 每天的记录
+   MODULES: 全局模块列表（用于今天及以后无快照的日期）
+   DIARY_DATA: 每天的记录（含 moduleList 快照）
    ============================================================ */
 const MODULES = ${JSON.stringify(modules, null, 2)};
 
@@ -358,32 +380,21 @@ const DIARY_DATA = ${JSON.stringify(data, null, 2)};
   a.href = url; a.download = "data.js"; a.click();
   URL.revokeObjectURL(url);
 }
-// 导入支持 .js 和 .json 两种格式
 function importData(e){
   const file = e.target.files[0];
   if(!file) return;
   const reader = new FileReader();
   reader.onload = ev=>{
     try{
-      let text = ev.target.result;
-      let obj;
-      // 如果是 .js 文件，提取 MODULES 和 DIARY_DATA
+      const text = ev.target.result;
       if(file.name.endsWith(".js")){
         const modulesMatch = text.match(/const\s+MODULES\s*=\s*(\[[\s\S]*?\]);/);
         const dataMatch = text.match(/const\s+DIARY_DATA\s*=\s*(\{[\s\S]*?\});/);
-        if(modulesMatch){
-          modules = JSON.parse(modulesMatch[1]);
-          saveModules();
-        }
-        if(dataMatch){
-          data = JSON.parse(dataMatch[1]);
-          saveData();
-        }
+        if(modulesMatch){ modules = JSON.parse(modulesMatch[1]); saveModules(); }
+        if(dataMatch){ data = JSON.parse(dataMatch[1]); saveData(); }
       } else {
-        obj = JSON.parse(text);
-        if(obj.modules && Array.isArray(obj.modules)){
-          modules = obj.modules; saveModules();
-        }
+        const obj = JSON.parse(text);
+        if(obj.modules && Array.isArray(obj.modules)){ modules = obj.modules; saveModules(); }
         data = obj.data || obj;
         saveData();
       }
