@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日记日历 | Cai Haoran</title>
+<style>
+  :root{
+    --primary:#4f46e5;
+    --primary-light:#eef2ff;
+    --primary-dark:#4338ca;
+    --accent:#f59e0b;
+    --accent-light:#fef3c7;
+    --bg:#f8fafc;
+    --card:#fff;
+    --text:#0f172a;
+    --text-soft:#475569;
+    --muted:#94a3b8;
+    --border:#e2e8f0;
+    --done:#16a34a;
+    --done-bg:#dcfce7;
+    --radius:12px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+  .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;height:62px;display:flex;align-items:center;justify-content:space-between}
+  .nav-brand{font-weight:700;font-size:16px;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:8px}
+  .nav-brand::before{content:"";width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent))}
+  .nav-links{display:flex;gap:22px}
+  .nav-links a{color:var(--text-soft);text-decoration:none;font-size:14px;font-weight:500}
+  .nav-links a:hover{color:var(--primary)}
+  .container{max-width:1140px;margin:0 auto;padding:24px}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+  .month-nav{display:flex;align-items:center;gap:14px}
+  .month-nav button{width:38px;height:38px;border:1px solid var(--border);background:var(--card);border-radius:10px;cursor:pointer;font-size:18px;color:var(--text);transition:all .2s}
+  .month-nav button:hover{border-color:var(--primary);color:var(--primary)}
+  .month-label{font-size:20px;font-weight:700;min-width:150px;text-align:center;color:var(--text)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{padding:8px 14px;border:1px solid var(--border);background:var(--card);border-radius:10px;cursor:pointer;font-size:13px;color:var(--text);font-weight:500;transition:all .2s}
+  .btn:hover{border-color:var(--primary);color:var(--primary)}
+  .btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+  .btn.primary:hover{background:var(--primary-dark);color:#fff}
+  .calendar{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .weekdays{display:grid;grid-template-columns:repeat(7,1fr);background:var(--primary-light);border-bottom:1px solid var(--border)}
+  .weekdays div{padding:12px;text-align:center;font-size:13px;color:var(--primary);font-weight:600}
+  .days{display:grid;grid-template-columns:repeat(7,1fr)}
+  .day{min-height:140px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:8px;cursor:default;transition:background .15s;display:flex;flex-direction:column}
+  .day:nth-child(7n){border-right:none}
+  .day:hover{background:#f8fafc}
+  .day.other-month{background:#fafbfc;color:#cbd5e1}
+  .day.today .date-num{background:var(--primary);color:#fff}
+  .date-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;align-self:flex-end;margin-bottom:4px}
+  .day-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+  .day-tag{font-size:10px;padding:2px 7px;background:var(--primary-light);color:var(--primary);border-radius:8px;line-height:1.4;font-weight:500}
+  .day-modules{display:flex;flex-direction:column;gap:3px;margin-top:auto}
+  .day-module{display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:11px;color:var(--text-soft);line-height:1.4}
+  .day-module .m-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .day-module .m-check{width:14px;height:14px;border:1.5px solid var(--border);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#fff;transition:all .15s;font-size:11px;color:transparent;user-select:none}
+  .day-module .m-check:hover{border-color:var(--primary)}
+  .day-module.done .m-name{color:var(--done);text-decoration:line-through}
+  .day-module.done .m-check{background:var(--done);border-color:var(--done);color:#fff}
+  .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
+  .modal-overlay.show{display:flex}
+  .modal{background:#fff;border-radius:16px;padding:26px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+  .modal h3{margin-bottom:18px;font-size:18px;font-weight:700}
+  .form-group{margin-bottom:16px}
+  .form-group label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
+  .form-group input,.form-group textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;transition:border-color .2s}
+  .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--primary)}
+  .mod-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .mod-row input[type=text]{flex:1}
+  .mod-row button{width:32px;height:32px;border:1px solid var(--border);background:#fff;border-radius:8px;cursor:pointer;font-size:18px;color:var(--muted)}
+  .mod-row button:hover{color:#ef4444;border-color:#ef4444}
+  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.6;background:var(--accent-light);padding:12px 16px;border-radius:10px}
+  .hint code{background:#fff;padding:1px 6px;border-radius:4px;font-size:12px}
+  @media(max-width:640px){
+    .day{min-height:110px;padding:5px}
+    .day-tag{font-size:9px;padding:1px 5px}
+    .day-module{font-size:10px}
+    .day-module .m-check{width:12px;height:12px;font-size:10px}
+  }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="/" class="nav-brand">← 返回主页</a>
+  <div class="nav-links">
+    <a href="/diary-calendar/">日记日历</a>
+  </div>
+</div></nav>
+
+<div class="container">
+  <div class="toolbar">
+    <div class="month-nav">
+      <button onclick="changeMonth(-1)">‹</button>
+      <div class="month-label" id="monthLabel"></div>
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="goToday()">今天</button>
+      <button class="btn" onclick="openModuleModal()">管理模块</button>
+      <button class="btn" onclick="exportData()">导出 JSON</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">导入 JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn" onclick="resetToFile()">重置</button>
+    </div>
+  </div>
+
+  <div class="calendar">
+    <div class="weekdays">
+      <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+    </div>
+    <div class="days" id="days"></div>
+  </div>
+
+  <p class="hint">💡 点击模块右侧小方格可直接打勾/取消。点「管理模块」可增删改模块。要同步到网站：点「导出」下载 <code>data.js</code> → 覆盖 <code>source/diary-calendar/data.js</code> → <code>hexo deploy</code>。</p>
+</div>
+
+<!-- 模块管理弹窗 -->
+<div class="modal-overlay" id="moduleModal">
+  <div class="modal">
+    <h3>管理模块</h3>
+    <div class="form-group">
+      <label>模块列表（修改名称会同步更新所有日期记录）</label>
+      <div id="moduleList"></div>
+      <button class="btn" onclick="addModule()" style="margin-top:6px">+ 添加模块</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModuleModal()">取消</button>
+      <button class="btn primary" onclick="saveModules()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 日期详情弹窗（编辑标签） -->
+<div class="modal-overlay" id="dayModal">
+  <div class="modal">
+    <h3 id="dayModalTitle">编辑日记</h3>
+    <div class="form-group">
+      <label>标签（逗号分隔）</label>
+      <input type="text" id="editTags" placeholder="例如：比赛, 学习, 运动">
+    </div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeDayModal()">取消</button>
+      <button class="btn primary" onclick="saveDayTags()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script src="/diary-calendar/data.js"></script>
+<script>
+const STORAGE_KEY = "diary_calendar_data";
+let data = loadData();
+let modules = loadModules();
+let currentYear, currentMonth;
+let editingDate = null;
+
+function loadData(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved) return JSON.parse(saved);
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DIARY_DATA || {}));
+}
+function loadModules(){
+  try{
+    const saved = localStorage.getItem("diary_calendar_modules");
+    if(saved) return JSON.parse(saved);
+  }catch(e){}
+  return JSON.parse(JSON.stringify(MODULES || []));
+}
+function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+function saveModules(){ localStorage.setItem("diary_calendar_modules", JSON.stringify(modules)); }
+
+function resetToFile(){
+  if(confirm("确定重置为 data.js 数据吗？当前浏览器内的修改将丢失。")){
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("diary_calendar_modules");
+    data = JSON.parse(JSON.stringify(DIARY_DATA || {}));
+    modules = JSON.parse(JSON.stringify(MODULES || []));
+    render();
+  }
+}
+function pad(n){return n<10?"0"+n:""+n}
+function fmt(y,m,d){return y+"-"+pad(m+1)+"-"+pad(d)}
+
+function changeMonth(delta){
+  currentMonth += delta;
+  if(currentMonth<0){currentMonth=11;currentYear--}
+  else if(currentMonth>11){currentMonth=0;currentYear++}
+  render();
+}
+function goToday(){
+  const now = new Date();
+  currentYear = now.getFullYear();
+  currentMonth = now.getMonth();
+  render();
+}
+
+function isModuleDone(dateStr, modName){
+  const entry = data[dateStr] || {};
+  const mods = entry.modules || {};
+  return !!mods[modName];
+}
+function toggleModule(dateStr, modName){
+  if(!data[dateStr]) data[dateStr] = { tags:[], modules:{} };
+  if(!data[dateStr].modules) data[dateStr].modules = {};
+  data[dateStr].modules[modName] = !data[dateStr].modules[modName];
+  // 若所有模块都是 false 且无标签，删除该日期记录以保持数据干净
+  const allFalse = modules.every(m => !data[dateStr].modules[m]);
+  const noTags = !data[dateStr].tags || data[dateStr].tags.length === 0;
+  if(allFalse && noTags) delete data[dateStr];
+  saveData();
+  render();
+}
+
+function render(){
+  document.getElementById("monthLabel").textContent = currentYear+"年 "+(currentMonth+1)+"月";
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+  const daysInMonth = new Date(currentYear, currentMonth+1, 0).getDate();
+  const prevDays = new Date(currentYear, currentMonth, 0).getDate();
+  const today = new Date();
+  const todayStr = fmt(today.getFullYear(), today.getMonth(), today.getDate());
+
+  let html = "";
+  for(let i=firstDay-1;i>=0;i--){
+    html += `<div class="day other-month"><div class="date-num">${prevDays-i}</div></div>`;
+  }
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr = fmt(currentYear, currentMonth, d);
+    const entry = data[dateStr] || {};
+    const tags = entry.tags || [];
+    const isToday = dateStr === todayStr;
+    let inner = `<div class="date-num">${d}</div>`;
+    if(tags.length){
+      inner += `<div class="day-tags">${tags.slice(0,3).map(t=>`<span class="day-tag">${t}</span>`).join("")}</div>`;
+    }
+    inner += `<div class="day-modules">`;
+    modules.forEach(mod => {
+      const done = isModuleDone(dateStr, mod);
+      inner += `<div class="day-module ${done?'done':''}">
+        <span class="m-name">${mod}</span>
+        <span class="m-check" onclick="toggleModule('${dateStr}','${mod.replace(/'/g,"\\'")}')">${done?'✓':''}</span>
+      </div>`;
+    });
+    inner += `</div>`;
+    html += `<div class="day ${isToday?'today':''}" ondblclick="openDayModal('${dateStr}')">${inner}</div>`;
+  }
+  const total = firstDay + daysInMonth;
+  const remain = (7 - total%7) % 7;
+  for(let i=1;i<=remain;i++){
+    html += `<div class="day other-month"><div class="date-num">${i}</div></div>`;
+  }
+  document.getElementById("days").innerHTML = html;
+}
+
+/* ===== 日期标签编辑 ===== */
+function openDayModal(dateStr){
+  editingDate = dateStr;
+  const entry = data[dateStr] || {};
+  document.getElementById("dayModalTitle").textContent = dateStr + " 标签";
+  document.getElementById("editTags").value = (entry.tags||[]).join(", ");
+  document.getElementById("dayModal").classList.add("show");
+}
+function closeDayModal(){ document.getElementById("dayModal").classList.remove("show"); editingDate=null; }
+function saveDayTags(){
+  const tags = document.getElementById("editTags").value.split(",").map(s=>s.trim()).filter(Boolean);
+  const entry = data[editingDate] || {};
+  if(tags.length === 0 && (!entry.modules || modules.every(m=>!entry.modules[m]))){
+    delete data[editingDate];
+  } else {
+    data[editingDate] = { tags, modules: entry.modules || {} };
+  }
+  saveData();
+  closeDayModal();
+  render();
+}
+
+/* ===== 模块管理 ===== */
+let _editingModules = [];
+function openModuleModal(){
+  _editingModules = modules.map(m=>({...m}));
+  // modules 是字符串数组
+  _editingModules = modules.slice();
+  renderModuleList();
+  document.getElementById("moduleModal").classList.add("show");
+}
+function closeModuleModal(){ document.getElementById("moduleModal").classList.remove("show"); }
+function renderModuleList(){
+  const list = document.getElementById("moduleList");
+  list.innerHTML = _editingModules.map((m,i)=>`
+    <div class="mod-row">
+      <input type="text" value="${m.replace(/"/g,'&quot;')}" onchange="window._editingModules[${i}]=this.value" placeholder="模块名称">
+      <button onclick="removeModuleItem(${i})">×</button>
+    </div>`).join("");
+}
+function addModule(){ _editingModules.push(""); renderModuleList(); }
+function removeModuleItem(i){
+  const removed = _editingModules[i];
+  _editingModules.splice(i,1);
+  // 同步删除所有日期中该模块的记录
+  Object.keys(data).forEach(dateStr => {
+    if(data[dateStr].modules && data[dateStr].modules[removed] !== undefined){
+      delete data[dateStr].modules[removed];
+    }
+  });
+  renderModuleList();
+}
+function saveModules(){
+  const oldModules = modules.slice();
+  const newModules = _editingModules.map(s=>s.trim()).filter(Boolean);
+  // 处理重命名：对比新旧列表
+  const minLen = Math.min(oldModules.length, newModules.length);
+  const renameMap = {};
+  for(let i=0;i<minLen;i++){
+    if(oldModules[i] !== newModules[i]){
+      renameMap[oldModules[i]] = newModules[i];
+    }
+  }
+  // 应用重命名到所有日期数据
+  if(Object.keys(renameMap).length > 0){
+    Object.keys(data).forEach(dateStr => {
+      const mods = data[dateStr].modules;
+      if(!mods) return;
+      Object.keys(renameMap).forEach(oldName => {
+        if(mods[oldName] !== undefined){
+          mods[renameMap[oldName]] = mods[oldName];
+          delete mods[oldName];
+        }
+      });
+    });
+  }
+  modules = newModules;
+  saveModules();
+  saveData();
+  closeModuleModal();
+  render();
+}
+
+/* ===== 导入导出 ===== */
+// 导出为 data.js 格式，可直接覆盖 source/diary-calendar/data.js
+function exportData(){
+  const content =
+`/* ============================================================
+   日记数据 - 由网页导出，直接覆盖此文件即可
+   MODULES: 全局模块列表
+   DIARY_DATA: 每天的记录
+   ============================================================ */
+const MODULES = ${JSON.stringify(modules, null, 2)};
+
+const DIARY_DATA = ${JSON.stringify(data, null, 2)};
+`;
+  const blob = new Blob([content], {type: "text/javascript"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "data.js"; a.click();
+  URL.revokeObjectURL(url);
+}
+// 导入支持 .js 和 .json 两种格式
+function importData(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    try{
+      let text = ev.target.result;
+      let obj;
+      // 如果是 .js 文件，提取 MODULES 和 DIARY_DATA
+      if(file.name.endsWith(".js")){
+        const modulesMatch = text.match(/const\s+MODULES\s*=\s*(\[[\s\S]*?\]);/);
+        const dataMatch = text.match(/const\s+DIARY_DATA\s*=\s*(\{[\s\S]*?\});/);
+        if(modulesMatch){
+          modules = JSON.parse(modulesMatch[1]);
+          saveModules();
+        }
+        if(dataMatch){
+          data = JSON.parse(dataMatch[1]);
+          saveData();
+        }
+      } else {
+        obj = JSON.parse(text);
+        if(obj.modules && Array.isArray(obj.modules)){
+          modules = obj.modules; saveModules();
+        }
+        data = obj.data || obj;
+        saveData();
+      }
+      render(); alert("导入成功！");
+    }catch(err){ alert("导入失败：格式错误"); }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+}
+
+const now = new Date();
+currentYear = now.getFullYear();
+currentMonth = now.getMonth();
+render();
+
+document.getElementById("moduleModal").addEventListener("click",e=>{
+  if(e.target.id==="moduleModal") closeModuleModal();
+});
+document.getElementById("dayModal").addEventListener("click",e=>{
+  if(e.target.id==="dayModal") closeDayModal();
+});
+</script>
+</body>
+</html>
